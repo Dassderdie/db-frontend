@@ -1,0 +1,27 @@
+<app-icon
+    *ngIf="!role.administrator && role.inviteUsers"
+    icon="inviteUsers"
+    [appInfoTooltip]="
+        'pages.projects.generalSettings.members.permissions.invite.description'
+            | translate
+    "
+    placement="top"
+></app-icon>
+<app-icon
+    *ngIf="!role.administrator && role.givePermissions"
+    icon="givePermissions"
+    [appInfoTooltip]="
+        'pages.projects.generalSettings.members.permissions.givePermissions.description'
+            | translate
+    "
+    placement="top"
+></app-icon>
+<app-icon
+    *ngIf="role.administrator"
+    icon="administrator"
+    [appInfoTooltip]="
+        'pages.projects.generalSettings.members.permissions.administrator.description'
+            | translate
+    "
+    placement="top"
+></app-icon>

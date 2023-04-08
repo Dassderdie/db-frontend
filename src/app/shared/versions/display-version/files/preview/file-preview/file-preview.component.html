@@ -1,0 +1,46 @@
+<ng-container
+    *ngIf="type && blobObject && blobUrl; withLoading"
+    [ngSwitch]="type"
+>
+    <app-excel-preview
+        *ngSwitchCase="'excel'"
+        [blob]="blobObject"
+        [blobUrl]="blobUrl"
+    ></app-excel-preview>
+    <app-markdown-preview
+        *ngSwitchCase="'markdown'"
+        [blob]="blobObject"
+        [blobUrl]="blobUrl"
+    ></app-markdown-preview>
+    <app-image-preview
+        *ngSwitchCase="'image'"
+        [blob]="blobObject"
+        [blobUrl]="blobUrl"
+    ></app-image-preview>
+    <app-audio-preview
+        *ngSwitchCase="'audio'"
+        [blob]="blobObject"
+        [blobUrl]="blobUrl"
+    ></app-audio-preview>
+    <app-video-preview
+        *ngSwitchCase="'video'"
+        [blob]="blobObject"
+        [blobUrl]="blobUrl"
+    ></app-video-preview>
+    <app-pdf-preview
+        *ngSwitchCase="'pdf'"
+        [blob]="blobObject"
+        [blobUrl]="blobUrl"
+    ></app-pdf-preview>
+    <app-text-preview
+        *ngSwitchCase="'text'"
+        [blob]="blobObject"
+        [blobUrl]="blobUrl"
+    ></app-text-preview>
+    <div *ngSwitchDefault class="card-body">
+        <p>
+            {{ 'file-preview.browser-no-preview' | translate }}
+            <span class="font-monospace">{{ blobObject.type }}</span>
+        </p>
+    </div>
+</ng-container>

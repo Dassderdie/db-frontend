@@ -1,0 +1,71 @@
+<div class="page-container">
+    <ng-container
+        *ngIf="
+            project && table && changedEntryValues && tableViews;
+            withLoading
+        "
+    >
+        <div class="mt-2 mb-2 row align-items-center">
+            <h2 class="col">
+                <app-table-name
+                    [table]="table"
+                    [showIcon]="true"
+                ></app-table-name>
+            </h2>
+            <div class="col-auto">
+                <button
+                    (click)="editTableView()"
+                    [appInfoTooltip]="
+                        'pages.tables.entry-form.customize.title' | translate
+                    "
+                    type="button"
+                    class="btn btn-sm"
+                    [class.btn-outline-secondary]="!tableViews[table.id]"
+                    [class.btn-secondary]="!!tableViews[table.id]"
+                >
+                    <app-icon icon="tables-editor"></app-icon>
+                    {{ 'pages.tables.entry-form.customize.title' | translate }}
+                </button>
+            </div>
+        </div>
+        <app-attribute-inputs
+            [ids]="{
+                projectId: table.projectId,
+                tableId: table.id
+            }"
+            [attributes]="table.attributes"
+            [changedValues]="changedEntryValues"
+            [parentState]="entryState"
+            [autofocus]="true"
+            [tableView]="tableViews[table.id]"
+            (valuesChange)="changedEntryValues = $event"
+        ></app-attribute-inputs>
+        <div class="row mt-3">
+            <div class="col-auto mb-2">
+                <button
+                    (click)="reset()"
+                    [disabled]="(entryState.delayedChanged$ | async) === false"
+                    class="btn btn-status-changed me-2"
+                >
+                    <app-icon icon="reset"></app-icon>
+                    {{ 'customForms.reset' | translate }}
+                </button>
+            </div>
+            <app-anonymous-button
+                [allowAnonymous]="
+                    table.allowAnonymousVersionCreation === null
+                        ? project.allowAnonymousVersionCreation
+                        : table.allowAnonymousVersionCreation
+                "
+                [title]="'customForms.save' | translate"
+                [icons]="['save']"
+                [disabled]="entryState.delayedInvalid$ | async"
+                [newEvent$]="entryCreation"
+                (anonymousClick)="submit($event)"
+                class="col-auto mb-2"
+            >
+                {{ 'customForms.save' | translate }}
+            </app-anonymous-button>
+        </div>
+    </ng-container>
+</div>

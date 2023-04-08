@@ -1,0 +1,39 @@
+[
+    {
+        "id": "technic",
+        "name": "Technische Aspekte",
+        "questions": [
+            {
+                "id": "browserSupport",
+                "question": "Welche Browser werden unterstützt?",
+                "answer": "Die Grundfunktionalitäten der Software werden offiziell auf den jeweils zwei aktuellsten Versionen von <a href=\"https://www.google.com/chrome/\" target=\"_blank\">Chrome</a> und <a href=\"https://www.mozilla.org/de/\" target=\"_blank\">Firefox</a> auf Windows, macOS, Linux, Android und IOS unterstützt. Bestimmte weitere Funktionalitäten der Software benötigen moderne Browser-APIs und sind deshalb leider noch nicht auf allen Betriebssystemen und Plattformen verfügbar.<br> Auf u.a. Safari und Chrome für Android ist es <a href=\"https://caniuse.com/?search=sharedworkers\" target=\"_blank\">aktuell noch nicht möglich</a> mit mehreren offenen KoppaDb-Tabs gleichzeitig zu arbeiten.",
+                "keywords": [
+                    "Chrome",
+                    "Firefox",
+                    "Windows",
+                    "Linux",
+                    "IOS",
+                    "Android",
+                    "macOS"
+                ]
+            },
+            {
+                "id": "installApp",
+                "question": "Wie installiere ich die App? - Ich kann sie nicht im PlayStore/AppleStore finden.",
+                "answer": "Wir bieten keine klassischen nativen Apps in App-Stores an. Stattdessen ist diese Website selbst eine sogenannte Progressive-Web-App. Das bedeutet, dass man sich einfach diese Website installieren kann und auf dem Home-Bildschirm oder sogar auf dem Desktop eines PCs verknüpfen kann. Wie man die Webseite installiert hängt vom verwendeten Browser ab. Unter Chrome gibt es in der <a href=\"https://support.google.com/chrome/answer/9658361\" target=\"_blank\">Adressleiste einen Installieren-Knopf mit einem Plus</a>.",
+                "keywords": ["IOS", "Android", "Smartphone", "PWA", "WebApp"]
+            },
+            {
+                "id": "i18n",
+                "question": "Welche Sprachen werden unterstützt?",
+                "answer": "Aktuell unterstützen wir Deutsch und Englisch als Sprachen. Falls wir eine weitere Sprache unterstützen sollen, kontaktieren Sie uns bitte über <a href=\"mailto: support@koppadb.com\">support@koppadb.com</a>.",
+                "keywords": [
+                    "Deutsch",
+                    "Englisch",
+                    "Französisch",
+                    "international"
+                ]
+            }
+        ]
+    }
+]

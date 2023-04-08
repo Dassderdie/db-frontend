@@ -1,0 +1,9 @@
+<div
+    *ngIf="(description | typeof) === 'string'; else descriptionObject"
+    [innerHtml]="$any(description) | translate"
+></div>
+<ng-template #descriptionObject>
+    <app-markdown-viewer
+        [markdownText]="$any(description) | translateDescriptions"
+    ></app-markdown-viewer>
+</ng-template>

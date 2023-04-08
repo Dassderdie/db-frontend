@@ -1,0 +1,26 @@
+<div class="tables-graph">
+    <div #cyOuterContainer class="cy-outer-container">
+        <div
+            *ngIf="!tables || tables.length === 0"
+            style="
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                max-width: 75%;
+            "
+            class="position-absolute"
+        >
+            <app-loading-placeholder
+                *ngIf="!tables; else tablesEmpty"
+                [inline]="false"
+            ></app-loading-placeholder>
+            <ng-template #tablesEmpty>
+                <h6 class="card-subtitle">
+                    {{ 'choose-table.no-tables' | translate }}
+                </h6>
+            </ng-template>
+        </div>
+        <div #cyContainer class="cy-container" [class.pointer]="hover"></div>
+        <div (drag)="resizeCy($event)" class="grabber" draggable="true"></div>
+    </div>
+</div>

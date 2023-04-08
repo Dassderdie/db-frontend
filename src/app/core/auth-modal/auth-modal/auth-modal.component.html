@@ -1,0 +1,109 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ 'auth.auth-modal.welcome' | translate }}</h4>
+    <button
+        (click)="bsModalRef.hide()"
+        type="button"
+        class="btn-close"
+    ></button>
+</div>
+<div class="modal-body">
+    <tabset #authTabset>
+        <tab [heading]="'auth.auth-modal.login.title' | translate">
+            <br />
+            <form
+                (keydown)="resetError()"
+                (keydown.enter)="login(); $event.preventDefault()"
+                (keydown.shift.enter)="$event.preventDefault()"
+            >
+                <div
+                    *ngFor="
+                        let control of loginForm.controls;
+                        let index = index;
+                        let first = first;
+                        trackBy: 'name' | trackByProperty
+                    "
+                    class="mb-3"
+                >
+                    <label [for]="control.name">{{
+                        loginFormLabelKeys[index]! | translate
+                    }}</label>
+                    <div [class.shake]="loginError">
+                        <app-string-input
+                            [control]="control"
+                            [autofocus]="first"
+                            displayValidationOn="dirty"
+                        >
+                        </app-string-input>
+                    </div>
+                </div>
+                <app-loading-button
+                    (click)="login()"
+                    [newEvent]="loggingIn"
+                    type="primary"
+                    [disabled]="
+                        (loginForm.delayedInvalid$ | async) && !loginError
+                    "
+                >
+                    {{ 'auth.auth-modal.login.login' | translate }}
+                </app-loading-button>
+            </form>
+        </tab>
+        <tab [heading]="'auth.auth-modal.register.title' | translate">
+            <br />
+            <form
+                *ngIf="
+                    !environment.registrationRestricted;
+                    else restrictedMessage
+                "
+                (keydown.enter)="register(); $event.preventDefault()"
+                (keydown.shift.enter)="$event.preventDefault()"
+            >
+                <div
+                    *ngFor="
+                        let control of registerForm.controls;
+                        let index = index;
+                        let first = first;
+                        trackBy: 'name' | trackByProperty
+                    "
+                >
+                    <label [for]="control.name">{{
+                        registerFormLabelKeys[index]! | translate
+                    }}</label>
+                    <app-string-input
+                        [control]="control"
+                        [autofocus]="first"
+                        displayValidationOn="dirty"
+                    >
+                    </app-string-input>
+                </div>
+                <app-loading-button
+                    (click)="register()"
+                    [newEvent]="registrating"
+                    type="primary"
+                    [disabled]="registerForm.delayedWarning$ | async"
+                >
+                    {{ 'auth.auth-modal.register.register' | translate }}
+                </app-loading-button>
+            </form>
+            <ng-template #restrictedMessage>
+                {{ 'auth.auth-modal.restricted-notice' | translate }}
+                <a href="mailto: info@koppadb.com">info@koppadb.com</a>.
+            </ng-template>
+        </tab>
+    </tabset>
+</div>
+<div class="modal-footer">
+    <a
+        class="btn btn-link"
+        routerLink="/reset-password"
+        (click)="bsModalRef.hide()"
+        >{{ 'auth.auth-modal.password-lost' | translate }}</a
+    >
+    <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="bsModalRef.hide()"
+    >
+        {{ 'auth.auth-modal.cancel' | translate }}
+    </button>
+</div>

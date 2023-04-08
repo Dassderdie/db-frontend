@@ -1,0 +1,30 @@
+<a
+    target="_blank"
+    [routerLink]="
+        '/projects/' + projectId + '/tables/' + foreignTableId + '/new'
+    "
+    [class.disabled]="(foreignTable$ | async)?.type === 'intermediate'"
+    [class]="'btn ' + btnClasses"
+>
+    <app-icon icon="create"></app-icon>
+    <ng-container
+        *ngIf="foreignTable$ | async as foreignTable; withInlineLoading"
+    >
+        <ng-container
+            *ngIf="
+                (foreignTable.displayNames | translateDisplayNames)?.singular ||
+                '???' as foreignTableName
+            "
+        >
+            {{
+                (breakpoints.xs | responsiveBreakpointExceeded | async)
+                    ? ('custom-forms.foreign.new-foreign-entry'
+                      | translate
+                          : {
+                                foreignTableName: foreignTableName
+                            })
+                    : foreignTableName
+            }}
+        </ng-container>
+    </ng-container>
+</a>

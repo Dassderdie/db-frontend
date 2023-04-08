@@ -1,0 +1,28 @@
+<div class="modal-header pb-0 pt-0">
+    <h4 class="modal-title">
+        {{ fileName }}
+    </h4>
+
+    <button
+        (click)="bsModalRef.hide()"
+        type="button"
+        class="btn-close p-0"
+        style="margin: 0.25rem 0 0 0"
+    ></button>
+</div>
+<div class="modal-body p-0" style="max-height: 80vh; overflow-y: auto">
+    <app-file-preview
+        *ngIf="showPreview"
+        [blob]="blob"
+        [fileName]="fileName"
+    ></app-file-preview>
+</div>
+<div class="modal-footer">
+    <button
+        type="button"
+        class="btn btn-outline-dark btn-sm"
+        (click)="bsModalRef.hide()"
+    >
+        {{ 'file-preview.modal.close' | translate }}
+    </button>
+</div>

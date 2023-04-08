@@ -1,0 +1,34 @@
+<div class="card border-danger me-5">
+    <div class="card-header">
+        <app-icon icon="danger" class="text-danger"></app-icon>
+        {{ 'pages.entries.filter.invalid-expression.name' | translate }}
+
+        <button
+            (click)="removeExpression.emit()"
+            class="btn link-danger p-0 float-end"
+        >
+            <app-icon icon="delete"></app-icon>
+            <ng-container
+                *ngIf="breakpoints.xs | responsiveBreakpointExceeded | async"
+            >
+                {{ 'pages.entries.filter.remove' | translate }}
+            </ng-container>
+        </button>
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            {{
+                'pages.entries.filter.invalid-expression.description'
+                    | translate
+            }}
+        </p>
+        Key:
+        <span class="font-monospace">
+            {{ expression.key }}
+        </span>
+        Type:
+        <span class="font-monospace"> {{ $any(expression).type }} </span><br />
+        Value:
+        <pre class="m-0">{{ $any(expression).value | json }}</pre>
+    </div>
+</div>

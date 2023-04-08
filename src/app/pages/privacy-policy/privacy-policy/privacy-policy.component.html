@@ -1,0 +1,6 @@
+<div class="page-container">
+    <div
+        *ngIf="privacyPolicy$ | async as privacyPolicy; withLoading"
+        [innerHTML]="privacyPolicy"
+    ></div>
+</div>

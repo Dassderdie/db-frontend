@@ -1,0 +1,44 @@
+<div
+    *ngIf="
+        intermediateVersion.values
+            | getForeignEntryId: true:intermediateTable:tableId:attribute.id;
+        let foreignEntryId
+    "
+    class="card"
+    [class.border-status-deleted]="status === 'deleted'"
+    [class.border-status-new]="status === 'new'"
+    [class.border-status-changed]="status === 'changed'"
+    style="
+        border-right: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    "
+>
+    <div class="card-header pt-1 pb-1">
+        <span *ngIf="status" class="me-2">
+            <app-icon
+                *ngIf="status === 'deleted'"
+                icon="delete"
+                class="text-status-deleted"
+            ></app-icon>
+            <app-icon
+                *ngIf="status === 'new'"
+                icon="create"
+                class="text-status-new"
+            ></app-icon>
+            <app-icon
+                *ngIf="status === 'changed'"
+                icon="edit"
+                class="text-status-changed"
+            ></app-icon>
+        </span>
+        <app-entry-name
+            [projectId]="intermediateTable.projectId"
+            [tableId]="attribute.kindOptions.foreign.tableId"
+            [entryId]="foreignEntryId"
+            [showLink]="true"
+        >
+        </app-entry-name>
+    </div>
+    <ng-content></ng-content>
+</div>

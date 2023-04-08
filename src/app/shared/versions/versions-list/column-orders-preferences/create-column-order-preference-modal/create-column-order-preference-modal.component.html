@@ -1,0 +1,125 @@
+<div class="modal-header">
+    <h5 class="modal-title">
+        {{
+            'pages.tables.columnOrder-preferences.create-columnOrder-preference-modal.title'
+                | translate
+        }}
+    </h5>
+    <button
+        type="button"
+        class="btn-close"
+        (click)="bsModalRef.hide()"
+    ></button>
+</div>
+<div class="modal-body drag-boundary">
+    <div *ngIf="newColumnOrderPreferenceForm">
+        <label for="project-name-input">{{
+            'pages.entries.new-filter-preference-modal.filter-preference-name.name'
+                | translate
+        }}</label>
+        <app-input
+            [control]="newColumnOrderPreferenceForm.controls[0]"
+            [autofocus]="true"
+        ></app-input>
+    </div>
+
+    <div
+        *ngIf="columnOrderPreference && table; withLoading"
+        cdkDropList
+        cdkDropListOrientation="vertical"
+        (cdkDropListDropped)="moveAttr($event)"
+        class="container"
+    >
+        <div
+            *ngFor="
+                let attrId of columnOrderPreference.attributeOrder;
+                trackBy: null | trackByProperty;
+                let index = index
+            "
+            cdkDrag
+            [cdkDragDisabled]="
+                columnOrderPreference.attributeOrder.length === 0
+            "
+            cdkDragBoundary=".drag-boundary"
+            class="d-flex row"
+        >
+            <div
+                cdkDragHandle
+                [appInfoTooltip]="
+                    'pages.tables.columnOrder-preferences.create-columnOrder-preference-modal.drag-attribute'
+                        | translate
+                "
+                class="align-middle col-auto p-0"
+            >
+                <app-icon icon="drag-vertical" [inline]="false"></app-icon>
+            </div>
+            <app-attribute-col-name
+                [attributeCol]="attrId"
+                [attributes]="table.attributes"
+                [displayAttributeKind]="true"
+                class="col"
+            ></app-attribute-col-name>
+            <button
+                (click)="removeAttribute(attrId)"
+                class="btn btn-small link-danger col-auto"
+                type="button"
+            >
+                <app-icon icon="close"></app-icon>
+            </button>
+        </div>
+    </div>
+    <app-validation [state]="modalState"></app-validation>
+    <div *ngIf="addableAttributeIds.length > 0 && table" class="mt-3">
+        <div class="btn-group" dropdown>
+            <button
+                dropdownToggle
+                type="button"
+                class="btn btn-outline-primary dropdown-toggle"
+            >
+                <app-icon icon="create"></app-icon>
+                {{ 'pages.tablesEditor.addAttribute' | translate }}
+                <span class="caret"></span>
+            </button>
+            <div
+                *dropdownMenu
+                class="dropdown-menu dropdown-menu-right attr-drop-list"
+                role="menu"
+            >
+                <button
+                    *ngFor="
+                        let attrId of addableAttributeIds;
+                        trackBy: null | trackByProperty
+                    "
+                    (click)="addAttribute(attrId)"
+                    role="menuitem"
+                    class="dropdown-item"
+                >
+                    <app-attribute-col-name
+                        [attributeCol]="attrId"
+                        [attributes]="table.attributes"
+                        [displayAttributeKind]="true"
+                    ></app-attribute-col-name>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">
+        {{
+            'pages.tables.columnOrder-preferences.create-columnOrder-preference-modal.discard'
+                | translate
+        }}
+    </button>
+    <app-loading-button
+        type="success"
+        [icons]="['save']"
+        (click)="save()"
+        (keyup.enter)="save()"
+    >
+        {{
+            'pages.tables.columnOrder-preferences.create-columnOrder-preference-modal.save'
+                | translate
+        }}
+    </app-loading-button>
+</div>

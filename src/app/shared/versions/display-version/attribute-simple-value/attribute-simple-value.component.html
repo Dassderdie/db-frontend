@@ -1,0 +1,59 @@
+<ng-container
+    *ngIf="value !== null && value !== undefined"
+    [ngSwitch]="attribute.kind"
+>
+    <!-- TODO: remove workaround with any assertions because of https://github.com/angular/angular/issues/20780 -->
+    <ng-container *ngSwitchCase="'string'">
+        <ng-container *ngIf="!$any(attribute.kindOptions).markdown">
+            {{ value }}
+        </ng-container>
+        <app-markdown-viewer
+            *ngIf="$any(attribute.kindOptions).markdown"
+            [markdownText]="$any(value)"
+            [overflow]="small ? 'hidden' : 'auto'"
+        ></app-markdown-viewer>
+    </ng-container>
+    <ng-container *ngSwitchCase="'number'">
+        {{ $any(value) | numberFormat | async }}
+        {{ $any(attribute.kindOptions).unit }}
+    </ng-container>
+    <ng-container *ngSwitchCase="'email'"> {{ value }} </ng-container>
+    <a *ngSwitchCase="'url'" target="_blank" [href]="value"> {{ value }} </a>
+    <ng-container *ngSwitchCase="'boolean'">
+        <ng-container *ngIf="value; else falseValue">
+            <app-icon
+                icon="true"
+                class="ms-1"
+                style="font-size: small"
+            ></app-icon>
+            {{ 'boolean.true' | translate }}
+        </ng-container>
+        <ng-template #falseValue>
+            <app-icon
+                icon="false"
+                class="ms-1"
+                style="font-size: small"
+            ></app-icon>
+            {{ 'boolean.false' | translate }}
+        </ng-template>
+    </ng-container>
+    <!-- TODO: remove workaround with any assertions because of https://github.com/angular/angular/issues/20780 -->
+    <app-display-date
+        *ngSwitchCase="'date'"
+        [date]="$any(value)"
+        [options]="{ relative: false, format: 'longDate' }"
+    ></app-display-date>
+    <app-display-date
+        *ngSwitchCase="'time'"
+        [date]="$any(value)"
+        [options]="{ relative: false, format: 'time' }"
+    ></app-display-date>
+    <app-display-date
+        *ngSwitchCase="'date-time'"
+        [date]="$any(value)"
+        [options]="{ relative: false, format: 'dateTime' }"
+    ></app-display-date>
+    <ng-container *ngSwitchDefault class="text-status-invalid">
+        Error: Unknown kind: {{ attribute.kind }}
+    </ng-container>
+</ng-container>

@@ -1,0 +1,30 @@
+.card-body {
+    padding-right: 0px;
+    padding-left: 40px;
+}
+
+.card-header {
+    align-content: center;
+}
+
+.vertical-card-header-padding {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+.card {
+    border-width: 2px;
+}
+
+.card.notFirstGroup {
+    border-right-width: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+/**
+ * accommodates for the buttons padding
+ */
+.remove-child-btn-padding {
+    margin: -0.375rem -0.75rem !important;
+}

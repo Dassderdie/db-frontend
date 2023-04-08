@@ -1,0 +1,87 @@
+<!-- TODO: types: remove any assertions because of missing support of typeof -->
+<ng-template #prepend>
+    <ng-container *ngIf="filterInput">
+        <span
+            *ngFor="
+                let addon of filterInput.leftAddons;
+                trackBy: '$index' | trackByProperty
+            "
+            class="input-group-text"
+        >
+            <app-addon [addon]="addon"></app-addon>
+        </span>
+        <app-select-input
+            [control]="filterInput.selectTypeControl"
+            [inputGroup]="false"
+        ></app-select-input>
+    </ng-container>
+</ng-template>
+
+<ng-template #append>
+    <ng-container *ngIf="filterInput">
+        <span
+            *ngFor="
+                let addon of filterInput.rightAddons;
+                trackBy: '$index' | trackByProperty
+            "
+            class="input-group-text"
+        >
+            <app-addon [addon]="addon"></app-addon>
+        </span>
+        <button
+            (click)="remove()"
+            class="input-group-text btn btn-outline-status-deleted me-5"
+            type="button"
+            [title]="'pages.entries.filter.remove' | translate"
+        >
+            <app-icon icon="delete"></app-icon>
+        </button>
+    </ng-container>
+</ng-template>
+
+<!-- TODO: types: remove type assertions because of missing type narrowing https://github.com/angular/angular/issues/20780 -->
+<div *ngIf="filterInput" [ngSwitch]="filterInput.control.type" class="mb-3">
+    <app-time-input
+        *ngSwitchCase="'time'"
+        [control]="$any(filterInput.control)"
+        [appendTemplate]="append"
+        [prependTemplate]="prepend"
+    >
+    </app-time-input>
+    <app-date-time-input
+        *ngSwitchCase="'date-time'"
+        [control]="$any(filterInput.control)"
+        [appendTemplate]="append"
+        [prependTemplate]="prepend"
+    ></app-date-time-input>
+    <app-date-input
+        *ngSwitchCase="'date'"
+        [control]="$any(filterInput.control)"
+        [appendTemplate]="append"
+        [prependTemplate]="prepend"
+    >
+    </app-date-input>
+    <app-select-input
+        *ngSwitchCase="'select'"
+        [control]="$any(filterInput.control)"
+        [appendTemplate]="append"
+        [prependTemplate]="prepend"
+    ></app-select-input>
+    <app-number-input
+        *ngSwitchCase="'number'"
+        [control]="$any(filterInput.control)"
+        [appendTemplate]="append"
+        [prependTemplate]="prepend"
+    ></app-number-input>
+    <app-string-input
+        *ngSwitchCase="'string'"
+        [control]="$any(filterInput.control)"
+        [appendTemplate]="append"
+        [prependTemplate]="prepend"
+    ></app-string-input>
+    <ng-container *ngSwitchDefault>
+        <i class="text-status-invalid">
+            Error: unknown input-type: {{ filterInput.control.type }}
+        </i>
+    </ng-container>
+</div>

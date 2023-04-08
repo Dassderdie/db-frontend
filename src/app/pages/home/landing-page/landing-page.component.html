@@ -1,0 +1,64 @@
+<p *ngIf="customerConfigurationService.config as customerConfig$">
+    {{ 'landing.customer-disclaimer.1' | translate }}:
+    <span class="font-monospace fw-bold">{{
+        (customerConfig$ | async)?.fullName
+    }}</span>
+    <br />
+    {{ 'landing.customer-disclaimer.2' | translate }}
+    <a href="https://www.koppadb.com">www.koppadb.com</a>.
+</p>
+
+<div class="p-5 bg-light rounded-3 text-center">
+    <h1 class="display-1">
+        <app-icon icon="about"></app-icon>
+    </h1>
+    <span
+        *ngIf="customerConfigurationService.config as customerConfig$"
+        class="h1"
+    >
+        {{ 'koppaDb-customer-for' | translate }}
+        <span class="font-monospace">
+            {{ (customerConfig$ | async)?.name }}
+        </span>
+    </span>
+    <h1 class="mb-3 text-muted">
+        <small [innerHTML]="'landing.top.subtitle' | translate"> </small>
+    </h1>
+    <button class="btn btn-primary btn-lg" (click)="openAuthModal('register')">
+        {{ 'landing.top.sign-up' | translate }}
+    </button>
+    <br />
+    <button class="btn btn-link" (click)="openAuthModal('login')">
+        {{ 'landing.top.link' | translate }}
+    </button>
+</div>
+
+<ng-container *ngIf="!environment.hasCustomerConfig">
+    <app-display-pitch></app-display-pitch>
+    <br />
+</ng-container>
+
+<!-- TODO: <h1>Was bietet Ihnen KoppaDb als Mehrwert?</h1> -->
+<!-- TODO: Welche Branchen bedienen wir besonders -->
+<!-- TODO: Business vs Privat -->
+
+<app-display-tutorial></app-display-tutorial>
+
+<app-display-features></app-display-features>
+<br />
+
+<div class="text-center">
+    <button class="btn btn-primary btn-lg" (click)="openAuthModal('register')">
+        {{ 'landing.top.sign-up' | translate }}
+    </button>
+</div>
+<br />
+<br />
+
+<div *ngIf="!environment.hasCustomerConfig" class="text-center">
+    <h1 class="display-4">{{ 'landing.end.title' | translate }}</h1>
+    <p>{{ 'landing.end.questions' | translate }}</p>
+    <!-- TODO: Add contact form and contact info -->
+    <!-- TODO: make adress a variable -->
+    <a href="mailto: info@koppadb.com">info@koppadb.com</a>
+</div>

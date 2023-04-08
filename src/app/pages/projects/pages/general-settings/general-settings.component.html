@@ -1,0 +1,88 @@
+<div class="page-container">
+    <ng-container *ngIf="project; withLoading">
+        <div class="row mt-2 mb-2 align-items-center">
+            <h1 class="col">
+                <app-icon icon="project"></app-icon>
+                <ng-container
+                    *ngIf="
+                        generalSettingsForm.controls[0].value$
+                            | async as newProjectName;
+                        else emptyProjectName
+                    "
+                >
+                    {{ newProjectName }}
+                    <s
+                        *ngIf="project.name !== newProjectName"
+                        class="small text-muted"
+                    >
+                        {{ project.name }}
+                    </s>
+                </ng-container>
+                <ng-template #emptyProjectName> ??? </ng-template>
+            </h1>
+            <div class="col-auto">
+                <button
+                    (click)="exportProjectTemplate()"
+                    class="btn btn-sm btn-outline-secondary"
+                >
+                    <app-icon icon="download"></app-icon>
+                    {{ 'pages.projects.settings.export' | translate }}
+                </button>
+            </div>
+        </div>
+        <div class="mb-4">
+            <div
+                *ngFor="
+                    let control of generalSettingsForm.controls;
+                    let first = first;
+                    let last = last;
+                    trackBy: 'id' | trackByProperty
+                "
+                class="mb-3"
+            >
+                <app-input
+                    [control]="control"
+                    [showChanged]="true"
+                    [autofocus]="first"
+                ></app-input>
+            </div>
+            <button
+                (click)="generalSettingsForm.reset()"
+                [disabled]="!generalSettingsForm.changed"
+                class="btn btn-status-changed"
+            >
+                <app-icon icon="reset"></app-icon>
+                {{ 'customForms.reset' | translate }}
+            </button>
+            <app-loading-button
+                [icons]="['save']"
+                [disabled]="
+                    !generalSettingsForm.changed || generalSettingsForm.invalid
+                "
+                [newEvent]="projectEditing"
+                (click)="submitGeneralProjectSettings()"
+                class="ms-2"
+            >
+                {{ 'customForms.save' | translate }}
+            </app-loading-button>
+        </div>
+
+        <div class="card border-danger">
+            <div class="card-header">
+                {{ 'pages.projects.settings.danger-zone' | translate }}
+            </div>
+            <div class="card-body">
+                <app-loading-button
+                    [title]="'pages.projects.settings.delete' | translate"
+                    [icons]="['delete']"
+                    type="danger"
+                    [newEvent]="projectDeleting"
+                    (click)="deleteProject()"
+                    class="ms-2"
+                >
+                    {{ 'pages.projects.settings.delete' | translate }}
+                </app-loading-button>
+            </div>
+        </div>
+    </ng-container>
+</div>

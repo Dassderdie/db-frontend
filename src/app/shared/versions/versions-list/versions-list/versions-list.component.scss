@@ -1,0 +1,37 @@
+@import './scss/variables.scss';
+
+.dark {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.hover:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.showVersion {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table-cell {
+    position: relative;
+    max-height: 2rem;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+}
+
+// workaround for the scrollbar on chrome:
+.table-cell::-webkit-scrollbar {
+    height: 5px;
+}
+.table-cell::-webkit-scrollbar-track {
+    background: #ddd;
+}
+.table-cell::-webkit-scrollbar-thumb {
+    background: $secondary;
+}
+
+// TODO: fix sticky header https://github.com/angular/material2/issues/14833
+// thead.sticky-header th {
+//     position: sticky;
+//     top: 0;
+// }

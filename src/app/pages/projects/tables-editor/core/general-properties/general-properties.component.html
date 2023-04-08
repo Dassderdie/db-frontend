@@ -1,0 +1,102 @@
+<div
+    class="card"
+    [class.border-status-invalid]="generalOptionsState.delayedInvalid$ | async"
+    [class.border-status-warning]="generalOptionsState.delayedWarning$ | async"
+    [class.border-status-new]="parentState.newCreated"
+    [class.border-status-changed]="generalOptionsState.delayedChanged$ | async"
+>
+    <div
+        (click)="openChange.emit(!open)"
+        (keydown.enter)="openChange.emit(!open)"
+        role="button"
+        tabindex="0"
+        class="card-header pointer collapse-toggler"
+    >
+        <div class="row align-items-center">
+            <div class="align-middle col-auto">
+                <app-collapse-indicator
+                    [isExpanded]="open"
+                ></app-collapse-indicator>
+            </div>
+            <div class="align-middle me-auto col-auto description-text">
+                <app-icon icon="settings"></app-icon>
+                {{
+                    'pages.tablesEditor.general-settings.table-settings-for'
+                        | translate
+                }}
+                <app-icon icon="table"></app-icon>
+                {{
+                    (generalProperties.displayNames | translateDisplayNames)
+                        ?.singular || '???'
+                }}
+                <br />
+                <app-markdown-viewer
+                    *ngIf="
+                        generalProperties.descriptions
+                            | translateDescriptions as description
+                    "
+                    [markdownText]="description"
+                    maxHeight="50px"
+                    overflow="hidden"
+                ></app-markdown-viewer>
+            </div>
+            <div *ngIf="!parentState.newCreated" class="align-middle col-auto">
+                <button
+                    (click)="$event.stopPropagation(); deleteTable.emit()"
+                    class="btn btn-danger btn-sm float-end mt-n2 mb-n2"
+                    type="button"
+                >
+                    <app-icon icon="delete"></app-icon>
+                    {{ 'pages.tablesEditor.deleteTable' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <app-animated-if [show]="open">
+        <ul
+            *
+            class="list-group list-group-flush"
+            style="border-radius: 0.25rem"
+        >
+            <li class="list-group-item">
+                <app-display-properties
+                    [initialDisplayProperties]="{
+                        descriptions: initialGeneralProperties.descriptions,
+                        displayNames: initialGeneralProperties.displayNames
+                    }"
+                    [displayProperties]="{
+                        descriptions: generalProperties.descriptions,
+                        displayNames: generalProperties.displayNames
+                    }"
+                    [parentState]="generalOptionsState"
+                    (displayPropertiesChange)="updateDisplayProperties($event)"
+                ></app-display-properties>
+            </li>
+            <li class="list-group-item">
+                <ng-template #allowAnonymousPrepend>
+                    <span class="input-group-text">
+                        {{
+                            'pages.tablesEditor.allowAnonymousCreation'
+                                | translate
+                        }}
+                    </span>
+                </ng-template>
+                <app-select-input
+                    [control]="generalOptionsForm.controls[0]!"
+                    [prependTemplate]="allowAnonymousPrepend"
+                    [showChanged]="true"
+                ></app-select-input>
+                <button
+                    (click)="reset()"
+                    [disabled]="
+                        (generalOptionsForm.delayedChanged$ | async) === false
+                    "
+                    class="btn btn-status-changed"
+                >
+                    <app-icon icon="reset"></app-icon>
+                    {{ 'customForms.reset' | translate }}
+                </button>
+            </li>
+        </ul>
+    </app-animated-if>
+</div>

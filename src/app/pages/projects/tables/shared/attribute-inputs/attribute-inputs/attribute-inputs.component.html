@@ -1,0 +1,118 @@
+<ng-container *ngIf="form && changedValues">
+    <!-- Normal -->
+    <div
+        *ngFor="
+            let attribute of displayedAttributes.normal;
+            trackBy: 'id' | trackByProperty;
+            let last = last
+        "
+        [class.mb-3]="!last"
+    >
+        <app-attribute-input
+            [projectId]="projectId"
+            [tableId]="tableId"
+            [initialVersion]="initialVersion"
+            [autofocusId]="autofocusId"
+            [attribute]="attribute"
+            [value]="changedValues[attribute.id]"
+            [form]="form"
+            [disabled]="disabled"
+            [inputsState]="inputsState"
+            (valueChanges)="updateValue(attribute, $event)"
+        ></app-attribute-input>
+    </div>
+
+    <!-- Concealed -->
+    <div class="d-grid gap-2">
+        <button
+            *ngIf="displayedAttributes.concealed.length > 0"
+            (click)="showConcealedAttributes = !showConcealedAttributes"
+            class="btn btn-sm btn-link text-muted mt-2 mb-2 text-start"
+        >
+            <app-collapse-indicator
+                [isExpanded]="showConcealedAttributes"
+            ></app-collapse-indicator>
+            {{
+                'pages.tables.attributes-inputs.show-concealed-attributes'
+                    | translate
+                        : {
+                              numberOfConcealedAttributes:
+                                  displayedAttributes.concealed.length
+                          }
+            }}
+        </button>
+    </div>
+
+    <app-animated-if [show]="showConcealedAttributes">
+        <ng-template>
+            <div
+                *ngFor="
+                    let attribute of displayedAttributes.concealed;
+                    trackBy: 'id' | trackByProperty;
+                    let last = last
+                "
+                [class.mb-3]="!last"
+            >
+                <app-attribute-input
+                    [projectId]="projectId"
+                    [tableId]="tableId"
+                    [initialVersion]="initialVersion"
+                    [autofocusId]="autofocusId"
+                    [attribute]="attribute"
+                    [value]="changedValues[attribute.id]"
+                    [form]="form"
+                    [disabled]="disabled"
+                    [inputsState]="inputsState"
+                    (valueChanges)="updateValue(attribute, $event)"
+                ></app-attribute-input>
+            </div>
+        </ng-template>
+    </app-animated-if>
+
+    <!-- Hidden -->
+    <div class="d-grid gap-2">
+        <button
+            *ngIf="displayedAttributes.hidden.length > 0"
+            (click)="showHiddenAttributes = !showHiddenAttributes"
+            class="btn btn-sm btn-link text-muted mt-2 mb-2 text-start"
+        >
+            <app-collapse-indicator
+                [isExpanded]="showHiddenAttributes"
+            ></app-collapse-indicator>
+            {{
+                'pages.tables.attributes-inputs.show-hidden-attributes'
+                    | translate
+                        : {
+                              numberOfHiddenAttributes:
+                                  displayedAttributes.hidden.length
+                          }
+            }}
+        </button>
+    </div>
+
+    <app-animated-if [show]="showHiddenAttributes">
+        <ng-template>
+            <div
+                *ngFor="
+                    let attribute of displayedAttributes.hidden;
+                    trackBy: 'id' | trackByProperty;
+                    let last = last
+                "
+                [class.mb-3]="!last"
+            >
+                <app-attribute-input
+                    [projectId]="projectId"
+                    [tableId]="tableId"
+                    [initialVersion]="initialVersion"
+                    [autofocusId]="autofocusId"
+                    [attribute]="attribute"
+                    [value]="changedValues[attribute.id]"
+                    [form]="form"
+                    [disabled]="disabled"
+                    [inputsState]="inputsState"
+                    (valueChanges)="updateValue(attribute, $event)"
+                ></app-attribute-input>
+            </div>
+        </ng-template>
+    </app-animated-if>
+</ng-container>

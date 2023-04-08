@@ -1,0 +1,37 @@
+<ng-template #prependWithCheckboxTemplate>
+    <ng-container *ngTemplateOutlet="prependTemplate"></ng-container>
+    <!-- add a checkbox indicating wether the input value is null or a (potentially empty) string-->
+    <div class="input-group-text">
+        <input
+            type="checkbox"
+            [checked]="isNotNull"
+            [attr.disabled]="
+                notNullCheckboxDisabled || (control.disabled$ | async)
+                    ? ''
+                    : null
+            "
+            (input)="changeIsNotNull($event)"
+        />
+    </div>
+</ng-template>
+
+<div
+    [appDescriptionTooltip]="descriptionTemplate"
+    [description]="control.description"
+    (focus)="control.setTouched(true)"
+>
+    <app-string-input
+        *ngIf="stringInput"
+        [showChanged]="showChanged"
+        [control]="stringInput"
+        [autofocus]="autofocus"
+        [displayValidationOn]="showValidation"
+        [appendTemplate]="appendTemplate"
+        [prependTemplate]="prependWithCheckboxTemplate"
+    ></app-string-input>
+</div>
+<app-validation *ngIf="showValidation" [state]="control"></app-validation>
+
+<ng-template #descriptionTemplate>
+    <app-description [description]="control.description"></app-description>
+</ng-template>

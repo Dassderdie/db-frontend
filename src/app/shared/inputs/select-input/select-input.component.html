@@ -1,0 +1,130 @@
+<ng-template #displayOption let-option="option">
+    <app-member-name
+        *ngIf="
+            option.name.userId && option.name.projectId;
+            else displayNonMember
+        "
+        [userId]="option.name.userId"
+        [projectId]="option.name.projectId"
+    >
+    </app-member-name>
+    <ng-template #displayNonMember>
+        <app-icon
+            *ngFor="
+                let icon of option.name.icons;
+                trackBy: null | trackByProperty;
+                let last = last
+            "
+            [icon]="$any(icon)"
+            [class.me-1]="last"
+        ></app-icon>
+        <ng-container [ngSwitch]="option.name.kind">
+            <span *ngSwitchCase="'string'">{{ option.name.text }}</span>
+            <span *ngSwitchCase="'translate'">{{
+                option.name.text | translate
+            }}</span>
+            <span *ngSwitchCase="'displayName'">{{
+                (option.name.text | translateDisplayNames)?.singular
+            }}</span>
+            <i *ngSwitchDefault class="text-status-invalid"
+                >Unknown kind: {{ option.name.kind }}</i
+            >
+        </ng-container>
+    </ng-template>
+</ng-template>
+
+<div
+    [appDescriptionTooltip]="descriptionTemplate"
+    [description]="control.description"
+    class="input-group"
+>
+    <ng-container *ngTemplateOutlet="prependTemplate"></ng-container>
+    <div
+        dropdown
+        #dropdown="bs-dropdown"
+        class="btn-group d-grid gap-2"
+        style="flex: 1 1 auto"
+    >
+        <button
+            dropdownToggle
+            type="button"
+            class="form-control btn dropdown-toggle"
+            [class.is-invalid]="showValidation && (control.invalid$ | async)"
+            [class.has-warning]="
+                showValidation && (control.hasWarning$ | async)
+            "
+            [class.is-changed]="showChanged && (control.changed$ | async)"
+            [class.no-border-radius-left]="prependTemplate || !inputGroup"
+            [class.no-border-radius-right]="appendTemplate || !inputGroup"
+            [class.btn-light]="lightButton"
+            [class.btn-outline-secondary]="
+                !lightButton &&
+                !(showChanged && (control.changed$ | async)) &&
+                (control.invalid$ | async) === false
+            "
+            [class.btn-outline-status-changed]="
+                showChanged && (control.changed$ | async)
+            "
+            [class.btn-outline-danger]="
+                showValidation && (control.invalid$ | async)
+            "
+            [class.disabled]="
+                (control.disabled$ | async) ||
+                (control.noOptionsToChoose$ | async)
+            "
+            [id]="control.name"
+            style="border-radius: 0.25rem"
+            [appAutoFocus]="autofocus"
+        >
+            <ng-container
+                *ngIf="
+                    (control.selectedOption$ | async)?.option as option;
+                    withInlineLoading
+                "
+            >
+                <ng-container
+                    *ngTemplateOutlet="
+                        displayOption;
+                        context: {
+                            option: option
+                        }
+                    "
+                ></ng-container>
+            </ng-container>
+            <span class="caret"></span>
+        </button>
+
+        <div
+            *dropdownMenu
+            class="dropdown-menu p-0"
+            role="menu"
+            style="min-width: 100%"
+        >
+            <button
+                *ngFor="
+                    let option of control.options$ | async;
+                    trackBy: '$index' | trackByProperty;
+                    let i = index
+                "
+                type="button"
+                (click)="changeOption(option); dropdown.hide()"
+                class="dropdown-item"
+                [attr.disabled]="option.disabled ? '' : null"
+                [class.active]="i === (control.selectedOption$ | async)?.index"
+            >
+                <ng-container
+                    *ngTemplateOutlet="
+                        displayOption;
+                        context: { option: option }
+                    "
+                ></ng-container>
+            </button>
+        </div>
+    </div>
+    <ng-container *ngTemplateOutlet="appendTemplate"></ng-container>
+</div>
+<app-validation *ngIf="showValidation" [state]="control"></app-validation>
+
+<ng-template #descriptionTemplate>
+    <app-description [description]="control.description"></app-description>
+</ng-template>

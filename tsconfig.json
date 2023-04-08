@@ -1,0 +1,43 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "incremental": true,
+        "outDir": "./dist/out-tsc",
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": true,
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es2017",
+        "strict": true,
+        "resolveJsonModule": true,
+        "allowSyntheticDefaultImports": true,
+        "noUncheckedIndexedAccess": true,
+        "module": "esnext",
+        "typeRoots": ["node_modules/@types"],
+        "lib": ["ES2020", "dom"],
+        "baseUrl": "./",
+        "paths": {
+            "@cache-server/*": ["src/cache-server/*"],
+            "@shared/*": ["src/app/shared/*"],
+            "@tables-editor/*": ["src/app/pages/projects/tables-editor/*"],
+            "@entries/*": ["src/app/pages/projects/tables/entries/*"],
+            "@tables/*": ["src/app/pages/projects/tables/*"],
+            "@projects/*": ["src/app/pages/projects/*"],
+            "@pages/*": ["src/app/pages/*"],
+            "@main-shared/*": ["src/app/main-shared/*"],
+            "@core/*": ["src/app/core/*"]
+        },
+        "allowUmdGlobalAccess": true
+    },
+    "angularCompilerOptions": {
+        "fullTemplateTypeCheck": true,
+        "strictTemplates": true,
+        "strictInjectionParameters": true,
+        "strictMetadataEmit": false,
+        "enableIvy": true
+    }
+}

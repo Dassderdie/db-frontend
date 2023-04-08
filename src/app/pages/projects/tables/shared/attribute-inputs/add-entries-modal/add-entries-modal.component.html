@@ -1,0 +1,138 @@
+<ng-container *ngIf="table$ | async as table">
+    <div class="modal-header">
+        <h5 class="modal-title">
+            {{
+                'add-entries-modal.titel'
+                    | translate
+                        : {
+                              name: table
+                                  ? (table.displayNames | translateDisplayNames)
+                                        ?.singular
+                                  : ''
+                          }
+            }}
+        </h5>
+        <button
+            type="button"
+            class="btn-close"
+            (click)="bsModalRef.hide()"
+        ></button>
+    </div>
+    <div class="modal-body">
+        <app-versions-filter-editor
+            [table]="table"
+            (appliedFilterChanges)="filter = $event"
+            class="mb-3"
+        ></app-versions-filter-editor>
+        <ng-template #firstColHeader>
+            <th class="p-0 fit" (click)="$event.stopPropagation()">
+                <label
+                    class="m-0 pointer"
+                    style="
+                        padding: 0.4rem;
+                        max-width: 37px;
+                        width: -webkit-fill-available;
+                        height: -webkit-fill-available;
+                    "
+                    [title]="
+                        (allCheckbox
+                            ? 'add-entries-modal.all-checkbox-title.unselect'
+                            : 'add-entries-modal.all-checkbox-title.select'
+                        ) | translate
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        [(ngModel)]="allCheckbox"
+                        (ngModelChange)="updateAll($event)"
+                        class="pointer"
+                    />
+                </label>
+            </th>
+        </ng-template>
+        <ng-template #firstCol let-version="version">
+            <td
+                [appInfoTooltip]="
+                    'add-entries-modal.checkbox-disabled-info' | translate
+                "
+                [isDisabled]="
+                    !(
+                        !checkboxes[version.entryId] &&
+                        maxSelected !== undefined &&
+                        maxSelected !== null &&
+                        selectedVersions.length >= maxSelected
+                    )
+                "
+                (click)="$event.stopPropagation()"
+                class="p-0 fit"
+                style="
+                    position: sticky;
+                    left: 0;
+                    z-index: 100;
+                    background-color: white;
+                "
+            >
+                <label
+                    class="m-0 pointer"
+                    style="
+                        padding: 0.75rem;
+                        max-width: 37px;
+                        width: -webkit-fill-available;
+                        height: -webkit-fill-available;
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        [(ngModel)]="checkboxes[version.entryId]"
+                        (ngModelChange)="updateSelected(version, $event)"
+                        class="pointer"
+                        [attr.disabled]="
+                            !checkboxes[version.entryId] &&
+                            maxSelected !== undefined &&
+                            maxSelected !== null &&
+                            selectedVersions.length >= maxSelected
+                                ? ''
+                                : null
+                        "
+                    />
+                </label>
+            </td>
+        </ng-template>
+        <!-- viewInit to make sure the container has already its correct width -->
+        <div
+            *ngIf="viewInit"
+            style="max-height: 60vh; overflow-y: auto"
+            (scroll)="onScroll($event)"
+            #container
+        >
+            <app-search-results
+                [table]="table"
+                [filter]="filter"
+                [queryId]="table.id"
+                [firstCol]="firstCol"
+                [firstColHeader]="firstColHeader"
+                [viewportHeight$]="(viewportHeight$ | async)!"
+                [loadMore$]="loadMoreE$"
+                [root]="container"
+                (versionsChange)="updateVersions($event)"
+            ></app-search-results>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="bsModalRef.hide()"
+        >
+            {{ 'add-entries-modal.close' | translate }}
+        </button>
+        <button
+            type="button"
+            class="btn btn-primary"
+            (click)="chooseEntries()"
+            (keyup.enter)="chooseEntries()"
+        >
+            {{ 'add-entries-modal.add' | translate }}
+        </button>
+    </div>
+</ng-container>

@@ -1,0 +1,52 @@
+<div
+    [class.border-status-invalid]="showValidation && (control.invalid$ | async)"
+    [class.border-status-warning]="
+        showValidation && (control.hasWarning$ | async)
+    "
+    [class.border-status-changed]="showChanged && (control.changed$ | async)"
+    (focus)="control.setTouched(true)"
+    class="card"
+>
+    <div
+        class="card-header"
+        style="background-color: #e9ecef; padding: 6px 12px 6px 12px"
+    >
+        <div class="row">
+            <div
+                [appDescriptionTooltip]="descriptionTemplate"
+                [description]="control.description"
+                class="col-auto align-self-center"
+            >
+                <app-icon icon="markdown"></app-icon>
+                <span *ngIf="control.displayName.translateKey">
+                    {{ control.displayName.translateKey | translate }}
+                </span>
+                <app-attribute-name
+                    *ngIf="control.displayName.attribute"
+                    [attribute]="control.displayName.attribute"
+                ></app-attribute-name>
+                <app-meta-attribute-name
+                    *ngIf="control.displayName.metaAttribute"
+                    [metaAttribute]="control.displayName.metaAttribute"
+                ></app-meta-attribute-name>
+                <span *ngIf="control.required" class="required">*</span>
+                <ng-container
+                    *ngTemplateOutlet="prependTemplate"
+                ></ng-container>
+            </div>
+            <div class="col-auto">
+                <ng-container *ngTemplateOutlet="appendTemplate"></ng-container>
+            </div>
+        </div>
+    </div>
+    <div
+        #editorWrapper
+        [attr.id]="control.name"
+        [style.min-height]="currentHeight + 'px'"
+    ></div>
+</div>
+<app-validation *ngIf="showValidation" [state]="control"></app-validation>
+
+<ng-template #descriptionTemplate>
+    <app-description [description]="control.description"></app-description>
+</ng-template>

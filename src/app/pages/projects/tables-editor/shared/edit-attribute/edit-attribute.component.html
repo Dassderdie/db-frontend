@@ -1,0 +1,180 @@
+<div
+    class="card listed-card"
+    [class.border-status-invalid]="attributeState.delayedInvalid$ | async"
+    [class.border-status-warning]="attributeState.delayedWarning$ | async"
+    [class.border-status-new]="attribute.editingType === 'new'"
+    [class.border-status-changed]="attributeState.delayedChanged$ | async"
+    [class.bottom]="bottom"
+    [class.top]="top"
+>
+    <div
+        (click)="openChange.emit(!open)"
+        (keydown.enter)="openChange.emit(!open)"
+        role="button"
+        tabindex="0"
+        class="card-header pointer collapse-toggler"
+    >
+        <div class="row align-items-center flex-nowrap">
+            <!-- TODO: workaround for cdkDragHandle not detected in child components  https://github.com/angular/components/issues/13784 -->
+            <ng-content></ng-content>
+            <div class="align-middle col-auto">
+                <app-collapse-indicator
+                    [isExpanded]="open"
+                ></app-collapse-indicator>
+            </div>
+            <div class="align-middle me-auto col overflow-auto">
+                <app-attribute-name
+                    [attribute]="attribute"
+                    [displayKind]="true"
+                ></app-attribute-name>
+                <i *ngIf="attribute.kind === 'foreign'" class="ms-3">
+                    <app-table-name
+                        *ngIf="foreignTable; withInlineLoading"
+                        [table]="foreignTable!"
+                        [showIcon]="true"
+                    ></app-table-name>
+                </i>
+                <br />
+                <app-markdown-viewer
+                    *ngIf="
+                        attribute.descriptions
+                            | translateDescriptions as description
+                    "
+                    [markdownText]="description"
+                    maxHeight="50px"
+                    overflow="hidden"
+                ></app-markdown-viewer>
+            </div>
+            <div class="col-auto">
+                <!-- .ms-n2 as a workaround to compensate for the delete-icon, because it isn't included in .col-auto and therefore it wraps too soon when dealing with long descriptions -->
+                <button
+                    (click)="$event.stopPropagation(); removeAttribute.emit()"
+                    class="
+                        btn btn-link btn-sm
+                        text-status-deleted
+                        float-end
+                        mt-n2
+                        mb-n2
+                        ms-n2
+                    "
+                    type="button"
+                >
+                    <app-icon icon="delete"></app-icon>
+                    {{ 'pages.tablesEditor.removeAttribute' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <app-animated-if [show]="open">
+        <tabset *>
+            <tab
+                [heading]="'pages.tablesEditor.display-properties' | translate"
+                style="padding: 0.75rem 1.25rem"
+            >
+                <app-display-properties
+                    [initialDisplayProperties]="{
+                        descriptions: initialAttribute.descriptions,
+                        displayNames: initialAttribute.displayNames
+                    }"
+                    [displayProperties]="{
+                        descriptions: attribute.descriptions,
+                        displayNames: attribute.displayNames
+                    }"
+                    [parentState]="attributeState"
+                    (displayPropertiesChange)="
+                        update($event.displayNames, ['displayNames']);
+                        update($event.descriptions, ['descriptions'])
+                    "
+                ></app-display-properties>
+            </tab>
+            <tab
+                [heading]="'pages.tablesEditor.kind-options' | translate"
+                [disabled]="!kindOptionsForm"
+            >
+                <div *ngIf="kindOptionsForm" style="padding: 0.75rem 1.25rem">
+                    <div
+                        *ngFor="
+                            let control of kindOptionsForm.controls;
+                            trackBy: 'id' | trackByProperty;
+                            let i = index;
+                            let first = first
+                        "
+                        class="mb-3"
+                    >
+                        <h5 *ngIf="i === numberOfNonValidatorOptions">
+                            {{ 'pages.tablesEditor.validators' | translate }}
+                        </h5>
+                        <app-input
+                            [control]="control"
+                            [showChanged]="!attributeState.newCreated"
+                            [autofocus]="first"
+                        ></app-input>
+                    </div>
+
+                    <div
+                        *ngIf="attribute.kind === 'foreign'"
+                        class="card right-card mb-3"
+                    >
+                        <div
+                            class="card-header"
+                            style="background-color: #e9ecef"
+                        >
+                            {{
+                                'kind-options.intermediateAttributes'
+                                    | translate
+                            }}
+                        </div>
+                        <div class="card-body">
+                            <!-- TODO: remove workaround with any assertions because of https://github.com/angular/angular/issues/20780 -->
+                            <!-- TODO: pass ForeignAttribute to update function -->
+                            <app-edit-attributes
+                                [tableId]="
+                                    $any(attribute.kindOptions)
+                                        .intermediateTableId
+                                "
+                                [attributes]="
+                                    $any(attribute.kindOptions)
+                                        .intermediateAttributes
+                                "
+                                [initialAttributes]="
+                                    $any(initialAttribute.kindOptions)
+                                        .intermediateAttributes
+                                "
+                                [parentState]="attributeState"
+                                [minAttributes]="0"
+                                (attributesChange)="
+                                    update(
+                                        $any($event),
+                                        $any([
+                                            'kindOptions',
+                                            'intermediateAttributes'
+                                        ])
+                                    )
+                                "
+                                (saveChanges)="saveChanges.next(null)"
+                            ></app-edit-attributes>
+                        </div>
+                    </div>
+
+                    <app-validation [state]="attributeState"></app-validation>
+
+                    <button
+                        (click)="reset()"
+                        [disabled]="
+                            (kindOptionsForm.delayedChanged$ | async) ===
+                                false &&
+                            (attributeState.children?.attributes
+                                ? (attributeState.children.attributes!
+                                      .delayedChanged$ | async) === false
+                                : true)
+                        "
+                        class="btn btn-status-changed"
+                    >
+                        <app-icon icon="reset"></app-icon>
+                        {{ 'customForms.reset' | translate }}
+                    </button>
+                </div>
+            </tab>
+        </tabset>
+    </app-animated-if>
+</div>

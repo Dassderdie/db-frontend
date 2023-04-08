@@ -1,0 +1,10 @@
+<ng-container
+    *ngIf="progressBarService.progressBarStatus$ | async as progressBarStatus"
+>
+    <div *ngIf="progressBarStatus.maximum > 0" class="progress">
+        <div
+            [class]="'progress-bar ' + progressBarStatus.status"
+            role="progressbar"
+        ></div>
+    </div>
+</ng-container>

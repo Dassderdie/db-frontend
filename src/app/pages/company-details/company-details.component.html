@@ -1,0 +1,38 @@
+<div class="page-container">
+    <h1>
+        <app-icon icon="info"></app-icon>
+        {{ 'routing.company-details' | translate }}
+    </h1>
+    <ng-container *ngIf="environment.companyDetails as companyDetails">
+        <h2>{{ 'company-details.contact' | translate }}</h2>
+        <address [innerHTML]="companyDetails.address"></address>
+
+        <p>
+            {{ 'company-details.email' | translate }}:
+            <a [href]="'mailto: ' + companyDetails.email">
+                {{ companyDetails.email }}
+            </a>
+        </p>
+        <p>
+            {{ 'company-details.phone-number' | translate }}:
+            {{ companyDetails.phoneNumber }}
+        </p>
+        <p>
+            {{ 'company-details.representatives' | translate }}:
+            {{ companyDetails.representatives }}
+        </p>
+
+        <h2>
+            {{ 'company-details.commercialRegister.name' | translate }}
+        </h2>
+        {{ 'company-details.commercialRegister.districtCourt' | translate }}:
+        {{ companyDetails.commercialRegister.districtCourt }}
+        <br />
+        {{ 'company-details.commercialRegister.registerId' | translate }}:
+        {{ companyDetails.commercialRegister.registerId }}
+        <h2>
+            {{ 'company-details.vatIdentificationNumber' | translate }}
+        </h2>
+        {{ companyDetails.vatIdentificationNumber }}
+    </ng-container>
+</div>

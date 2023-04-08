@@ -1,0 +1,17 @@
+export const excelFileTypes: ReadonlyArray<string> = [
+    'xls',
+    'ssml',
+    'xlsb',
+    'xlsx',
+    'qpw',
+    'rtf',
+    'ods',
+    'fods',
+    'dbf',
+    'dif',
+    'sylk',
+    'prn',
+    'eth',
+    'uos',
+    'xlsm',
+];

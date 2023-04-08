@@ -1,0 +1,53 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        {{ 'pages.entries.new-filter-preference-modal.title' | translate }}
+    </h4>
+    <button
+        type="button"
+        class="btn-close"
+        (click)="bsModalRef.hide()"
+    ></button>
+</div>
+<div class="modal-body">
+    <p>
+        {{
+            'pages.entries.new-filter-preference-modal.filter-preference-name.description'
+                | translate
+        }}
+    </p>
+    <div *ngIf="newFilterPreferenceForm" class="mb-3">
+        <label for="project-name-input">{{
+            'pages.entries.new-filter-preference-modal.filter-preference-name.name'
+                | translate
+        }}</label>
+        <app-input
+            [control]="newFilterPreferenceForm.controls[0]"
+            [autofocus]="true"
+            (keydown.enter)="createFilterPreference()"
+        ></app-input>
+    </div>
+</div>
+<div class="modal-footer">
+    <button
+        type="submit"
+        (click)="createFilterPreference()"
+        [disabled]="newFilterPreferenceForm?.delayedInvalid$ | async"
+        class="btn btn-warning"
+    >
+        <app-icon icon="create"></app-icon>
+        {{
+            'pages.entries.new-filter-preference-modal.filter-preference-name.create'
+                | translate
+        }}
+    </button>
+    <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="bsModalRef.hide()"
+    >
+        {{
+            'pages.entries.new-filter-preference-modal.filter-preference-name.cancel'
+                | translate
+        }}
+    </button>
+</div>

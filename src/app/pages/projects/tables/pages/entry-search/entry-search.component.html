@@ -1,0 +1,68 @@
+<div class="page-container">
+    <ng-container *ngIf="table; withLoading">
+        <div class="row mt-2 mb-2 align-items-center">
+            <h2 class="col">
+                <app-table-name
+                    [table]="table"
+                    [showIcon]="true"
+                ></app-table-name>
+                <button
+                    (click)="shareService.shareUrl()"
+                    class="pb-0 pt-0 mb-n2 mt-n2 btn btn-link text-muted"
+                    [appInfoTooltip]="
+                        'pages.entries.overview.copyLink' | translate
+                    "
+                >
+                    <app-icon icon="share" style="font-size: 150%"></app-icon>
+                </button>
+            </h2>
+            <div class="col-auto">
+                <button
+                    type="button"
+                    class="btn btn-sm btn-outline-secondary float-end"
+                    (click)="openFilterPreferencesManagerModal()"
+                >
+                    <app-icon icon="tables-editor"></app-icon>
+                    {{ 'pages.entry-search.manage-filters' | translate }}
+                </button>
+            </div>
+        </div>
+
+        <app-versions-filter-editor
+            [table]="table"
+            (appliedFilterChanges)="filter = $event"
+        ></app-versions-filter-editor>
+
+        <button
+            class="btn btn-link btn-sm float-end ms-3"
+            (click)="toggleFullscreenTable()"
+        >
+            <app-icon icon="fullscreen"></app-icon>
+            {{ 'pages.search-results.go-fullscreen' | translate }}
+        </button>
+    </ng-container>
+</div>
+<div
+    [class.container-xl]="!fullscreenTable"
+    [class.container-fluid]="fullscreenTable"
+>
+    <ng-container *ngIf="table; withLoading">
+        <ng-template #lastCol let-version="version">
+            <td
+                class="p-0 fit bg-light last-col"
+                style="position: sticky; vertical-align: middle; right: 0"
+            >
+                <app-navigation-col [version]="version"></app-navigation-col>
+            </td>
+        </ng-template>
+        <app-search-results
+            *ngIf="filter !== undefined"
+            [table]="table"
+            [filter]="filter"
+            [queryId]="table.id"
+            [lastCol]="lastCol"
+            [loadMore$]="windowValuesService.endOfWindowReached$"
+            [viewportHeight$]="(windowValuesService.viewportHeight$ | async)!"
+        ></app-search-results>
+    </ng-container>
+</div>

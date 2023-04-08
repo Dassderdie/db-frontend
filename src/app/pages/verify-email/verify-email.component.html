@@ -1,0 +1,28 @@
+<div class="page-container">
+    <h1 [class.text-success]="status === 'success'">
+        {{ 'auth.verify-email.title' | translate }}
+    </h1>
+    <div *ngIf="status === 'in-progress'">
+        <span
+            class="spinner-border text-secondary spinner-border-sm"
+            role="status"
+        >
+        </span>
+        {{ 'auth.verify-email.in-progress' | translate }}
+    </div>
+    <div *ngIf="status === 'success'">
+        <app-icon icon="success" [inline]="false"></app-icon>
+        {{ 'auth.verify-email.success' | translate }}
+        <br />
+        <a
+            *ngIf="(authenticatedService.isAuthenticated$ | async) === false"
+            class="btn btn-success mt-4"
+            routerLink="/login"
+            >{{ 'auth.verify-email.continue-login' | translate }}</a
+        >
+    </div>
+    <div *ngIf="status === 'error'">
+        <app-icon icon="danger"></app-icon>
+        {{ 'auth.verify-email.error' | translate }}
+    </div>
+</div>

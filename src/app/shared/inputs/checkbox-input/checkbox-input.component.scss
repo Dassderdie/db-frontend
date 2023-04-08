@@ -1,0 +1,33 @@
+@import 'scss/variables.scss';
+$status-colors: (
+    'is-changed': $changed,
+    'has-warning': $warning,
+);
+
+@each $name, $color in $status-colors {
+    .#{$name}.custom-control-label::before {
+        border-color: $color;
+    }
+
+    .#{$name}.custom-control-input:focus ~ .custom-control-label::before {
+        box-shadow: 0 0 0 0.2rem rgba($color, 0.25) !important;
+    }
+
+    .#{$name}.custom-control-input ~ .custom-control-label::before {
+        border-color: $color !important;
+    }
+
+    input.#{$name}.custom-control-input:not(.is-invalid):focus
+        ~ .custom-control-label {
+        color: $color;
+    }
+
+    .#{$name}.custom-control-input:checked ~ .custom-control-label::before {
+        background-color: $color;
+    }
+
+    .#{$name}.custom-control-input:not(:checked)
+        ~ .custom-control-label::after {
+        background-color: $color;
+    }
+}

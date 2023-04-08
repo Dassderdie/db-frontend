@@ -1,0 +1,227 @@
+<div class="cy-outer-container mb-1 position-relative">
+    <div class="position-absolute">
+        <div class="btn-toolbar position-relative" style="z-index: 10">
+            <div class="btn-group btn-group-lg btn-group-toggle">
+                <button
+                    (click)="selectTool('expand'); $event.stopPropagation()"
+                    type="button"
+                    class="btn btn-outline-primary"
+                    [class.active]="selectedTool === 'expand'"
+                    [appInfoTooltip]="
+                        'pages.relation-explorer.expand-tool.description'
+                            | translate
+                    "
+                    placement="top"
+                >
+                    <app-icon icon="node-expand" [inline]="false"></app-icon>
+                </button>
+                <button
+                    (click)="selectTool('remove'); $event.stopPropagation()"
+                    type="button"
+                    class="btn btn-outline-primary"
+                    [class.active]="selectedTool === 'remove'"
+                    [appInfoTooltip]="
+                        'pages.relation-explorer.remove-tool.description'
+                            | translate
+                    "
+                    placement="top"
+                >
+                    <app-icon icon="node-remove" [inline]="false"></app-icon>
+                </button>
+                <button
+                    (click)="selectTool('inspect'); $event.stopPropagation()"
+                    type="button"
+                    class="btn btn-outline-primary"
+                    [class.active]="selectedTool === 'inspect'"
+                    [appInfoTooltip]="
+                        'pages.relation-explorer.inspect-tool.description'
+                            | translate
+                    "
+                    placement="top"
+                >
+                    <app-icon icon="node-inspect" [inline]="false"></app-icon>
+                </button>
+            </div>
+
+            <button
+                (click)="reset()"
+                type="button"
+                class="btn btn-lg btn-outline-status-changed me-2 ms-2"
+            >
+                <app-icon icon="reset" [inline]="false"></app-icon>
+            </button>
+
+            <div class="btn-group btn-group-lg">
+                <button
+                    (click)="fit(); $event.stopPropagation()"
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    [appInfoTooltip]="
+                        'pages.tablesEditor.table-graph.fit' | translate
+                    "
+                    placement="top"
+                >
+                    <app-icon icon="fit" [inline]="false"></app-icon>
+                </button>
+                <button
+                    (click)="zoomIn(); $event.stopPropagation()"
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    [appInfoTooltip]="
+                        'pages.tablesEditor.table-graph.zoom-in' | translate
+                    "
+                    placement="top"
+                >
+                    <app-icon icon="zoom-in" [inline]="false"></app-icon>
+                </button>
+                <button
+                    (click)="zoomOut(); $event.stopPropagation()"
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    [appInfoTooltip]="
+                        'pages.tablesEditor.table-graph.zoom-out' | translate
+                    "
+                    placement="top"
+                >
+                    <app-icon icon="zoom-out" [inline]="false"></app-icon>
+                </button>
+                <button
+                    (click)="runLayout(); $event.stopPropagation()"
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    [appInfoTooltip]="
+                        'pages.tablesEditor.table-graph.layout' | translate
+                    "
+                    placement="top"
+                >
+                    <app-icon icon="layout" [inline]="false"></app-icon>
+                </button>
+            </div>
+        </div>
+        <div
+            class="ps-2 position-relative"
+            style="
+                max-height: 50%;
+                max-width: 100%;
+                width: fit-content;
+                overflow: auto;
+                background-color: rgba(256, 256, 256, 0.5);
+                z-index: 10;
+            "
+        >
+            <app-select-foreign-attributes
+                *ngIf="selectedTool === 'expand'; else tablesLegend"
+                [tables]="usedTables"
+                [startTableId]="tableId"
+                (selectedForeignAttributeIdsChange)="
+                    updateAllowedAttributeIds($event)
+                "
+            ></app-select-foreign-attributes>
+            <ng-template #tablesLegend>
+                <app-tables-legend [tables]="usedTables"></app-tables-legend>
+            </ng-template>
+        </div>
+    </div>
+    <div #cyContainer class="cy-container" style="min-height: 75vh"></div>
+</div>
+
+<div class="page-container" style="min-height: 50vh">
+    <div *ngIf="inspection; else tutorial">
+        <h2>
+            <app-table-name
+                [table]="inspection.table"
+                [showIcon]="true"
+                class="me-3"
+            >
+            </app-table-name>
+            <app-entry-name
+                [newestVersion]="inspection.version"
+                [table]="inspection.table"
+                [showLink]="true"
+            >
+            </app-entry-name>
+        </h2>
+        <app-entry-table
+            [version]="inspection.version"
+            [attributes]="inspection.table.attributes"
+        ></app-entry-table>
+    </div>
+    <ng-template #tutorial>
+        <!-- TODO: translations -->
+        <h2>How to use the relation graph</h2>
+        <ul>
+            <li>
+                You can click with the selected tool on the blue nodes. The grey
+                ones are disabled.
+            </li>
+            <li>
+                You can change the positions in the graph by dragging the entry
+                nodes
+            </li>
+            <li>
+                Via <app-icon icon="layout" [inline]="true"></app-icon> the
+                layout of the graph will be automatically improved
+            </li>
+            <li>Click on a free spot on the graph to return to this view</li>
+        </ul>
+
+        <p>
+            At the top left of the graph you can select one of the following
+            tools:
+        </p>
+        <h6>
+            <app-icon icon="node-expand" [inline]="true"></app-icon> Expand node
+        </h6>
+        <ul>
+            <li>
+                Unselect those foreign attributes that you are not interested
+                in.
+            </li>
+            <li>Click on the blue entry whose relations you want to expand.</li>
+            <li>
+                If new relations, that fit with your filters and are going out
+                from the expanded entry have been found they will appear in the
+                graph
+            </li>
+            <li>
+                You will always see a detailed view of the selected entry below
+                the graph
+            </li>
+            <li>
+                Per relation attribute and entry currently only 25 connections
+                can be displayed
+            </li>
+        </ul>
+        <h6>
+            <app-icon icon="node-remove" [inline]="true"></app-icon> Remove node
+        </h6>
+        <ul>
+            <li>
+                This will remove the selected node and all associated relations.
+                You can expand it afterwards again.
+            </li>
+            <li>
+                You can reset the whole graph via the
+                <app-icon icon="reset" [inline]="true"></app-icon> Reset button
+                at the bottom.
+            </li>
+        </ul>
+
+        <h6>
+            <app-icon icon="node-inspect" [inline]="true"></app-icon> Inspect
+            node
+        </h6>
+        <ul>
+            <li>See a detailed view of the selected entry below the graph.</li>
+        </ul>
+
+        <h5>Limitations</h5>
+        <ul>
+            <li>
+                Please be aware that the graph doesn't yet automatically update
+                if e.g. an entry has been created, edited or deleted. Reset the
+                whole graph or remove the specific node and expand it again.
+            </li>
+        </ul>
+    </ng-template>
+</div>

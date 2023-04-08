@@ -1,0 +1,102 @@
+<!-- Limit the dragging area-->
+<div class="drag-boundary" style="margin: -25px; padding: 25px">
+    <div
+        cdkDropList
+        cdkDropListOrientation="vertical"
+        (cdkDropListDropped)="moveAttr($event)"
+        class="container"
+    >
+        <div
+            *ngFor="
+                let orderedAttrId of tableView.orderedAttributeIds;
+                trackBy: null | trackByProperty;
+                let index = index
+            "
+            cdkDrag
+            [cdkDragDisabled]="tableView.orderedAttributeIds.length === 0"
+            cdkDragBoundary=".drag-boundary"
+            class="d-flex row"
+        >
+            <div
+                cdkDragHandle
+                [appInfoTooltip]="
+                    'pages.tables.table-views.table-views-editor.drag-attribute'
+                        | translate
+                "
+                class="align-middle col-auto p-0"
+            >
+                <app-icon icon="drag-vertical" [inline]="false"></app-icon>
+            </div>
+            <app-attribute-name
+                [attribute]="(orderedAttrId | attributeById: attributes)!"
+                [displayKind]="true"
+                class="col"
+            ></app-attribute-name>
+            <button
+                [disabled]="
+                    (orderedAttrId | attributeById: attributes)!.required
+                "
+                [appInfoTooltip]="
+                    'pages.tables.table-views.table-views-editor.add-attribute'
+                        | translate
+                "
+                (click)="removeAttribute(orderedAttrId)"
+                class="btn btn-small link-danger col-auto"
+                type="button"
+            >
+                <app-icon icon="close"></app-icon>
+            </button>
+        </div>
+    </div>
+</div>
+
+<small *ngIf="addableAttributeIds.length > 0" class="text-muted">
+    {{
+        'pages.tables.table-views.table-views-editor.concealed-attributes-hint'
+            | translate
+                : { numberOfConcealedAttributes: addableAttributeIds.length }
+    }}
+</small>
+<app-validation [state]="viewEditorState"></app-validation>
+<div *ngIf="addableAttributeIds.length > 0" class="mt-3">
+    <div class="btn-group" dropdown>
+        <button
+            dropdownToggle
+            type="button"
+            class="btn btn-outline-primary dropdown-toggle"
+        >
+            <app-icon icon="create"></app-icon>
+            {{ 'pages.tablesEditor.addAttribute' | translate }}
+            <span class="caret"></span>
+        </button>
+        <div
+            *dropdownMenu
+            class="dropdown-menu dropdown-menu-right attr-drop-list"
+            role="menu"
+        >
+            <button
+                *ngFor="
+                    let attrId of addableAttributeIds;
+                    trackBy: null | trackByProperty
+                "
+                (click)="addAttribute(attrId)"
+                role="menuitem"
+                class="dropdown-item"
+                [appInfoTooltip]="
+                    (
+                        (attrId | attributeById: attributes)!.displayNames
+                        | translateDisplayNames
+                    )?.singular || ''
+                "
+                placement="right"
+                [adaptivePosition]="false"
+                [isDisabled]="addableAttributeIds.length === 0"
+            >
+                <app-attribute-name
+                    [attribute]="(attrId | attributeById: attributes)!"
+                    [displayKind]="true"
+                ></app-attribute-name>
+            </button>
+        </div>
+    </div>
+</div>

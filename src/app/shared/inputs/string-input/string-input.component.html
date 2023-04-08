@@ -1,0 +1,139 @@
+<div
+    [appDescriptionTooltip]="descriptionTemplate"
+    [description]="control.description"
+    class="input-group"
+>
+    <ng-container *ngTemplateOutlet="prependTemplate"></ng-container>
+    <ng-container [ngSwitch]="control.kind">
+        <input
+            *ngSwitchCase="'string'"
+            type="text"
+            [class.is-invalid]="showValidation && (control.invalid$ | async)"
+            [class.has-warning]="
+                showValidation && (control.hasWarning$ | async)
+            "
+            [class.is-changed]="showChanged && (control.changed$ | async)"
+            [attr.disabled]="(control.disabled$ | async) ? '' : null"
+            [attr.autocomplete]="control.autocomplete"
+            [appInputControl]="control"
+            class="form-control"
+            [id]="control.name"
+            [placeholder]="control.placeholder | translate"
+            [appAutoFocus]="autofocus"
+        />
+        <ng-container *ngSwitchCase="'password'">
+            <input
+                [type]="passwordVisible ? 'text' : 'password'"
+                [class.is-invalid]="
+                    showValidation && (control.invalid$ | async)
+                "
+                [class.has-warning]="
+                    showValidation && (control.hasWarning$ | async)
+                "
+                [class.is-changed]="showChanged && (control.changed$ | async)"
+                [attr.disabled]="(control.disabled$ | async) ? '' : null"
+                [attr.autocomplete]="control.autocomplete"
+                [appInputControl]="control"
+                class="form-control"
+                [id]="control.name"
+                [placeholder]="control.placeholder | translate"
+                [appAutoFocus]="autofocus"
+                (appCapsLockOn)="capsLockOn = $event"
+            />
+            <button
+                type="button"
+                class="input-group-text btn btn-outline-secondary"
+                (click)="passwordVisible = !passwordVisible"
+                (keydown.enter)="
+                    passwordVisible = !passwordVisible;
+                    $event.stopPropagation();
+                    $event.preventDefault()
+                "
+            >
+                <app-icon
+                    [icon]="passwordVisible ? 'invisible' : 'visible'"
+                ></app-icon>
+            </button>
+        </ng-container>
+        <ng-container *ngSwitchCase="'url'">
+            <input
+                type="url"
+                [class.is-invalid]="
+                    showValidation && (control.invalid$ | async)
+                "
+                [class.has-warning]="
+                    showValidation && (control.hasWarning$ | async)
+                "
+                [class.is-changed]="showChanged && (control.changed$ | async)"
+                [attr.disabled]="(control.disabled$ | async) ? '' : null"
+                [attr.autocomplete]="control.autocomplete"
+                [appInputControl]="control"
+                class="form-control"
+                [id]="control.name"
+                [placeholder]="control.placeholder | translate"
+                [appAutoFocus]="autofocus"
+            />
+            <button
+                type="button"
+                class="input-group-text btn btn-outline-secondary"
+                (click)="openLink(control.value)"
+                (keydown.enter)="
+                    openLink(control.value);
+                    $event.stopPropagation();
+                    $event.preventDefault()
+                "
+                [attr.disabled]="control.invalid || !control.value ? '' : null"
+            >
+                {{ 'custom-forms.open-url' | translate }}
+            </button>
+        </ng-container>
+
+        <input
+            *ngSwitchCase="'email'"
+            type="email"
+            [class.is-invalid]="showValidation && (control.invalid$ | async)"
+            [class.has-warning]="
+                showValidation && (control.hasWarning$ | async)
+            "
+            [class.is-changed]="showChanged && (control.changed$ | async)"
+            [attr.disabled]="(control.disabled$ | async) ? '' : null"
+            [attr.autocomplete]="control.autocomplete"
+            [appInputControl]="control"
+            class="form-control"
+            [id]="control.name"
+            [placeholder]="control.placeholder | translate"
+            [appAutoFocus]="autofocus"
+        />
+
+        <textarea
+            *ngSwitchCase="'text'"
+            [class.is-invalid]="showValidation && (control.invalid$ | async)"
+            [class.has-warning]="
+                showValidation && (control.hasWarning$ | async)
+            "
+            [class.is-changed]="showChanged && (control.changed$ | async)"
+            [attr.disabled]="(control.disabled$ | async) ? '' : null"
+            [attr.autocomplete]="control.autocomplete"
+            [appInputControl]="control"
+            class="form-control"
+            [id]="control.name"
+            [placeholder]="control.placeholder | translate"
+            [appAutoFocus]="autofocus"
+        ></textarea>
+
+        <i *ngSwitchDefault class="danger">
+            Internal Error: Unknown control-kind: {{ control.kind }}
+        </i>
+    </ng-container>
+    <ng-container *ngTemplateOutlet="appendTemplate"></ng-container>
+</div>
+<div *ngIf="capsLockOn" class="text-status-warning">
+    <app-icon icon="warning"></app-icon>
+    {{ 'custom-forms.caps-lock-on' | translate }}
+</div>
+
+<app-validation *ngIf="showValidation" [state]="control"></app-validation>
+
+<ng-template #descriptionTemplate>
+    <app-description [description]="control.description"></app-description>
+</ng-template>

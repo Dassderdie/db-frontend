@@ -1,0 +1,105 @@
+<div
+    class="card border-end-0"
+    [class.border-status-invalid]="
+        foreignState.children[intermediateVersion.entryId]?.delayedInvalid$
+            | async
+    "
+    [class.border-status-warning]="
+        foreignState.children[intermediateVersion.entryId]?.delayedWarning$
+            | async
+    "
+    [class.border-status-deleted]="value?.delete"
+    [class.border-status-changed]="
+        foreignState.children[intermediateVersion.entryId]?.delayedChanged$
+            | async
+    "
+    style="border-top-right-radius: 0; border-bottom-right-radius: 0"
+>
+    <div class="card-header pt-0 pb-0">
+        <div class="row justify-content-between">
+            <div class="col-auto">
+                <app-entry-name
+                    [projectId]="intermediateVersion.projectId"
+                    [tableId]="attribute.kindOptions.foreign.tableId"
+                    [entryId]="
+                        intermediateVersion.values
+                            | getForeignEntryId
+                                : true
+                                : intermediateTable
+                                : tableId
+                                : attribute.id
+                    "
+                    [showLink]="true"
+                >
+                </app-entry-name>
+            </div>
+            <div class="col-auto">
+                <button
+                    *ngIf="!value?.delete; else restore"
+                    (click)="
+                        removeRelation.emit({
+                            intermediateEntryId: intermediateVersion.entryId,
+                            foreignEntryId: getForeignEntryIdOfThisItem()
+                        })
+                    "
+                    class="btn link-danger"
+                    [class.disabled]="disabled"
+                >
+                    <app-icon icon="delete"></app-icon>
+                    <ng-container
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                    >
+                        {{ 'pages.entries.filter.remove' | translate }}
+                    </ng-container>
+                </button>
+                <ng-template #restore>
+                    <button
+                        (click)="
+                            restoreRelation.emit(intermediateVersion.entryId)
+                        "
+                        [class.disabled]="disabled"
+                        class="btn btn-link text-changed"
+                    >
+                        <app-icon icon="reset"></app-icon>
+                        <ng-container
+                            *ngIf="
+                                breakpoints.xs
+                                    | responsiveBreakpointExceeded
+                                    | async
+                            "
+                        >
+                            {{
+                                'pages.entries.restore-intermediate' | translate
+                            }}
+                        </ng-container>
+                    </button>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <!-- intermediate Attributes -->
+    <div
+        *ngIf="attribute.kindOptions.intermediateAttributes?.length"
+        class="card-body"
+    >
+        <app-attribute-inputs
+            [initialVersion]="intermediateVersion"
+            [id]="intermediateVersion.entryId"
+            [attributes]="attribute.kindOptions.intermediateAttributes"
+            [changedValues]="value?.changedIntermediateValues"
+            [parentState]="foreignState"
+            (valuesChange)="
+                updateValue.emit({
+                    intermediateEntryId: intermediateVersion.entryId,
+                    foreignEntryId: getForeignEntryIdOfThisItem(),
+                    changedIntermediateValues: $event
+                })
+            "
+            [disabled]="value?.delete || disabled"
+        ></app-attribute-inputs>
+    </div>
+</div>

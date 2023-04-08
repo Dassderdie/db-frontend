@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <h5 class="modal-title">
+        {{
+            'pages.tablesEditor.create-foreign-attribute-modal.title'
+                | translate
+        }}
+    </h5>
+    <button
+        type="button"
+        class="btn-close"
+        (click)="bsModalRef.hide()"
+    ></button>
+</div>
+<div class="modal-body">
+    <p>
+        {{
+            'pages.tablesEditor.create-foreign-attribute-modal.choose-foreign-tableId'
+                | translate
+        }}
+    </p>
+    <!-- only show after viewInit, to fix bug, that cytoscape graph doesn't fit correctly because the modal has another size at the beginning -->
+    <app-choose-table
+        *ngIf="viewInit"
+        [tables]="tables$ | async"
+        [selectableIntermediateTables]="true"
+        [additionalStyles]="additionalGraphStyles"
+        [tableGroups]="{
+            fromTable: tableId ? [tableId] : [],
+            toTable: selectedTableId ? [selectedTableId] : []
+        }"
+        (newTableSelected)="selectTable($event)"
+    ></app-choose-table>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">
+        {{
+            'pages.tablesEditor.create-foreign-attribute-modal.close'
+                | translate
+        }}
+    </button>
+</div>

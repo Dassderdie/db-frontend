@@ -1,0 +1,118 @@
+<div class="page-container">
+    <h1><app-icon icon="faq"></app-icon> {{ 'routing.faq' | translate }}</h1>
+
+    <input
+        [(ngModel)]="searchText"
+        (ngModelChange)="updateFilteredQuestions()"
+        [placeholder]="'pages.help.faq.search-placeholder' | translate"
+        [appAutoFocus]="true"
+        class="form-control search"
+        type="text"
+    />
+
+    <ng-container *ngIf="faq; withLoading">
+        <ng-container
+            *ngFor="let category of faq; trackBy: 'id' | trackByProperty"
+        >
+            <ng-container *ngIf="filteredQuestions[category.id]">
+                <h2 class="mt-3">{{ category.name }}</h2>
+                <div class="accordion">
+                    <div class="card listed-card">
+                        <ng-container
+                            *ngFor="
+                                let question of category.questions;
+                                trackBy: 'id' | trackByProperty
+                            "
+                        >
+                            <ng-container
+                                *ngIf="
+                                    filteredQuestions[category.id]![
+                                        question.id
+                                    ]!
+                                "
+                            >
+                                <div
+                                    (click)="
+                                        toggleAnswer(category.id, question.id)
+                                    "
+                                    (keydown.enter)="
+                                        toggleAnswer(category.id, question.id)
+                                    "
+                                    [attr.id]="category.id + question.id"
+                                    role="button"
+                                    tabindex="0"
+                                    class="card-header pointer collapse-toggler"
+                                >
+                                    <app-collapse-indicator
+                                        [isExpanded]="
+                                            !!openAnswers[
+                                                category.id + question.id
+                                            ]
+                                        "
+                                    ></app-collapse-indicator>
+                                    <span
+                                        [innerHTML]="question.question"
+                                        class="ms-3"
+                                    ></span>
+                                    <button
+                                        (click)="
+                                            shareLink(
+                                                category.id + question.id
+                                            );
+                                            $event.stopPropagation()
+                                        "
+                                        class="
+                                            pb-0
+                                            pt-0
+                                            mb-n2
+                                            mt-n2
+                                            btn btn-link
+                                            text-muted
+                                        "
+                                        [appInfoTooltip]="
+                                            'pages.help.faq.copy-link.popover'
+                                                | translate
+                                        "
+                                        placement="right"
+                                    >
+                                        <app-icon
+                                            icon="share"
+                                            style="font-size: 185%"
+                                        ></app-icon>
+                                    </button>
+                                </div>
+                                <app-animated-if
+                                    [show]="
+                                        !!openAnswers[category.id + question.id]
+                                    "
+                                >
+                                    <div
+                                        *
+                                        class="card-body"
+                                        [innerHTML]="question.answer"
+                                    ></div>
+                                </app-animated-if>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+    <div
+        *ngIf="filteredQuestions | isEmptyObject"
+        class="mt-3 text-center h6 text-muted"
+    >
+        {{ 'pages.help.faq.no-questions-found' | translate }}
+    </div>
+
+    <br />
+    <p>
+        {{ 'pages.help.faq.always-up-to-date' | translate }}
+    </p>
+    <p>
+        {{ 'pages.help.faq.submit-question' | translate }}
+        <a [href]="'mailto: ' + supportEmail">{{ supportEmail }}</a
+        >.
+    </p>
+</div>

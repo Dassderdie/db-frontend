@@ -1,0 +1,1413 @@
+{
+    "add-entries-modal": {
+        "add": "Add connection",
+        "all-checkbox-title": {
+            "select": "Add all loaded entries",
+            "unselect": "Remove all entries"
+        },
+        "checkbox-disabled-info": "Choosing more entries would violate the validator for the maximum number of relations",
+        "close": "Close",
+        "titel": "Connect with {{ name }}"
+    },
+    "anonymous-button": {
+        "description": "Set if this action should be executed anonymously"
+    },
+    "attribute-kinds": {
+        "boolean": {
+            "description": "A boolean value can either be false, true or unknown. Typical applications: \"Archived\", \"Checked\"",
+            "name": "Boolean"
+        },
+        "date-time": {
+            "description": "",
+            "name": "Date time"
+        },
+        "date": {
+            "description": "",
+            "name": "Date"
+        },
+        "email": {
+            "description": "",
+            "name": "Email"
+        },
+        "files": {
+            "description": "",
+            "name": "Files"
+        },
+        "foreign-single": {
+            "description": "",
+            "name": "Foreign single"
+        },
+        "foreign": {
+            "description": "",
+            "name": "Relations"
+        },
+        "number": {
+            "description": "",
+            "name": "Number"
+        },
+        "string": {
+            "description": "",
+            "name": "String"
+        },
+        "time": {
+            "description": "",
+            "name": "Time"
+        },
+        "url": {
+            "description": "",
+            "name": "URL"
+        }
+    },
+    "auth": {
+        "auth-modal": {
+            "cancel": "Cancel",
+            "login": {
+                "email": {
+                    "name": "Email adress",
+                    "placeholder": "Enter your email adress"
+                },
+                "login": "Login",
+                "password": {
+                    "name": "Password",
+                    "placeholder": "Enter your password"
+                },
+                "title": "Login"
+            },
+            "password-lost": "Forgot your login?",
+            "register": {
+                "confirmPassword": {
+                    "name": "Confirm password",
+                    "placeholder": "Re-enter your password"
+                },
+                "email": {
+                    "name": "Email adress",
+                    "placeholder": "Enter your email adress"
+                },
+                "name": {
+                    "name": "Name",
+                    "placeholder": "Enter your name"
+                },
+                "password": {
+                    "name": "Password",
+                    "placeholder": "Enter your password"
+                },
+                "register": "Register",
+                "title": "Register"
+            },
+            "restricted-notice": "Unfortunately it is not yet possible to register on this website. If you are interested in a demo of our software, please contact us via",
+            "welcome": "Welcome to KoppaDb"
+        },
+        "email-verification-modal": {
+            "continue": "Continue",
+            "description": "Please check your email inbox for a verification email from us and follow the link in that email.",
+            "small-description": "You can't login into your account until you have verified your email address.",
+            "title": "Please verify your email!"
+        },
+        "reset-password": {
+            "confirm": "Confirm password",
+            "email": {
+                "email": "Email adress",
+                "forgotten": "If you forgot your email address, please contact the support.",
+                "send": "Send recovery email"
+            },
+            "heading": "Reset your password",
+            "instructions": "If you forgot your password, we can send you an recovery email allowing you to choose a new password. Therefore enter the email associated with your account.",
+            "new-password": "Your new Password",
+            "update": "Update password"
+        },
+        "verify-email": {
+            "continue-login": "Continue to login",
+            "error": "There was an error trying to validate your email address. Please try again or contact the support.",
+            "in-progress": "Verification is in progress ...",
+            "success": "Verification was successful!",
+            "title": "Email verification"
+        }
+    },
+    "boolean": {
+        "false": "false",
+        "null": "null",
+        "true": "true"
+    },
+    "breadcrumbs": {
+        "syncButton": "Reload"
+    },
+    "choose-table": {
+        "no-tables": "There are no tables in this project yet."
+    },
+    "company-details": {
+        "commercialRegister": {
+            "districtCourt": "District court",
+            "name": "Commercial register entry",
+            "registerId": "Register id"
+        },
+        "contact": "Contact",
+        "email": "email",
+        "phone-number": "phone number",
+        "representatives": "representatives",
+        "vatIdentificationNumber": "VAT identification number"
+    },
+    "confirmation-modal": {
+        "confirm-string-placeholder": "Enter the confirmation key here...",
+        "confirmation-key-description": "Repeat the following confirmation key:",
+        "default-btn-cancel": "Cancel"
+    },
+    "copy-entry": {
+        "files-not-copied": {
+            "body": "If it is necessary to copy files you should restructure your tables with relations to remove the need of duplicate files.",
+            "title": "Files do not get copied"
+        },
+        "maximum-relations-error": {
+            "body": "Currently there can not more than 25 relations copied per attribute.",
+            "title": "Not all relations could be copied"
+        }
+    },
+    "custom-form": {
+        "markdown": {
+            "make-larger": {
+                "tooltip": "Increase size"
+            },
+            "make-smaller": {
+                "tooltip": "Decrease size"
+            },
+            "toggle-mode": {
+                "name": "Mode",
+                "tooltip": "Change the mode"
+            }
+        }
+    },
+    "custom-forms": {
+        "add-item": "Add item",
+        "caps-lock-on": "CAPSLOCK IS ACTIVE.",
+        "default-increment": "Automatically generated",
+        "default-placeholder": "Enter the value here...",
+        "empty-list": "There are no items in the list...",
+        "files": {
+            "add-files": "Add files",
+            "add-placeholder": "Add a file or drag one in here...",
+            "delete": "Delete this file",
+            "empty": "There are no files already present...",
+            "errors": {
+                "invalidExtension": "\"{{ extension }}\" is an invalid file extension. Try one of those instead: {{ allowedExtensions }}.",
+                "invalidName": "This name does not match the pattern \"{{ pattern }}\".",
+                "noFileName": "Invalid filename."
+            },
+            "max-error": "There are not more than {{ max }} files allowed. These are {{ difference }} more than allowed.",
+            "min-error": "There are not less than {{ min }} files allowed. These are {{ difference }} less than allowed.",
+            "rename": "Rename this file",
+            "restore": "Restore this file"
+        },
+        "foreign": {
+            "add-placeholder": "No new relations added...",
+            "add-relations": "Add relations",
+            "empty": "There are no relations already present...",
+            "max-error": "There are not more than {{ max }} relations allowed. These are {{ difference }} more than allowed.",
+            "min-error": "There are not less than {{ min }} relations allowed. These are {{ difference }} less than allowed.",
+            "new-foreign-entry": "Create {{ foreignTableName }}",
+            "number-of-present-relations": "already present relations"
+        },
+        "no-results": "No results",
+        "open-url": "Open url"
+    },
+    "customForms": {
+        "delete": "Delete",
+        "reset": "Reset",
+        "save": "Save"
+    },
+    "deactivation": {
+        "btnOkText": "Discard changes",
+        "description": "Press 'Discard changes' to discard your changes and navigate to the new site or press 'Cancel' to stay on this site.",
+        "title": "You have unsaved changes!"
+    },
+    "display-changelog": {
+        "show-complete-changelog": "Go to the complete changelog"
+    },
+    "display-foreign": {
+        "more-relations": "and {{ moreRelationsNumber }} more"
+    },
+    "empty-translation": "",
+    "entries": {
+        "show-hidden-input": {
+            "description": "",
+            "name": "Show hidden attributes"
+        }
+    },
+    "entry-name": {
+        "deleted": "This entry has been deleted. Restore an old version in its history or edit the deleted entry to restore it."
+    },
+    "errors": {
+        "404": {
+            "description": "The page you requested could not be found. Please try reloading the page. If this problem persists: Please contact the support. You can use your browsers Back button to navigate to the page you have previously come from or navigate to the start-page by pressing the button below.",
+            "home": "Home",
+            "lead": "Error 404",
+            "title": "Page Not Found!"
+        }
+    },
+    "file-preview": {
+        "browser-no-preview": "Your browser doesn't support this file type. You can download it and try to open it on your computer.",
+        "modal": {
+            "close": "Close"
+        },
+        "xss-confirm": {
+            "btn": "Trust this file",
+            "description": "We are not able to check wether this file could perform an XSS-Attack when being displayed in the browser. Click the button below if you are sure you can trust this file."
+        }
+    },
+    "files-buttons": {
+        "download": {
+            "body": "Currently we are not scanning uploaded files for malicious code that could affect a clients computer when downloaded. Only download this file if you trust its creator.",
+            "title": "Download"
+        },
+        "preview": "Open a preview of this file"
+    },
+    "files": {
+        "actions": "Actions",
+        "creator": "Creator",
+        "empty": "No files",
+        "name": "Name",
+        "size": "Size"
+    },
+    "footer": {
+        "scroll-top": "Scroll to top"
+    },
+    "help": {
+        "changelog": {
+            "description": "Here you can find all our update notes."
+        },
+        "faq": {
+            "description": "Find the answers to frequently asked questions here."
+        },
+        "features": {
+            "description": "You don't know what you can do with this website? - Look here for a pitch and feature list."
+        },
+        "licenses": {
+            "description": "This software depends on multiple open source projects which legally require their license to be included in all their copies. They do not have access to any user information at all. We want to thank each programmer who was involved in the creation of these libraries without which this software wouldn't be possible."
+        },
+        "support": {
+            "description": "Here you can find our contact information for individual support or reporting a bug.",
+            "feature-request": {
+                "description": {
+                    "1": "If you or your company are missing a feature please let us know over",
+                    "2": "We are constantly developing exciting new features and are always happy for input. Nevertheless be aware that some new functionalities will take a long time to implement correctly and sometimes they are even out of our softwares scope."
+                },
+                "title": "Feature requests"
+            },
+            "general-contact": {
+                "1": "If you don't know how to do something with our software or have a question, please check our",
+                "2": "first. If you don't find anything helpful in there you can always contact us via",
+                "3": ". We wil try to come back to you with a response as soon as possible."
+            },
+            "intro": "We believe that user-software should be intuitive with no need of explanation. But in reality this not always possible.",
+            "report-bug": {
+                "description": {
+                    "1": "If you think you have found a software bug please report it to",
+                    "2": "Most of the time the following information will be helpful for us:",
+                    "3": "Bug reports will be handled directly by the responsible developer team."
+                },
+                "report-error": "The error message that is shown. Please remove any sensitive information from the error message before you send it to us.",
+                "report-expected-behaviour": "What was the expected behaviour?",
+                "report-media": "Screenshots, a short video or gif of the unwanted behaviour. You can create screenshots by pressing {{ windows }} on Windows or  {{ mac }} on MAC and snipping the wanted part.",
+                "report-reproduction": "A brief explanation on how to reproduce the behavior.",
+                "report-url": {
+                    "1": "The URL of the current page you encounter the error, like",
+                    "2": ". Please check that you don't send any sensitive information to us."
+                },
+                "title": "Report a bug"
+            }
+        }
+    },
+    "home": {
+        "help": {
+            "description": "Here you can find some helpful tipps on how to use this software like our changelog, the faq or how to contact our support for individual help or to report a bug."
+        },
+        "navbar": {
+            "authenticate": "Login / Register",
+            "changeLanguage": "Change Language",
+            "logout": "Logout",
+            "settings": "User settings"
+        },
+        "projects": {
+            "description": "Here you can find an overview of all your projects. In a project you can e.g. create, edit or search for entries and tables."
+        },
+        "scanner": {
+            "description": "Scan QR-codes from entries and see their values."
+        },
+        "user-profile": {
+            "description": "Change personal settings like your name, language or email."
+        }
+    },
+    "kind-options": {
+        "allowedFileExtensions": {
+            "description": "",
+            "empty": "All file extensions are allowed",
+            "name": "Allowed file extensions"
+        },
+        "default-increment-prefix": {
+            "description": "",
+            "name": "Automatic identifier prefix"
+        },
+        "default-increment": {
+            "description": "Wether a unique value for this field should be automatically generated. (Useful for e.g. an id)",
+            "name": "Automatic identifier generation"
+        },
+        "fileNamePattern": {
+            "description": "",
+            "name": "File name pattern"
+        },
+        "foreignRelationshipMax": {
+            "description": "",
+            "name": "Maximum foreign relationships"
+        },
+        "foreignRelationshipMin": {
+            "description": "",
+            "name": "Minimum foreign relationships"
+        },
+        "hidden": {
+            "description": "",
+            "name": "Hidden"
+        },
+        "indexed": {
+            "description": "",
+            "name": "Indexed"
+        },
+        "intermediateAttributes": "Intermediate attributes",
+        "markdown": {
+            "description": "",
+            "name": "Markdown"
+        },
+        "maximum": {
+            "description": "",
+            "name": "Maximum value"
+        },
+        "maximumDate": {
+            "description": "",
+            "name": "Maximum value"
+        },
+        "maximumDateTime": {
+            "description": "",
+            "name": "Maximum value"
+        },
+        "maximumFileAmount": {
+            "description": "",
+            "name": "Maximum amount of files"
+        },
+        "maximumLength": {
+            "description": "",
+            "name": "Maximum length"
+        },
+        "maximumTime": {
+            "description": "",
+            "name": "Maximum value"
+        },
+        "minimum": {
+            "description": "",
+            "name": "Minimum value"
+        },
+        "minimumDate": {
+            "description": "",
+            "name": "Minimum value"
+        },
+        "minimumDateTime": {
+            "description": "",
+            "name": "Minimum value"
+        },
+        "minimumFileAmount": {
+            "description": "",
+            "name": "Minimum amount of files"
+        },
+        "minimumLength": {
+            "description": "",
+            "name": "Minimum length"
+        },
+        "minimumTime": {
+            "description": "",
+            "name": "Minimum value"
+        },
+        "multipleOf": {
+            "description": "",
+            "name": "Multiple of"
+        },
+        "pattern": {
+            "description": "",
+            "name": "Pattern"
+        },
+        "relationshipMax": {
+            "description": "",
+            "name": "Maximum relationships"
+        },
+        "relationshipMin": {
+            "description": "",
+            "name": "Minimum relationships"
+        },
+        "required": {
+            "description": "",
+            "name": "Required"
+        },
+        "text": {
+            "description": "",
+            "name": "Big textarea"
+        },
+        "unique": {
+            "description": "",
+            "name": "Unique"
+        },
+        "unit": {
+            "description": "",
+            "name": "Unit"
+        }
+    },
+    "koppaDb-customer-for": "for",
+    "landing": {
+        "compatible": {
+            "description": "You don't have to use a special device or operating system to use our software. It runs on your desktop, your tablet or your mobile without any trouble. The only requirement is a recent browser.",
+            "title": "Compatible for your needs"
+        },
+        "customer-disclaimer": {
+            "1": "This website is intended exclusively for employees of the following organization",
+            "2": "You can find our official public website at"
+        },
+        "end": {
+            "questions": "If you got any questions you can contact us here:",
+            "title": "Still not convinced?"
+        },
+        "i18n": {
+            "cto": "There is an essential language you would need missing? Contact us",
+            "cto-link": "here",
+            "description": "You are an international company with many employees all around the globe? Don't worry! We support multiple languages.",
+            "title": "Internationalization"
+        },
+        "top": {
+            "link": "Already have an account? Click here to login.",
+            "sign-up": "Sign-up Now!",
+            "subtitle": "Bring order to your data - <br /> Simple & futureproof"
+        },
+        "updates": {
+            "description": "Experience quick and uncomplicated support and regular updates which constantly bring enhancements and new features.",
+            "title": "Always on the safe side"
+        }
+    },
+    "languages": {
+        "eng": "English",
+        "ger": "German"
+    },
+    "messages": {
+        "auth": {
+            "error": {
+                "body": "We had an issue while processing your request. If this error persists, please contact the support.",
+                "title": "There was a error while authenticating!"
+            },
+            "logout": {
+                "body": "You can login again at any time.",
+                "title": "You got logged out successfully!"
+            },
+            "request-auth-email-change": {
+                "email-success": {
+                    "body": "We have sent instructions on how to change your authentication email adress to your current authentication email adress.",
+                    "title": "Email sent!"
+                }
+            },
+            "reset-password": {
+                "email-success": {
+                    "body": "We have sent instructions on how to reset your password to your authentication email adress.",
+                    "title": "Email sent!"
+                },
+                "invalid": {
+                    "body": "Your link is invalid, please try again!",
+                    "title": "Invalid link"
+                },
+                "password-success": "Successfully changed password!"
+            }
+        },
+        "error": {
+            "default": {
+                "body": "We had an issue while processing your request. If this error persists, please contact the support.",
+                "title": "Error!"
+            }
+        },
+        "linkCopied": {
+            "body": "You can now paste it in e.g. an email.",
+            "title": "Link successfully copied to clipboard!"
+        },
+        "officially-only-german": {
+            "body": "The presence of the English translation is currently only to be understood as a preview of the functionality of the final product.",
+            "title": "This website is currently only targeted at German-speaking visitors!"
+        },
+        "query-storage": {
+            "value-converted": {
+                "body": "",
+                "title": "Link has been updated"
+            }
+        },
+        "scanner": {
+            "content-error": {
+                "body": "You have either not the needed permissions or the QR-Code is invalid.",
+                "title": "Error by displaying the results"
+            },
+            "url-error": {
+                "body": "If you are certain this QR-Code is from one of our labels: Please contact the support.",
+                "title": "Invalid QR-Code"
+            }
+        },
+        "shared-worker-fallback": {
+            "body": "Your browser doesn't support SharedWorker. A fallback is used instead, but the app won't synchronize between multiple open tabs. We suggest the most recent version of Chrome or Firefox on desktop or Firefox on mobile.",
+            "title": "Some features might be missing..."
+        },
+        "update-available": {
+            "body": "The new Version has already been downloaded in the background and just needs to be installed. Please reload the page.",
+            "btn": "Reload now",
+            "title": "A new Update is available"
+        },
+        "user": {
+            "add-email": {
+                "email-success": {
+                    "body": "We have sent an email with a verification link to the specified email adress.",
+                    "title": "Verification email has been send"
+                }
+            },
+            "change-auth-mail": {
+                "change-success": {
+                    "body": "Remember to use the new authentication email to login again.",
+                    "title": "Authentication email changed successfully!"
+                },
+                "invalid": {
+                    "body": "Please request another authentication email change link.",
+                    "title": "This link is invalid!"
+                }
+            }
+        },
+        "version-missmatch": {
+            "body": "The version of the service-worker is different from the one of the tab-client. Please close all tabs of this website and restart your browser. Should this message appear again, please contact the support.",
+            "title": "Version missmatch"
+        }
+    },
+    "meta-attributes": {
+        "createdAt": "version created at",
+        "creatorId": "creator",
+        "deleted": "deleted",
+        "entryCreatedAt": "entry created at",
+        "invalidatedAt": "version outdated since",
+        "invalidatorId": "invalidator"
+    },
+    "pages": {
+        "entries": {
+            "addColumn": "Add Column",
+            "apply-new-filters": "Apply new filters",
+            "column-orders": {
+                "default-all-attributes": "All attributes",
+                "repair-warning": {
+                    "body": "That's probably because an attribute has been deleted from the table.",
+                    "title": "Repaired a column order"
+                }
+            },
+            "edit": {
+                "delete-success-message": {
+                    "body": "You can restore this entry at any time.",
+                    "title": "Entry successfully deleted."
+                },
+                "delete": {
+                    "description": "This entry won't show up on normal searches anymore. You are able to restore it after it's deletion. But be advised: all relations will have to be restored manually!",
+                    "ok": "Delete entry",
+                    "title": "Do you really want to delete this entry?"
+                },
+                "edit-success-message": {
+                    "body": "The changes have been added to it's history.",
+                    "title": "Entry successfully edited."
+                }
+            },
+            "files-input": {
+                "confirm-extension-change": {
+                    "btn-ok-text": "Rename",
+                    "description": "If you change the filename extension from \"{{ oldExtension }}\" to \"{{ newExtension }}\", the file might become unusable. Are you sure you want to rename this file?",
+                    "title": "Rename changes file extension"
+                }
+            },
+            "filter": {
+                "add-expression": "Attribute",
+                "add-group": "Group",
+                "advanced-mode": {
+                    "descriptions": "If the advanced mode is activated you are able to create filters for metadata too. You can therefore search for deleted or invalidated versions.",
+                    "name": "Advanced"
+                },
+                "and": "AND",
+                "clear": "Clear",
+                "get-all-entries": "Get all entries",
+                "get-all-versions": "Get all versions of all entries",
+                "group": "Group",
+                "invalid-expression": {
+                    "description": "This Expression is not valid anymore. Probably because it's attribute has been removed. Please remove it.",
+                    "name": "Invalid expression"
+                },
+                "maximum-filter-preferences-tooltip": "You can only save {{ maximumNumberOfFilterPreferences }} filters.",
+                "no-expression": "Please add at least one expression or group",
+                "not": "NOT",
+                "not-available-anymore-message": {
+                    "title": "Filter is not available anymore (anymore)"
+                },
+                "or": "OR",
+                "remove": "Remove"
+            },
+            "filters": {
+                "all-entries": "All entries"
+            },
+            "history": {
+                "by": "by",
+                "confirmation": {
+                    "description": "This action will create a new version with the values of the chosen one.",
+                    "description-foreign": "This action will create a new version with the values of the chosen one. Changed relations will not be restored.",
+                    "ok": "Restore",
+                    "title": "Do you really want to restore this version?"
+                },
+                "foreign": {
+                    "number-of-changed-relations": "changed relations"
+                },
+                "newValue": "New value",
+                "oldValue": "Old value",
+                "restore-message": {
+                    "body": "",
+                    "title": "Version successfully restored!"
+                },
+                "restore": {
+                    "body": "This creates a new version of this entry with the values of this one. So no data gets lost in the process.",
+                    "name": "Restore"
+                },
+                "showAll": "Show all",
+                "startValue": "Value"
+            },
+            "new-column-order-preference-modal": {
+                "column-order-preference-name": {
+                    "unique-validator": "This name is already in use."
+                }
+            },
+            "new-columnOrder-preference-modal": {
+                "columnOrder-preference-name": {
+                    "first-applied-columnOrder-tipp": "This column order will be applied by default, because it is at the top."
+                }
+            },
+            "new-filter-preference-modal": {
+                "filter-preference-name": {
+                    "cancel": "Cancel",
+                    "create": "Save new filter",
+                    "description": "You just have to choose a name for the current filter.",
+                    "first-applied-filter-tipp": "The first filter in your filter-preference list will always be selected first.",
+                    "name": "Name",
+                    "unique-validator": "There is already a filter with the name \"{{ value }}\"."
+                },
+                "title": "Add new filter preference"
+            },
+            "noEntries": "There are no matching entries.",
+            "overview": {
+                "copyLink": "Copy the (shortened) link of this page",
+                "create-new-entry": {
+                    "body": "Create another entry"
+                },
+                "create-similar-entry": {
+                    "body": "After duplicating this entry, you can still make changes before saving the new entry. Files are not copied."
+                },
+                "download": "Download",
+                "label": {
+                    "body": "We generate for each entry a qr-code that links directly to this site. You can e.g. print it and put it on the item whose values are stored here. Scan it with your smartphone via your preferred qr-scanner app or our own qr-code scanner.",
+                    "name": "Label"
+                },
+                "last-updated": "This entry was last updated on {{ date }}."
+            },
+            "restore-intermediate": "Restore",
+            "results": "results"
+        },
+        "entry-search": {
+            "manage-filters": "Manage filters"
+        },
+        "help": {
+            "faq": {
+                "always-up-to-date": "We will try to keep this section always up to date and add further questions and answers on the fly.",
+                "copy-link": {
+                    "popover": "Click here to open the link to this question."
+                },
+                "no-questions-found": "No matching questions found",
+                "search-placeholder": "Search question",
+                "submit-question": "If you have another question, please contact us via "
+            }
+        },
+        "join-project": {
+            "accept-success-message": {
+                "body": "",
+                "title": "Invitation successfully accepted."
+            },
+            "accept": {
+                "btn": "Accept!",
+                "description": "Do you want to accept the invitation to {{ name }}?",
+                "title": "Accept invitation"
+            },
+            "expired": {
+                "description": "Please try to get invited to {{ name }} again or contact the support.",
+                "title": "This invitation is expired"
+            },
+            "invalid": {
+                "description": "Please try to get invited again or contact the support.",
+                "title": "This is not a valid invitation-link"
+            },
+            "login": {
+                "description": "Please login to accept this invitation.",
+                "title": "You are not logged in"
+            },
+            "user": {
+                "description": "Please login with the correct account to join {{ name }}.",
+                "title": "This invitation is not meant for you"
+            }
+        },
+        "members": {
+            "edit-success-message": {
+                "body": "",
+                "title": "Member successfully edited."
+            }
+        },
+        "projects": {
+            "addProjectsModal": {
+                "cancel": "Cancel",
+                "create": "Create Projekt",
+                "description": "Project-description",
+                "name": "Project-name",
+                "title": "Create new project"
+            },
+            "applying-template-description": "Applying template...",
+            "create-success-message": {
+                "body": "",
+                "title": "Project successfully created."
+            },
+            "edit-success-message": {
+                "body": "",
+                "title": "Project successfully edited."
+            },
+            "generalSettings": {
+                "allowAnonymousVersionCreation": "Allow anonymous version creation",
+                "confirm-delete": {
+                    "btnOkText": "Delete Project",
+                    "description": "If you delete this project all the data associated with it will be erased completely.",
+                    "title": "Do you really want to delete this project?"
+                },
+                "confirm-invitation-revoke": {
+                    "btnOkText": "Revoke invitation",
+                    "description": "You can invite this user again at anytime.",
+                    "title": "Do you really want to revoke this invitation?"
+                },
+                "confirmLeave": {
+                    "btnOkText": "Leave Project",
+                    "description": "If you leave you will have no access to this project anymore.",
+                    "title": "Do you really want to leave this project?"
+                },
+                "confirmRemove": {
+                    "btnOkText": "Remove member",
+                    "description": "This action will not have any effects on the stored data in the project.",
+                    "title": "Do you really want to remove this member from the project?"
+                },
+                "delete-success": {
+                    "title": "The project has been deleted successfully"
+                },
+                "description": "Project description",
+                "members": {
+                    "by": "by",
+                    "createdAt": "created at:",
+                    "invitations": "Invitations",
+                    "invite": "Invite",
+                    "manage": "Manage",
+                    "noMatchingPendingRoles": "There are no matching pending invitations",
+                    "noMatchingRevokedRoles": "There are no matching revoked roles",
+                    "noMatchingRoles": "There are no matching roles",
+                    "permissions": {
+                        "administrator": {
+                            "description": "Can manage the project"
+                        },
+                        "givePermissions": {
+                            "description": "Can give permissions to other users"
+                        },
+                        "invite": {
+                            "description": "Can invite new users"
+                        }
+                    },
+                    "remove": "Remove",
+                    "revoke-invitation": "Revoke",
+                    "revoked": "Revoked",
+                    "revokedAt": "revoked at:",
+                    "title": "Members"
+                },
+                "name": "Project name",
+                "searchMemberPlaceholder": "Search for Member"
+            },
+            "inviteModal": {
+                "cancel": "Cancel",
+                "email": "Email",
+                "emailPlaceholder": "Enter the email adress of the user to invite",
+                "invite": "Invite User",
+                "title": "Invite a user"
+            },
+            "leave-project": {
+                "last-admin": "You can not leave the project if you are the last admin. Delete the project instead or make someone else an admin too.",
+                "leave-btn": "Leave project"
+            },
+            "leave-success-message": {
+                "body": "You have to get invited again to regain access to this project.",
+                "title": "You have left the project."
+            },
+            "list": {
+                "apply-template": "Apply template",
+                "newProject": "New project",
+                "no-projects-yet": {
+                    "apply-project-template": "Create a demo project!",
+                    "text": "You have not a member in any projects yet. Get invited by a project admin or create your own."
+                },
+                "noSearchResults": "No projects found",
+                "searchPlaceholder": "Search project",
+                "title": "Your projects"
+            },
+            "no-tables-editor-on-xs": "This feature is disabled on small devices",
+            "overview": {
+                "drag-favorite": "Change the order of your favorite tables by dragging them",
+                "favorites": {
+                    "add": "Add to favorites",
+                    "maximum-reached": "Maximum amount of favorite tables reached",
+                    "remove": "Remove from favorites"
+                },
+                "new": "New",
+                "newTitle": "Create new data",
+                "noTables": "No tables found.",
+                "permission": {
+                    "3": "You can also edit and delete data of other members in this table"
+                },
+                "search": "Search",
+                "searchPlaceholder": "Search table",
+                "searchTitle": "Search"
+            },
+            "project-member": {
+                "form": {
+                    "admin": {
+                        "displayName": "Administrator"
+                    },
+                    "invite": {
+                        "displayName": "Invite new Users"
+                    },
+                    "permissions": {
+                        "displayName": "Give permissions"
+                    }
+                },
+                "no-permission": "You don't have the permission to edit the permissions of this member",
+                "permissions": "Project-Permissions"
+            },
+            "settings": {
+                "danger-zone": "Danger zone",
+                "delete": "Delete project",
+                "export": "Export"
+            },
+            "tables": {
+                "create-entry": {
+                    "create-success-message": {
+                        "body": "",
+                        "title": "Entry successfully created."
+                    }
+                }
+            }
+        },
+        "relation-explorer": {
+            "expand-tool": {
+                "description": "Click on a blue entry to expand its relations."
+            },
+            "inspect-tool": {
+                "description": "Click on an entry to see a detailed view it below the graph."
+            },
+            "remove-tool": {
+                "description": "Click on a blue entry to remove it from the graph."
+            }
+        },
+        "relations-explorer": {
+            "not-all-versions-shown-message": {
+                "body": "We currently only support 25 relations per attribute and entry in the relations-explorer.",
+                "title": "Not all relations can be loaded"
+            }
+        },
+        "roles": {
+            "invitation-success-message": {
+                "body": "",
+                "title": "Invitation has been send."
+            },
+            "remove-success-message": {
+                "body": "",
+                "title": "Member successfully removed."
+            },
+            "revoke-invitation-success-message": {
+                "body": "",
+                "title": "Invitation successfully revoked."
+            }
+        },
+        "search-results": {
+            "go-fullscreen": "Fullscreen"
+        },
+        "tables-editor": {
+            "create-success-message": {
+                "body": "",
+                "title": "Table successfully created."
+            },
+            "delete-success-message": {
+                "body": "",
+                "title": "Table successfully deleted."
+            },
+            "edit-success-message": {
+                "body": "",
+                "title": "Table successfully edited."
+            },
+            "save-positions": {
+                "success-message": {
+                    "body": "",
+                    "title": "Table positions successfully saved."
+                }
+            }
+        },
+        "tables": {
+            "attributes-inputs": {
+                "show-concealed-attributes": "There are {{ numberOfConcealedAttributes }} concealed attributes.",
+                "show-hidden-attributes": "There are {{ numberOfHiddenAttributes }} hidden attributes."
+            },
+            "column-orders": {
+                "create-column-order-preference-modal": {
+                    "min-ordered-attributes-error": "You need at least one attribute."
+                }
+            },
+            "columnOrder-preferences": {
+                "columnOrder-preferences-manager-modal": {
+                    "add-column-order": "Add column order",
+                    "close": "Close",
+                    "drag-columnOrder-preference": "Drag & drop to change the order",
+                    "no-columnOrders": "No column orders saved yet",
+                    "remove-columnOrder": "Delete",
+                    "title": "Manage column orders"
+                },
+                "columnOrder-preferences-selector": {
+                    "selector-empty-name": "Manage column orders"
+                },
+                "create-columnOrder-preference-modal": {
+                    "discard": "Discard",
+                    "drag-attribute": "Drag & drop to change the order",
+                    "save": "Save",
+                    "title": "Create new column order"
+                }
+            },
+            "entry-form": {
+                "customize": {
+                    "title": "Customize"
+                }
+            },
+            "filter-preferences": {
+                "filter-preferences-manager-modal": {
+                    "close": "Close",
+                    "drag-filter-preference": "Drag & drop to change the order",
+                    "no-filters": "There are currently no filters saved yet.",
+                    "remove-filter": "Delete filter",
+                    "title": "Edit saved filters"
+                }
+            },
+            "overview": {
+                "create": {
+                    "description": "Create a new entry in this table",
+                    "title": "New"
+                },
+                "search": {
+                    "description": "Search for entries in this table",
+                    "saved-filters": "Saved filters",
+                    "title": "Search"
+                }
+            },
+            "table-views": {
+                "table-views-editor-modal": {
+                    "default-order-subtitle": "(Currently default order)",
+                    "discard": "Discard",
+                    "save": "Save",
+                    "title": "Customize your view",
+                    "use-default-order": "Use default order"
+                },
+                "table-views-editor": {
+                    "add-attribute": "Add an attribute that should be visible",
+                    "concealed-attributes-hint": "And {{ numberOfConcealedAttributes }} concealed Attributes.",
+                    "drag-attribute": "Drag to change the attribute order",
+                    "min-ordered-attributes-error": "At least 1 attribute must be visible."
+                }
+            }
+        },
+        "tablesEditor": {
+            "add-foreign-attribute": "Add relation",
+            "addAttribute": "Add attribute",
+            "allowAnonymousCreation": "Allow anonymous actions",
+            "confirm-foreign-save": {
+                "btnOkText": "Save changes",
+                "description": "The counterpart for this foreign attribute will be created only after this table has been saved. <br/><br/> If you have made changes you don't want to save: press \"Cancel\", revert these changes and save the table then. <br/><br/> Don't forget to set correct names and validators for the new attributes.",
+                "title": "Save your changes to finish the creation"
+            },
+            "confirmAttributeDeletion": {
+                "btnOkText": "Save changes",
+                "description": "Your changes have removed at least one attribute. This would also delete all saved values for this attribute permanently. You cannot reverse this action. Do you really want to save these changes?",
+                "title": "Saving would permanently delete an attribute"
+            },
+            "confirmDeletion": {
+                "btnOkText": "Delete table",
+                "description": "Do you really want to delete this table? You can not revert this action!",
+                "title": "Delete table"
+            },
+            "create-foreign-attribute-modal": {
+                "choose-foreign-tableId": "Please choose a table from the graph below. The so created relation connects the currently open table with the chosen one.",
+                "close": "Cancel",
+                "title": "Choose the table to connect with..."
+            },
+            "deleteTable": "Delete this Table",
+            "display-properties": "Names & Description",
+            "displayProperties": {
+                "description": "Description",
+                "minimum-languages": "You need to add at least one language",
+                "plural": "Plural-Name",
+                "singular": "Singular-Name"
+            },
+            "drag-attribute": "Change the order of the attributes by dragging them",
+            "edit": {
+                "description": "Choose the table to edit by clicking on its name in the graph above",
+                "title": "Edit a Table"
+            },
+            "foreign-save-invalid": {
+                "description": "The counterpart for this foreign attribute will be created only after this table has been saved. <br/><br/> The form is currently invalid. Please press \"Cancel\" correct it's  values and save it. <br/><br/> Don't forget to set correct names and validators for the new attributes.",
+                "title": "Save your changes to finish the creation"
+            },
+            "general-settings": {
+                "table-settings-for": "Table settings for"
+            },
+            "kind-options": "Options & Validators",
+            "new": {
+                "description": "Click here or on an empty section of the graph above.",
+                "title": "Create a new Table"
+            },
+            "noAttributes": "A table needs at least one attribute",
+            "projectDefault": "Project default",
+            "removeAttribute": "Remove",
+            "table-graph": {
+                "empty": "There are no tables created in this project yet. To create a new table fill out and save the form below. The newly created table will be displayed in the tables-graph here.",
+                "fit": "Fit graph to window",
+                "indicator-info": "This is the graph for changing the table-structure",
+                "layout": "Automatically arrange graph",
+                "new": "Create a new table",
+                "reset": "Reset graph positions",
+                "save": "Click here to save the position of the table on the graph",
+                "zoom-in": "Zoom in",
+                "zoom-out": "Zoom out"
+            },
+            "table": {
+                "attributes": "Attributes"
+            },
+            "validators": "Validators"
+        },
+        "users": {
+            "edit-success-message": {
+                "body": "",
+                "title": "Personal settings successfully updated."
+            },
+            "remove-email-success-message": {
+                "body": "",
+                "title": "Email successfully removed."
+            }
+        }
+    },
+    "roles": {
+        "anonymousUser": "Anonymous user",
+        "me": "me"
+    },
+    "routing": {
+        "about": "About",
+        "changelog": "Changelog",
+        "company-details": "Company details",
+        "createEntry": "New",
+        "edit": "Edit",
+        "edit-description": "Edit the entry",
+        "entry-overview": "Overview",
+        "entry-overview-description": "A complete overview of the values and meta-data of the entry",
+        "faq": "FAQ",
+        "features": "Features",
+        "general-settings": "Settings",
+        "general-settings-descriptions": "Change general settings of this project",
+        "help": "Help",
+        "history": "History",
+        "history-description": "The full version history of this entry",
+        "home": "Home",
+        "licenses": "Third party licenses",
+        "members": "Members",
+        "overview": "Overview",
+        "overview-description": "Choose a table and create, search and edit entries",
+        "privacy-policy": "Privacy policy",
+        "project-overview": "Overview",
+        "projects": "Projects",
+        "relation-explorer": "Relation explorer",
+        "relation-explorer-description": "",
+        "scanner": "Scanner",
+        "search": "Search",
+        "settings-members": "Members",
+        "settings-members-descriptions": "Invite new users and change roles and permissions of the members",
+        "statistics": "Statistics",
+        "support": "Support",
+        "tables-editor": "Editor",
+        "tables-editor-descriptions": "Create and edit tables",
+        "user-profile": "User-Profile"
+    },
+    "scanner": {
+        "clear-results": "Clear results",
+        "errors": {
+            "no-camera": "This device has no camera.",
+            "no-permission": "Unable to access video stream. Please make sure you have a webcam enabled and given our application the correct access rights in the browser."
+        },
+        "nothing-scanned-yet": "Scann the QR-Code label of an entry..."
+    },
+    "shared": {
+        "feature": {
+            "display-features": {
+                "efficient-workflow": {
+                    "description": "Our user interface is designed so that you can work quickly and reliably. For example, if you need to create several similar entries, you can simply duplicate the first entry by pressing a button and only need to change the corresponding values.",
+                    "title": "Workflow oriented"
+                },
+                "export": {
+                    "description": "An export of tables as CSV and JSON files is planned. This will especially offer the possibility to migrate data from the KoppaDb system to other data processing solutions.",
+                    "title": "File export"
+                },
+                "files-search": {
+                    "description": "It should be possible to filter by file name and the text content of a file. Supported are text files, PDF files and images where the text is determined by optical character recognition.",
+                    "title": "Search for files"
+                },
+                "files": {
+                    "description": "It is also possible to upload arbitrary files. These can then not only be downloaded, but (depending on the browser) also be displayed directly in KoppaDb. For the preview images, videos, audio, text, PDF and Markdown files are supported. A preview for Excel files is under development.",
+                    "title": "File attributes"
+                },
+                "foreign-search": {
+                    "description": "It should also be possible to include relation attributes in the search.",
+                    "title": "Search with relations"
+                },
+                "hidden-attributes": {
+                    "description": "You have attributes that exist only for historical reasons and are no longer actively used? You can simply hide them by default without losing their values.",
+                    "title": "Hidden attributes"
+                },
+                "history": {
+                    "description": "Every change or deletion of an entry is stored in an easily understandable history. This prevents unintentional loss of information.",
+                    "title": "Full version history"
+                },
+                "labels": {
+                    "description": "For each entry we generate a label with a QR code that refers to the corresponding entry. This label can be printed out and attached to the corresponding product. By scanning it, you can access all your important information in a flash.",
+                    "title": "Labels"
+                },
+                "markdown": {
+                    "description": "Formatted texts can be created and saved using an integrated editor. It is not necessary to understand the underlying formatting language \"Markdown\".",
+                    "title": "Markdown"
+                },
+                "permissions": {
+                    "description": "It should be possible to adjust which project members have access to which tables via a group-based rights system.",
+                    "title": "Permissions"
+                },
+                "planned-features": {
+                    "description": "The following functions are envisioned and are at different stages of planning and implementation. In each case, no ETA is available yet.",
+                    "title": "Planned features"
+                },
+                "relations": {
+                    "description": "Relations connect entries from tables with each other. Simple relations are supported, which only consist of a selection field, but also complex relations, where intermediate attributes in the relation itself can be used to store additional data.",
+                    "title": "Relations"
+                },
+                "table-views": {
+                    "description": "A table is used by several employees, for each of whom only a handful of attributes are relevant? - Each member can set their own attribute order and even hide attributes.",
+                    "title": "Table views"
+                },
+                "tables-graph": {
+                    "description": "Tables and their relationships to each other are clearly displayed in the tables graph. It is also used for navigation. Project members can mark frequently used tables as favourites and thus visually highlight them for themselves.",
+                    "title": "Tables graph"
+                },
+                "title": "Further features",
+                "validators": {
+                    "description": "Validators can be used to reduce input errors. There are different validators for each attribute type, e.g. you can set minimum and maximum values for numbers or limit files to certain file types. The error messages are generated in real time as values are filled in.",
+                    "title": "Validators"
+                }
+            },
+            "display-pitch": {
+                "case-0": "you are a company, club or other organization based in Germany",
+                "case-1": "folders full of Excel spreadsheets are no longer enough for you.",
+                "case-2": "most of your team members have little programming skills and computer science knowledge.",
+                "case-3": "you want to save your data (gradually) digitally ordered.",
+                "case-4": "you want to rely on a futureproof solution for your valuable data.",
+                "title": "KoppaDb is just right for you if..."
+            },
+            "display-tutorial": {
+                "1": {
+                    "button": "here",
+                    "post-button": ".",
+                    "pre-button": "Register easily and free of charge",
+                    "title": "Register"
+                },
+                "2": {
+                    "description": "All projects are independent of each other and are characterized by their members, table structure and stored data.",
+                    "title": "Create project"
+                },
+                "3": {
+                    "description": "Tables specify the structure in which the data is to be stored. Attributes are the columns of the table. The type of attribute determines whether, for example, numbers, words, time data or files should be in a column.",
+                    "title": "Create table"
+                },
+                "4": {
+                    "description": "Invite additional members to your project. You can give them different access rights.",
+                    "title": "Invite Members"
+                },
+                "5": {
+                    "description": "Based on the previously defined table structure, a form is generated which all employees can now use to create, edit or delete entries.",
+                    "title": "Insert data"
+                },
+                "6": {
+                    "description": "You can also search for all entries. Searches with complex filters are possible too.",
+                    "title": "Search for entries"
+                },
+                "7": {
+                    "description": "In reality, there are constantly new developments that require other attributes. Since one can adapt the table structure oneself at any time via the user interface, one avoids delays or misunderstandings due to cumbersome communication with the IT department or programmers who have no domain knowledge.",
+                    "title": "Adapt the tables to new requirements"
+                },
+                "title": "How does KoppaDb work?"
+            },
+            "pricing": {
+                "all-functions": "Unlimited use of all features",
+                "basic-fee": "Basic fee",
+                "cloud": {
+                    "advantages": {
+                        "1": "Accessable from anywhere",
+                        "2": "Flexibly scalable",
+                        "3": "We take care of maintenance and safety",
+                        "4": "High availability by using the Amazon web services infrastructure",
+                        "5": "Regular backups included"
+                    },
+                    "description": "Use an official KoppaDb instance.",
+                    "individual-instance": "Own isolated KoppaDb instance on an individual domain",
+                    "member-upgrade": {
+                        "more-members": "1 additional user",
+                        "more-space": "{{ maxInGB }} GB additional storage space",
+                        "title": "Additional member"
+                    },
+                    "premium": {
+                        "more-storage": "{{ maxInGB }} GB additional storage space"
+                    },
+                    "storage-upgrade": {
+                        "more-option": "More after individual arrangement",
+                        "option": "{{ storageInGB }} GB for {{ priceInEUR }}€",
+                        "per-month": "Prices are per month",
+                        "title": "Additional storage space"
+                    },
+                    "title": "Cloud"
+                },
+                "excluding-vat": "plus VAT",
+                "on-premise": {
+                    "advantages": {
+                        "1": "Regular security and function updates",
+                        "2": "Prioritized customer support",
+                        "3": "No software limitation in terms of storage space, number of projects or entries"
+                    },
+                    "contact": {
+                        "post": "",
+                        "pre": "If you are interested please contact us via"
+                    },
+                    "data-migration": "Consulting or development of data migration solutions: individual arrangement",
+                    "description": "You want to run KoppaDb on your own company server? Then this is the right option. Your data are thus physically only visible for yourself.",
+                    "initial-setup": "One-time installation (docker container): individual arrangement",
+                    "single-license": {
+                        "minimum-volume": "At least {{ minVolume }} must be purchased"
+                    },
+                    "title": "On Premise"
+                },
+                "per-month": "per month",
+                "title": "Pricing",
+                "unlimited-devices": "On any number of devices",
+                "unlimited-projects": "Unlimited number of projects"
+            }
+        },
+        "show-more": {
+            "show-less": "Show less...",
+            "show-more": "Show more..."
+        },
+        "utility": {
+            "global-loading-placeholder": {
+                "abort": "Abort"
+            }
+        },
+        "versions": {
+            "foreign": {
+                "display-foreign-many": {
+                    "number-of-relations": "relations"
+                }
+            }
+        }
+    },
+    "table": {
+        "attribute": "Attribute",
+        "value": "Value"
+    },
+    "user": {
+        "add-email": "Add email",
+        "add-email-placeholder": "New email",
+        "change-auth-mail-input": {
+            "name": "New authentication email"
+        },
+        "change-auth-mail": {
+            "btn": "Change authentication email",
+            "errors": {
+                "only-one-email-verified": "You must have more than one email verified to change your authentication email.",
+                "token": "The provided link is invalid. Please request another authentication email change link."
+            },
+            "heading": "Change authentication email"
+        },
+        "danger-zone": "Danger zone",
+        "emails": "Emails",
+        "general": "General-Settings",
+        "language": "Preferred language",
+        "name": "Name",
+        "not-removable-email": {
+            "authentication-email": "You cannot remove your authentication email.",
+            "notification-email": "You cannot remove your notification email.",
+            "public-email": "You cannot remove your public email."
+        },
+        "notification-email": "Notification email",
+        "public-email": "Public email",
+        "request-auth-email-change": {
+            "btn": "Change authentication email",
+            "description": "The authentication email is the email you need to login into your account. Click the button below and an email is send to the following email address:",
+            "min-emails-error": "To change your authentication email you must have at least two verified emails."
+        },
+        "reset-password": "Send email for password change",
+        "unset-publicEmail": "Invisible"
+    },
+    "validators": {
+        "error": {
+            "all-hidden": "Not all attributes can be \"Hidden\".",
+            "alreadyInList": "This item is already in the list.",
+            "containsLetter": "The input value needs at least one letter.",
+            "containsNumber": "The input value needs at least one number.",
+            "date": "This is not a valid date.",
+            "dateMax": "The input value mustn't be later than {{ max }}.",
+            "dateMin": "The input value mustn't be earlier than {{ min }}.",
+            "dateTime": "This is not a valid date with time.",
+            "defaultIncrementRequired": "If \"{{ incrementName }}\" is set then this attribute must be \"Required\" too.",
+            "email": "This is not a valid email adress.",
+            "emailAlreadyInProject": "{{ value }} is already in this project.",
+            "emailAlreadyVerified": "{{ value }} is already verified.",
+            "hiddenNotRequired": "An \"hidden\" attribute mustn't be \"required\".",
+            "isMultipleOf": "The number isn't an integral multiple of {{ multipleOf }}. Do you mean {{ previous }} or {{ next }}?",
+            "isNumber": "The input value is not a number.",
+            "matchesPassword": "The passwords are not matching.",
+            "max": "The number mustn't be bigger than {{ max }}.",
+            "maxItems": "There are not more than {{ maxItems }} items allowed.",
+            "maxLength": "The input value is {{ difference }} characters too long.",
+            "min": "The number mustn't be smaller than {{ min }}.",
+            "min-after-max": "\"{{ minName }}\" must not be after \"{{ maxName }}\".",
+            "min-higher-max": "\"{{ minName }}\" must not be higher than \"{{ maxName }}\".",
+            "minItems": "You must add at least {{ minItems }} items to the list.",
+            "minLength": "The input value is {{ difference }} characters too short.",
+            "pattern": "The input is not matching this pattern: {{ pattern }}",
+            "regExp": "The input is no regular Expression.",
+            "required": "This input value is required.",
+            "time": "This is not a valid time.",
+            "timeMax": "The input value mustn't be later than {{ max }}.",
+            "timeMin": "The input value mustn't be earlier than {{ min }}.",
+            "timeMultipleOf": "This time isn't an integral multiple of {{ multipleOf }}s.",
+            "unique": "This input value already exists.",
+            "url": "This is not a valid URL."
+        },
+        "warning": {
+            "missing-primary-key": "It is recommended to specify an unique identifier for each table. You can do this by setting the \"Required\" and \"Unique\" validators for one attribute. Most of the time this identifier is an id or name."
+        }
+    }
+}

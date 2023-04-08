@@ -1,0 +1,22 @@
+<div class="page-container">
+    <ng-container *ngIf="table; withLoading">
+        <h2 class="mt-2 mb-2">
+            <app-table-name [table]="table" [showIcon]="true"></app-table-name>
+            <button
+                (click)="shareService.shareUrl()"
+                class="pb-0 pt-0 mb-n2 mt-n2 btn btn-link text-muted"
+                [appInfoTooltip]="'pages.entries.overview.copyLink' | translate"
+            >
+                <app-icon icon="share" style="font-size: 150%"></app-icon>
+            </button>
+        </h2>
+
+        <app-versions-filter-editor
+            [table]="table"
+            (appliedFilterChanges)="filter = $event"
+        ></app-versions-filter-editor>
+        <!-- TODO: Add statistics -->
+    </ng-container>
+
+    <h1>Coming soon!</h1>
+</div>

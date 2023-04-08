@@ -1,0 +1,9 @@
+<i *ngIf="metaAttribute | translateMetaAttribute as metaAttributeTranslation">
+    <app-icon
+        *ngIf="
+            displayKind ? (metaAttribute | getMetaAttributeIcon) : null as icon
+        "
+        [icon]="icon"
+    ></app-icon>
+    {{ metaAttributeTranslation | translate }}
+</i>

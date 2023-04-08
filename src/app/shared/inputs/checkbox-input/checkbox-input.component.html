@@ -1,0 +1,43 @@
+<ng-template #descriptionTemplate>
+    <app-description [description]="control.description"></app-description>
+</ng-template>
+
+<div
+    class="form-check"
+    [class.form-switch]="switch"
+    (focus)="control.setTouched(true)"
+>
+    <input
+        [appInputControl]="control"
+        class="form-check-input"
+        [class.is-invalid]="showValidation && (control.invalid$ | async)"
+        [class.has-warning]="showValidation && (control.hasWarning$ | async)"
+        [class.is-changed]="showChanged && (control.changed$ | async)"
+        type="checkbox"
+        [id]="control.name"
+        [attr.disabled]="(control.disabled$ | async) ? '' : null"
+        [appAutoFocus]="autofocus"
+    />
+    <!-- user generated descriptions should be light themed -->
+    <label
+        class="form-check-label"
+        [for]="control.name"
+        [appDescriptionTooltip]="descriptionTemplate"
+        [description]="control.description"
+        placement="right"
+        [class.pointer]="(control.disabled$ | async) === false"
+    >
+        <ng-container [ngSwitch]="control.kind">
+            <ng-container *ngSwitchCase="'string'">
+                {{ control.text }}
+            </ng-container>
+            <ng-container *ngSwitchCase="'translate'">
+                {{ $any(control.text) | translate }}
+            </ng-container>
+            <ng-container *ngSwitchCase="'displayName'">
+                {{ ($any(control.text) | translateDisplayNames)?.singular }}
+            </ng-container>
+        </ng-container>
+    </label>
+</div>
+<app-validation *ngIf="showValidation" [state]="control"></app-validation>

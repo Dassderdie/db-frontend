@@ -1,0 +1,75 @@
+<app-input
+    *ngIf="
+        attribute.kind !== 'foreign' && attribute.kind !== 'files';
+        else specialInputs
+    "
+    [control]="attribute.id | getControl: form"
+    [showChanged]="!!initialVersion"
+    [autofocus]="autofocusId === attribute.id"
+></app-input>
+<ng-template #specialInputs>
+    <ng-container [ngSwitch]="attribute.kind">
+        <ng-container *ngSwitchCase="'files'">
+            <!-- TODO: types: remove type assertions because of missing type narrowing of union types and in else -->
+            <!-- TODO: replace ternary expression for initialValue with safe navigation (currently buggy) -->
+            <app-many-files-input
+                [initialValue]="
+                    initialVersion
+                        ? $any(initialVersion.values[attribute.id])
+                        : undefined
+                "
+                [attribute]="$any(attribute)"
+                [projectId]="projectId"
+                [value]="$any(value)"
+                [parentState]="inputsState"
+                [disabled]="disabled"
+                (valueChange)="valueChanges.emit($event)"
+            >
+            </app-many-files-input>
+            <!-- TODO: add single-files-input
+                *ngIf=" $any(attribute).kindOptions.maximumFileAmount !== 1; else
+                SingleFilesInput "
+                <ng-template #SingleFilesInput>
+                    <app-single-files-input
+                    [version]="initialVersion"
+                    [attribute]="$any(attribute)"
+                    [value]="$any(changedValues[attribute.id])"
+                    [parentState]="inputsState"
+                    [disabled]="disabled"
+                    (valueChange)="
+                    changedValues![attribute.id] = $event;
+                    emitChangedValues()
+                    "
+                    ></app-single-files-input>
+                </ng-template> -->
+        </ng-container>
+        <ng-container *ngSwitchCase="'foreign'">
+            <!-- TODO: types: remove type assertions because of missing type narrowing of union types and in else -->
+            <app-foreign-single-input
+                *ngIf="
+                    attribute | isForeignSingleAttribute;
+                    else foreignManyInput
+                "
+                [ids]="{ projectId: projectId, tableId: tableId }"
+                [version]="initialVersion"
+                [attribute]="$any(attribute)"
+                [value]="$any(value)"
+                [parentState]="inputsState"
+                [disabled]="disabled"
+                (valueChange)="valueChanges.emit($event)"
+            ></app-foreign-single-input>
+            <ng-template #foreignManyInput>
+                <app-foreign-many-input
+                    [ids]="{ projectId: projectId, tableId: tableId }"
+                    [version]="initialVersion"
+                    [attribute]="$any(attribute)"
+                    [value]="$any(value)"
+                    [parentState]="inputsState"
+                    [disabled]="disabled"
+                    (valueChange)="valueChanges.emit($event)"
+                >
+                </app-foreign-many-input>
+            </ng-template>
+        </ng-container>
+    </ng-container>
+</ng-template>

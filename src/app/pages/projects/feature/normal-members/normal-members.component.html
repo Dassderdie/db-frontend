@@ -1,0 +1,54 @@
+<div
+    *ngFor="let role of roles; trackBy: 'id' | trackByProperty"
+    class="card mb-3"
+>
+    <div class="card-body">
+        <h5>
+            <app-member-name
+                *ngIf="project"
+                [role]="role"
+                [projectId]="project.id"
+            ></app-member-name>
+            <small class="card-text text-muted">
+                <app-display-date
+                    [date]="role.createdAt"
+                    [options]="{ relative: true, format: 'long' }"
+                ></app-display-date>
+                {{ 'pages.projects.generalSettings.members.by' | translate }}
+                <app-member-name
+                    *ngIf="project"
+                    [userId]="role.creatorId"
+                    [projectId]="project.id"
+                ></app-member-name>
+            </small>
+        </h5>
+        <a
+            *ngIf="
+                role.userId !== project.authenticatedUserRole.userId &&
+                ((project.authenticatedUserRole.givePermissions &&
+                    !role.administrator) ||
+                    project.authenticatedUserRole.administrator)
+            "
+            [routerLink]="role.user.id"
+            class="btn btn-link text-warning"
+        >
+            <app-icon icon="settings"></app-icon>
+            {{ 'pages.projects.generalSettings.members.manage' | translate }}
+        </a>
+        <a
+            *ngIf="
+                role.userId !== project.authenticatedUserRole.userId &&
+                project.authenticatedUserRole.administrator
+            "
+            (click)="removeRole(role)"
+            class="btn btn-link text-danger"
+        >
+            <app-icon icon="delete"></app-icon>
+            {{ 'pages.projects.generalSettings.members.remove' | translate }}
+        </a>
+    </div>
+</div>
+
+<div *ngIf="roles.length === 0" class="text-center h6 text-muted">
+    {{ 'pages.projects.generalSettings.members.noMatchingRoles' | translate }}
+</div>

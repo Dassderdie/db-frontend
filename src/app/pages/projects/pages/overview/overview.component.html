@@ -1,0 +1,104 @@
+<div class="page-container">
+    <ng-container *ngIf="project; withLoading">
+        <h1>
+            <app-icon icon="project"></app-icon>
+            {{ project.name }}
+        </h1>
+        <p class="card-subtitle">
+            <app-markdown-viewer
+                [markdownText]="project.description"
+                maxHeight="100px"
+                overflow="showMore"
+            ></app-markdown-viewer>
+        </p>
+    </ng-container>
+    <!-- TODO: permission-levels -->
+    <app-choose-table
+        [tables]="allTables"
+        [selectableIntermediateTables]="false"
+        [additionalStyles]="additionalGraphStyles"
+        [tableGroups]="{
+            favorite: ownRole ? ownRole.preferences.favoriteTables : []
+        }"
+        (newTableSelected)="navigateToTable($event)"
+    ></app-choose-table>
+    <input
+        [(ngModel)]="searchText"
+        (ngModelChange)="updateFilteredTables()"
+        [placeholder]="'pages.projects.overview.searchPlaceholder' | translate"
+        [appAutoFocus]="true"
+        class="form-control search mt-3 mb-3"
+        type="text"
+    />
+    <ng-container *ngIf="filteredTables; withLoading">
+        <div
+            *ngIf="
+                !filteredTables.favoriteTables.length &&
+                !filteredTables.normalTables.length
+            "
+            class="text-center h6 text-muted"
+        >
+            {{ 'pages.projects.overview.noTables' | translate }}
+        </div>
+        <!-- favorite tables -->
+        <!-- Limit the dragging area-->
+        <div class="drag-boundary" style="margin: -25px; padding: 25px">
+            <div
+                cdkDropList
+                cdkDropListOrientation="vertical"
+                (cdkDropListDropped)="moveFavorite($event)"
+            >
+                <div
+                    *ngFor="
+                        let table of filteredTables.favoriteTables;
+                        trackBy: 'id' | trackByProperty
+                    "
+                    cdkDrag
+                    [cdkDragDisabled]="favoritesAreUpdating"
+                    cdkDragBoundary=".drag-boundary"
+                >
+                    <app-overview-item
+                        [table]="table"
+                        [isFavorite]="true"
+                        [maximumFavoriteTablesReached]="
+                            !!unfilteredTables &&
+                            unfilteredTables.favoriteTables.length >= 30
+                        "
+                        [disableFavoriteActions]="favoritesAreUpdating"
+                        (isFavoriteChanges)="
+                            changeFavoriteStatus(table.id, false)
+                        "
+                    >
+                        <!-- TODO: workaround for cdkDragHandle not detected in child components  https://github.com/angular/components/issues/13784 -->
+                        <!-- negative margin to correct position & padding to increase area -->
+                        <div
+                            cdkDragHandle
+                            [appInfoTooltip]="
+                                'pages.projects.overview.drag-favorite'
+                                    | translate
+                            "
+                            style="margin: -20px; padding: 10px"
+                        >
+                            <app-icon icon="drag" [inline]="false"></app-icon>
+                        </div>
+                    </app-overview-item>
+                </div>
+            </div>
+        </div>
+        <!-- normal tables -->
+        <app-overview-item
+            *ngFor="
+                let table of filteredTables.normalTables;
+                trackBy: 'id' | trackByProperty
+            "
+            [table]="table"
+            [isFavorite]="false"
+            [maximumFavoriteTablesReached]="
+                !!unfilteredTables &&
+                unfilteredTables.favoriteTables.length >= 30
+            "
+            [disableFavoriteActions]="favoritesAreUpdating"
+            (isFavoriteChanges)="changeFavoriteStatus(table.id, true)"
+        ></app-overview-item>
+    </ng-container>
+</div>

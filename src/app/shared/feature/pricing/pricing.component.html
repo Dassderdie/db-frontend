@@ -1,0 +1,363 @@
+<h1>
+    {{ 'shared.feature.pricing.title' | translate }}
+</h1>
+<!-- TODO: Privatanwender -->
+<!-- Alle Angaben hier sind ein invitatio ad offerendum -> kein Rechtsbindungswille -> Kassenpreis/Vertrag zählt später -->
+<h3>{{ 'shared.feature.pricing.cloud.title' | translate }}</h3>
+<p>
+    {{ 'shared.feature.pricing.cloud.description' | translate }}
+</p>
+<ul>
+    <li>
+        {{ 'shared.feature.pricing.cloud.advantages.1' | translate }}
+    </li>
+    <li>
+        {{ 'shared.feature.pricing.cloud.advantages.2' | translate }}
+    </li>
+    <li>
+        {{ 'shared.feature.pricing.cloud.advantages.3' | translate }}
+    </li>
+    <li>
+        {{ 'shared.feature.pricing.cloud.advantages.4' | translate }}
+    </li>
+    <li>
+        {{ 'shared.feature.pricing.cloud.advantages.5' | translate }}
+    </li>
+</ul>
+<div class="row row-cols-1 row-cols-md-3">
+    <div class="col mb-4">
+        <div class="card h-100 text-center px-3">
+            <span
+                class="
+                    h6
+                    w-60
+                    mx-auto
+                    px-3
+                    py-1
+                    rounded-bottom
+                    bg-primary
+                    text-white
+                    shadow-sm
+                "
+            >
+                {{ 'shared.feature.pricing.basic-fee' | translate }}
+            </span>
+            <div class="bg-transparent card-header pt-3 border-0">
+                <h1 class="h1 fw-normal text-center mb-0">
+                    10€<span class="h6 text-muted ms-2"
+                        >/
+                        {{
+                            'shared.feature.pricing.per-month' | translate
+                        }}*</span
+                    >
+                </h1>
+            </div>
+            <div class="card-body pt-0">
+                <ul class="list-unstyled mb-3">
+                    <li>
+                        <app-icon icon="plus"></app-icon>
+                        {{
+                            'shared.feature.pricing.cloud.individual-instance'
+                                | translate
+                        }}
+                    </li>
+                    <li>
+                        <app-icon icon="plus"></app-icon>
+                        {{ 'shared.feature.pricing.all-functions' | translate }}
+                    </li>
+                    <li>
+                        <app-icon icon="plus"></app-icon>
+                        {{
+                            'shared.feature.pricing.unlimited-projects'
+                                | translate
+                        }}
+                    </li>
+                    <li>
+                        <app-icon icon="plus"></app-icon>
+                        {{
+                            'shared.feature.pricing.cloud.premium.more-storage'
+                                | translate: { maxInGB: 5 }
+                        }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-4">
+        <div class="card h-100 border-primary text-center px-3">
+            <span
+                class="
+                    h6
+                    w-60
+                    mx-auto
+                    px-3
+                    py-1
+                    rounded-bottom
+                    bg-primary
+                    text-white
+                    shadow-sm
+                "
+            >
+                <app-icon icon="plus"></app-icon>
+                {{
+                    'shared.feature.pricing.cloud.member-upgrade.title'
+                        | translate
+                }}
+            </span>
+            <div class="bg-transparent card-header pt-3 border-0">
+                <h1 class="h1 fw-normal text-primary text-center mb-0">
+                    10€<span class="h6 text-muted ms-2"
+                        >/
+                        {{
+                            'shared.feature.pricing.per-month' | translate
+                        }}*</span
+                    >
+                </h1>
+            </div>
+            <div class="card-body pt-0">
+                <ul class="list-unstyled mb-3">
+                    <li>
+                        <app-icon icon="plus"></app-icon>
+                        {{
+                            'shared.feature.pricing.cloud.member-upgrade.more-members'
+                                | translate
+                        }}
+                    </li>
+                    <li>
+                        <app-icon icon="plus"></app-icon>
+                        {{
+                            'shared.feature.pricing.cloud.member-upgrade.more-space'
+                                | translate: { maxInGB: 5 }
+                        }}
+                    </li>
+                    <li>
+                        <app-icon icon="plus"></app-icon>
+                        {{
+                            'shared.feature.pricing.unlimited-devices'
+                                | translate
+                        }}
+                    </li>
+                    <li>
+                        <app-icon icon="info"></app-icon>
+                        {{
+                            'shared.feature.pricing.on-premise.single-license.minimum-volume'
+                                | translate: { minVolume: 5 }
+                        }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-4">
+        <div class="card h-100 text-center px-3">
+            <span
+                class="
+                    h6
+                    w-60
+                    mx-auto
+                    px-3
+                    py-1
+                    rounded-bottom
+                    bg-primary
+                    text-white
+                    shadow-sm
+                "
+            >
+                <app-icon icon="plus"></app-icon>
+                {{
+                    'shared.feature.pricing.cloud.storage-upgrade.title'
+                        | translate
+                }}
+            </span>
+            <div class="card-body">
+                <ul class="list-unstyled mb-3">
+                    <li>
+                        <app-icon icon="plus"></app-icon>
+                        {{
+                            'shared.feature.pricing.cloud.storage-upgrade.option'
+                                | translate: { storageInGB: 10, priceInEUR: 5 }
+                        }}<span class="text-muted">*</span>
+                    </li>
+                    <li>
+                        <app-icon icon="plus"></app-icon>
+                        {{
+                            'shared.feature.pricing.cloud.storage-upgrade.option'
+                                | translate
+                                    : { storageInGB: 50, priceInEUR: 12 }
+                        }}<span class="text-muted">*</span>
+                    </li>
+                    <li>
+                        <app-icon icon="plus"></app-icon>
+                        {{
+                            'shared.feature.pricing.cloud.storage-upgrade.option'
+                                | translate
+                                    : { storageInGB: 100, priceInEUR: 20 }
+                        }}<span class="text-muted">*</span>
+                    </li>
+                    <li>
+                        <app-icon icon="plus"></app-icon>
+                        {{
+                            'shared.feature.pricing.cloud.storage-upgrade.more-option'
+                                | translate
+                        }}
+                    </li>
+                    <li>
+                        <app-icon icon="info"></app-icon>
+                        {{
+                            'shared.feature.pricing.cloud.storage-upgrade.per-month'
+                                | translate
+                        }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #contactIfInterested>
+    <p class="fw-bolder">
+        {{ 'shared.feature.pricing.on-premise.contact.pre' | translate }}
+        <a href="mailto: info@koppadb.com">info@koppadb.com</a
+        >{{ 'shared.feature.pricing.on-premise.contact.post' | translate }}.
+    </p>
+</ng-template>
+
+<ng-container *ngTemplateOutlet="contactIfInterested"></ng-container>
+
+<h3>{{ 'shared.feature.pricing.on-premise.title' | translate }}</h3>
+<p>
+    {{ 'shared.feature.pricing.on-premise.description' | translate }}
+</p>
+<ul class="list-unstyled mb-3">
+    <li>
+        <app-icon icon="plus"></app-icon>
+        {{ 'shared.feature.pricing.on-premise.advantages.1' | translate }}
+    </li>
+    <li>
+        <app-icon icon="plus"></app-icon>
+        {{ 'shared.feature.pricing.on-premise.advantages.2' | translate }}
+    </li>
+    <li>
+        <app-icon icon="plus"></app-icon>
+        {{ 'shared.feature.pricing.on-premise.advantages.3' | translate }}
+    </li>
+    <li>
+        <app-icon icon="info"></app-icon>
+        {{ 'shared.feature.pricing.on-premise.initial-setup' | translate }}
+    </li>
+    <li>
+        <app-icon icon="info"></app-icon>
+        {{ 'shared.feature.pricing.on-premise.data-migration' | translate }}
+    </li>
+</ul>
+
+<div class="row row-cols-1 row-cols-md-2">
+    <div class="col mb-4">
+        <div class="card h-100 text-center px-3">
+            <span
+                class="
+                    h6
+                    w-60
+                    mx-auto
+                    px-3
+                    py-1
+                    rounded-bottom
+                    bg-primary
+                    text-white
+                    shadow-sm
+                "
+            >
+                {{ 'shared.feature.pricing.basic-fee' | translate }}
+            </span>
+            <div class="bg-transparent card-header pt-3 border-0">
+                <h1 class="h1 fw-normal text-center mb-0">
+                    20€<span class="h6 text-muted ms-2"
+                        >/
+                        {{
+                            'shared.feature.pricing.per-month' | translate
+                        }}*</span
+                    >
+                </h1>
+            </div>
+            <div class="card-body pt-0">
+                <ul class="list-unstyled mb-3">
+                    <li>
+                        <app-icon icon="plus"></app-icon>
+                        {{
+                            'shared.feature.pricing.unlimited-projects'
+                                | translate
+                        }}
+                    </li>
+                    <li>
+                        <app-icon icon="plus"></app-icon>
+                        {{ 'shared.feature.pricing.all-functions' | translate }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-4">
+        <div class="card h-100 border-primary text-center px-3">
+            <span
+                class="
+                    h6
+                    w-60
+                    mx-auto
+                    px-3
+                    py-1
+                    rounded-bottom
+                    bg-primary
+                    text-white
+                    shadow-sm
+                "
+            >
+                <app-icon icon="plus"></app-icon>
+                {{
+                    'shared.feature.pricing.cloud.member-upgrade.title'
+                        | translate
+                }}
+            </span>
+            <div class="bg-transparent card-header pt-3 border-0">
+                <h1 class="h1 fw-normal text-primary text-center mb-0">
+                    12€<span class="h6 text-muted ms-2"
+                        >/
+                        {{
+                            'shared.feature.pricing.per-month' | translate
+                        }}*</span
+                    >
+                </h1>
+            </div>
+            <div class="card-body pt-0">
+                <ul class="list-unstyled mb-3">
+                    <li>
+                        <app-icon icon="plus"></app-icon>
+                        {{
+                            'shared.feature.pricing.cloud.member-upgrade.more-members'
+                                | translate
+                        }}
+                    </li>
+                    <li>
+                        <app-icon icon="plus"></app-icon>
+                        {{
+                            'shared.feature.pricing.unlimited-devices'
+                                | translate
+                        }}
+                    </li>
+                    <li>
+                        <app-icon icon="info"></app-icon>
+                        {{
+                            'shared.feature.pricing.on-premise.single-license.minimum-volume'
+                                | translate: { minVolume: 8 }
+                        }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-container *ngTemplateOutlet="contactIfInterested"></ng-container>
+
+<p>
+    <small class="text-muted"
+        >* {{ 'shared.feature.pricing.excluding-vat' | translate }}</small
+    >
+</p>

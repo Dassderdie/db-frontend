@@ -1,0 +1,217 @@
+@import './scss/variables.scss';
+
+/* modify bootstrap variables here */
+$modal-fade-transform: scale(0.8);
+
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap/scss/mixins';
+
+.page-container {
+    @extend .container-xl;
+}
+
+// links to other pages styled as cards
+.card-link {
+    text-align: center;
+    cursor: pointer;
+    @extend .text-reset;
+    .card-img-top {
+        font-size: 500%;
+    }
+}
+
+@each $color, $value in $theme-colors {
+    .card-link-#{$color} {
+        color: $value !important;
+        @extend .border-#{$color};
+    }
+}
+
+a,
+.btn-link {
+    text-decoration: none;
+}
+
+.card-link:hover {
+    border-color: $primary;
+
+    .card-img-top {
+        color: $primary;
+    }
+}
+
+.card-link + .card-link {
+    margin-left: unset;
+}
+
+// to be able to disable cards used as big links
+.card.card-link.disabled {
+    opacity: 0.65;
+    pointer-events: none;
+    cursor: default;
+}
+
+.is-changed:not(.is-invalid):not(.has-warning) {
+    border-color: $changed !important;
+    &:focus {
+        box-shadow: 0 0 0 0.2rem rgba($changed, 0.25) !important;
+    }
+}
+
+.has-warning:not(.is-invalid) {
+    border-color: $warning !important;
+    &:focus {
+        box-shadow: 0 0 0 0.2rem rgba($warning, 0.25) !important;
+    }
+}
+
+// workaround for red borders around number-inputs with float number
+input {
+    box-shadow: none;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.cdk-drag-handle {
+    cursor: grab;
+}
+// TODO: not working
+.cdk-drag-preview,
+.cdk-drag-dragging {
+    cursor: grabbing;
+}
+
+.cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+        0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    z-index: 1100 !important;
+}
+
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+// Tooltip-light
+.light .tooltip-inner {
+    background: white !important;
+    color: unset !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+@each $direction in 'top', 'bottom', 'right', 'left' {
+    .light.tooltip-#{$direction} .arrow::before {
+        border-#{$direction}-color: rgba(0, 0, 0, 0.4) !important;
+    }
+}
+
+.light.tooltip.show {
+    opacity: 0.98;
+}
+
+// Dropdown
+.dropdown-item:hover:not(:disabled) {
+    background: rgba($primary, 0.5);
+}
+
+button.dropdown-item {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+// For footer
+html,
+body {
+    height: 100%;
+    min-height: 100%;
+}
+
+.card-header {
+    border-bottom: 0px;
+}
+
+.card-header + * {
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+// TODO: remove workaround for #125
+.form-control {
+    height: auto;
+}
+
+// tables-graph
+.tables-graph {
+    .cy-container {
+        width: auto;
+        height: calc(100% - 10px);
+        display: block;
+        position: relative;
+    }
+
+    .cy-outer-container {
+        height: 50vh;
+        min-height: 280px;
+        overflow: hidden;
+    }
+
+    .grabber {
+        z-index: 10;
+        position: sticky;
+        bottom: 0;
+        cursor: s-resize;
+        height: 10px;
+        width: 100%;
+        border-top: 1px solid #f1f1f1;
+        overflow: hidden;
+        background-color: #eff0f1;
+    }
+}
+
+.cy-outer-container {
+    border: $border-width solid $secondary;
+    border-radius: $border-radius-lg;
+}
+
+// changes the width of a column exactly to fit it's minimum content
+td.fit,
+th.fit {
+    white-space: nowrap;
+    width: 1px;
+    text-align: center !important;
+}
+
+.preview-img {
+    width: 100% !important;
+    // to ignore width and height after the images are loaded
+    height: auto;
+    box-shadow: 0px 0px 18px 2px rgba(0, 0, 0, 0.125);
+    border-radius: 0.3rem;
+    padding: 2%;
+    // to make sure that the user doesn't mistake it with an actual interface
+    cursor: not-allowed;
+}
+
+// TODO: this should be directly added to the cdk-table in app-versions-list
+.last-col {
+    // border doesn't work good with absolute positioning
+    box-shadow: -3px 0px 3px -1px $gray-300;
+}
+
+input:not([type='checkbox']) {
+    min-width: 100px !important;
+}

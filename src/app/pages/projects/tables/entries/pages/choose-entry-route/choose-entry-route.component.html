@@ -1,0 +1,132 @@
+<div class="page-container">
+    <h1 *ngIf="params$ | async as params; withLoading">
+        <app-entry-name
+            [projectId]="params.projectId"
+            [tableId]="params.tableId"
+            [entryId]="params.entryId"
+        ></app-entry-name>
+    </h1>
+
+    <br />
+
+    <div class="row row-cols-1 row-cols-md-2">
+        <div class="col mb-4">
+            <a
+                [class.disabled]="permissionLevel && permissionLevel < 1"
+                class="card h-100 card-link"
+                routerLink="overview"
+            >
+                <app-icon
+                    icon="overview"
+                    [inline]="false"
+                    class="card-img-top"
+                ></app-icon>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ 'routing.entry-overview' | translate }}
+                    </h4>
+                    <p
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                        class="card-text"
+                    >
+                        {{ 'routing.entry-overview-description' | translate }}
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col mb-4">
+            <a
+                routerLink="relation-explorer"
+                [class.disabled]="
+                    !((table$ | async)?.attributes | showRelationExplorer) ||
+                    (permissionLevel && permissionLevel < 1)
+                "
+                class="card h-100 card-link"
+            >
+                <app-icon
+                    icon="relation-explorer"
+                    [inline]="false"
+                    class="card-img-top"
+                ></app-icon>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ 'routing.relation-explorer' | translate }}
+                    </h4>
+                    <p
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                        class="card-text"
+                    >
+                        {{
+                            'routing.relation-explorer-description' | translate
+                        }}
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col mb-4">
+            <a
+                [class.disabled]="permissionLevel && permissionLevel < 1"
+                class="card h-100 card-link"
+                routerLink="history"
+            >
+                <app-icon
+                    icon="history"
+                    [inline]="false"
+                    class="card-img-top"
+                ></app-icon>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ 'routing.history' | translate }}
+                    </h4>
+                    <p
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                        class="card-text"
+                    >
+                        {{ 'routing.history-description' | translate }}
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col mb-4">
+            <a
+                [class.disabled]="permissionLevel && permissionLevel < 2"
+                class="card h-100 card-link card-link-danger"
+                routerLink="edit"
+            >
+                <app-icon
+                    icon="edit"
+                    [inline]="false"
+                    class="card-img-top"
+                ></app-icon>
+                <div class="card-body">
+                    <h4 class="card-title">{{ 'routing.edit' | translate }}</h4>
+                    <p
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                        class="card-text"
+                    >
+                        {{ 'routing.edit-description' | translate }}
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

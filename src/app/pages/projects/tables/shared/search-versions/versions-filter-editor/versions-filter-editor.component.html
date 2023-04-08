@@ -1,0 +1,135 @@
+<ng-container *ngIf="filter && filtersPreferences !== undefined">
+    <!-- The outer FormGroup can not get removed -->
+    <app-filter-group
+        *ngIf="initiallyCollapseFilterGroup !== undefined"
+        [firstGroup]="true"
+        [filterGroup]="filter"
+        [table]="table"
+        [initialShowGroup]="!initiallyCollapseFilterGroup"
+        [advancedMode]="isAdvancedModeControl.value"
+        [leftHeader]="leftHeader"
+        [rightHeader]="rightHeader"
+        (filterGroupChanges)="setFilterEditable($event!)"
+    ></app-filter-group>
+    <ng-template #leftHeader let-formGroupIsShown="formGroupIsShown">
+        <div class="btn-group">
+            <div
+                class="btn-group"
+                dropdown
+                [isDisabled]="
+                    (filtersPreferences[table.id]?.length || 0) +
+                        (selectedFilterPreference ? 0 : 1) <
+                    2
+                "
+            >
+                <button
+                    dropdownToggle
+                    type="button"
+                    class="btn btn-outline-secondary dropdown-toggle"
+                    placement="left"
+                    [class.btn-outline-status-changed]="
+                        filterPreferencesState.changed$ | async
+                    "
+                >
+                    {{
+                        selectedFilterPreference?.name ||
+                            (!filtersPreferences[table.id]?.length &&
+                            currentFilter?.isDefaultFilter
+                                ? ('pages.entries.filters.all-entries'
+                                  | translate)
+                                : '???')
+                    }}
+                    <span class="caret"></span>
+                </button>
+                <div
+                    *dropdownMenu
+                    class="dropdown-menu p-0"
+                    role="menu"
+                    style="min-width: 100%"
+                >
+                    <button
+                        *ngFor="
+                            let preferenceFilter of filtersPreferences[
+                                table.id
+                            ] || [];
+                            trackBy: 'name' | trackByProperty
+                        "
+                        [attr.disabled]="
+                            preferenceFilter.name ===
+                            selectedFilterPreference?.name
+                                ? ''
+                                : null
+                        "
+                        (click)="selectFilterPreference(preferenceFilter.name)"
+                        role="menuitem"
+                        class="dropdown-item"
+                    >
+                        {{ preferenceFilter.name }}
+                    </button>
+                </div>
+            </div>
+            <ng-container *ngIf="filterPreferencesState.changed$ | async">
+                <button
+                    (click)="resetCurrentFilter()"
+                    type="button"
+                    class="btn btn-outline-status-changed"
+                >
+                    <app-icon icon="reset"></app-icon>
+                </button>
+                <button
+                    (click)="saveCurrentFilter()"
+                    type="button"
+                    class="btn btn-outline-warning"
+                >
+                    <app-icon icon="save"></app-icon>
+                </button>
+            </ng-container>
+            <button
+                *ngIf="formGroupIsShown"
+                [attr.disabled]="
+                    (filtersPreferences[table.id]?.length || 0) >=
+                        maximumNumberOfFilterPreferences ||
+                    ((filterPreferencesState.changed$ | async) === false &&
+                        selectedFilterPreference)
+                        ? ''
+                        : null
+                "
+                [appInfoTooltip]="
+                    'pages.entries.filter.maximum-filter-preferences-tooltip'
+                        | translate
+                            : {
+                                  maximumNumberOfFilterPreferences:
+                                      maximumNumberOfFilterPreferences
+                              }
+                "
+                [isDisabled]="
+                    (filtersPreferences[table.id]?.length || 0) <
+                    maximumNumberOfFilterPreferences
+                "
+                (click)="addFilterPreference()"
+                type="button"
+                class="btn btn-outline-status-new"
+            >
+                <app-icon icon="create"></app-icon>
+            </button>
+        </div>
+    </ng-template>
+    <ng-template #rightHeader let-formGroupIsShown="formGroupIsShown">
+        <app-checkbox-input
+            *ngIf="formGroupIsShown"
+            [control]="isAdvancedModeControl"
+            [showChanged]="false"
+        >
+        </app-checkbox-input>
+    </ng-template>
+    <div class="mt-3 mb-3">
+        <button
+            *ngIf="!filterIsApplied"
+            class="btn btn-warning"
+            (click)="applyFilter()"
+        >
+            <app-icon icon="search"></app-icon>
+            {{ 'pages.entries.apply-new-filters' | translate }}
+        </button>
+    </div>
+</ng-container>

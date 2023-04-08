@@ -1,0 +1,19 @@
+<ng-container *ngIf="icons | async as icons">
+    <ng-container *ngIf="icons[icon] as iconObj">
+        <svg
+            *ngIf="iconObj.path || iconObj.svg; else textIcon"
+            [class.spinning]="iconObj.spinning"
+            [attr.viewBox]="iconObj.viewbox || '2 2 22 20'"
+            [style.height]="inline ? '0.7em' : '1em'"
+            style="fill: currentColor"
+            [style.vertical-align]="inline ? 'baseline' : 'middle'"
+        >
+            <title *ngIf="showTitle">{{ icon }}</title>
+            <g *ngIf="iconObj.svg" [innerHTML]="iconObj.svg | notSanitize"></g>
+            <path *ngIf="iconObj.path as path" [attr.d]="path"></path>
+        </svg>
+        <ng-template #textIcon>
+            <span class="font-monospace">{{ iconObj.text }}</span>
+        </ng-template>
+    </ng-container>
+</ng-container>

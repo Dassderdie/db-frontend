@@ -1,0 +1,1251 @@
+[
+    {
+        "project": {
+            "id": "22bafabe-fb32-4c97-8075-3d15069a7866",
+            "authenticatedUserRole": {
+                "id": "0f15cbb7-a36d-4b73-ad0c-b9ae71563b7b",
+                "projectId": "22bafabe-fb32-4c97-8075-3d15069a7866",
+                "userId": "2fe2fa8d-eb90-41f0-a1f6-941f3c29064d",
+                "inviteUsers": true,
+                "givePermissions": true,
+                "administrator": true,
+                "creatorId": "2fe2fa8d-eb90-41f0-a1f6-941f3c29064d",
+                "createdAt": "2021-05-11T19:28:12.697Z"
+            },
+            "name": "test project v.1",
+            "description": "This project is mostly used for internal testing",
+            "allowAnonymousVersionCreation": true,
+            "createdAt": "2021-05-11T19:28:12.688Z"
+        },
+        "tables": [
+            {
+                "id": "45e730b1-ffe8-4e17-bc9a-b5e89efe8eeb",
+                "projectId": "22bafabe-fb32-4c97-8075-3d15069a7866",
+                "type": "default",
+                "displayNames": {
+                    "eng": {
+                        "singular": "Normal attributes"
+                    }
+                },
+                "descriptions": {},
+                "coordinates": {
+                    "x": 25,
+                    "y": -25
+                },
+                "attributes": [
+                    {
+                        "id": "6a1abe48-b300-4e7c-9c80-375e9dd002a5",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "ID (string)"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": true,
+                        "hidden": false,
+                        "kindOptions": {
+                            "text": false,
+                            "markdown": false,
+                            "defaultIncrementPrefix": ""
+                        },
+                        "kind": "string",
+                        "indexed": true
+                    },
+                    {
+                        "id": "27c4fe32-dac3-4513-a01c-b5ca9ec09035",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "Big markdown"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "text": true,
+                            "markdown": true
+                        },
+                        "kind": "string",
+                        "indexed": true
+                    },
+                    {
+                        "id": "6741d801-4fa9-4e78-8a23-9db76930f5d8",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "validated string"
+                            }
+                        },
+                        "descriptions": {
+                            "eng": "Has to include `a` and be between 4 and 100 letters long."
+                        },
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "text": false,
+                            "markdown": false,
+                            "pattern": "a",
+                            "minimumLength": 4,
+                            "maximumLength": 100
+                        },
+                        "kind": "string",
+                        "indexed": true
+                    },
+                    {
+                        "id": "a25cf50b-2811-4e12-abee-8db0bfa92bb8",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "Number"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "multipleOf": 1,
+                            "unit": "m",
+                            "minimum": 10,
+                            "maximum": 100
+                        },
+                        "kind": "number",
+                        "indexed": true
+                    },
+                    {
+                        "id": "e3f2cace-fa7f-4a1a-b046-331ee9b40ff9",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "bool"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {},
+                        "kind": "boolean",
+                        "indexed": true
+                    },
+                    {
+                        "id": "4b887e0f-b934-4d4c-91d6-1bbd9387d0fc",
+                        "displayNames": {
+                            "ger": {
+                                "singular": "url"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "pattern": "a",
+                            "minimumLength": 3,
+                            "maximumLength": 200
+                        },
+                        "kind": "url",
+                        "indexed": true
+                    },
+                    {
+                        "id": "8b8db763-9234-4e61-94ab-215db7724d14",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "email"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "pattern": "a"
+                        },
+                        "kind": "email",
+                        "indexed": true
+                    },
+                    {
+                        "id": "99c0deb1-ea00-4041-9421-c8bc3c0d0b0d",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "time"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "maximum": "23:37:38.000Z",
+                            "minimum": "00:36:23.700Z"
+                        },
+                        "kind": "time",
+                        "indexed": true
+                    },
+                    {
+                        "id": "5d4daf93-6bd8-4538-9336-9b4b79b5e062",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "date"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "maximum": "2021-05-26",
+                            "minimum": "2021-05-13"
+                        },
+                        "kind": "date",
+                        "indexed": true
+                    },
+                    {
+                        "id": "78de6383-8f5f-44f4-a6c1-d419a2d1415e",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "date"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "maximum": "2024-12-11T00:00:00.000Z",
+                            "minimum": "2010-05-14T00:00:00.000Z"
+                        },
+                        "kind": "date-time",
+                        "indexed": true
+                    }
+                ],
+                "allowAnonymousVersionCreation": null,
+                "intermediateTableInformation": null
+            },
+            {
+                "id": "fc83550a-086c-4b50-a9e6-40d053a18cd9",
+                "projectId": "22bafabe-fb32-4c97-8075-3d15069a7866",
+                "type": "default",
+                "displayNames": {
+                    "eng": {
+                        "singular": "Files"
+                    }
+                },
+                "descriptions": {},
+                "coordinates": {
+                    "x": 275,
+                    "y": -25
+                },
+                "attributes": [
+                    {
+                        "id": "18cce867-bb52-48ba-bc28-8a4767ca1735",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "ID"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": true,
+                        "hidden": false,
+                        "kindOptions": {
+                            "text": false,
+                            "markdown": false,
+                            "defaultIncrementPrefix": ""
+                        },
+                        "kind": "string",
+                        "indexed": true
+                    },
+                    {
+                        "id": "785c9128-ce5a-4449-bbaf-597efa775d15",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "1 File"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "allowedFileExtensions": [
+                                "jpeg",
+                                "gif",
+                                "png",
+                                "jpg"
+                            ],
+                            "fileNamePattern": "a",
+                            "maximumFileAmount": 1
+                        },
+                        "kind": "files",
+                        "indexed": true
+                    },
+                    {
+                        "id": "d1db7993-fffd-4bc4-9519-51d3d977c1a7",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "multiple files"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "maximumFileAmount": 100,
+                            "minimumFileAmount": 2,
+                            "allowedFileExtensions": null
+                        },
+                        "kind": "files",
+                        "indexed": true
+                    }
+                ],
+                "allowAnonymousVersionCreation": null,
+                "intermediateTableInformation": null
+            },
+            {
+                "id": "da0fa73e-834b-4082-831c-f08af1c7af5f",
+                "projectId": "22bafabe-fb32-4c97-8075-3d15069a7866",
+                "type": "default",
+                "displayNames": {
+                    "eng": {
+                        "singular": "Foreign 1"
+                    }
+                },
+                "descriptions": {},
+                "coordinates": {
+                    "x": -75,
+                    "y": 125
+                },
+                "attributes": [
+                    {
+                        "id": "861c5f47-78fa-4efa-b7bc-9820d5277725",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "ID"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": true,
+                        "hidden": false,
+                        "kindOptions": {
+                            "text": false,
+                            "markdown": false,
+                            "defaultIncrementPrefix": ""
+                        },
+                        "kind": "string",
+                        "indexed": true
+                    },
+                    {
+                        "id": "f7a5f867-317e-419c-bce2-3c1a6e290ac0",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "12 Single"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "relationshipMax": 1,
+                            "relationshipMin": null,
+                            "foreign": {
+                                "tableId": "41511c3e-5e01-4747-85e0-6433880e7cdb",
+                                "attributeId": "55923a69-ebde-44f0-9c31-b1d2e3cf823b",
+                                "relationshipMax": 1,
+                                "relationshipMin": null
+                            },
+                            "intermediateTableId": "908c62fb-474f-451c-91af-838b429d5c29",
+                            "intermediateAttributes": []
+                        },
+                        "kind": "foreign",
+                        "indexed": true
+                    },
+                    {
+                        "id": "18fcb5d7-ef2b-4ac7-ae5c-51e116f93f81",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "Many 12"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "relationshipMax": null,
+                            "relationshipMin": null,
+                            "foreign": {
+                                "tableId": "41511c3e-5e01-4747-85e0-6433880e7cdb",
+                                "attributeId": "7afeb6a9-609e-4854-8e3c-6dec9cae65d3",
+                                "relationshipMax": null,
+                                "relationshipMin": null
+                            },
+                            "intermediateTableId": "6779c44a-664d-4116-a224-82c081a16876",
+                            "intermediateAttributes": []
+                        },
+                        "kind": "foreign",
+                        "indexed": true
+                    },
+                    {
+                        "id": "6bc94c60-9a2a-4184-9d9e-d1b28fd7f1ce",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "Intermediate 12"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "relationshipMax": null,
+                            "relationshipMin": null,
+                            "foreign": {
+                                "tableId": "41511c3e-5e01-4747-85e0-6433880e7cdb",
+                                "attributeId": "9eabbeca-221e-4fcd-bf63-72014602ce26",
+                                "relationshipMax": null,
+                                "relationshipMin": null
+                            },
+                            "intermediateTableId": "86b4ad75-2eb0-4ee0-9884-5a14208b6f8e",
+                            "intermediateAttributes": [
+                                {
+                                    "id": "a2fce0ac-6b48-4d6f-a9d2-ce96e00f8017",
+                                    "displayNames": {
+                                        "eng": {
+                                            "singular": "ID"
+                                        }
+                                    },
+                                    "descriptions": {},
+                                    "required": true,
+                                    "unique": true,
+                                    "hidden": false,
+                                    "kindOptions": {
+                                        "text": false,
+                                        "markdown": false,
+                                        "defaultIncrementPrefix": ""
+                                    },
+                                    "kind": "string",
+                                    "indexed": true
+                                },
+                                {
+                                    "id": "3e4c4cbb-bb9a-4fed-af6f-152de4b55258",
+                                    "displayNames": {
+                                        "eng": {
+                                            "singular": "Number"
+                                        }
+                                    },
+                                    "descriptions": {},
+                                    "required": false,
+                                    "unique": false,
+                                    "hidden": false,
+                                    "kindOptions": {
+                                        "multipleOf": 1,
+                                        "unit": "kg",
+                                        "minimum": 0
+                                    },
+                                    "kind": "number",
+                                    "indexed": true
+                                }
+                            ]
+                        },
+                        "kind": "foreign",
+                        "indexed": true
+                    },
+                    {
+                        "id": "fe7fe1b4-4cb7-4925-9d26-eb79c1491cca",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "Intermediate foreign 12"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "relationshipMax": null,
+                            "relationshipMin": null,
+                            "foreign": {
+                                "tableId": "41511c3e-5e01-4747-85e0-6433880e7cdb",
+                                "attributeId": "62daf3d9-0216-4bd9-bd99-d0c873a870df",
+                                "relationshipMax": null,
+                                "relationshipMin": null
+                            },
+                            "intermediateTableId": "d0f5d426-b1c4-469f-a771-3a43dfb8c6a2",
+                            "intermediateAttributes": [
+                                {
+                                    "id": "3eee1bf1-861d-4476-bdcf-39ade29c7219",
+                                    "displayNames": {
+                                        "eng": {
+                                            "singular": "intermediate Foreign 123"
+                                        }
+                                    },
+                                    "descriptions": {},
+                                    "required": false,
+                                    "unique": false,
+                                    "hidden": false,
+                                    "kindOptions": {
+                                        "intermediateAttributes": [],
+                                        "relationshipMax": null,
+                                        "relationshipMin": null,
+                                        "foreign": {
+                                            "tableId": "0ddb6738-1931-433c-9021-8db5c5c211d8",
+                                            "attributeId": "447e05a9-d0a8-45b7-b88c-b8acb52b05c5"
+                                        },
+                                        "intermediateTableId": "c9f0dd6a-8e22-4092-aaf9-8da12d903732"
+                                    },
+                                    "kind": "foreign",
+                                    "indexed": true
+                                }
+                            ]
+                        },
+                        "kind": "foreign",
+                        "indexed": true
+                    }
+                ],
+                "allowAnonymousVersionCreation": null,
+                "intermediateTableInformation": null
+            },
+            {
+                "id": "41511c3e-5e01-4747-85e0-6433880e7cdb",
+                "projectId": "22bafabe-fb32-4c97-8075-3d15069a7866",
+                "type": "default",
+                "displayNames": {
+                    "eng": {
+                        "singular": "Foreign 2"
+                    }
+                },
+                "descriptions": {},
+                "coordinates": {
+                    "x": 225,
+                    "y": 125
+                },
+                "attributes": [
+                    {
+                        "id": "07aaf4e9-dc72-45c0-a48f-74f93eda5f2c",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "ID"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": true,
+                        "hidden": false,
+                        "kindOptions": {
+                            "text": false,
+                            "markdown": false,
+                            "defaultIncrementPrefix": ""
+                        },
+                        "kind": "string",
+                        "indexed": true
+                    },
+                    {
+                        "id": "55923a69-ebde-44f0-9c31-b1d2e3cf823b",
+                        "descriptions": {},
+                        "displayNames": {
+                            "eng": {
+                                "singular": "21 Single"
+                            }
+                        },
+                        "kind": "foreign",
+                        "kindOptions": {
+                            "relationshipMax": 1,
+                            "relationshipMin": null,
+                            "foreign": {
+                                "tableId": "da0fa73e-834b-4082-831c-f08af1c7af5f",
+                                "attributeId": "f7a5f867-317e-419c-bce2-3c1a6e290ac0",
+                                "relationshipMax": 1,
+                                "relationshipMin": null
+                            },
+                            "intermediateAttributes": [],
+                            "intermediateTableId": "908c62fb-474f-451c-91af-838b429d5c29"
+                        },
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "indexed": false
+                    },
+                    {
+                        "id": "7afeb6a9-609e-4854-8e3c-6dec9cae65d3",
+                        "descriptions": {},
+                        "displayNames": {
+                            "eng": {
+                                "singular": "Many 21"
+                            }
+                        },
+                        "kind": "foreign",
+                        "kindOptions": {
+                            "relationshipMax": null,
+                            "relationshipMin": null,
+                            "foreign": {
+                                "tableId": "da0fa73e-834b-4082-831c-f08af1c7af5f",
+                                "attributeId": "18fcb5d7-ef2b-4ac7-ae5c-51e116f93f81",
+                                "relationshipMax": null,
+                                "relationshipMin": null
+                            },
+                            "intermediateAttributes": [],
+                            "intermediateTableId": "6779c44a-664d-4116-a224-82c081a16876"
+                        },
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "indexed": false
+                    },
+                    {
+                        "id": "9eabbeca-221e-4fcd-bf63-72014602ce26",
+                        "descriptions": {},
+                        "displayNames": {
+                            "eng": {
+                                "singular": "Intermediate Foreign 21"
+                            }
+                        },
+                        "kind": "foreign",
+                        "kindOptions": {
+                            "relationshipMax": null,
+                            "relationshipMin": null,
+                            "foreign": {
+                                "tableId": "da0fa73e-834b-4082-831c-f08af1c7af5f",
+                                "attributeId": "6bc94c60-9a2a-4184-9d9e-d1b28fd7f1ce",
+                                "relationshipMax": null,
+                                "relationshipMin": null
+                            },
+                            "intermediateAttributes": [
+                                {
+                                    "id": "a2fce0ac-6b48-4d6f-a9d2-ce96e00f8017",
+                                    "displayNames": {
+                                        "eng": {
+                                            "singular": "ID"
+                                        }
+                                    },
+                                    "descriptions": {},
+                                    "required": true,
+                                    "unique": true,
+                                    "hidden": false,
+                                    "kindOptions": {
+                                        "text": false,
+                                        "markdown": false,
+                                        "defaultIncrementPrefix": ""
+                                    },
+                                    "kind": "string",
+                                    "indexed": true
+                                },
+                                {
+                                    "id": "3e4c4cbb-bb9a-4fed-af6f-152de4b55258",
+                                    "displayNames": {
+                                        "eng": {
+                                            "singular": "Number"
+                                        }
+                                    },
+                                    "descriptions": {},
+                                    "required": false,
+                                    "unique": false,
+                                    "hidden": false,
+                                    "kindOptions": {
+                                        "multipleOf": 1,
+                                        "unit": "kg",
+                                        "minimum": 0
+                                    },
+                                    "kind": "number",
+                                    "indexed": true
+                                }
+                            ],
+                            "intermediateTableId": "86b4ad75-2eb0-4ee0-9884-5a14208b6f8e"
+                        },
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "indexed": false
+                    },
+                    {
+                        "id": "62daf3d9-0216-4bd9-bd99-d0c873a870df",
+                        "descriptions": {},
+                        "displayNames": {
+                            "eng": {
+                                "singular": "Intermediate Foreign 21"
+                            }
+                        },
+                        "kind": "foreign",
+                        "kindOptions": {
+                            "relationshipMax": null,
+                            "relationshipMin": null,
+                            "foreign": {
+                                "tableId": "da0fa73e-834b-4082-831c-f08af1c7af5f",
+                                "attributeId": "fe7fe1b4-4cb7-4925-9d26-eb79c1491cca",
+                                "relationshipMax": null,
+                                "relationshipMin": null
+                            },
+                            "intermediateAttributes": [
+                                {
+                                    "id": "3eee1bf1-861d-4476-bdcf-39ade29c7219",
+                                    "displayNames": {
+                                        "eng": {
+                                            "singular": "intermediate Foreign 123"
+                                        }
+                                    },
+                                    "descriptions": {},
+                                    "required": false,
+                                    "unique": false,
+                                    "hidden": false,
+                                    "kindOptions": {
+                                        "intermediateAttributes": [],
+                                        "relationshipMax": null,
+                                        "relationshipMin": null,
+                                        "foreign": {
+                                            "tableId": "0ddb6738-1931-433c-9021-8db5c5c211d8",
+                                            "attributeId": "447e05a9-d0a8-45b7-b88c-b8acb52b05c5"
+                                        },
+                                        "intermediateTableId": "c9f0dd6a-8e22-4092-aaf9-8da12d903732",
+                                        "actions": []
+                                    },
+                                    "kind": "foreign",
+                                    "indexed": true
+                                }
+                            ],
+                            "intermediateTableId": "d0f5d426-b1c4-469f-a771-3a43dfb8c6a2"
+                        },
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "indexed": false
+                    }
+                ],
+                "allowAnonymousVersionCreation": null,
+                "intermediateTableInformation": null
+            },
+            {
+                "id": "0ddb6738-1931-433c-9021-8db5c5c211d8",
+                "projectId": "22bafabe-fb32-4c97-8075-3d15069a7866",
+                "type": "default",
+                "displayNames": {
+                    "eng": {
+                        "singular": "Foreign 3"
+                    }
+                },
+                "descriptions": {},
+                "coordinates": {
+                    "x": 75,
+                    "y": 275
+                },
+                "attributes": [
+                    {
+                        "id": "510d62cd-9d0d-4089-a61c-251749fbf411",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "ID"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": true,
+                        "hidden": false,
+                        "kindOptions": {
+                            "text": false,
+                            "markdown": false,
+                            "defaultIncrementPrefix": ""
+                        },
+                        "kind": "string",
+                        "indexed": true
+                    },
+                    {
+                        "id": "447e05a9-d0a8-45b7-b88c-b8acb52b05c5",
+                        "descriptions": {},
+                        "displayNames": {
+                            "eng": {
+                                "singular": "Intermediate Foreign 312"
+                            }
+                        },
+                        "kind": "foreign",
+                        "kindOptions": {
+                            "relationshipMax": null,
+                            "relationshipMin": null,
+                            "foreign": {
+                                "tableId": "d0f5d426-b1c4-469f-a771-3a43dfb8c6a2",
+                                "attributeId": "3eee1bf1-861d-4476-bdcf-39ade29c7219",
+                                "relationshipMax": null,
+                                "relationshipMin": null
+                            },
+                            "intermediateAttributes": [],
+                            "intermediateTableId": "c9f0dd6a-8e22-4092-aaf9-8da12d903732"
+                        },
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "indexed": false
+                    }
+                ],
+                "allowAnonymousVersionCreation": null,
+                "intermediateTableInformation": null
+            },
+            {
+                "id": "908c62fb-474f-451c-91af-838b429d5c29",
+                "projectId": "22bafabe-fb32-4c97-8075-3d15069a7866",
+                "type": "intermediate",
+                "displayNames": {},
+                "descriptions": {},
+                "coordinates": {
+                    "x": null,
+                    "y": null
+                },
+                "attributes": [
+                    {
+                        "id": "3b8abe06-b8cd-4f25-acd6-74def7755737",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "first",
+                                "plural": "first"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": false,
+                        "hidden": false,
+                        "kind": "uuid",
+                        "kindOptions": {},
+                        "indexed": true
+                    },
+                    {
+                        "id": "1038ea5b-2e38-4918-8943-cf24a411fa96",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "second",
+                                "plural": "second"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": false,
+                        "hidden": false,
+                        "kind": "uuid",
+                        "kindOptions": {},
+                        "indexed": true
+                    }
+                ],
+                "allowAnonymousVersionCreation": true,
+                "intermediateTableInformation": {
+                    "first": {
+                        "tableId": "41511c3e-5e01-4747-85e0-6433880e7cdb",
+                        "attributeId": "55923a69-ebde-44f0-9c31-b1d2e3cf823b",
+                        "relationshipMax": 1,
+                        "relationshipMin": null
+                    },
+                    "second": {
+                        "tableId": "da0fa73e-834b-4082-831c-f08af1c7af5f",
+                        "attributeId": "f7a5f867-317e-419c-bce2-3c1a6e290ac0",
+                        "relationshipMax": 1,
+                        "relationshipMin": null
+                    }
+                }
+            },
+            {
+                "id": "6779c44a-664d-4116-a224-82c081a16876",
+                "projectId": "22bafabe-fb32-4c97-8075-3d15069a7866",
+                "type": "intermediate",
+                "displayNames": {},
+                "descriptions": {},
+                "coordinates": {
+                    "x": null,
+                    "y": null
+                },
+                "attributes": [
+                    {
+                        "id": "cc6a1d30-674c-4ebc-b2b9-c2ef55e75249",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "first",
+                                "plural": "first"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": false,
+                        "hidden": false,
+                        "kind": "uuid",
+                        "kindOptions": {},
+                        "indexed": true
+                    },
+                    {
+                        "id": "38494d1d-191e-4001-b210-1c71d9986006",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "second",
+                                "plural": "second"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": false,
+                        "hidden": false,
+                        "kind": "uuid",
+                        "kindOptions": {},
+                        "indexed": true
+                    }
+                ],
+                "allowAnonymousVersionCreation": true,
+                "intermediateTableInformation": {
+                    "first": {
+                        "tableId": "da0fa73e-834b-4082-831c-f08af1c7af5f",
+                        "attributeId": "18fcb5d7-ef2b-4ac7-ae5c-51e116f93f81",
+                        "relationshipMax": null,
+                        "relationshipMin": null
+                    },
+                    "second": {
+                        "tableId": "41511c3e-5e01-4747-85e0-6433880e7cdb",
+                        "attributeId": "7afeb6a9-609e-4854-8e3c-6dec9cae65d3",
+                        "relationshipMax": null,
+                        "relationshipMin": null
+                    }
+                }
+            },
+            {
+                "id": "86b4ad75-2eb0-4ee0-9884-5a14208b6f8e",
+                "projectId": "22bafabe-fb32-4c97-8075-3d15069a7866",
+                "type": "intermediate",
+                "displayNames": {},
+                "descriptions": {},
+                "coordinates": {
+                    "x": null,
+                    "y": null
+                },
+                "attributes": [
+                    {
+                        "id": "a2fce0ac-6b48-4d6f-a9d2-ce96e00f8017",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "ID"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": true,
+                        "hidden": false,
+                        "kindOptions": {
+                            "text": false,
+                            "markdown": false,
+                            "defaultIncrementPrefix": ""
+                        },
+                        "kind": "string",
+                        "indexed": true
+                    },
+                    {
+                        "id": "3e4c4cbb-bb9a-4fed-af6f-152de4b55258",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "Number"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "multipleOf": 1,
+                            "unit": "kg",
+                            "minimum": 0
+                        },
+                        "kind": "number",
+                        "indexed": true
+                    },
+                    {
+                        "id": "17a5c0cb-29fa-49bf-815d-1a836ca1e08b",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "first",
+                                "plural": "first"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": false,
+                        "hidden": false,
+                        "kind": "uuid",
+                        "kindOptions": {},
+                        "indexed": true
+                    },
+                    {
+                        "id": "dee73a04-695a-4566-8093-6373f29f19d1",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "second",
+                                "plural": "second"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": false,
+                        "hidden": false,
+                        "kind": "uuid",
+                        "kindOptions": {},
+                        "indexed": true
+                    }
+                ],
+                "allowAnonymousVersionCreation": true,
+                "intermediateTableInformation": {
+                    "first": {
+                        "tableId": "da0fa73e-834b-4082-831c-f08af1c7af5f",
+                        "attributeId": "6bc94c60-9a2a-4184-9d9e-d1b28fd7f1ce",
+                        "relationshipMax": null,
+                        "relationshipMin": null
+                    },
+                    "second": {
+                        "tableId": "41511c3e-5e01-4747-85e0-6433880e7cdb",
+                        "attributeId": "9eabbeca-221e-4fcd-bf63-72014602ce26",
+                        "relationshipMax": null,
+                        "relationshipMin": null
+                    }
+                }
+            },
+            {
+                "id": "c9f0dd6a-8e22-4092-aaf9-8da12d903732",
+                "projectId": "22bafabe-fb32-4c97-8075-3d15069a7866",
+                "type": "intermediate",
+                "displayNames": {},
+                "descriptions": {},
+                "coordinates": {
+                    "x": null,
+                    "y": null
+                },
+                "attributes": [
+                    {
+                        "id": "07d15358-b5cc-4ca8-95eb-f4324729024f",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "first",
+                                "plural": "first"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": false,
+                        "hidden": false,
+                        "kind": "uuid",
+                        "kindOptions": {},
+                        "indexed": true
+                    },
+                    {
+                        "id": "31fdf83a-1eba-49f8-9fa4-02f2af3d078f",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "second",
+                                "plural": "second"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": false,
+                        "hidden": false,
+                        "kind": "uuid",
+                        "kindOptions": {},
+                        "indexed": true
+                    }
+                ],
+                "allowAnonymousVersionCreation": true,
+                "intermediateTableInformation": {
+                    "first": {
+                        "tableId": "d0f5d426-b1c4-469f-a771-3a43dfb8c6a2",
+                        "attributeId": "3eee1bf1-861d-4476-bdcf-39ade29c7219",
+                        "relationshipMax": null,
+                        "relationshipMin": null
+                    },
+                    "second": {
+                        "tableId": "0ddb6738-1931-433c-9021-8db5c5c211d8",
+                        "attributeId": "447e05a9-d0a8-45b7-b88c-b8acb52b05c5",
+                        "relationshipMax": null,
+                        "relationshipMin": null
+                    }
+                }
+            },
+            {
+                "id": "d0f5d426-b1c4-469f-a771-3a43dfb8c6a2",
+                "projectId": "22bafabe-fb32-4c97-8075-3d15069a7866",
+                "type": "intermediate",
+                "displayNames": {},
+                "descriptions": {},
+                "coordinates": {
+                    "x": null,
+                    "y": null
+                },
+                "attributes": [
+                    {
+                        "id": "3eee1bf1-861d-4476-bdcf-39ade29c7219",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "intermediate Foreign 123"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "relationshipMax": null,
+                            "relationshipMin": null,
+                            "foreign": {
+                                "tableId": "0ddb6738-1931-433c-9021-8db5c5c211d8",
+                                "attributeId": "447e05a9-d0a8-45b7-b88c-b8acb52b05c5",
+                                "relationshipMax": null,
+                                "relationshipMin": null
+                            },
+                            "intermediateTableId": "c9f0dd6a-8e22-4092-aaf9-8da12d903732",
+                            "intermediateAttributes": []
+                        },
+                        "kind": "foreign",
+                        "indexed": true
+                    },
+                    {
+                        "id": "8aabdbd4-e2dd-49d4-8ab8-976e439ca787",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "first",
+                                "plural": "first"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": false,
+                        "hidden": false,
+                        "kind": "uuid",
+                        "kindOptions": {},
+                        "indexed": true
+                    },
+                    {
+                        "id": "46a5ac60-756f-4ccb-b47d-2394c9b04ac5",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "second",
+                                "plural": "second"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": false,
+                        "hidden": false,
+                        "kind": "uuid",
+                        "kindOptions": {},
+                        "indexed": true
+                    }
+                ],
+                "allowAnonymousVersionCreation": true,
+                "intermediateTableInformation": {
+                    "first": {
+                        "tableId": "41511c3e-5e01-4747-85e0-6433880e7cdb",
+                        "attributeId": "62daf3d9-0216-4bd9-bd99-d0c873a870df",
+                        "relationshipMax": null,
+                        "relationshipMin": null
+                    },
+                    "second": {
+                        "tableId": "da0fa73e-834b-4082-831c-f08af1c7af5f",
+                        "attributeId": "fe7fe1b4-4cb7-4925-9d26-eb79c1491cca",
+                        "relationshipMax": null,
+                        "relationshipMin": null
+                    }
+                }
+            },
+            {
+                "id": "ec850a8d-d7f2-49b1-bfa8-37d819543bc3",
+                "projectId": "22bafabe-fb32-4c97-8075-3d15069a7866",
+                "type": "default",
+                "displayNames": {
+                    "eng": {
+                        "singular": "Hidden"
+                    }
+                },
+                "descriptions": {},
+                "coordinates": {
+                    "x": -125,
+                    "y": 275
+                },
+                "attributes": [
+                    {
+                        "id": "32a97a98-e18a-4dc0-9ca5-17b52995498b",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "ID"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": true,
+                        "unique": true,
+                        "hidden": false,
+                        "kindOptions": {
+                            "text": false,
+                            "markdown": false,
+                            "defaultIncrementPrefix": ""
+                        },
+                        "kind": "string",
+                        "indexed": true
+                    },
+                    {
+                        "id": "b65f7e1f-514b-4972-a2f7-33571b8a7a70",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "Hidden number"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": true,
+                        "kindOptions": {
+                            "multipleOf": 1
+                        },
+                        "kind": "number",
+                        "indexed": true
+                    },
+                    {
+                        "id": "38c593db-b598-43e7-963a-501140bcbb38",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "Not hidden number"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {
+                            "multipleOf": 1
+                        },
+                        "kind": "number",
+                        "indexed": true
+                    },
+                    {
+                        "id": "3efbb6a0-9c2e-4de5-acec-544e9a79a321",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "Hidden boolean"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": true,
+                        "kindOptions": {},
+                        "kind": "boolean",
+                        "indexed": true
+                    },
+                    {
+                        "id": "8e5e0303-5824-46e7-8553-4240cce4b504",
+                        "displayNames": {
+                            "eng": {
+                                "singular": "Not hidden boolean"
+                            }
+                        },
+                        "descriptions": {},
+                        "required": false,
+                        "unique": false,
+                        "hidden": false,
+                        "kindOptions": {},
+                        "kind": "boolean",
+                        "indexed": true
+                    }
+                ],
+                "allowAnonymousVersionCreation": null,
+                "intermediateTableInformation": null
+            }
+        ]
+    }
+]

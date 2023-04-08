@@ -1,0 +1,118 @@
+<div class="page-container">
+    <ng-container *ngIf="versions$ | async as versions; withLoading">
+        <div #versionsListElement *ngIf="project && table && versions[0]">
+            <div class="row">
+                <h2 class="col">
+                    <app-entry-name
+                        [newestVersion]="versions[0]"
+                        [table]="table"
+                    ></app-entry-name>
+                </h2>
+                <app-show-hidden-attributes-input
+                    [attributes]="table.attributes"
+                    (showHiddenChanges)="showHidden = $event"
+                    class="col-auto align-self-center"
+                ></app-show-hidden-attributes-input>
+            </div>
+
+            <!-- TODO: change *ngFor to *cdkVirtualFor (currently index not working) -->
+            <div
+                *ngFor="
+                    let version of versions;
+                    trackBy: 'id' | trackByProperty;
+                    let index = index;
+                    let first = first;
+                    let last = last
+                "
+                [appIsVisible]="isVisible[version.id] ? undefined : null"
+                (isVisibleChanges)="
+                    isVisible[version.id] = !!($event || isVisible[version.id])
+                "
+                class="card mb-4"
+            >
+                <div
+                    class="card-header"
+                    [class.text-status-deleted]="version.deleted"
+                    [class.text-status-new]="
+                        version.createdAt === version.entryCreatedAt
+                    "
+                >
+                    <div class="row">
+                        <h4 class="col-md-auto mb-0">
+                            <app-icon icon="history"></app-icon>
+                            <app-display-date
+                                [date]="version.createdAt"
+                                [options]="{
+                                    relative: false,
+                                    format: 'dateTime'
+                                }"
+                            ></app-display-date>
+                            <small
+                                *ngIf="version.creatorId !== anonymousUserId"
+                                class="text-muted align-self-end"
+                            >
+                                {{ 'pages.entries.history.by' | translate }}
+                                <app-member-name
+                                    [projectId]="version.projectId"
+                                    [userId]="version.creatorId"
+                                ></app-member-name>
+                            </small>
+                        </h4>
+                        <div class="col">
+                            <span class="float-end ms-2">
+                                <!-- TODO: make responsive  -->
+                                <app-anonymous-button
+                                    *ngIf="!first && !version.deleted"
+                                    [allowAnonymous]="
+                                        table.allowAnonymousVersionCreation ===
+                                        null
+                                            ? project.allowAnonymousVersionCreation
+                                            : table.allowAnonymousVersionCreation
+                                    "
+                                    [appInfoTooltip]="
+                                        'pages.entries.history.restore.body'
+                                            | translate
+                                    "
+                                    [icons]="['restore']"
+                                    [disabled]="
+                                        !versions[0].deleted &&
+                                        !(
+                                            versions[0]
+                                            | versionHasChanges: version
+                                        )
+                                    "
+                                    [small]="true"
+                                    [newEvent$]="versionRestoring"
+                                    (anonymousClick)="restore(version, $event)"
+                                    class="revert-button"
+                                >
+                                    {{
+                                        'pages.entries.history.restore.name'
+                                            | translate
+                                    }}
+                                </app-anonymous-button>
+                                <app-icon
+                                    *ngIf="version.deleted"
+                                    icon="delete"
+                                    class="h4"
+                                ></app-icon>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!version.deleted" class="card-body p-0">
+                    <app-version-changes
+                        *ngIf="isVisible[version.id]; withLoading"
+                        [attributes]="table.attributes"
+                        [currentVersion]="version"
+                        [oldVersion]="!last ? versions[index + 1] : undefined"
+                        [showHidden]="showHidden"
+                    ></app-version-changes>
+                </div>
+            </div>
+            <ng-container
+                *ngIf="(allElementsLoaded$ | async) === true; withLoading"
+            ></ng-container>
+        </div>
+    </ng-container>
+</div>

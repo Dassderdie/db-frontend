@@ -1,0 +1,38 @@
+<ng-container *ngIf="filteredChangelogs.length > 0">
+    <h1>
+        <app-icon icon="changelog"></app-icon>
+        {{ 'routing.changelog' | translate }}
+    </h1>
+    <div
+        *ngFor="
+            let changelog of filteredChangelogs;
+            trackBy: 'version' | trackByProperty
+        "
+        class="card mb-3"
+    >
+        <div class="card-header">
+            <h4 class="col-md-auto mb-0">
+                <app-icon icon="history"></app-icon>
+                {{ changelog.version }}
+                <app-display-date
+                    class="small text-muted"
+                    [date]="changelog.releaseDate"
+                    [options]="{ relative: false, format: 'longDate' }"
+                ></app-display-date>
+            </h4>
+        </div>
+        <div
+            *ngIf="changelog.htmlContent as htmlContent"
+            class="card-body"
+            [innerHTML]="htmlContent"
+        ></div>
+    </div>
+
+    <a
+        *ngIf="showChangelogLink"
+        routerLink="/help/changelog"
+        routerLinkActive="active"
+    >
+        {{ 'display-changelog.show-complete-changelog' | translate }}
+    </a>
+</ng-container>

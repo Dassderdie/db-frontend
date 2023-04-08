@@ -1,0 +1,60 @@
+<ng-container *ngIf="breadcrumbsService.breadcrumbs$ | async as breadcrumbs">
+    <div *ngIf="breadcrumbs.length > 1" class="row p-0">
+        <nav class="col">
+            <ol class="breadcrumb bg-light rounded-3 p-2">
+                <li
+                    *ngFor="
+                        let crumb of breadcrumbs;
+                        let last = last;
+                        trackBy: 'path' | trackByProperty
+                    "
+                    class="breadcrumb-item"
+                >
+                    <a
+                        [routerLink]="crumb.path"
+                        class="breadcrumb-item d-inline"
+                        [class.active]="last"
+                        [tabIndex]="last ? -1 : 0"
+                    >
+                        <app-icon
+                            *ngIf="crumb.icon"
+                            [icon]="crumb.icon"
+                        ></app-icon>
+                        <ng-container
+                            *ngIf="
+                                crumb.translate &&
+                                (last ||
+                                    (breakpoints.xs
+                                        | responsiveBreakpointExceeded
+                                        | async))
+                            "
+                        >
+                            {{ crumb.translate | translate }}
+                        </ng-container>
+                        <ng-container *ngIf="crumb.value$ as value$">
+                            {{ value$ | async }}
+                        </ng-container>
+                    </a>
+                </li>
+            </ol>
+        </nav>
+        <div class="col-auto">
+            <button
+                (click)="syncCache()"
+                [disabled]="synchronizing$ | async"
+                class="btn btn-primary"
+                style="height: 42px; width: 42px"
+                [title]="'breadcrumbs.syncButton' | translate"
+            >
+                <app-icon
+                    [icon]="
+                        (synchronizing$ | async)
+                            ? 'synchronizing'
+                            : 'synchronize'
+                    "
+                    [inline]="false"
+                ></app-icon>
+            </button>
+        </div>
+    </div>
+</ng-container>

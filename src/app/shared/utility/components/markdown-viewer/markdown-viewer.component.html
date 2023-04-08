@@ -1,0 +1,13 @@
+<app-show-more
+    *ngIf="overflow === 'showMore'; else staticOverflow"
+    [defaultHeight]="maxHeight"
+>
+    <div #viewerWrapper></div>
+</app-show-more>
+<ng-template #staticOverflow>
+    <div
+        #viewerWrapper
+        [style.max-height]="maxHeight"
+        [style.overflow]="overflow"
+    ></div>
+</ng-template>

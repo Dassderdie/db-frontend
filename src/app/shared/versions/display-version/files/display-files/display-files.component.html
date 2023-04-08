@@ -1,0 +1,84 @@
+<!-- all the already present files -->
+<ng-container *ngIf="!small; else compactDisplayFiles">
+    <div
+        *ngIf="value && displayFilesKeys.length > 0; else empty"
+        style="max-height: 400px; overflow-y: auto; margin: -0.3rem"
+    >
+        <table class="table table-sm m-0">
+            <thead class="bg-light">
+                <tr>
+                    <th>
+                        {{ 'files.name' | translate }}
+                        <app-file-sort-btn
+                            key="name"
+                            [sortKey]="sortObject.key"
+                            [sortOrder]="sortObject.order"
+                            (click)="toggleSortBy('name')"
+                        ></app-file-sort-btn>
+                    </th>
+                    <th class="fit">
+                        {{ 'files.size' | translate }}
+                        <app-file-sort-btn
+                            key="size"
+                            [sortKey]="sortObject.key"
+                            [sortOrder]="sortObject.order"
+                            (click)="toggleSortBy('size')"
+                        ></app-file-sort-btn>
+                    </th>
+                    <th class="pe-0 ps-0 text-center">
+                        {{ 'files.actions' | translate }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="
+                        let fileName of displayFilesKeys;
+                        trackBy: null | trackByProperty
+                    "
+                >
+                    <td>
+                        <app-file-name [fileName]="fileName"></app-file-name>
+                    </td>
+                    <td>
+                        <span
+                            class="float-end"
+                            style="padding-right: calc(100% - 100px)"
+                        >
+                            {{
+                                value[fileName]!.blobInformation.rawSize
+                                    | prettySizePipe
+                                    | async
+                            }}
+                        </span>
+                    </td>
+                    <td class="fit p-0 bg-light" style="max-width: min-content">
+                        <app-file-buttons
+                            (preview)="previewFile(fileName)"
+                            (download)="downloadFile(fileName)"
+                        ></app-file-buttons>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <ng-template #empty>
+        <span class="text-muted">
+            {{ 'files.empty' | translate }}
+        </span>
+    </ng-template>
+</ng-container>
+
+<ng-template #compactDisplayFiles>
+    <ng-container
+        *ngFor="
+            let fileName of displayFilesKeys | slice: 0:3;
+            trackBy: null | trackByProperty;
+            let last = last
+        "
+    >
+        <app-file-name [fileName]="fileName"></app-file-name
+        ><ng-container *ngIf="!last">, </ng-container>
+    </ng-container>
+    <ng-container *ngIf="displayFilesKeys.length > 3">...</ng-container>
+</ng-template>

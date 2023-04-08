@@ -1,0 +1,95 @@
+<div
+    [class.border-status-invalid]="showValidation && (control.invalid$ | async)"
+    [class.border-status-warning]="
+        showValidation && (control.hasWarning$ | async)
+    "
+    [class.border-status-changed]="showChanged && (control.changed$ | async)"
+    (focus)="control.setTouched(true)"
+    class="card"
+>
+    <div class="card-header row m-0 p-0" style="background-color: #e9ecef">
+        <div
+            [appDescriptionTooltip]="descriptionTemplate"
+            [description]="control.description"
+            class="col-auto align-middle mb-auto mt-auto"
+        >
+            <app-icon icon="list-input"></app-icon>
+            {{ control.displayName | translate }}
+            <span *ngIf="control.required" class="required">*</span>
+        </div>
+        <div class="col pe-0">
+            <app-string-input
+                [control]="addItemInput"
+                [autofocus]="autofocus"
+                [showChanged]="false"
+                [appendTemplate]="appendTemplate"
+                (keyup.enter)="addItem()"
+            ></app-string-input>
+            <ng-template #appendTemplate>
+                <button
+                    type="button"
+                    class="input-group-text btn btn-outline-primary"
+                    (click)="addItem()"
+                    [attr.disabled]="canAddItem ? '' : null"
+                >
+                    <app-icon icon="create"></app-icon>
+                    <ng-container
+                        *ngIf="
+                            breakpoints.md
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                    >
+                        {{ 'custom-forms.add-item' | translate }}
+                    </ng-container>
+                </button>
+            </ng-template>
+        </div>
+    </div>
+    <ng-container *ngIf="filteredItems$ | async as items; else nullValue">
+        <ul
+            *ngIf="items.length > 0; else noItems"
+            class="list-group"
+            style="max-height: 200px; overflow: auto"
+        >
+            <li
+                *ngFor="
+                    let item of items;
+                    let index = index;
+                    trackBy: null | trackByProperty
+                "
+                class="list-group-item pt-0 pb-0"
+                [class.text-muted]="!item.highlight"
+            >
+                {{ item.value }}
+                <button
+                    *ngIf="
+                        !control.minItems ||
+                        !items ||
+                        control.minItems <= items.length
+                    "
+                    class="btn link-danger pt-0 pb-0"
+                    (click)="removeItem(index)"
+                    [attr.disabled]="(control.disabled$ | async) ? '' : null"
+                >
+                    <app-icon icon="close"></app-icon>
+                </button>
+            </li>
+        </ul>
+        <ng-template #noItems>
+            <div class="text-center text-muted mb-2 mt-2">
+                {{ 'custom-forms.no-results' | translate }}
+            </div>
+        </ng-template>
+    </ng-container>
+    <ng-template #nullValue>
+        <div class="text-center text-muted mb-2 mt-2">
+            {{ control.emptyMessage | translate }}
+        </div>
+    </ng-template>
+</div>
+<app-validation *ngIf="showValidation" [state]="control"></app-validation>
+
+<ng-template #descriptionTemplate>
+    <app-description [description]="control.description"></app-description>
+</ng-template>

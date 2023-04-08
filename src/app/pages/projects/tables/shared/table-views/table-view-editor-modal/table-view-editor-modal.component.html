@@ -1,0 +1,64 @@
+<div class="modal-header">
+    <h5 class="modal-title">
+        {{
+            'pages.tables.table-views.table-views-editor-modal.title'
+                | translate
+        }}
+        <small *ngIf="tableViews && !tableViews[tableId]" class="text-muted">
+            {{
+                'pages.tables.table-views.table-views-editor-modal.default-order-subtitle'
+                    | translate
+            }}
+        </small>
+    </h5>
+    <button
+        type="button"
+        class="btn-close"
+        (click)="bsModalRef.hide()"
+    ></button>
+</div>
+<div class="modal-body">
+    <app-table-view-editor
+        *ngIf="initialTableView && table; withLoading"
+        [parentState]="tableViewEditorModalState"
+        [initialTableView]="initialTableView"
+        [attributes]="table.attributes"
+        (tableViewChanges)="tableView = $event"
+    >
+    </app-table-view-editor>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">
+        {{
+            'pages.tables.table-views.table-views-editor-modal.discard'
+                | translate
+        }}
+    </button>
+    <app-loading-button
+        *ngIf="tableViews && tableViews[tableId]"
+        type="primary"
+        [icons]="['reset']"
+        [newEvent]="updatingTableViews"
+        (click)="removeTableView()"
+    >
+        {{
+            'pages.tables.table-views.table-views-editor-modal.use-default-order'
+                | translate
+        }}
+    </app-loading-button>
+    <app-loading-button
+        type="warning"
+        [disabled]="
+            (tableViewEditorModalState.delayedChanged$ | async) === false ||
+            (tableViewEditorModalState.delayedInvalid$ | async)
+        "
+        [icons]="['save']"
+        [newEvent]="updatingTableViews"
+        (click)="saveTableView()"
+        (keyup.enter)="saveTableView()"
+    >
+        {{
+            'pages.tables.table-views.table-views-editor-modal.save' | translate
+        }}
+    </app-loading-button>
+</div>

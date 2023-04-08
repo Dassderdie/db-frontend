@@ -1,0 +1,147 @@
+<table class="table table-bordered table-sm mb-0">
+    <thead>
+        <tr (click)="toggleShowUnchanged()" [class.pointer]="!allChanged">
+            <th class="dark fit">
+                <span
+                    [appInfoTooltip]="
+                        'pages.entries.history.showAll' | translate
+                    "
+                    [isDisabled]="allChanged"
+                    class="pe-1 ps-1"
+                >
+                    <app-collapse-indicator
+                        *ngIf="!allChanged"
+                        [isExpanded]="showUnchanged"
+                    ></app-collapse-indicator>
+                    {{ 'table.attribute' | translate }}
+                </span>
+            </th>
+            <th *ngIf="oldVersion" class="light text-muted font-italic">
+                {{ 'pages.entries.history.oldValue' | translate }}
+            </th>
+            <th>
+                {{
+                    (oldVersion
+                        ? 'pages.entries.history.newValue'
+                        : 'pages.entries.history.startValue'
+                    ) | translate
+                }}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container
+            *ngFor="
+                let row of rows;
+                let index = index;
+                trackBy: 'attribute.id' | trackByProperty
+            "
+        >
+            <!-- TODO: why `row.attribute.kind === 'foreign'`? -->
+            <tr
+                *ngIf="
+                    (showUnchanged || row.status !== 'unchanged') &&
+                    (showHidden ||
+                        !row.attribute.hidden ||
+                        row.status === 'new' ||
+                        row.attribute.kind === 'foreign')
+                "
+            >
+                <th class="dark fit">
+                    <app-attribute-name
+                        [attribute]="row.attribute"
+                        [displayKind]="false"
+                    ></app-attribute-name>
+                </th>
+                <td
+                    *ngIf="row.attribute.kind === 'files'; else otherChanges"
+                    class="light p-0"
+                    colspan="2"
+                >
+                    <app-files-changes
+                        [attribute]="row.attribute"
+                        [currentFiles]="
+                            $any(currentVersion.values[row.attribute.id]!)
+                        "
+                        [oldFiles]="$any(oldVersion)?.values[row.attribute.id]"
+                        [showUnchanged]="showUnchanged"
+                        [projectId]="currentVersion.projectId"
+                    >
+                    </app-files-changes>
+                </td>
+                <ng-template #otherChanges>
+                    <ng-container
+                        *ngIf="
+                            row.attribute.kind !== 'foreign' ||
+                                (row.attribute | isForeignSingleAttribute);
+                            else foreignManyChanges
+                        "
+                    >
+                        <!-- "normal" attributes -->
+                        <td
+                            *ngIf="row.status !== 'unchanged' && oldVersion"
+                            class="light text-muted font-italic"
+                        >
+                            <app-icon
+                                *ngIf="row.status === 'deleted'"
+                                icon="delete"
+                                class="text-status-deleted"
+                            ></app-icon>
+                            <app-icon
+                                *ngIf="row.status === 'changed'"
+                                icon="edit"
+                                class="text-status-changed"
+                            ></app-icon>
+                            <app-attribute-value
+                                *ngIf="row.status !== 'new'"
+                                [attribute]="row.attribute"
+                                [version]="oldVersion"
+                                [showHidden]="showHidden"
+                            ></app-attribute-value>
+                        </td>
+                        <td
+                            class="light"
+                            [class.text-center]="row.status === 'unchanged'"
+                            [colSpan]="row.status === 'unchanged' ? 2 : 1"
+                        >
+                            <app-icon
+                                *ngIf="row.status === 'new'"
+                                icon="create"
+                                class="text-status-new"
+                            ></app-icon>
+                            <app-icon
+                                *ngIf="row.status === 'changed'"
+                                icon="edit"
+                                class="text-status-changed"
+                            ></app-icon>
+                            <app-attribute-value
+                                *ngIf="row.status !== 'deleted'"
+                                [attribute]="row.attribute"
+                                [version]="currentVersion"
+                                [showHidden]="showHidden"
+                            ></app-attribute-value>
+                        </td>
+                    </ng-container>
+                    <ng-template #foreignManyChanges>
+                        <td class="light p-0" colspan="2">
+                            <!-- TODO: types: remove type assertions because of missing type narrowing of union types and in else -->
+                            <app-foreign-changes
+                                *ngIf="currentVersion.updateId || showUnchanged"
+                                [showUnchanged]="showUnchanged"
+                                [attribute]="$any(row.attribute)"
+                                [version]="currentVersion"
+                                [showHidden]="showHidden"
+                                (rowStatus)="
+                                    updateForeignAttributeStatus(
+                                        row.attribute,
+                                        $event
+                                    )
+                                "
+                            ></app-foreign-changes>
+                        </td>
+                    </ng-template>
+                </ng-template>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>

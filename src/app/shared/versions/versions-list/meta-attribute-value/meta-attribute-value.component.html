@@ -1,0 +1,58 @@
+<ng-container [ngSwitch]="key">
+    <ng-container *ngSwitchCase="'deleted'">
+        <ng-container *ngIf="entry[key]; else falseValue">
+            <app-icon
+                icon="true"
+                class="ms-1"
+                style="font-size: small"
+            ></app-icon>
+            {{ 'boolean.true' | translate }}
+        </ng-container>
+        <ng-template #falseValue>
+            <ng-container *ngIf="entry[key] === false">
+                <app-icon
+                    icon="false"
+                    class="ms-1"
+                    style="font-size: small"
+                ></app-icon>
+                {{ 'boolean.false' | translate }}
+            </ng-container>
+        </ng-template>
+    </ng-container>
+    <ng-container *ngSwitchCase="'entryCreatedAt'">
+        <app-display-date
+            *ngIf="entry[key]"
+            [date]="$any(entry[key])"
+            [options]="{ relative: false, format: 'dateTime' }"
+        ></app-display-date>
+    </ng-container>
+    <ng-container *ngSwitchCase="'createdAt'">
+        <app-display-date
+            *ngIf="entry[key]"
+            [date]="$any(entry[key])"
+            [options]="{ relative: false, format: 'dateTime' }"
+        ></app-display-date>
+    </ng-container>
+    <ng-container *ngSwitchCase="'invalidatedAt'">
+        <app-display-date
+            *ngIf="entry[key]"
+            [date]="$any(entry[key])"
+            [options]="{ relative: false, format: 'dateTime' }"
+        ></app-display-date>
+    </ng-container>
+    <app-member-name
+        *ngSwitchCase="'creatorId'"
+        [projectId]="entry.projectId"
+        [userId]="entry.creatorId"
+    ></app-member-name>
+    <ng-container *ngSwitchCase="'invalidatorId'">
+        <app-member-name
+            *ngIf="entry.invalidatorId"
+            [projectId]="entry.projectId"
+            [userId]="entry.invalidatorId"
+        ></app-member-name>
+    </ng-container>
+    <i *ngSwitchDefault class="text-status-invalid">
+        Error: unknown meta-attribute type {{ key }}
+    </i>
+</ng-container>

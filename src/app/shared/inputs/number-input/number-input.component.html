@@ -1,0 +1,32 @@
+<div
+    class="input-group"
+    [appDescriptionTooltip]="descriptionTemplate"
+    [description]="control.description"
+    (focus)="control.setTouched(true)"
+>
+    <ng-container *ngTemplateOutlet="prependTemplate"></ng-container>
+    <input
+        type="number"
+        class="form-control"
+        [title]="
+            (control.value$ | async) === null
+                ? null
+                : (control.value! | numberFormat | async)
+        "
+        [class.is-invalid]="showValidation && (control.invalid$ | async)"
+        [class.has-warning]="showValidation && (control.hasWarning$ | async)"
+        [class.is-changed]="showChanged && (control.changed$ | async)"
+        [attr.disabled]="(control.disabled$ | async) ? '' : null"
+        [step]="control.multipleOf"
+        [appInputControl]="control"
+        [id]="control.name"
+        [placeholder]="control.placeholder | translate"
+        [appAutoFocus]="autofocus"
+    />
+    <ng-container *ngTemplateOutlet="appendTemplate"></ng-container>
+</div>
+<app-validation *ngIf="showValidation" [state]="control"></app-validation>
+
+<ng-template #descriptionTemplate>
+    <app-description [description]="control.description"></app-description>
+</ng-template>

@@ -1,0 +1,14 @@
+[
+    {
+        "id": "general",
+        "name": "General",
+        "questions": [
+            {
+                "id": "onlyOneQuestion",
+                "question": "Why is there only one question here?",
+                "answer": "We haven't translated the frequently asked questions to English yet. You can change the language to German to see more questions.",
+                "keywords": []
+            }
+        ]
+    }
+]

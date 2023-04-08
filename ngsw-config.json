@@ -1,0 +1,13 @@
+{
+    "index": "/index.html",
+    "assetGroups": [
+        {
+            "name": "app",
+            "installMode": "lazy",
+            "resources": {
+                "files": ["/*.js", "!/*-es5*.js"],
+                "urls": []
+            }
+        }
+    ]
+}

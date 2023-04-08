@@ -1,0 +1,53 @@
+kind: pipeline
+name: default
+
+steps:
+    - name: fetch-lfs
+      image: alpine
+      commands:
+          - apk add git-lfs
+          - git-lfs install
+          - git-lfs pull
+    - name: audit
+      image: alpine
+      environment:
+          NPM_AUDIT_TO_ISSUE:
+              from_secret: NPM_AUDIT_TO_ISSUE
+      commands:
+          - apk add nodejs npm
+          - npm config set unsafe-perm true
+          - npm install --global npm-audit-to-issue
+          - npm-audit-to-issue
+    - name: build
+      image: alpine
+      commands:
+          - apk add git nodejs npm
+          - npm ci
+          - npm run build
+    - name: docker-experimental
+      image: plugins/docker
+      settings:
+          dockerfile: Dockerfile-drone
+          registry: docker-registry.koppadb.com
+          force_tag: true
+          username:
+              from_secret: DOCKER_USERNAME
+          password:
+              from_secret: DOCKER_PASSWORD
+          repo: docker-registry.koppadb.com/koppadb/db-frontend
+    - name: docker-auto-tag
+      image: plugins/docker
+      settings:
+          auto_tag: true
+          force_tag: true
+          dockerfile: Dockerfile-drone
+          registry: docker-registry.koppadb.com
+          username:
+              from_secret: DOCKER_USERNAME
+          password:
+              from_secret: DOCKER_PASSWORD
+          repo: docker-registry.koppadb.com/koppadb/db-frontend
+
+trigger:
+    branch:
+        - master

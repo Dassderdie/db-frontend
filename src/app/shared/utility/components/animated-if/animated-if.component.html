@@ -1,0 +1,13 @@
+<div
+    #collapseElement
+    [@expandCollapse]="(isCollapsedE$ | async) ? 'collapsed' : 'expanded'"
+>
+    <!--
+        ng-content does not work, because the components are already initialised
+        (even though not rendered) independent of wether <ng-content></ng-content> is in the dom
+    -->
+    <ng-container
+        *ngIf="isInDomE$ | async"
+        [ngTemplateOutlet]="contentRef"
+    ></ng-container>
+</div>

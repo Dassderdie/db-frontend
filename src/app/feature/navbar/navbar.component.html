@@ -1,0 +1,150 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="page-container">
+        <a class="navbar-brand" routerLink="/about">
+            <app-icon icon="about"></app-icon>
+        </a>
+
+        <button
+            class="navbar-toggler navbar-toggler-right"
+            type="button"
+            (click)="navbarCollapsed = !navbarCollapsed"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" [collapse]="navbarCollapsed">
+            <ul (click)="navbarCollapsed = true" class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        routerLink="/"
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                    >
+                        <app-icon icon="home"></app-icon>
+                        {{ 'routing.home' | translate }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        routerLink="/projects"
+                        routerLinkActive="active"
+                    >
+                        <app-icon icon="projects"></app-icon>
+                        {{ 'routing.projects' | translate }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        routerLink="/scanner"
+                        routerLinkActive="active"
+                    >
+                        <app-icon icon="scanner"></app-icon>
+                        {{ 'routing.scanner' | translate }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        routerLink="/help"
+                        routerLinkActive="active"
+                    >
+                        <app-icon icon="help"></app-icon>
+                        {{ 'routing.help' | translate }}
+                    </a>
+                </li>
+            </ul>
+
+            <div
+                *ngIf="
+                    authenticatedService.isAuthenticated$ | async;
+                    else notLoggedIn
+                "
+                class="btn-group"
+                dropdown
+            >
+                <button
+                    dropdownToggle
+                    type="button"
+                    class="btn dropdown-toggle"
+                    style="color: rgba(255, 255, 255, 0.5)"
+                >
+                    <app-icon icon="user"></app-icon>
+                    {{ (user$ | async)?.name }}
+                    <span class="caret"></span>
+                </button>
+                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                    <li role="menuitem">
+                        <a
+                            routerLink="your-profile"
+                            class="btn dropdown-item"
+                            routerLinkActive="disabled"
+                        >
+                            <app-icon icon="settings"></app-icon>
+                            {{ 'home.navbar.settings' | translate }}
+                        </a>
+                    </li>
+                    <!-- add if there are more than just two options -->
+                    <!-- <li class="divider dropdown-divider"></li> -->
+                    <li role="menuitem">
+                        <button
+                            (click)="logout()"
+                            class="btn dropdown-item text-danger"
+                        >
+                            <app-icon icon="logout"></app-icon>
+                            {{ 'home.navbar.logout' | translate }}
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<ng-template #notLoggedIn>
+    <button
+        *ngIf="(authenticatedService.isAuthenticated$ | async) === false"
+        (click)="openAuthModal(); navbarCollapsed = !navbarCollapsed"
+        class="btn btn-primary my-2 my-sm-0"
+    >
+        {{ 'home.navbar.authenticate' | translate }}
+    </button>
+    <ng-container [ngTemplateOutlet]="chooseLanguage"></ng-container>
+</ng-template>
+
+<ng-template #chooseLanguage>
+    <!-- to correctly display the dropdown-menu under the button (else problems with responsive navbar) -->
+    <span class="btn-group-vertical ms-2" dropdown>
+        <button
+            class="btn p-0"
+            [title]="'home.navbar.changeLanguage' | translate"
+            style="border-width: 0; overflow: hidden; border-radius: 0.25rem"
+            dropdownToggle
+        >
+            <svg
+                *ngIf="
+                    $any(languageIcons)[translateService.currentLang] ||
+                    languageIcons.eng as icon
+                "
+                height="36px"
+                [attr.viewBox]="icon.viewbox"
+                [innerHTML]="icon.svg | notSanitize"
+            ></svg>
+        </button>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+            <button
+                *ngFor="
+                    let language of languages;
+                    trackBy: 'id' | trackByProperty
+                "
+                (click)="translateService.use(language.id)"
+                class="dropdown-item"
+            >
+                <app-icon [icon]="language.id"></app-icon>
+                {{ language.translateKey | translate }}
+            </button>
+        </div>
+    </span>
+</ng-template>

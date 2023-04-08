@@ -1,0 +1,94 @@
+<h1>
+    {{ 'shared.feature.display-tutorial.title' | translate }}
+</h1>
+
+<ul class="timeline">
+    <li>
+        <h3>1. {{ 'shared.feature.display-tutorial.1.title' | translate }}</h3>
+        <p>
+            {{ 'shared.feature.display-tutorial.1.pre-button' | translate }}
+
+            <button
+                class="btn btn-link p-0 align-baseline"
+                (click)="openAuthModal('register')"
+            >
+                {{
+                    'shared.feature.display-tutorial.1.button' | translate
+                }}</button
+            >{{ 'shared.feature.display-tutorial.1.post-button' | translate }}
+            <!-- TODO: on premise doesn't care about free -->
+        </p>
+    </li>
+    <li>
+        <h3>2. {{ 'shared.feature.display-tutorial.2.title' | translate }}</h3>
+        <p>
+            {{ 'shared.feature.display-tutorial.2.description' | translate }}
+        </p>
+        <img
+            [src]="'/assets/images/projects-preview' | i18nPath: 'png' | async"
+            loading="lazy"
+            width="1120"
+            height="500"
+            class="preview-img d-none d-md-block"
+        />
+    </li>
+    <li>
+        <h3>3. {{ 'shared.feature.display-tutorial.3.title' | translate }}</h3>
+        <p>
+            {{ 'shared.feature.display-tutorial.3.description' | translate }}
+        </p>
+        <img
+            [src]="
+                '/assets/images/table-editing-preview' | i18nPath: 'png' | async
+            "
+            loading="lazy"
+            width="1125"
+            height="765"
+            class="preview-img d-none d-md-block"
+        />
+    </li>
+    <li>
+        <h3>4. {{ 'shared.feature.display-tutorial.4.title' | translate }}</h3>
+        <p>
+            {{ 'shared.feature.display-tutorial.4.description' | translate }}
+        </p>
+    </li>
+    <li>
+        <h3>5. {{ 'shared.feature.display-tutorial.5.title' | translate }}</h3>
+        <p>
+            {{ 'shared.feature.display-tutorial.5.description' | translate }}
+        </p>
+        <img
+            [src]="
+                '/assets/images/entry-creation-preview'
+                    | i18nPath: 'png'
+                    | async
+            "
+            loading="lazy"
+            width="1065"
+            height="705"
+            class="preview-img d-none d-md-block"
+        />
+    </li>
+    <li>
+        <h3>6. {{ 'shared.feature.display-tutorial.6.title' | translate }}</h3>
+        <p>
+            {{ 'shared.feature.display-tutorial.6.description' | translate }}
+        </p>
+        <img
+            [src]="'/assets/images/filter-preview' | i18nPath: 'png' | async"
+            loading="lazy"
+            width="1125"
+            height="395"
+            class="preview-img d-none d-md-block"
+        />
+    </li>
+    <li>
+        <h3>7. {{ 'shared.feature.display-tutorial.7.title' | translate }}</h3>
+        <p>
+            {{ 'shared.feature.display-tutorial.7.description' | translate }}
+        </p>
+    </li>
+</ul>
+<br />
+<br />

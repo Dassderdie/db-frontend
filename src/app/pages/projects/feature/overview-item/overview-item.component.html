@@ -1,0 +1,103 @@
+<div
+    class="card card-link mb-3 text-start"
+    [routerLink]="table.id"
+    style="cursor: auto"
+>
+    <div class="card-body">
+        <h5 class="card-title">
+            <!-- to enable opening in a new tab -->
+            <a [routerLink]="table.id" class="text-reset">
+                <app-table-name
+                    [table]="table"
+                    [showIcon]="true"
+                ></app-table-name>
+                <span class="text-muted ms-2">
+                    <!-- TODO: if permissionLevel > 2 -->
+                    <app-icon
+                        *ngIf="false"
+                        icon="edit"
+                        [appInfoTooltip]="
+                            'pages.projects.overview.permission.3' | translate
+                        "
+                    ></app-icon>
+                </span>
+            </a>
+            <!-- stopPropagation and preventDefault are both needed https://github.com/angular/angular/issues/21457 -->
+            <button
+                class="btn btn-link text-decoration-none p-0"
+                [class.disabled]="
+                    disableFavoriteActions ||
+                    (maximumFavoriteTablesReached && !isFavorite)
+                        ? ''
+                        : null
+                "
+                (click)="
+                    $event.stopPropagation();
+                    $event.preventDefault();
+                    disableFavoriteActions ||
+                    (maximumFavoriteTablesReached && !isFavorite)
+                        ? null
+                        : isFavoriteChanges.next(undefined)
+                "
+                [class.text-primary]="isFavorite"
+                style="font-size: large"
+                [ngStyle]="{
+                    cursor:
+                        maximumFavoriteTablesReached && !isFavorite
+                            ? 'default'
+                            : 'pointer'
+                }"
+                [appInfoTooltip]="
+                    'pages.projects.overview.favorites.maximum-reached'
+                        | translate
+                "
+                [isDisabled]="!maximumFavoriteTablesReached || isFavorite"
+                placement="top"
+                [title]="
+                    (isFavorite
+                        ? 'pages.projects.overview.favorites.remove'
+                        : maximumFavoriteTablesReached && !isFavorite
+                        ? 'empty-translation'
+                        : 'pages.projects.overview.favorites.add'
+                    ) | translate
+                "
+            >
+                <app-icon
+                    [icon]="isFavorite ? 'favorite' : 'not-favorite'"
+                    [inline]="false"
+                ></app-icon>
+            </button>
+            <!-- TODO: workaround for cdkDragHandle not detected in child components  https://github.com/angular/components/issues/13784 -->
+            <span class="float-end">
+                <ng-content></ng-content>
+            </span>
+        </h5>
+        <p
+            *ngIf="table.descriptions | translateDescriptions as description"
+            class="card-subtitle"
+        >
+            <app-markdown-viewer
+                [markdownText]="description"
+                maxHeight="50px"
+                overflow="hidden"
+            ></app-markdown-viewer>
+        </p>
+        <!-- TODO: if permissionLevel > 0 -->
+        <!-- TODO: for some odd reason not directing to search -->
+        <a [routerLink]="table.id + '/search'" class="me-3">
+            <app-icon
+                icon="search"
+                [title]="'pages.projects.overview.searchTitle' | translate"
+            ></app-icon>
+            {{ 'pages.projects.overview.search' | translate }}
+        </a>
+        <!-- TODO: if permissionLevel > 1 -->
+        <a [routerLink]="table.id + '/new'">
+            <app-icon
+                icon="create"
+                [title]="'pages.projects.overview.newTitle' | translate"
+            ></app-icon>
+            {{ 'pages.projects.overview.new' | translate }}
+        </a>
+    </div>
+</div>

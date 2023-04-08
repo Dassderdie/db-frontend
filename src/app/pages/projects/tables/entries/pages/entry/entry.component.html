@@ -1,0 +1,65 @@
+<div class="page-container">
+    <div
+        [attr.hidden]="
+            overviewActive.isActive ||
+            historyActive.isActive ||
+            RelationExplorerActive ||
+            editActive.isActive
+                ? null
+                : ''
+        "
+    >
+        <ul class="nav nav-tabs justify-content-end">
+            <!-- TODO: permission levels -->
+            <li class="nav-item pull-right">
+                <a
+                    class="nav-link"
+                    routerLink="overview"
+                    routerLinkActive="active"
+                    #overviewActive="routerLinkActive"
+                >
+                    <app-icon icon="overview"></app-icon>
+                    {{ 'routing.overview' | translate }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a
+                    class="nav-link"
+                    [class.disabled]="
+                        !((table$ | async)?.attributes | showRelationExplorer)
+                    "
+                    routerLink="relation-explorer"
+                    routerLinkActive="active"
+                    #RelationExplorerActive="routerLinkActive"
+                >
+                    <app-icon icon="relation-explorer"></app-icon>
+                    {{ 'routing.relation-explorer' | translate }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a
+                    class="nav-link"
+                    routerLink="history"
+                    routerLinkActive="active"
+                    #historyActive="routerLinkActive"
+                >
+                    <app-icon icon="history"></app-icon>
+                    {{ 'routing.history' | translate }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a
+                    class="nav-link text-danger"
+                    routerLink="edit"
+                    routerLinkActive="active"
+                    #editActive="routerLinkActive"
+                >
+                    <app-icon icon="edit"></app-icon>
+                    {{ 'routing.edit' | translate }}
+                </a>
+            </li>
+        </ul>
+        <br />
+    </div>
+</div>
+<router-outlet></router-outlet>

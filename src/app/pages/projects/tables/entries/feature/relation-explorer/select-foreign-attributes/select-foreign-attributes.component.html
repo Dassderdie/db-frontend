@@ -1,0 +1,22 @@
+<div *ngFor="let table of tables">
+    <span [style]="'color: ' + tableColorService.getColor($any(table))"
+        >&#x25ae;</span
+    >
+    <app-table-name [table]="table" [showIcon]="false"></app-table-name>
+    <ng-container *ngFor="let attribute of table.attributes">
+        <div *ngIf="attribute.kind === 'foreign'" class="form-check">
+            <label class="form-check-label">
+                <input
+                    [checked]="attributeIdSelection[table.id]![attribute.id]"
+                    (change)="toggleForeignAttribute(table, attribute)"
+                    type="checkbox"
+                    class="form-check-input"
+                />
+                <app-attribute-name
+                    [attribute]="attribute"
+                    [displayKind]="false"
+                ></app-attribute-name>
+            </label>
+        </div>
+    </ng-container>
+</div>

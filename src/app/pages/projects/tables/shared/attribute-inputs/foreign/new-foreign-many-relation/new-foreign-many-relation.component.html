@@ -1,0 +1,56 @@
+<div
+    class="card mt-3 border-end-0 border-status-new"
+    [class.border-status-invalid]="
+        parentState.children[id]?.delayedInvalid$ | async
+    "
+    style="border-top-right-radius: 0; border-bottom-right-radius: 0"
+>
+    <div class="card-header pt-0 pb-0">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-auto">
+                <app-entry-name
+                    [projectId]="projectId"
+                    [tableId]="attribute.kindOptions.foreign.tableId"
+                    [entryId]="value.foreignEntryId"
+                    [showLink]="true"
+                >
+                </app-entry-name>
+            </div>
+            <div class="col-auto">
+                <button
+                    (click)="removeNewForeignRelation.emit()"
+                    class="btn link-danger"
+                    [class.disabled]="disabled"
+                >
+                    <app-icon icon="delete"></app-icon>
+                    <ng-container
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                    >
+                        {{ 'pages.entries.filter.remove' | translate }}
+                    </ng-container>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- intermediate Attributes -->
+    <div
+        *ngIf="attribute.kindOptions.intermediateAttributes?.length"
+        class="card-body"
+    >
+        <app-attribute-inputs
+            [ids]="{
+                projectId: intermediateTable.projectId,
+                tableId: intermediateTable.id
+            }"
+            [id]="id"
+            [attributes]="attribute.kindOptions.intermediateAttributes"
+            [changedValues]="value.changedIntermediateValues"
+            [parentState]="parentState"
+            (valuesChange)="editNewForeignRelation.emit($event)"
+        ></app-attribute-inputs>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+<ng-template #descriptionTemplate>
+    <app-markdown-viewer
+        [markdownText]="attribute.descriptions | translateDescriptions"
+    ></app-markdown-viewer>
+</ng-template>
+
+<div
+    class="input-group mb-3"
+    [appInfoTooltip]="descriptionTemplate"
+    [isDisabled]="
+        !attribute.descriptions ||
+        !(attribute.descriptions | translateDescriptions)
+    "
+    tooltipStyle="light"
+>
+    <span class="input-group-text">
+        <app-icon icon="foreign"></app-icon>
+    </span>
+    <span class="input-group-text">
+        <app-attribute-name
+            [attribute]="attribute"
+            [displayKind]="false"
+        ></app-attribute-name>
+        <span *ngIf="attribute.required" class="text-status-invalid">*</span>
+    </span>
+    <div class="d-grid gap-2" style="flex: 1 1 auto">
+        <button
+            type="button"
+            [class.disabled]="disabled"
+            class="form-control btn btn-outline-secondary rounded-0"
+            [class.btn-outline-status-changed]="
+                version && foreignState.changed$ | async
+            "
+            [class.btn-outline-status-invalid]="foreignState.invalid$ | async"
+            (click)="chooseRelation()"
+        >
+            <ng-container
+                *ngIf="
+                    foreignEntryAttributeId &&
+                        (numberOfPresentRelations$ | async) !== null;
+                    withInlineLoading
+                "
+            >
+                <app-entry-name
+                    *ngIf="
+                        value
+                            | singleForeignEntryId
+                                : foreignEntryAttributeId
+                                : (presentIntermediateVersion$ | async);
+                        else nullValue;
+                        let foreignEntryId
+                    "
+                    [projectId]="projectId"
+                    [tableId]="attribute.kindOptions.foreign.tableId"
+                    [entryId]="foreignEntryId"
+                >
+                </app-entry-name>
+                <ng-template #nullValue> null </ng-template>
+            </ng-container>
+        </button>
+    </div>
+    <app-create-new-foreign-entry-btn
+        [projectId]="projectId"
+        [foreignTableId]="attribute.kindOptions.foreign.tableId"
+        btnClasses="btn-outline-primary rounded-0"
+    ></app-create-new-foreign-entry-btn>
+    <button
+        class="input-group-text btn btn-outline-danger"
+        type="button"
+        (click)="clear()"
+        [attr.disabled]="
+            (value
+                | foreignSingleIsNull
+                    : (numberOfPresentRelations$ | async) || 0) ||
+            attribute.required ||
+            disabled
+                ? ''
+                : null
+        "
+    >
+        <app-icon icon="delete"></app-icon>
+        <ng-container
+            *ngIf="breakpoints.xs | responsiveBreakpointExceeded | async"
+        >
+            {{ 'pages.entries.filter.clear' | translate }}
+        </ng-container>
+    </button>
+</div>
+<app-validation [state]="foreignState"></app-validation>

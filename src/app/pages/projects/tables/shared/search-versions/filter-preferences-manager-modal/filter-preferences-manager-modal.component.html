@@ -1,0 +1,95 @@
+<div class="modal-header">
+    <h5 class="modal-title">
+        {{
+            'pages.tables.filter-preferences.filter-preferences-manager-modal.title'
+                | translate
+        }}
+    </h5>
+    <button
+        type="button"
+        class="btn-close"
+        (click)="bsModalRef.hide()"
+    ></button>
+</div>
+<div class="modal-body">
+    <!-- Limit the dragging area-->
+    <div class="drag-boundary" style="margin: -25px; padding: 25px">
+        <div
+            *ngIf="
+                filtersPreferences
+                    ? filtersPreferences[tableId]
+                    : undefined as filtersPreference
+            "
+            cdkDropList
+            cdkDropListOrientation="vertical"
+            (cdkDropListDropped)="moveFilterPreference($event)"
+            class="container"
+        >
+            <div
+                *ngFor="
+                    let filterPreference of filtersPreference;
+                    trackBy: null | trackByProperty;
+                    let index = index;
+                    let first = first
+                "
+                cdkDrag
+                [cdkDragDisabled]="!filtersPreference.length"
+                cdkDragBoundary=".drag-boundary"
+                class="d-flex row"
+            >
+                <div
+                    cdkDragHandle
+                    [appInfoTooltip]="
+                        'pages.tables.filter-preferences.filter-preferences-manager-modal.drag-filter-preference'
+                            | translate
+                    "
+                    class="align-middle col-auto p-0"
+                >
+                    <app-icon icon="drag-vertical" [inline]="false"></app-icon>
+                </div>
+                <div class="col">
+                    {{ filterPreference.name }}
+                    <app-icon
+                        *ngIf="first"
+                        icon="info"
+                        [inline]="false"
+                        [appInfoTooltip]="
+                            'pages.entries.new-filter-preference-modal.filter-preference-name.first-applied-filter-tipp'
+                                | translate
+                        "
+                        placement="right"
+                        class="ms-1 text-info"
+                    ></app-icon>
+                </div>
+                <button
+                    [appInfoTooltip]="
+                        'pages.tables.filter-preferences.filter-preferences-manager-modal.remove-filter'
+                            | translate
+                    "
+                    (click)="removeFilterPreference(filterPreference.name)"
+                    class="btn btn-small link-danger col-auto"
+                    type="button"
+                >
+                    <app-icon icon="delete" [inline]="false"></app-icon>
+                </button>
+            </div>
+        </div>
+        <span
+            *ngIf="!(filtersPreferences && filtersPreferences[tableId]?.length)"
+            class="text-muted"
+        >
+            {{
+                'pages.tables.filter-preferences.filter-preferences-manager-modal.no-filters'
+                    | translate
+            }}
+        </span>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">
+        {{
+            'pages.tables.filter-preferences.filter-preferences-manager-modal.close'
+                | translate
+        }}
+    </button>
+</div>

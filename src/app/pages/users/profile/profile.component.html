@@ -1,0 +1,188 @@
+<div class="page-container">
+    <div *ngIf="userForm" class="card mb-4">
+        <div class="card-header" style="background-color: #e9ecef">
+            <app-icon icon="user"></app-icon>
+            {{ 'user.general' | translate }}
+        </div>
+        <div class="card-body">
+            <div
+                *ngFor="
+                    let control of userForm.controls;
+                    trackBy: 'id' | trackByProperty
+                "
+                class="mb-3"
+            >
+                <app-input [control]="control" [showChanged]="true"></app-input>
+            </div>
+            <button
+                (click)="userForm.reset()"
+                [disabled]="!userForm.changed"
+                class="btn btn-status-changed"
+            >
+                <app-icon icon="reset"></app-icon>
+                {{ 'customForms.reset' | translate }}
+            </button>
+            <app-loading-button
+                [title]="'customForms.save' | translate"
+                [icons]="['save']"
+                [disabled]="!userForm.changed || userForm.invalid"
+                [newEvent]="userEditing"
+                (click)="submitUser()"
+                class="ms-2"
+            >
+                {{ 'customForms.save' | translate }}
+            </app-loading-button>
+        </div>
+    </div>
+
+    <div *ngIf="user" class="card mb-4">
+        <div class="card-header" style="background-color: #e9ecef">
+            <app-icon icon="list-input"></app-icon>
+            {{ 'user.emails' | translate }}
+        </div>
+        <div class="card-body pb-0">
+            <div class="mb-3">
+                <app-string-input
+                    [control]="addEmailControl"
+                    [appendTemplate]="addEmailButton"
+                    (keyup.enter)="
+                        addEmailControl.invalid
+                            ? 0
+                            : addEmail(addEmailControl.value!)
+                    "
+                ></app-string-input>
+                <ng-template #addEmailButton>
+                    <app-loading-button
+                        [title]="'user.add-email' | translate"
+                        [icons]="['create']"
+                        [disabled]="
+                            addEmailControl.invalid || !addEmailControl.value
+                        "
+                        [newEvent]="addingEmail"
+                        (click)="addEmail(addEmailControl.value!)"
+                        type="outline-primary"
+                        [additionalStyles]="{
+                            'border-top-left-radius': 0,
+                            'border-bottom-left-radius': 0
+                        }"
+                    >
+                        {{ 'user.add-email' | translate }}
+                    </app-loading-button>
+                </ng-template>
+            </div>
+            <ul class="list-group mb-3">
+                <li
+                    *ngFor="
+                        let email of user.emails | keyvalue;
+                        trackBy: null | trackByProperty
+                    "
+                    class="list-group-item pt-0 pb-0"
+                >
+                    <span
+                        [appInfoTooltip]="
+                            (email.key === user.authenticationEmail
+                                ? 'user.not-removable-email.authentication-email'
+                                : email.key === user.notificationEmail
+                                ? 'user.not-removable-email.notification-email'
+                                : email.key === user.publicEmail
+                                ? 'user.not-removable-email.public-email'
+                                : 'empty-translation'
+                            ) | translate
+                        "
+                        placement="right"
+                        [isDisabled]="
+                            !(
+                                email.key === user.authenticationEmail ||
+                                email.key === user.notificationEmail ||
+                                email.key === user.publicEmail
+                            )
+                        "
+                    >
+                        <app-icon
+                            *ngIf="email.key === user.authenticationEmail"
+                            icon="authentication-email"
+                        ></app-icon>
+                        <app-icon
+                            *ngIf="email.key === user.notificationEmail"
+                            icon="notification-email"
+                        ></app-icon>
+                        <app-icon
+                            *ngIf="email.key === user.publicEmail"
+                            icon="public-email"
+                        ></app-icon>
+                        {{ email.key }}
+                        <app-display-date
+                            *ngIf="
+                                breakpoints.xs
+                                    | responsiveBreakpointExceeded
+                                    | async
+                            "
+                            class="text-muted ms-2"
+                            [date]="email.value"
+                            [options]="{
+                                relative: false,
+                                format: 'shortDate'
+                            }"
+                        ></app-display-date>
+                        <button
+                            [attr.disabled]="
+                                email.key === user.authenticationEmail ||
+                                email.key === user.notificationEmail ||
+                                email.key === user.publicEmail
+                                    ? ''
+                                    : null
+                            "
+                            class="btn link-danger"
+                            (click)="removeEmail(email.key)"
+                        >
+                            <app-icon icon="close"></app-icon>
+                        </button>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card border-danger">
+        <div class="card-header">
+            {{ 'user.danger-zone' | translate }}
+        </div>
+        <div class="card-body">
+            <app-loading-button
+                [title]="'user.reset-password' | translate"
+                [icons]="['edit']"
+                [newEvent]="requestingPasswordResetEmail"
+                (click)="requestResetPasswordEmail()"
+                type="warning"
+            >
+                {{ 'user.reset-password' | translate }}
+            </app-loading-button>
+            <div class="mt-3">
+                {{ 'user.request-auth-email-change.description' | translate }}
+                <div class="font-monospace mt-3">
+                    {{ user?.authenticationEmail }}
+                </div>
+                <p
+                    *ngIf="(user?.emails | objectKeys).length < 2"
+                    class="text-danger"
+                >
+                    {{
+                        'user.request-auth-email-change.min-emails-error'
+                            | translate
+                    }}
+                </p>
+                <br />
+                <app-loading-button
+                    [title]="'user.request-auth-email-change.btn' | translate"
+                    [icons]="['edit', 'email']"
+                    [newEvent]="requestingAuthEmailChange"
+                    [disabled]="(user?.emails | objectKeys).length < 2"
+                    (click)="requestAuthEmailChange()"
+                    type="danger"
+                >
+                    {{ 'user.request-auth-email-change.btn' | translate }}
+                </app-loading-button>
+            </div>
+        </div>
+    </div>
+</div>

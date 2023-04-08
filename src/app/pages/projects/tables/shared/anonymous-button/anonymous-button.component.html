@@ -1,0 +1,37 @@
+<div class="btn-group p-0" [class.btn-sm]="small">
+    <button
+        *ngIf="allowAnonymous"
+        [class]="'ps-1 pe-1 btn btn-outline-' + type"
+        (click)="
+            anonymousService.saveAnonymously = !anonymousService.saveAnonymously
+        "
+        [appInfoTooltip]="'anonymous-button.description' | translate"
+        placement="top"
+        [class.btn-sm]="small"
+    >
+        <app-icon
+            [icon]="anonymousService.saveAnonymously ? 'anonymous' : 'visible'"
+        ></app-icon>
+    </button>
+    <app-loading-button
+        [disabled]="disabled"
+        [icons]="icons"
+        [newEvent]="newEvent$"
+        [title]="title"
+        [timeout]="timeout"
+        [type]="type"
+        [small]="small"
+        [additionalStyles]="{
+            'border-top-left-radius': allowAnonymous ? 0 : null,
+            'border-bottom-left-radius': allowAnonymous ? 0 : null,
+            'padding-left': allowAnonymous ? '0.25rem' : null
+        }"
+        (click)="
+            anonymousClick.emit(
+                anonymousService.saveAnonymously && allowAnonymous
+            )
+        "
+    >
+        <ng-content></ng-content>
+    </app-loading-button>
+</div>

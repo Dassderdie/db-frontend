@@ -1,0 +1,35 @@
+<div class="page-container">
+    <div
+        [attr.hidden]="newActive.isActive || searchActive.isActive ? null : ''"
+    >
+        <ul class="nav nav-tabs">
+            <!-- TODO: permission levels -->
+            <li class="nav-item">
+                <a
+                    class="nav-link"
+                    routerLink="new"
+                    queryParamsHandling="merge"
+                    routerLinkActive="active"
+                    #newActive="routerLinkActive"
+                >
+                    <app-icon icon="create"></app-icon>
+                    {{ 'routing.createEntry' | translate }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a
+                    class="nav-link"
+                    routerLink="search"
+                    queryParamsHandling="merge"
+                    routerLinkActive="active"
+                    #searchActive="routerLinkActive"
+                >
+                    <app-icon icon="search"></app-icon>
+                    {{ 'routing.search' | translate }}
+                </a>
+            </li>
+            <!-- TODO: Add statistics -->
+        </ul>
+    </div>
+</div>
+<router-outlet></router-outlet>

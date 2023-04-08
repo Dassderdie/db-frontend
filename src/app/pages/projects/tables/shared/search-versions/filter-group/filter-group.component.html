@@ -1,0 +1,221 @@
+<div class="card" [class.notFirstGroup]="!firstGroup">
+    <div class="card-header m-0 p-0 row align-items-center">
+        <div
+            (click)="toggleShowGroup()"
+            class="ms-0 col-auto vertical-card-header-padding pointer"
+        >
+            <app-collapse-indicator
+                [isExpanded]="showGroup"
+            ></app-collapse-indicator>
+        </div>
+        <div class="col-auto">
+            <ng-container
+                *ngTemplateOutlet="
+                    leftHeader || defaultFormGroupName;
+                    context: {
+                        formGroupIsShown: showGroup
+                    }
+                "
+            ></ng-container>
+            <ng-template #defaultFormGroupName>
+                <span (click)="toggleShowGroup()" class="pointer">
+                    {{ 'pages.entries.filter.group' | translate }}
+                </span>
+            </ng-template>
+        </div>
+        <div
+            (click)="toggleShowGroup()"
+            class="col vertical-card-header-padding pointer"
+        >
+            <!-- Without sth. in it the col has a width of 0 -->
+            &nbsp;
+        </div>
+        <div class="me-0 col text-center" style="max-width: max-content">
+            <button
+                *ngIf="!firstGroup"
+                (click)="remove()"
+                class="btn link-danger p-0"
+            >
+                <app-icon icon="delete"></app-icon>
+                <ng-container
+                    *ngIf="
+                        breakpoints.xs | responsiveBreakpointExceeded | async
+                    "
+                >
+                    {{ 'pages.entries.filter.remove' | translate }}
+                </ng-container>
+            </button>
+            <ng-container
+                *ngTemplateOutlet="
+                    rightHeader || null;
+                    context: {
+                        formGroupIsShown: showGroup
+                    }
+                "
+            ></ng-container>
+        </div>
+    </div>
+    <app-animated-if [show]="showGroup">
+        <div * class="card-body">
+            <button
+                *ngIf="filterGroup.expressions.length > 0"
+                (click)="toggleNegated()"
+                [ngClass]="
+                    filterGroup.negated
+                        ? 'fw-bolder'
+                        : 'text-muted text-decoration-line-through'
+                "
+                class="btn btn-light btn-sm ms-n4 mt-n3 mb-2 font-monospace"
+            >
+                {{ 'pages.entries.filter.not' | translate }}
+            </button>
+            <ng-container
+                *ngFor="
+                    let expression of filterGroup.expressions;
+                    let i = index;
+                    let last = last;
+                    let first = first;
+                    trackBy: 'key' | trackByProperty
+                "
+            >
+                <!-- any assertions to differentiate between FilterGroup and FilterInput -->
+                <app-filter-group
+                    *ngIf="$any(expression)?.expressions; else filterInput"
+                    [filterGroup]="$any(expression)"
+                    [table]="table"
+                    [advancedMode]="advancedMode"
+                    (filterGroupChanges)="updateExpression(i, $event)"
+                ></app-filter-group>
+                <ng-template #filterInput>
+                    <app-filter-input
+                        *ngIf="!$any(expression).invalid; else invalidInput"
+                        [value]="$any(expression)"
+                        [attribute]="
+                            $any(expression).key
+                                | attributeById: table.attributes
+                        "
+                        [projectId]="table.projectId"
+                        (valueChange)="updateExpression(i, $event)"
+                    ></app-filter-input>
+                </ng-template>
+                <ng-template #invalidInput>
+                    <app-invalid-expression
+                        [expression]="$any(expression)"
+                        (removeExpression)="updateExpression(i, undefined)"
+                    ></app-invalid-expression>
+                </ng-template>
+                <button
+                    *ngIf="first && !last"
+                    (click)="toggleConjunction()"
+                    class="btn btn-light btn-sm ms-5 mt-2 mb-2 font-monospace"
+                >
+                    <span
+                        [ngClass]="
+                            filterGroup.conjunction === 'and'
+                                ? 'fw-bolder'
+                                : 'text-muted text-decoration-line-through'
+                        "
+                        >{{ 'pages.entries.filter.and' | translate }}</span
+                    >
+                    /
+                    <span
+                        [ngClass]="
+                            filterGroup.conjunction === 'or'
+                                ? 'fw-bolder'
+                                : 'text-muted text-decoration-line-through'
+                        "
+                        >{{ 'pages.entries.filter.or' | translate }}</span
+                    >
+                </button>
+                <div
+                    *ngIf="!first && !last"
+                    class="btn-sm ms-5 mt-2 mb-2 font-monospace fw-bolder"
+                >
+                    {{
+                        (filterGroup.conjunction === 'and'
+                            ? 'pages.entries.filter.and'
+                            : 'pages.entries.filter.or'
+                        ) | translate
+                    }}
+                </div>
+            </ng-container>
+            <span
+                *ngIf="filterGroup.expressions.length === 0 && !firstGroup"
+                class="text-status-invalid"
+            >
+                {{ 'pages.entries.filter.no-expression' | translate }}
+            </span>
+            <span
+                *ngIf="filterGroup.expressions.length === 0 && firstGroup"
+                class="text-muted"
+            >
+                {{
+                    (advancedMode
+                        ? 'pages.entries.filter.get-all-versions'
+                        : 'pages.entries.filter.get-all-entries'
+                    ) | translate
+                }}
+            </span>
+            <div class="mt-3">
+                <div class="btn-group me-4" dropdown>
+                    <button
+                        dropdownToggle
+                        type="button"
+                        class="btn btn-outline-primary dropdown-toggle"
+                    >
+                        <app-icon icon="create"></app-icon>
+                        {{ 'pages.entries.filter.add-expression' | translate }}
+                        <span class="caret"></span>
+                    </button>
+                    <div *dropdownMenu class="dropdown-menu" role="menu">
+                        <button
+                            *ngFor="
+                                let attribute of table.attributes;
+                                trackBy: 'id' | trackByProperty;
+                                id
+                            "
+                            [attr.disabled]="
+                                attribute.kind === 'foreign' ||
+                                attribute.kind === 'files'
+                                    ? ''
+                                    : null
+                            "
+                            (click)="addExpression(attribute.id)"
+                            role="menuitem"
+                            class="dropdown-item"
+                        >
+                            <app-attribute-name
+                                [attribute]="attribute"
+                                [displayKind]="true"
+                            ></app-attribute-name>
+                        </button>
+                        <ng-container *ngIf="advancedMode">
+                            <button
+                                *ngFor="
+                                    let metaAttribute of metaAttributes;
+                                    trackBy: null | trackByProperty
+                                "
+                                (click)="addExpression(metaAttribute)"
+                                role="menuitem"
+                                class="dropdown-item"
+                            >
+                                <app-meta-attribute-name
+                                    [metaAttribute]="metaAttribute"
+                                    [displayKind]="true"
+                                ></app-meta-attribute-name>
+                            </button>
+                        </ng-container>
+                    </div>
+                </div>
+                <button
+                    class="btn btn-outline-primary"
+                    type="button"
+                    (click)="addGroup()"
+                >
+                    <app-icon icon="create"></app-icon>
+                    {{ 'pages.entries.filter.add-group' | translate }}
+                </button>
+            </div>
+        </div>
+    </app-animated-if>
+</div>

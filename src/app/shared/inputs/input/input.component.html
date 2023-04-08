@@ -1,0 +1,182 @@
+<ng-template #prepend>
+    <ng-container
+        *ngIf="$any(control).leftAddons && $any(control).leftAddons.length > 0"
+    >
+        <span
+            *ngFor="
+                let addon of $any(control).leftAddons;
+                trackBy: '$index' | trackByProperty
+            "
+            class="input-group-text"
+        >
+            <app-addon [addon]="$any(addon)"></app-addon>
+        </span>
+    </ng-container>
+</ng-template>
+<ng-template #append>
+    <ng-container
+        *ngIf="
+            $any(control).rightAddons && $any(control).rightAddons.length > 0
+        "
+    >
+        <span
+            *ngFor="
+                let addon of $any(control).rightAddons;
+                trackBy: '$index' | trackByProperty
+            "
+            class="input-group-text"
+        >
+            <app-addon [addon]="$any(addon)"></app-addon>
+        </span>
+    </ng-container>
+</ng-template>
+
+<!-- TODO: types: type guards for https://github.com/microsoft/TypeScript/issues/1260 combined with safe navigation operator -->
+<!-- TODO: types: remove type assertions because of missing type narrowing https://github.com/angular/angular/issues/20780 -->
+<ng-container [ngSwitch]="control.type">
+    <app-time-input
+        *ngSwitchCase="'time'"
+        [control]="$any(control)"
+        [showChanged]="showChanged"
+        [autofocus]="autofocus"
+        [displayValidationOn]="displayValidationOn"
+        [appendTemplate]="
+            $any(control).rightAddons && $any(control).rightAddons.length > 0
+                ? append
+                : null
+        "
+        [prependTemplate]="
+            $any(control).leftAddons && $any(control).leftAddons.length > 0
+                ? prepend
+                : null
+        "
+    >
+    </app-time-input>
+    <app-date-time-input
+        *ngSwitchCase="'date-time'"
+        [control]="$any(control)"
+        [showChanged]="showChanged"
+        [autofocus]="autofocus"
+        [displayValidationOn]="displayValidationOn"
+        [appendTemplate]="
+            $any(control).rightAddons && $any(control).rightAddons.length > 0
+                ? append
+                : null
+        "
+        [prependTemplate]="
+            $any(control).leftAddons && $any(control).leftAddons.length > 0
+                ? prepend
+                : null
+        "
+    ></app-date-time-input>
+    <app-date-input
+        *ngSwitchCase="'date'"
+        [control]="$any(control)"
+        [showChanged]="showChanged"
+        [autofocus]="autofocus"
+        [displayValidationOn]="displayValidationOn"
+        [appendTemplate]="
+            $any(control).rightAddons && $any(control).rightAddons.length > 0
+                ? append
+                : null
+        "
+        [prependTemplate]="
+            $any(control).leftAddons && $any(control).leftAddons.length > 0
+                ? prepend
+                : null
+        "
+    >
+    </app-date-input>
+    <app-select-input
+        *ngSwitchCase="'select'"
+        [control]="$any(control)"
+        [showChanged]="showChanged"
+        [autofocus]="autofocus"
+        [displayValidationOn]="displayValidationOn"
+        [appendTemplate]="
+            $any(control).rightAddons && $any(control).rightAddons.length > 0
+                ? append
+                : null
+        "
+        [prependTemplate]="
+            $any(control).leftAddons && $any(control).leftAddons.length > 0
+                ? prepend
+                : null
+        "
+    ></app-select-input>
+    <app-markdown-input
+        *ngSwitchCase="'markdown'"
+        [showChanged]="showChanged"
+        [control]="$any(control)"
+        [autofocus]="autofocus"
+        [displayValidationOn]="displayValidationOn"
+    ></app-markdown-input>
+    <app-checkbox-input
+        *ngSwitchCase="'checkbox'"
+        [showChanged]="showChanged"
+        [control]="$any(control)"
+        [autofocus]="autofocus"
+        [displayValidationOn]="displayValidationOn"
+    ></app-checkbox-input>
+    <app-list-input
+        *ngSwitchCase="'list'"
+        [showChanged]="showChanged"
+        [control]="$any(control)"
+        [autofocus]="autofocus"
+        [displayValidationOn]="displayValidationOn"
+    ></app-list-input>
+    <app-number-input
+        *ngSwitchCase="'number'"
+        [showChanged]="showChanged"
+        [control]="$any(control)"
+        [displayValidationOn]="displayValidationOn"
+        [autofocus]="autofocus"
+        [appendTemplate]="
+            $any(control).rightAddons && $any(control).rightAddons.length > 0
+                ? append
+                : null
+        "
+        [prependTemplate]="
+            $any(control).leftAddons && $any(control).leftAddons.length > 0
+                ? prepend
+                : null
+        "
+    ></app-number-input>
+    <app-string-input
+        *ngSwitchCase="'string'"
+        [showChanged]="showChanged"
+        [control]="$any(control)"
+        [autofocus]="autofocus"
+        [displayValidationOn]="displayValidationOn"
+        [appendTemplate]="
+            $any(control).rightAddons && $any(control).rightAddons.length > 0
+                ? append
+                : null
+        "
+        [prependTemplate]="
+            $any(control).leftAddons && $any(control).leftAddons.length > 0
+                ? prepend
+                : null
+        "
+    ></app-string-input>
+    <app-real-string-input
+        *ngSwitchCase="'real-string'"
+        [showChanged]="showChanged"
+        [control]="$any(control)"
+        [autofocus]="autofocus"
+        [displayValidationOn]="displayValidationOn"
+        [appendTemplate]="
+            $any(control).rightAddons && $any(control).rightAddons.length > 0
+                ? append
+                : null
+        "
+        [prependTemplate]="
+            $any(control).leftAddons && $any(control).leftAddons.length > 0
+                ? prepend
+                : null
+        "
+    ></app-real-string-input>
+    <i *ngSwitchDefault class="text-status-invalid">
+        Error: unknown input-type: {{ control.type }}
+    </i>
+</ng-container>

@@ -1,0 +1,12 @@
+// the css for the viewer
+@import '~@toast-ui/editor/dist/toastui-editor-viewer.css';
+
+div.tui-editor-contents {
+    :first-child {
+        margin-top: 0px !important;
+    }
+    :last-child {
+        margin-bottom: 0px !important;
+    }
+    min-height: 0rem !important;
+}

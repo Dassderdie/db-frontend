@@ -1,0 +1,15 @@
+{{ !last ? ', ' : ''
+}}<ng-container *ngIf="last && numberOfTotalRelations > displayLimit"
+    >,
+    <span
+        [title]="
+            'display-foreign.more-relations'
+                | translate
+                    : {
+                          moreRelationsNumber:
+                              numberOfTotalRelations - displayLimit
+                      }
+        "
+        >...</span
+    >
+</ng-container>

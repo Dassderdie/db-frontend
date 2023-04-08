@@ -1,0 +1,22 @@
+.progress {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0);
+    position: fixed;
+    width: 100%;
+    height: 4px;
+    z-index: 1300;
+
+    .progress-bar.starting {
+        width: 0%;
+        transition: none;
+    }
+
+    .progress-bar.finished {
+        width: 100%;
+    }
+
+    .progress-bar.waiting {
+        width: 40%;
+        transition: width 60s cubic-bezier(0, 0, 0, 1);
+    }
+}

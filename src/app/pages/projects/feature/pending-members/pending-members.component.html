@@ -1,0 +1,42 @@
+<div
+    *ngFor="let pendingRole of pendingRoles; trackBy: 'id' | trackByProperty"
+    class="card mb-3"
+>
+    <div class="card-body">
+        <h5 class="card-title">
+            {{ pendingRole.email }}
+            <small class="card-text text-muted">
+                <app-display-date
+                    [date]="pendingRole.createdAt"
+                    [options]="{ relative: true, format: 'long' }"
+                ></app-display-date>
+                {{ 'pages.projects.generalSettings.members.by' | translate }}
+                <app-member-name
+                    *ngIf="project"
+                    [userId]="pendingRole.creatorId"
+                    [projectId]="project.id"
+                ></app-member-name>
+            </small>
+        </h5>
+        <a
+            *ngIf="
+                project.authenticatedUserRole.administrator ||
+                pendingRole.creatorId === project.authenticatedUserRole.userId
+            "
+            (click)="revokeInvitation(pendingRole)"
+            class="btn btn-link text-danger"
+        >
+            <app-icon icon="delete"></app-icon>
+            {{
+                'pages.projects.generalSettings.members.revoke-invitation'
+                    | translate
+            }}
+        </a>
+    </div>
+</div>
+<div *ngIf="pendingRoles.length === 0" class="text-center h6 text-muted">
+    {{
+        'pages.projects.generalSettings.members.noMatchingPendingRoles'
+            | translate
+    }}
+</div>

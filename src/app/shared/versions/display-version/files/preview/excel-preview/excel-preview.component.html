@@ -1,0 +1,16 @@
+<ng-template #confirmDialog>
+    <div class="card-body">
+        {{ 'file-preview.xss-confirm.description' | translate }}
+        <br />
+        <button (click)="confirmParsing()" class="btn btn-outline-warning">
+            {{ 'file-preview.xss-confirm.btn' | translate }}
+        </button>
+    </div>
+</ng-template>
+
+<div
+    *ngIf="parsingConfirmed; else confirmDialog"
+    #container
+    class="w-100"
+    style="height: 79vh"
+></div>

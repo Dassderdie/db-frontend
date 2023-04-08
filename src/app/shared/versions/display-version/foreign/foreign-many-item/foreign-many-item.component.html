@@ -1,0 +1,14 @@
+<app-foreign-many-item-card
+    [attribute]="attribute"
+    [intermediateVersion]="intermediateVersion"
+    [intermediateTable]="intermediateTable"
+    [tableId]="tableId"
+>
+    <app-entry-table
+        *ngIf="attribute.kindOptions.intermediateAttributes?.length"
+        [attributes]="attribute.kindOptions.intermediateAttributes"
+        [version]="intermediateVersion"
+        [displayHead]="false"
+        [showHidden]="showHidden"
+    ></app-entry-table>
+</app-foreign-many-item-card>

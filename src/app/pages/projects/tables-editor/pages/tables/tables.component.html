@@ -1,0 +1,132 @@
+<div class="page-container">
+    <div class="tables-graph position-relative">
+        <app-icon
+            icon="tables-editor"
+            [inline]="false"
+            class="position-absolute text-danger"
+            [appInfoTooltip]="
+                'pages.tablesEditor.table-graph.indicator-info' | translate
+            "
+            style="opacity: 0.5; font-size: 10vmin; right: 0; line-height: 1"
+        ></app-icon>
+        <div #cyOuterContainer class="cy-outer-container mb-1">
+            <div
+                *ngIf="!tables || tables.length === 0"
+                style="
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    max-width: 75%;
+                "
+                class="position-absolute"
+            >
+                <app-loading-placeholder
+                    *ngIf="!tables; else tablesEmpty"
+                    [inline]="false"
+                ></app-loading-placeholder>
+                <ng-template #tablesEmpty>
+                    <h6 class="card-subtitle">
+                        {{ 'pages.tablesEditor.table-graph.empty' | translate }}
+                    </h6>
+                </ng-template>
+            </div>
+            <div class="btn-group-vertical toolbar">
+                <button
+                    routerLink="new"
+                    type="button"
+                    class="btn btn-outline-primary"
+                    [appInfoTooltip]="
+                        'pages.tablesEditor.table-graph.new' | translate
+                    "
+                    placement="left"
+                >
+                    <app-icon icon="create" [inline]="false"></app-icon>
+                </button>
+                <button
+                    (click)="fit(); $event.stopPropagation()"
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    [appInfoTooltip]="
+                        'pages.tablesEditor.table-graph.fit' | translate
+                    "
+                    placement="left"
+                >
+                    <app-icon icon="fit" [inline]="false"></app-icon>
+                </button>
+                <button
+                    (click)="zoomIn(); $event.stopPropagation()"
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    [appInfoTooltip]="
+                        'pages.tablesEditor.table-graph.zoom-in' | translate
+                    "
+                    placement="left"
+                >
+                    <app-icon icon="zoom-in" [inline]="false"></app-icon>
+                </button>
+                <button
+                    (click)="zoomOut(); $event.stopPropagation()"
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    [appInfoTooltip]="
+                        'pages.tablesEditor.table-graph.zoom-out' | translate
+                    "
+                    placement="left"
+                >
+                    <app-icon icon="zoom-out" [inline]="false"></app-icon>
+                </button>
+                <button
+                    (click)="runLayout(true); $event.stopPropagation()"
+                    type="button"
+                    [class.disabled]="!tables || tables.length < 1 || freeze"
+                    class="btn btn-outline-secondary"
+                    [appInfoTooltip]="
+                        'pages.tablesEditor.table-graph.layout' | translate
+                    "
+                    placement="left"
+                >
+                    <app-icon icon="layout" [inline]="false"></app-icon>
+                </button>
+                <button
+                    *ngIf="graphChanged > 1"
+                    (click)="resetPositions(); $event.stopPropagation()"
+                    type="button"
+                    [class.disabled]="freeze || !tables"
+                    class="btn btn-outline-status-changed"
+                    [appInfoTooltip]="
+                        'pages.tablesEditor.table-graph.reset' | translate
+                    "
+                    placement="left"
+                >
+                    <app-icon icon="reset" [inline]="false"></app-icon>
+                </button>
+                <button
+                    *ngIf="graphChanged > 0"
+                    (click)="savePositions(); $event.stopPropagation()"
+                    type="button"
+                    [class.disabled]="freeze || !tables"
+                    class="btn btn-outline-warning"
+                    [appInfoTooltip]="
+                        'pages.tablesEditor.table-graph.save' | translate
+                    "
+                    placement="left"
+                    [isOpen]="graphChanged > 0"
+                    triggers=""
+                >
+                    <app-icon icon="save" [inline]="false"></app-icon>
+                </button>
+            </div>
+            <div
+                #cyContainer
+                [ngClass]="{ pointer: hover, grab: grab }"
+                class="cy-container"
+            ></div>
+            <div
+                (drag)="resizeCy($event)"
+                class="grabber"
+                draggable="true"
+            ></div>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

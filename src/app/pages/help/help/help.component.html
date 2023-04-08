@@ -1,0 +1,119 @@
+<div class="page-container">
+    <h1>
+        <app-icon icon="help" [inline]="true"></app-icon>
+        {{ 'routing.help' | translate }}
+    </h1>
+
+    <div class="row row-cols-1 row-cols-md-2">
+        <div class="col mb-4">
+            <a class="card h-100 card-link" routerLink="features">
+                <app-icon
+                    class="card-img-top"
+                    icon="features"
+                    [inline]="false"
+                ></app-icon>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ 'routing.features' | translate }}
+                    </h4>
+                    <p
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                        class="card-text"
+                    >
+                        {{ 'help.features.description' | translate }}
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col mb-4">
+            <a class="card h-100 card-link" routerLink="changelog">
+                <app-icon
+                    class="card-img-top"
+                    icon="changelog"
+                    [inline]="false"
+                ></app-icon>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ 'routing.changelog' | translate }}
+                    </h4>
+                    <p
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                        class="card-text"
+                    >
+                        {{ 'help.changelog.description' | translate }}
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col mb-4">
+            <a class="card h-100 card-link" routerLink="faq">
+                <app-icon
+                    class="card-img-top"
+                    icon="faq"
+                    [inline]="false"
+                ></app-icon>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ 'routing.faq' | translate }}
+                    </h4>
+                    <p
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                        class="card-text"
+                    >
+                        {{ 'help.faq.description' | translate }}
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col mb-4">
+            <a class="card h-100 card-link" routerLink="support">
+                <app-icon
+                    class="card-img-top"
+                    icon="support"
+                    [inline]="false"
+                ></app-icon>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ 'routing.support' | translate }}
+                    </h4>
+                    <p
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                        class="card-text"
+                    >
+                        {{ 'help.support.description' | translate }}
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <br />
+
+    <a routerLink="licenses">
+        <app-icon icon="licenses"></app-icon>
+        {{ 'routing.licenses' | translate }}
+    </a>
+
+    <br />
+    <br />
+    <br />
+</div>

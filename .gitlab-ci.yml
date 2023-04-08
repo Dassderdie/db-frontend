@@ -1,0 +1,58 @@
+image: node:14-stretch
+variables:
+    FF_USE_FASTZIP: 'true'
+
+cache:
+    untracked: true
+    policy: push
+    key: ${CI_COMMIT_SHORT_SHA}
+    paths:
+        - node_modules/
+
+.pull_cached_node_modules:
+    cache:
+        untracked: true
+        key: ${CI_COMMIT_SHORT_SHA}
+        policy: pull
+
+stages:
+    - setup
+    - build
+    - test
+    - deploy
+
+install:
+    stage: setup
+    script:
+        - npm install
+
+build:
+    stage: build
+    extends: .pull_cached_node_modules
+    artifacts:
+        paths:
+            - dist
+        expire_in: 1 week
+    script:
+        - npm run build
+
+test:
+    stage: test
+    extends: .pull_cached_node_modules
+    before_script:
+        - apt-get update
+        - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        - apt install -y ./google-chrome*.deb;
+        - export CHROME_BIN=/usr/bin/google-chrome
+    script:
+        - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+
+deploy_staging:
+    stage: deploy
+    script:
+        - curl --request POST --user user:$DB_CD_UPDATER_PASSWORD https://db-cd-updater.aws-oxygen.s.koppadb.com/deploy-frontend/$CI_PIPELINE_ID
+    environment:
+        name: db-staging
+        url: https://db-staging.koppadb.com
+    only:
+        - develop

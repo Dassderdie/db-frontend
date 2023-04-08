@@ -1,0 +1,17 @@
+<div class="modal-body text-center">
+    <h3>
+        {{ description | translate }}
+    </h3>
+    <br />
+    <div
+        class="spinner-border"
+        style="width: 5rem; height: 5rem"
+        role="status"
+    ></div>
+    <p *ngIf="progressCounter.progress$ | async as progress">
+        {{ progress.current }} / {{ progress.maximum }}
+    </p>
+    <button class="btn btn-sm btn-outline-secondary" (click)="abort()">
+        {{ 'shared.utility.global-loading-placeholder.abort' | translate }}
+    </button>
+</div>

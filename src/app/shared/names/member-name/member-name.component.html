@@ -1,0 +1,27 @@
+<i
+    *ngIf="userId === anonymousUserId; else normalMember"
+    [title]="'roles.anonymousUser' | translate"
+>
+    <app-icon icon="anonymous"></app-icon>
+    {{ 'roles.anonymousUser' | translate }}
+</i>
+<ng-template #normalMember>
+    <i
+        *ngIf="role$ | async as roleValue; withInlineLoading"
+        [title]="roleValue.user.name + '#' + roleValue.user.id"
+    >
+        <ng-container
+            *ngIf="roleValue.userId !== (ownUser$ | async)?.id; else myself"
+        >
+            {{ roleValue.user.name
+            }}<span class="fw-light text-muted" style="font-size: 75%"
+                >#{{ roleValue.user.id | substring: 0:4 }}
+            </span>
+        </ng-container>
+        <ng-template #myself>
+            {{ 'roles.me' | translate }}
+        </ng-template>
+        <app-role-permissions [role]="roleValue" class="fw-light text-muted">
+        </app-role-permissions>
+    </i>
+</ng-template>

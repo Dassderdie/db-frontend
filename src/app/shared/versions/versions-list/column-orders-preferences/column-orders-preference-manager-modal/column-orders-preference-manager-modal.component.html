@@ -1,0 +1,114 @@
+<div class="modal-header">
+    <h5 class="modal-title">
+        <app-icon icon="column-order"></app-icon>
+        {{
+            'pages.tables.columnOrder-preferences.columnOrder-preferences-manager-modal.title'
+                | translate
+        }}
+    </h5>
+    <button
+        type="button"
+        class="btn-close"
+        (click)="bsModalRef.hide()"
+    ></button>
+</div>
+<div class="modal-body">
+    <!-- Limit the dragging area-->
+    <div class="drag-boundary" style="margin: -25px; padding: 25px">
+        <div
+            *ngIf="
+                columnOrdersPreferences
+                    ? columnOrdersPreferences[tableId]
+                    : undefined as columnOrdersPreference
+            "
+            cdkDropList
+            cdkDropListOrientation="vertical"
+            (cdkDropListDropped)="moveColumnOrderPreference($event)"
+            class="container"
+        >
+            <div
+                *ngFor="
+                    let columnOrderPreference of columnOrdersPreference;
+                    trackBy: null | trackByProperty;
+                    let index = index;
+                    let first = first
+                "
+                cdkDrag
+                [cdkDragDisabled]="!columnOrdersPreference.length"
+                cdkDragBoundary=".drag-boundary"
+                class="d-flex row"
+            >
+                <div
+                    cdkDragHandle
+                    [appInfoTooltip]="
+                        'pages.tables.columnOrder-preferences.columnOrder-preferences-manager-modal.drag-columnOrder-preference'
+                            | translate
+                    "
+                    class="align-middle col-auto p-0"
+                >
+                    <app-icon icon="drag-vertical" [inline]="false"></app-icon>
+                </div>
+                <div class="col">
+                    {{ columnOrderPreference.name }}
+                    <app-icon
+                        *ngIf="first"
+                        icon="info"
+                        [inline]="false"
+                        [appInfoTooltip]="
+                            'pages.entries.new-columnOrder-preference-modal.columnOrder-preference-name.first-applied-columnOrder-tipp'
+                                | translate
+                        "
+                        placement="right"
+                        class="ms-1 text-info"
+                    ></app-icon>
+                </div>
+                <button
+                    [appInfoTooltip]="
+                        'pages.tables.columnOrder-preferences.columnOrder-preferences-manager-modal.remove-columnOrder'
+                            | translate
+                    "
+                    (click)="
+                        removeColumnOrderPreference(columnOrderPreference.name)
+                    "
+                    class="btn btn-small link-danger col-auto"
+                    type="button"
+                >
+                    <app-icon icon="delete" [inline]="false"></app-icon>
+                </button>
+            </div>
+        </div>
+        <p
+            *ngIf="
+                !(
+                    columnOrdersPreferences &&
+                    columnOrdersPreferences[tableId]?.length
+                )
+            "
+            class="text-muted"
+        >
+            {{
+                'pages.tables.columnOrder-preferences.columnOrder-preferences-manager-modal.no-columnOrders'
+                    | translate
+            }}
+        </p>
+    </div>
+    <button
+        (click)="addColumnOrderPreference()"
+        class="btn btn-outline-status-new"
+        type="button"
+    >
+        <app-icon icon="create" [inline]="true"></app-icon>
+        {{
+            'pages.tables.columnOrder-preferences.columnOrder-preferences-manager-modal.add-column-order'
+                | translate
+        }}
+    </button>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">
+        {{
+            'pages.tables.columnOrder-preferences.columnOrder-preferences-manager-modal.close'
+                | translate
+        }}
+    </button>
+</div>

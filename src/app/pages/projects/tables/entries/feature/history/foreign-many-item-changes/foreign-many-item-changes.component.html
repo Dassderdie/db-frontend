@@ -1,0 +1,40 @@
+<!-- deleted or new -->
+<app-foreign-many-item-card
+    *ngIf="
+        intermediateVersion.deleted ||
+            previousIntermediateVersion === undefined;
+        else versionChangedOrLoading
+    "
+    [attribute]="attribute"
+    [intermediateVersion]="intermediateVersion"
+    [intermediateTable]="intermediateTable"
+    [tableId]="tableId"
+    [status]="intermediateVersion.deleted ? 'deleted' : 'new'"
+>
+    <app-entry-table
+        *ngIf="attribute.kindOptions.intermediateAttributes?.length"
+        [attributes]="attribute.kindOptions.intermediateAttributes"
+        [version]="intermediateVersion"
+        [displayHead]="false"
+    ></app-entry-table>
+</app-foreign-many-item-card>
+<ng-template #versionChangedOrLoading>
+    <ng-container *ngIf="previousIntermediateVersion !== null; withLoading">
+        <!-- changed -->
+        <app-foreign-many-item-card
+            [attribute]="attribute"
+            [intermediateVersion]="intermediateVersion"
+            [intermediateTable]="intermediateTable"
+            [tableId]="tableId"
+            status="changed"
+        >
+            <app-version-changes
+                *ngIf="attribute.kindOptions.intermediateAttributes?.length"
+                [attributes]="attribute.kindOptions.intermediateAttributes"
+                [currentVersion]="intermediateVersion"
+                [oldVersion]="previousIntermediateVersion"
+            >
+            </app-version-changes>
+        </app-foreign-many-item-card>
+    </ng-container>
+</ng-template>

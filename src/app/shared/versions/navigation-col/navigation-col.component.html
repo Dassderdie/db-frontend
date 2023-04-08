@@ -1,0 +1,48 @@
+<div class="btn-group" (click)="$event.stopPropagation()">
+    <button
+        class="btn btn-link ps-2 pe-2"
+        [routerLink]="
+            '/projects/' +
+            version.projectId +
+            '/tables/' +
+            version.tableId +
+            '/entries/' +
+            version.entryId +
+            '/overview'
+        "
+        [appInfoTooltip]="'routing.overview' | translate"
+    >
+        <app-icon icon="overview" [inline]="false"></app-icon>
+    </button>
+    <button
+        *ngIf="breakpoints.md | responsiveBreakpointExceeded | async"
+        class="btn btn-link ps-2 pe-2"
+        [routerLink]="
+            '/projects/' +
+            version.projectId +
+            '/tables/' +
+            version.tableId +
+            '/entries/' +
+            version.entryId +
+            '/history'
+        "
+        [appInfoTooltip]="'routing.history' | translate"
+    >
+        <app-icon icon="history" [inline]="false"></app-icon>
+    </button>
+    <button
+        class="btn link-danger ps-2 pe-2"
+        [routerLink]="
+            '/projects/' +
+            version.projectId +
+            '/tables/' +
+            version.tableId +
+            '/entries/' +
+            version.entryId +
+            '/edit'
+        "
+        [appInfoTooltip]="'routing.edit' | translate"
+    >
+        <app-icon icon="edit" [inline]="false"></app-icon>
+    </button>
+</div>

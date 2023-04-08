@@ -1,0 +1,16 @@
+<app-attribute-name
+    *ngIf="
+        attributeCol | attributeById: attributes as attribute;
+        else metaAttribute
+    "
+    [attribute]="attribute"
+    [displayKind]="displayAttributeKind"
+    [plural]="true"
+></app-attribute-name>
+
+<ng-template #metaAttribute>
+    <app-meta-attribute-name
+        [metaAttribute]="$any(attributeCol)"
+        [displayKind]="displayAttributeKind"
+    ></app-meta-attribute-name>
+</ng-template>

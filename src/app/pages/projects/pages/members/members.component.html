@@ -1,0 +1,86 @@
+<div class="page-container">
+    <h1>
+        <app-icon icon="project"></app-icon>
+        <ng-container *ngIf="project; withInlineLoading">
+            {{ project.name }}
+        </ng-container>
+    </h1>
+
+    <div class="row justify-content-between mb-3">
+        <div class="col-8">
+            <input
+                [(ngModel)]="searchText"
+                (ngModelChange)="updateFilteredRoles()"
+                [placeholder]="
+                    'pages.projects.generalSettings.searchMemberPlaceholder'
+                        | translate
+                "
+                [appAutoFocus]="true"
+                class="form-control search"
+                type="text"
+            />
+        </div>
+        <div *ngIf="project?.authenticatedUserRole?.inviteUsers" class="col-4">
+            <button
+                (click)="openInviteModal()"
+                type="button"
+                class="btn btn-primary float-end"
+            >
+                <app-icon icon="create"></app-icon>
+                <ng-container
+                    *ngIf="
+                        breakpoints.xs | responsiveBreakpointExceeded | async
+                    "
+                >
+                    {{
+                        'pages.projects.generalSettings.members.invite'
+                            | translate
+                    }}
+                </ng-container>
+            </button>
+        </div>
+    </div>
+
+    <tabset *ngIf="project && roles">
+        <tab
+            [heading]="
+                'pages.projects.generalSettings.members.title' | translate
+            "
+        >
+            <br />
+            <app-normal-members
+                *ngIf="filteredRoles"
+                [project]="project"
+                [roles]="filteredRoles"
+            ></app-normal-members>
+        </tab>
+        <tab
+            [heading]="
+                'pages.projects.generalSettings.members.invitations' | translate
+            "
+            [disabled]="!project.authenticatedUserRole.inviteUsers"
+        >
+            <br />
+            <app-pending-members
+                *ngIf="filteredPendingRoles"
+                [project]="project"
+                [pendingRoles]="filteredPendingRoles"
+            >
+            </app-pending-members>
+        </tab>
+        <tab
+            [heading]="
+                'pages.projects.generalSettings.members.revoked' | translate
+            "
+            [disabled]="!project.authenticatedUserRole.administrator"
+        >
+            <br />
+            <app-revoked-members
+                *ngIf="filteredRevokedRoles"
+                [project]="project"
+                [revokedRoles]="filteredRevokedRoles"
+            >
+            </app-revoked-members>
+        </tab>
+    </tabset>
+</div>

@@ -1,0 +1,122 @@
+<div class="page-container">
+    <ng-container *ngIf="newestVersion && table; withLoading">
+        <div class="row">
+            <h2 class="col">
+                <app-entry-name
+                    [newestVersion]="newestVersion"
+                    [table]="table"
+                ></app-entry-name>
+                <button
+                    (click)="shareService.shareUrl()"
+                    class="pb-0 pt-0 mb-n2 mt-n2 btn btn-link text-muted"
+                    [appInfoTooltip]="
+                        'pages.entries.overview.copyLink' | translate
+                    "
+                >
+                    <app-icon icon="share" style="font-size: 150%"></app-icon>
+                </button>
+                <div class="btn-group" dropdown>
+                    <button
+                        dropdownToggle
+                        type="button"
+                        class="btn btn-link text-muted dropdown-toggle"
+                        [appInfoTooltip]="
+                            'pages.entries.overview.label.body' | translate
+                        "
+                        placement="right"
+                    >
+                        <app-icon icon="qrcode"></app-icon>
+                        {{ 'pages.entries.overview.label.name' | translate }}
+                        <span class="caret"></span>
+                    </button>
+                    <ul
+                        *dropdownMenu
+                        (click)="downloadLabel()"
+                        class="
+                            dropdown-menu dropdown-menu-right
+                            max-height-none
+                        "
+                        role="menu"
+                    >
+                        <div class="me-1 ms-1">
+                            <img
+                                class="card-img-top"
+                                [src]="url | getQrCodeDataUrl | async"
+                            />
+                        </div>
+                        <li role="menuitem" class="text-center">
+                            <button
+                                class="
+                                    pb-0
+                                    pt-0
+                                    mb-n2
+                                    mt-n2
+                                    btn btn-link
+                                    text-secondary
+                                "
+                            >
+                                <app-icon icon="download"></app-icon>
+                                {{
+                                    'pages.entries.overview.download'
+                                        | translate
+                                }}
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <button
+                    (click)="createSimilarEntry()"
+                    class="pb-0 pt-0 mb-n2 mt-n2 btn btn-link"
+                    [class.text-muted]="!showEntryCreateShortcuts"
+                    [appInfoTooltip]="
+                        'pages.entries.overview.create-similar-entry.body'
+                            | translate
+                    "
+                >
+                    <app-icon icon="copy" style="font-size: 185%"></app-icon>
+                </button>
+                <button
+                    *ngIf="showEntryCreateShortcuts"
+                    routerLink="../../../new"
+                    class="pb-0 pt-0 mb-n2 mt-n2 btn btn-link"
+                    [appInfoTooltip]="
+                        'pages.entries.overview.create-new-entry.body'
+                            | translate
+                    "
+                >
+                    <app-icon icon="create" style="font-size: 185%"></app-icon>
+                </button>
+            </h2>
+            <app-show-hidden-attributes-input
+                [attributes]="table.attributes"
+                (showHiddenChanges)="showHidden = $event"
+                class="col-auto align-self-center"
+            ></app-show-hidden-attributes-input>
+        </div>
+        <app-entry-table
+            [version]="newestVersion"
+            [attributes]="table.attributes"
+            [showHidden]="showHidden"
+        ></app-entry-table>
+        <span
+            class="text-muted mt-3 float-end"
+            triggers="mouseenter:mouseleave"
+            [appInfoTooltip]="
+                'pages.entries.overview.last-updated'
+                    | translate
+                        : {
+                              date:
+                                  newestVersion.createdAt
+                                  | dateTimeFormatter: 'dateTime'
+                                  | async
+                          }
+            "
+        >
+            <app-icon icon="history"></app-icon>
+            <app-display-date
+                [date]="newestVersion.createdAt"
+                [options]="{ relative: true, format: 'long', noPopover: true }"
+            ></app-display-date>
+        </span>
+    </ng-container>
+</div>

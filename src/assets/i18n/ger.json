@@ -1,0 +1,1413 @@
+{
+    "add-entries-modal": {
+        "add": "Verbindung hinzufügen",
+        "all-checkbox-title": {
+            "select": "Alle geladenen Einträge hinzufügen",
+            "unselect": "Alle Einträge abwählen"
+        },
+        "checkbox-disabled-info": "Wenn Sie mehr Einträge auswählen würden, würde dies die maximale Anzahl an erlaubten Beziehungen übersteigen",
+        "close": "Schließen",
+        "titel": "Verbinden mit {{ name }}"
+    },
+    "anonymous-button": {
+        "description": "Stellen Sie ein, ob diese Aktion anonym durchgeführt werden soll"
+    },
+    "attribute-kinds": {
+        "boolean": {
+            "description": "Ein Wahrheitswert kann entweder wahr, falsch oder unbekannt sein. Anwendungsfälle: \"Archiviert\", \"Überprüft\", ...",
+            "name": "Wahrheitswert"
+        },
+        "date-time": {
+            "description": "Ein Datum, dass bis auf die ms genau bestimmt werden kann.",
+            "name": "Datum mit Zeit"
+        },
+        "date": {
+            "description": "Ein Datum, das bis auf den Tag genau bestimmt werden kann. Anwendungsfälle: \"Einlieferungsdatum\", ...",
+            "name": "Datum"
+        },
+        "email": {
+            "description": "",
+            "name": "E-Mail"
+        },
+        "files": {
+            "description": "Ein Attribut, über welches Dateien abgespeichert werden können.",
+            "name": "Dateien"
+        },
+        "foreign-single": {
+            "description": "Eine Beziehung zwischen zwei Tabellen. Die Besonderheit bei der Einfachauswahl ist, dass \"Maximum an Beziehungen\" 1 ist. Anwendungsfälle: \"Verarbeitungsart\", ... Kann verlustlos in eine Mehrfach-Beziehung umgewandelt werden.",
+            "name": "Einfache Beziehung"
+        },
+        "foreign": {
+            "description": "Eine Beziehung zwischen zwei oder mehr Tabellen. Intermediäre Attribute können die einzelnen Beziehungen genauer charakterisieren. Anwendungsfälle: \"Zutaten\", ...",
+            "name": "Mehrfach-Beziehung"
+        },
+        "number": {
+            "description": "Eine Ganz- oder Kommazahl. Beachten Sie, dass Nachkommastellen gespeicherter Werte nicht exakt gespeichert werden, sondern nur approximiert. Anwendungsfälle: \"Anzahl\", \"Höhe\", ...",
+            "name": "Zahl"
+        },
+        "string": {
+            "description": "Wörter, Sätze oder allgemein Zeichenketten. Anwendungsfälle: \"Name\", \"ID\", \"Kommentar\",...",
+            "name": "Zeichenkette"
+        },
+        "time": {
+            "description": "Ein Zeitpunkt, der bis auf die ms genau angegeben werden kann.",
+            "name": "Zeitpunkt"
+        },
+        "url": {
+            "description": "Ein vollständiger Link zu einer Website. Bsp.: \"https://www.google.com\"",
+            "name": "URL"
+        }
+    },
+    "auth": {
+        "auth-modal": {
+            "cancel": "Abbrechen",
+            "login": {
+                "email": {
+                    "name": "E-Mail-Ad­res­se",
+                    "placeholder": "Geben Sie Ihre E-Mail-Ad­res­se ein"
+                },
+                "login": "Anmelden",
+                "password": {
+                    "name": "Passwort",
+                    "placeholder": "Geben Sie Ihr Passwort ein"
+                },
+                "title": "Anmeldung"
+            },
+            "password-lost": "Anmeldedaten vergessen?",
+            "register": {
+                "confirmPassword": {
+                    "name": "Bestätige Passwort",
+                    "placeholder": "Geben Sie ihr Passwort erneut ein"
+                },
+                "email": {
+                    "name": "E-Mail-Ad­res­se",
+                    "placeholder": "Geben Sie Ihre E-Mail-Ad­res­se ein"
+                },
+                "name": {
+                    "name": "Name",
+                    "placeholder": "Geben Sie Ihren Namen ein"
+                },
+                "password": {
+                    "name": "Passwort",
+                    "placeholder": "Geben Sie Ihr Passwort ein "
+                },
+                "register": "Registrieren",
+                "title": "Registrierung"
+            },
+            "restricted-notice": "Es ist leider noch nicht möglich sich auf dieser Webseite zu registrieren. Falls Sie Interesse an einer Demo unserer Software haben, kontaktieren Sie uns bitte via",
+            "welcome": "Willkommen bei KoppaDb"
+        },
+        "email-verification-modal": {
+            "continue": "Fortfahren",
+            "description": "Überprüfen Sie bitte den Posteingang ihrer angegebenen E-Mail-Adresse drauf, ob Sie eine E-Mail von uns erhalten haben. Folgen Sie dem in dieser E-Mail enthaltenen Link.",
+            "small-description": "Sie können sich erst anmelden, nachdem Sie ihre E-Mail-Adresse bestätigt haben.",
+            "title": "Bitte bestätigen Sie ihre E-Mail-Adresse!"
+        },
+        "reset-password": {
+            "confirm": "Passwort bestätigen",
+            "email": {
+                "email": "E-Mail-Adresse",
+                "forgotten": "Bitte kontaktieren Sie den Support, falls Sie Ihre E-Mail-Adresse vergessen haben.",
+                "send": "Sende Zurücksetzungs-E-Mail"
+            },
+            "heading": "Setzten Sie Ihr Passwort zurück",
+            "instructions": "Wir können Ihnen eine Zurücksetzungs-E-Mail senden, mit Hilfe derer Sie Sie ein neues Passwort setzen können. Geben Sie dazu bitte Ihre mit diesem Benutzerkonto verknüpfte E-Mail-Adresse ein.",
+            "new-password": "Ihr neues Passwort",
+            "update": "Aktualisiere Passwort"
+        },
+        "verify-email": {
+            "continue-login": "Weiter zur Anmeldung",
+            "error": "Bei der Bestätigung ihrer E-Mail-Adresse ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder verständigen Sie den Support.",
+            "in-progress": "E-Mail-Adresse wird verifiziert...",
+            "success": "Ihre E-Mail-Adresse wurde erfolgreich bestätigt!",
+            "title": "E-Mail Bestätigung"
+        }
+    },
+    "boolean": {
+        "false": "falsch",
+        "null": "unbekannt",
+        "true": "wahr"
+    },
+    "breadcrumbs": {
+        "syncButton": "Neuladen"
+    },
+    "choose-table": {
+        "no-tables": "Es wurden noch keine Tabellen erstellt."
+    },
+    "company-details": {
+        "commercialRegister": {
+            "districtCourt": "Registergericht",
+            "name": "Handelsregistereintrag",
+            "registerId": "Registernummer"
+        },
+        "contact": "Kontakt",
+        "email": "E-Mail",
+        "phone-number": "Telefonnummer",
+        "representatives": "Vertretungsberechtigte",
+        "vatIdentificationNumber": "Umsatzsteueridentifikationsnummer"
+    },
+    "confirmation-modal": {
+        "confirm-string-placeholder": "Geben Sie hier den Bestätigungskey ein...",
+        "confirmation-key-description": "Wiederholen Sie den folgenden Bestätigungskey:",
+        "default-btn-cancel": "Abbrechen"
+    },
+    "copy-entry": {
+        "files-not-copied": {
+            "body": "Falls es regelmäßig nötig sein sollte Dateien zu duplizieren, sollten Sie in Erwägung ziehen die Tabellenstruktur mit Beziehungen umzustrukturieren.",
+            "title": "Dateien werden nicht kopiert"
+        },
+        "maximum-relations-error": {
+            "body": "Es können aktuell nicht mehr als 25 Beziehungen pro Attribut kopiert werden",
+            "title": "Nicht alle Beziehungen wurden kopiert"
+        }
+    },
+    "custom-form": {
+        "markdown": {
+            "make-larger": {
+                "tooltip": "Vergrößern"
+            },
+            "make-smaller": {
+                "tooltip": "Verkleinern"
+            },
+            "toggle-mode": {
+                "name": "Modus",
+                "tooltip": "Modus wechseln"
+            }
+        }
+    },
+    "custom-forms": {
+        "add-item": "Element hinzufügen",
+        "caps-lock-on": "FESTSTELLTASTE AKTIV.",
+        "default-increment": "Automatisch generiert",
+        "default-placeholder": "Geben Sie hier den Wert ein...",
+        "empty-list": "Die Liste ist leer...",
+        "files": {
+            "add-files": "Datei hinzufügen",
+            "add-placeholder": "Fügen Sie eine Datei hinzu oder ziehen Sie sie hier herein...",
+            "delete": "Diese Datei löschen",
+            "empty": "Es wurden keine Dateien bereits gespeichert...",
+            "errors": {
+                "invalidExtension": "\"{{ extension }}\" ist eine invalide Dateierweiterung. Versuchen Sie stattdessen eine von diesen: {{ allowedExtensions }}.",
+                "invalidName": "Der Dateiname passt nicht auf diese Schablone: \"{{ pattern }}\".",
+                "noFileName": "Invalider Dateiname."
+            },
+            "max-error": "Es sind nicht mehr als {{ max }} Dateien erlaubt. Das sind {{ difference }} zu viel.",
+            "min-error": "Es sind nicht weniger als {{ min }} Dateien erlaubt. Das sind {{ difference }} zu wenig.",
+            "rename": "Diese Datei umbenennen",
+            "restore": "Diese Datei wiederherstellen"
+        },
+        "foreign": {
+            "add-placeholder": "Es wurden noch keine Verknüpfungen hinzugefügt...",
+            "add-relations": "Verknüpfungen hinzufügen",
+            "empty": "Es sind keine Verknüpfungen bereits vorhanden...",
+            "max-error": "Es sind nicht mehr als {{ max }} Verknüpfungen erlaubt. Das sind {{ difference }} zu viel.",
+            "min-error": "Es sind nicht weniger als {{ min }} Verknüpfungen erlaubt. Das sind {{ difference }} zu wenig.",
+            "new-foreign-entry": "{{ foreignTableName }} erstellen",
+            "number-of-present-relations": "bereits erstellte Verknüpfungen"
+        },
+        "no-results": "Keine Ergebnisse",
+        "open-url": "Öffne Url"
+    },
+    "customForms": {
+        "delete": "Löschen",
+        "reset": "Zurücksetzen",
+        "save": "Speichern"
+    },
+    "deactivation": {
+        "btnOkText": "Änderungen verwerfen!",
+        "description": "Drücken Sie 'Änderungen verwerfen!', um ihre ungespeicherten Änderungen zu verwerfen und auf die neue Seite zu navigieren oder drücken Sie 'Abbrechen', um auf dieser Seite zu bleiben.",
+        "title": "Sie haben noch ungespeicherte Änderungen!"
+    },
+    "display-changelog": {
+        "show-complete-changelog": "Zur vollständigen Änderungsübersicht navigieren"
+    },
+    "display-foreign": {
+        "more-relations": "und {{ moreRelationsNumber }} weitere"
+    },
+    "empty-translation": "",
+    "entries": {
+        "show-hidden-input": {
+            "description": "",
+            "name": "Versteckte Attribute anzeigen"
+        }
+    },
+    "entry-name": {
+        "deleted": "Dieser Eintrag wurde gelöscht. Stellen Sie in seiner Historie eine alte Version wieder her oder editieren Sie den gelöschten Eintrag, um ihn wiederherzustellen."
+    },
+    "errors": {
+        "404": {
+            "description": "Die Seite konnte nicht gefunden werden. Bitte laden Sie die Seite erneut. Kontaktieren Sie den Support, falls dieses Problem bestehen bleibt. Sie können ihren Zurück-Knopf im Browser verwenden, um zur vorherigen Seite zurück zu navigieren oder drücken Sie den Knopf unter diesem Text, um zur Startseite zu gelangen.",
+            "home": "Startseite",
+            "lead": "Fehler 404",
+            "title": "Seite nicht gefunden!"
+        }
+    },
+    "file-preview": {
+        "browser-no-preview": "Ihr Browser unterstützt diesen Dateityp nicht. Sie können die Datei herunterladen und die Datei mit einem Programm auf Ihrem Computer versuchen anzuzeigen.",
+        "modal": {
+            "close": "Schließen"
+        },
+        "xss-confirm": {
+            "btn": "Dieser Datei vertrauen",
+            "description": "Es ist uns leider nicht möglich zu überprüfen, ob diese Datei eine XSS-Attacke durchführen kann. Drücken Sie den folgenden Knopf wenn Sie sicher sind, dass Sie der Datei vertrauen können."
+        }
+    },
+    "files-buttons": {
+        "download": {
+            "body": "Aktuell führen wir noch keine Virenscans beim Dateiupload durch. Entsprechend sollten Sie diese Datei nur herunterladen, wenn Sie dem Ersteller trauen.",
+            "title": "Herunterladen"
+        },
+        "preview": "Vorschau anzeigen"
+    },
+    "files": {
+        "actions": "Aktionen",
+        "creator": "Ersteller",
+        "empty": "Es sind keine Dateien vorhanden.",
+        "name": "Name",
+        "size": "Größe"
+    },
+    "footer": {
+        "scroll-top": "Nach oben"
+    },
+    "help": {
+        "changelog": {
+            "description": "Hier können Sie die Änderungen und Funktionen all unserer Aktualisierungen finden."
+        },
+        "faq": {
+            "description": "Finde die Antworten zu häufigen Fragen hier."
+        },
+        "features": {
+            "description": "Sie wissen nicht, was sie mit dieser Website anfangen sollen? - Schauen Sie hier für einen Überblick über unserer Funktionen."
+        },
+        "licenses": {
+            "description": "Diese Software baut auf mehreren Open-Source-Projekten auf, deren Lizenz rechtlich jeweils all ihren Kopien beigefügt sein muss. Es werden keine Benutzerinformationen in irgendeiner Art an diese Parteien weitergegeben. Wir danken allen Entwicklern, die sich für diese Projekte engagiert und somit diese Software mit ermöglicht haben."
+        },
+        "support": {
+            "description": "Hier können Sie unsere Kontaktinformationen für bspw. individuellen Support oder das Melden von Fehlern finden.",
+            "feature-request": {
+                "description": {
+                    "1": "Falls Ihnen oder Ihrer Organisation eine Funktion fehlt, dann lassen Sie es uns wissen über",
+                    "2": "Wir sind ununterbrochen dabei neue, nützliche Funktionalitäten zu programmieren und immer dankbar für neuen Input. Trotzdem kann es sein, dass manche Punkte länger dauern korrekt zu implementieren und manchmal sind gewisse Funktionalitäten sogar außerhalb der Reichweite unserer Software."
+                },
+                "title": "Funktionswünsche"
+            },
+            "general-contact": {
+                "1": "Falls Sie nicht wissen, wie oder wo Sie etwas mit mit unserer Software machen können, dann suchen Sie bitte zuerst in unserem",
+                "2": ". Wenn Sie dort keine Antwort auf ihre Frage gefunden haben, können Sie uns jederzeit unter ",
+                "3": " erreichen. Wir versuchen Ihnen so bald wie möglich zu antworten."
+            },
+            "intro": "Wir glauben daran, dass Anwendungssoftware intuitiv gestaltet sein sollte und keine großen Erklärungen oder dicke Handbücher nötig sind. In der Realität kommt es trotzdem zu Situationen, wo man als Nutzer alleine nicht mehr weiter kommt.",
+            "report-bug": {
+                "description": {
+                    "1": "Wenn Sie denken, dass Sie einen Softwarefehler gefunden haben, informieren Sie uns bitte über ",
+                    "2": "Sehr häufig sind folgende Informationen für uns dabei nützlich:",
+                    "3": "Fehlerberichte werden direkt von dem zuständigen Programmierteam gehandhabt."
+                },
+                "report-error": "Die angezeigte Fehlermeldung - Entfernen Sie bitte alle vertraulichen Informationen von dem protokollierten Fehler!",
+                "report-expected-behaviour": "Wie sieht das von Ihnen ohne den Fehler erwartete Verhalten aus?",
+                "report-media": "Eine Bildschirmaufnahme, kurzes Video oder GIF, welches das Problem zeigt. Sie können Bildschirmaufnahmen erstellen, indem Sie unter Windows {{ windows }} oder unter MAC {{ mac }} drücken und den relevanten Teil des Bildschirmes auswählen.",
+                "report-reproduction": "Eine kurze Erklärung, wie wir selbst den Fehler reproduzieren können.",
+                "report-url": {
+                    "1": "Die URL von der Seite, auf welcher der Fehler auftrat, wie z.B. ",
+                    "2": ". Bitte überprüfen Sie, dass dabei keine vertraulichen Informationen mehr enthalten sind."
+                },
+                "title": "Programmfehler melden"
+            }
+        }
+    },
+    "home": {
+        "help": {
+            "description": "Hier finden Sie Hilfestellungen zum Umgang mit dieser Software."
+        },
+        "navbar": {
+            "authenticate": "Anmelden / Registrieren",
+            "changeLanguage": "Sprache ändern",
+            "logout": "Abmelden",
+            "settings": "Benutzereinstellungen"
+        },
+        "projects": {
+            "description": "Hier finden Sie eine Übersicht über alle ihre Projekte. In diesen können Sie u.a. Tabellen oder Einträge erstellen, bearbeiten oder suchen."
+        },
+        "scanner": {
+            "description": "Scannen Sie QR-Codes von Einträgen ein und lassen Sie sich diese übersichtlich darstellen."
+        },
+        "user-profile": {
+            "description": "Ändern Sie hier ihre persönlichen Einstellungen, wie z.B. Sprache, E-Mail oder ihren Namen."
+        }
+    },
+    "kind-options": {
+        "allowedFileExtensions": {
+            "description": "Alle Dateiendungen (ohne Punkt: txt, png, xls), die für dieses Attribut zulässig sind. Wenn hier keine Dateiendungen angegeben werden, sind alle Dateiendungen erlaubt.",
+            "empty": "Alle Dateiendungen sind zulässig.",
+            "name": "Zulässige Dateiendungen"
+        },
+        "default-increment-prefix": {
+            "description": "",
+            "name": "Prefix für automatische Generierung"
+        },
+        "default-increment": {
+            "description": "Ob die Werte für dieses Attribut automatisch generiert werden sollen.",
+            "name": "Automatische Generierung"
+        },
+        "fileNamePattern": {
+            "description": "",
+            "name": "Schablone für Dateinamen"
+        },
+        "foreignRelationshipMax": {
+            "description": "Maximale Anzahl an Beziehungen für das entsprechende Attribut in der verknüpften Tabelle",
+            "name": "Maximum an Fremdschlüsselbeziehungen"
+        },
+        "foreignRelationshipMin": {
+            "description": "Minimale Anzahl an Beziehungen für das entsprechende Attribut in der verknüpften Tabelle",
+            "name": "Minimum an Fremdschlüsselbeziehungen"
+        },
+        "hidden": {
+            "description": "Versteckte Attribute werden standardmäßig nicht angezeigt. Dies ist insbesondere nützlich für nicht mehr relevante Attribute, deren Daten aber gelegentlich doch noch gebraucht werden oder weiterhin gespeichert bleiben sollen.",
+            "name": "Versteckt"
+        },
+        "indexed": {
+            "description": "Nach einem indexierten Attribut kann schneller gesucht und sortiert werden. In den meisten Fällen sollte die Indexierung aktiviert werden.",
+            "name": "Indexiert"
+        },
+        "intermediateAttributes": "Intermediäre Attribute",
+        "markdown": {
+            "description": "Markdown ermöglicht erweiterte Stil- & Formatierungsoptionen, wie bspw. Überschriften, Aufzählungen oder Tabellen",
+            "name": "Markdown"
+        },
+        "maximum": {
+            "description": "Der Wert dieses Attributs darf nicht größer sein als die hier spezifizierte der Maximalwert. Wenn der Maximalwert leer ist, gibt es keine Beschränkung nach oben.",
+            "name": "Maximalwert"
+        },
+        "maximumDate": {
+            "description": "Der Wert dieses Attributs darf nicht größer sein als die hier spezifizierte der Maximalwert. Wenn der Maximalwert leer ist, gibt es keine Beschränkung nach oben.",
+            "name": "Maximalwert"
+        },
+        "maximumDateTime": {
+            "description": "Der Wert dieses Attributs darf nicht größer sein als die hier spezifizierte der Maximalwert. Wenn der Maximalwert leer ist, gibt es keine Beschränkung nach oben.",
+            "name": "Maximalwert"
+        },
+        "maximumFileAmount": {
+            "description": "Es dürfen nicht mehr Dateien pro Eintrag hochgeladen werden als hier spezifiziert. Wenn dieser Wert leer ist, gibt es keine Beschränkung der Anzahl nach oben.",
+            "name": "Maximale Anzahl an Dateien"
+        },
+        "maximumLength": {
+            "description": "Der Wert dieses Attributs darf nicht länger sein als die hier spezifizierte Maximallänge. Wenn die Maximallänge leer ist, gibt es keine Beschränkung nach oben.",
+            "name": "Maximallänge"
+        },
+        "maximumTime": {
+            "description": "Der Wert dieses Attributs darf nicht größer sein als der hier spezifizierte Maximalwert. Wenn der Maximalwert leer ist, gibt es keine Beschränkung nach oben.",
+            "name": "Maximalwert"
+        },
+        "minimum": {
+            "description": "Der Wert dieses Attributs darf nicht kleiner sein als der hier spezifizierte Minimalwert. Wenn der Minimalwert leer ist, gibt es keine Beschränkung nach unten.",
+            "name": "Minimalwert"
+        },
+        "minimumDate": {
+            "description": "Der Wert dieses Attributs darf nicht kleiner sein als der  hier spezifizierte Minimalwert. Wenn der Minimalwert leer ist, gibt es keine Beschränkung nach unten.",
+            "name": "Minimalwert"
+        },
+        "minimumDateTime": {
+            "description": "Der Wert dieses Attributs darf nicht kleiner sein als der hier spezifizierte Minimalwert. Wenn der Minimalwert leer ist, gibt es keine Beschränkung nach unten.",
+            "name": "Minimalwert"
+        },
+        "minimumFileAmount": {
+            "description": "Es dürfen nicht weniger Dateien pro Eintrag hochgeladen werden als hier spezifiziert. Wenn dieser Wert leer ist, gibt es keine Beschränkung der Anzahl nach unten.",
+            "name": "Minimale Anzahl an Dateien"
+        },
+        "minimumLength": {
+            "description": "Der Wert dieses Attributs darf nicht kürzer sein als die hier spezifizierte Minimallänge. Wenn die Minimallänge leer ist, gibt es keine Beschränkung nach unten.",
+            "name": "Minimallänge"
+        },
+        "minimumTime": {
+            "description": "Der Wert dieses Attributs darf nicht kleiner sein als der hier spezifizierte Minimalwert. Wenn der Minimalwert leer ist, gibt es keine Beschränkung nach unten.",
+            "name": "Minimalwert"
+        },
+        "multipleOf": {
+            "description": "Der Wert dieses Attributs muss ein Vielfaches von dem hier spezifizierten Wert sein. Wenn der Wert ein Vielfaches von 1 ist, so muss bspw. der Wert dieses Attributs eine ganze Zahl sein. Wenn \"Vielfaches von\" leer ist, gibt es keine derartige Beschränkung.",
+            "name": "Vielfaches von"
+        },
+        "pattern": {
+            "description": "Ein regulärer Ausdruck, der auf den Wert des Attributs zutreffen muss.<br> Beispiele: <ul class=\"text-start\"><li><code>ab</code> = der Wert muss mindestens einmal ab enthalten</li><li><code>^[a-zA-Z0-9]*$</code> = der Wert darf ausschließlich aus Klein- oder Großbuchstaben oder Ziffern bestehen</li><li><code>^a</code> = der Wert muss mit einem kleinen a Beginnen</li></ul>",
+            "name": "Schablone"
+        },
+        "relationshipMax": {
+            "description": "Die maximale Anzahl an Beziehungen, die diesem Attribut zugeordnet werden dürfen. Wenn sie hier nicht spezifiziert ist, gibt es keine Begrenzung nach oben. Falls das Maximum an Beziehungen 1 ist, wird ein vereinfachtes Eingabefeld angezeigt.",
+            "name": "Maximum an Beziehungen"
+        },
+        "relationshipMin": {
+            "description": "Die minimale Anzahl an Beziehungen, die diesem Attribut zugeordnet werden dürfen. Wenn sie hier nicht spezifiziert ist, gibt es keine Begrenzung nach unten.",
+            "name": "Minimum an Beziehungen"
+        },
+        "required": {
+            "description": "Wenn der Wert dieses Attributs benötigt wird, darf er nicht leer sein.",
+            "name": "Benötigt"
+        },
+        "text": {
+            "description": "Ob das Eingabefeld für dieses Attribut größer sein soll. Oft verwendet für Kommentare o.ä.",
+            "name": "Großes Textfeld"
+        },
+        "unique": {
+            "description": "Kein Wert für dieses Attribut darf mehr als einmal vergeben werden. Insbesondere für IDs oder Namen sollte dies aktiviert werden.",
+            "name": "Eindeutig"
+        },
+        "unit": {
+            "description": "Zum Beispiel kg oder μm",
+            "name": "Einheit"
+        }
+    },
+    "koppaDb-customer-for": "for",
+    "landing": {
+        "compatible": {
+            "description": "Unsere Software können Sie einfach und direkt auf Ihrem Desktop-PC, Tablet oder Smartphone aufrufen und ausführen.",
+            "title": "Kompatibel zu ihren Ansprüchen"
+        },
+        "customer-disclaimer": {
+            "1": "Diese Webseite ist ausschließlich für Mitarbeiter der folgenden Organisation bestimmt",
+            "2": "Unsere offizielle öffentliche Webseite finden Sie unter"
+        },
+        "end": {
+            "questions": "Falls Sie Fragen haben können Sie uns hier kontaktieren:",
+            "title": "Noch nicht überzeugt?"
+        },
+        "i18n": {
+            "cto": "Gibt es eine noch nicht unterstützte Sprache, die Sie benötigen? Kontaktieren Sie uns",
+            "cto-link": "hier",
+            "description": "Sie sind eine international agierende Institution mit Mitarbeitern, die über den gesamten Globus verteilt sind? Sorgen Sie sich nicht! Wir unterstützen verschiedene Sprachen.",
+            "title": "Internationalisierung"
+        },
+        "top": {
+            "link": "Haben Sie schon einen Account?",
+            "sign-up": "Registrieren Sie sich jetzt!",
+            "subtitle": "Bringen Sie Ordnung in Ihre Daten - <br /> Einfach & Zukunftssicher"
+        },
+        "updates": {
+            "description": "Erleben Sie schnellen und unkomplizierten Support sowie regelmäßige Updates, die Verbesserungen und neue Funktionen bringen.",
+            "title": "Immer auf der sicheren Seite"
+        }
+    },
+    "languages": {
+        "eng": "Englisch",
+        "ger": "Deutsch"
+    },
+    "messages": {
+        "auth": {
+            "error": {
+                "body": "Bei der Verarbeitung ihrer Anfrage ist ein Fehler aufgetreten. Bitte kontaktieren Sie den Support, falls dieser Fehler bestehen bleibt.",
+                "title": "Fehler während der Authentifizierung!"
+            },
+            "logout": {
+                "body": "Sie können sich jederzeit wieder anmelden.",
+                "title": "Sie wurden erfolgreich abgemeldet!"
+            },
+            "request-auth-email-change": {
+                "email-success": {
+                    "body": "Weitere Anweisungen zur Änderung Ihrer Authentifizierungs-E-Mail-Adresse wurden an Ihre aktuelle Authentifizierungs-E-Mail-Adresse geschickt.",
+                    "title": "E-Mail wurde gesendet!"
+                }
+            },
+            "reset-password": {
+                "email-success": {
+                    "body": "Weitere Anweisungen zum Zurücksetzen ihres Passwortes wurden an Ihre Authentifizierungs-E-Mail-Adresse geschickt.",
+                    "title": "E-Mail wurde gesendet!"
+                },
+                "invalid": {
+                    "body": "Dieser Link ist abgelaufen oder falsch. Bitte versuchen Sie es erneut!",
+                    "title": "Falscher Link"
+                },
+                "password-success": "Passwort wurde erfolgreich geändert!"
+            }
+        },
+        "error": {
+            "default": {
+                "body": "Bei der Verarbeitung ihrer Anfrage ist ein Fehler aufgetreten. Bitte kontaktieren Sie den Support, falls dieser Fehler bestehen bleibt.",
+                "title": "Fehler!"
+            }
+        },
+        "linkCopied": {
+            "body": "Sie können den Link nun in bspw. eine E-Mail einfügen.",
+            "title": "Link wurde erfolgreich kopiert!"
+        },
+        "officially-only-german": {
+            "body": "Das Vorhandensein der Englischen Übersetzung ist aktuell ausschließlich als Vorschau für die Funktionalität des Endproduktes zu verstehen.",
+            "title": "Diese Webseite richtet sich aktuell nur an deutschsprachige Besucher"
+        },
+        "query-storage": {
+            "value-converted": {
+                "body": "",
+                "title": "Link wurde aktualisiert"
+            }
+        },
+        "scanner": {
+            "content-error": {
+                "body": "Sie haben entweder nicht die erforderlichen Berechtigungen oder der QR-Code ist invalid.",
+                "title": "Fehler beim Anzeigen der Ergebnisse"
+            },
+            "url-error": {
+                "body": "Wenn Sie sich sicher sind, dass dieser QR-Code zu unserem Label-System gehört: Kontaktieren sie bitte den Support.",
+                "title": "Ungültiger QR-Code"
+            }
+        },
+        "shared-worker-fallback": {
+            "body": "Ihr Browser unterstützt SharedWorker nicht. Stattdessen nutzen wir eine Ausweichlösung. Das hat allerdings zur Folge, dass mehrere offene Tabs sich nicht automatisch synchronisieren können. Wir empfehlen die aktuellsten Versionen von Chrome oder Firefox für den Desktop bzw. Firefox für mobile Geräte.",
+            "title": "Einige Funktionen fehlen..."
+        },
+        "update-available": {
+            "body": "Das Update wurde bereits im Hintergrund heruntergeladen und muss nur noch installiert werden. Bitte laden Sie die Seite neu.",
+            "btn": "Jetzt neu laden",
+            "title": "Ein neues Update ist verfügbar"
+        },
+        "user": {
+            "add-email": {
+                "email-success": {
+                    "body": "Wir haben Ihnen eine E-Mail mit einem Verifizierungslink gesendet.",
+                    "title": "E-Mail wurde gesendet!"
+                }
+            },
+            "change-auth-mail": {
+                "change-success": {
+                    "body": "Vergessen Sie nicht bei der nächsten Anmeldung die neue Authentifizierungs-E-Mail zu verwenden.",
+                    "title": "Authentifizierungs-E-Mail wurde erfolgreich verändert!"
+                },
+                "invalid": {
+                    "body": "Bitte fordern Sie einen neuen Link.",
+                    "title": "Dieser Link ist inkorrekt!"
+                }
+            }
+        },
+        "version-missmatch": {
+            "body": "Die Version des Service-Workers stimmt nicht mit der dieses Tabs überein. Bitte schließen Sie alle Tabs dieser Website und starten Sie ihren Browser neu. Kontaktieren Sie bitte den Support, sollte diese Nachricht danach erneut erscheinen.",
+            "title": "Versionen stimmen nicht überein"
+        }
+    },
+    "meta-attributes": {
+        "createdAt": "Version erstellt am",
+        "creatorId": "Ersteller",
+        "deleted": "gelöscht",
+        "entryCreatedAt": "Eintrag erstellt am",
+        "invalidatedAt": "Version veraltet seit",
+        "invalidatorId": "Überarbeiter"
+    },
+    "pages": {
+        "entries": {
+            "addColumn": "Spalte hinzufügen",
+            "apply-new-filters": "Filter anwenden",
+            "column-orders": {
+                "default-all-attributes": "TODO",
+                "repair-warning": {
+                    "body": "TODO",
+                    "title": "TODO"
+                }
+            },
+            "edit": {
+                "delete-success-message": {
+                    "body": "Sie können den Eintrag jederzeit wiederherstellen.",
+                    "title": "Eintrag erfolgreich gelöscht."
+                },
+                "delete": {
+                    "description": "Dieser Eintrag wird nicht mehr bei normalen Suchen auftauchen. Sie können den Eintrag trotzdem jederzeit wiederherstellen. Achtung: alle Fremdschlüsselbeziehungen müssen manuell wiederhergestellt werden.",
+                    "ok": "Eintrag löschen",
+                    "title": "Wollen Sie diesen Eintrag wirklich löschen?"
+                },
+                "edit-success-message": {
+                    "body": "Die Änderungen sind in seiner Historie vermerkt.",
+                    "title": "Eintrag erfolgreich bearbeitet."
+                }
+            },
+            "files-input": {
+                "confirm-extension-change": {
+                    "btn-ok-text": "Umbenennen",
+                    "description": "Wenn Sie die Dateinamenerweiterung von \"{{ oldExtension }}\" zu \"{{ newExtension }}\" ändern, könnte die Datei nicht mehr geöffnet werden können. Wollen Sie diese Datei wirklich umbennen?",
+                    "title": "Umbenennen ändert Dateinamenerweiterung"
+                }
+            },
+            "filter": {
+                "add-expression": "Attribut",
+                "add-group": "Gruppe",
+                "advanced-mode": {
+                    "descriptions": "Wenn der erweiterte Modus aktiviert ist, können auch Filter für Metadaten erstellt werden. Bspw. kann nach bereits gelöschten oder überarbeiteten Versionen gesucht werden.",
+                    "name": "Erweitert"
+                },
+                "and": "UND",
+                "clear": "Leeren",
+                "get-all-entries": "Alle Einträge",
+                "get-all-versions": "Alle Versionen aller Einträge",
+                "group": "Gruppe",
+                "invalid-expression": {
+                    "description": "Dieser Ausdruck ist nicht mehr korrekt. Wahrscheinlich weil das entsprechende Attribut nicht mehr existiert. Löschen Sie diesen Ausdruck bitte.",
+                    "name": "Invalider Ausdruck"
+                },
+                "maximum-filter-preferences-tooltip": "Sie können nur {{ maximumNumberOfFilterPreferences }} Filter speichern.",
+                "no-expression": "Sie müssen mindestens einen Ausdruck oder eine Gruppe hinzufügen",
+                "not": "NOT",
+                "not-available-anymore-message": {
+                    "title": "Filter ist nicht mehr vorhanden"
+                },
+                "or": "ODER",
+                "remove": "Entfernen"
+            },
+            "filters": {
+                "all-entries": "Alle Einträge"
+            },
+            "history": {
+                "by": "von",
+                "confirmation": {
+                    "description": "Diese Aktion wird eine neue Version mit den Werten der ausgewählten Version erstellen.",
+                    "description-foreign": "Diese Aktion wird eine neue Version mit den Werten der ausgewählten Version erstellen. Fremdschlüsselbeziehungen werden dabei nicht wiederhergestellt.",
+                    "ok": "Wiederherstellen",
+                    "title": "Wollen Sie wirklich diese Version wiederherstellen?"
+                },
+                "foreign": {
+                    "number-of-changed-relations": "bearbeitete Verknüpfungen"
+                },
+                "newValue": "Neuer Wert",
+                "oldValue": "Alter Wert",
+                "restore-message": {
+                    "body": "",
+                    "title": "Version erfolgreich wiederhergestellt!"
+                },
+                "restore": {
+                    "body": "Beim Wiederherstellen wird eine neue Version dieses Eintrages erstellt, mit den Werten dieser Version. Somit gehen keine Informationen verloren.",
+                    "name": "Wiederherstellen"
+                },
+                "showAll": "Alle anzeigen",
+                "startValue": "Wert"
+            },
+            "new-column-order-preference-modal": {
+                "column-order-preference-name": {
+                    "unique-validator": "Dieser Name wird bereits genutzt."
+                }
+            },
+            "new-columnOrder-preference-modal": {
+                "columnOrder-preference-name": {
+                    "first-applied-columnOrder-tipp": "Diese Reihenfolge wird standardmäßig genutzt, weil sie ganz oben steht."
+                }
+            },
+            "new-filter-preference-modal": {
+                "filter-preference-name": {
+                    "cancel": "Abbrechen",
+                    "create": "Neuen Filter speichern",
+                    "description": "Sie müssen nur noch den gewünschten Namen für den aktuell ausgewählten Filter eingeben.",
+                    "first-applied-filter-tipp": "Der erste Filter in der Liste wird immer zuerst ausgewählt.",
+                    "name": "Name",
+                    "unique-validator": "Es existiert bereits ein Filter mit dem Namen \"{{ value }}\"."
+                },
+                "title": "Neuen Filter speichern"
+            },
+            "noEntries": "Es sind keine passenden Einträge vorhanden.",
+            "overview": {
+                "copyLink": "Kopiere den (gekürzten) Link zu dieser Seite",
+                "create-new-entry": {
+                    "body": "Erstelle einen weiteren Eintrag"
+                },
+                "create-similar-entry": {
+                    "body": "Sie können nach dem Duplizieren dieses Eintrages noch Änderungen durchführen, bevor Sie den neuen Eintrag speichern. Dateien werden nicht kopiert."
+                },
+                "download": "Herunterladen",
+                "label": {
+                    "body": "Für jeden Eintrag generieren wir einen QR-Code der direkt zu dieser Seite leitet. Sie können ihn bspw. ausdrucken und auf das Einzelteil kleben, das durch den Eintrag repräsentiert wird. Eingescannt werden kann er mit einem Smartphone entweder über ein beliebige QR-Code-Scanner-App oder direkt über den Scanner auf unserer Webseite.",
+                    "name": "Label"
+                },
+                "last-updated": "Dieser Eintrag wurde zuletzt am {{ date }} bearbeitet."
+            },
+            "restore-intermediate": "Wiederherstellen",
+            "results": "Ergebnisse"
+        },
+        "entry-search": {
+            "manage-filters": "Filter verwalten"
+        },
+        "help": {
+            "faq": {
+                "always-up-to-date": "Wir versuchen diesen Bereich immer aktuell zu halten und weitere Fragen und Antworten hinzuzufügen.",
+                "copy-link": {
+                    "popover": "Klicken Sie hier, um den Link zu dieser Frage zu kopieren"
+                },
+                "no-questions-found": "Keine passenden Fragen gefunden",
+                "search-placeholder": "Suche Frage",
+                "submit-question": "Falls Sie eine Frage haben, die hier noch nicht beantwortet wurde, dann kontaktieren Sie uns bitte über "
+            }
+        },
+        "join-project": {
+            "accept-success-message": {
+                "body": "",
+                "title": "Einladung erfolgreich akzeptiert."
+            },
+            "accept": {
+                "btn": "Annehmen!",
+                "description": "Wollen Sie die Einladung zu {{ name }} annehmen?",
+                "title": "Einladung annehmen"
+            },
+            "expired": {
+                "description": "Versuchen Sie bitte erneut zu {{ name }} eingeladen zu werden oder kontaktieren Sie den Support.",
+                "title": "Diese Einladung ist abgelaufen"
+            },
+            "invalid": {
+                "description": "Versuchen Sie bitte erneut eingeladen zu werden oder kontaktieren Sie den Support.",
+                "title": "Dieser Einladungslink ist inkorrekt."
+            },
+            "login": {
+                "description": "Melden Sie sich an, um diese Einladung zu akzeptieren.",
+                "title": "Sie sind nicht angemeldet"
+            },
+            "user": {
+                "description": "Melden Sie sich bitte mit dem richtigen Account an, um {{ name }} beizutreten.",
+                "title": "Diese Einladung ist nicht für Sie bestimmt"
+            }
+        },
+        "members": {
+            "edit-success-message": {
+                "body": "",
+                "title": "Mitglied erfolgreich bearbeitet."
+            }
+        },
+        "projects": {
+            "addProjectsModal": {
+                "cancel": "Abbrechen",
+                "create": "Projekt erstellen",
+                "description": "Projektbeschreibung",
+                "name": "Projektname",
+                "title": "Neues Projekt erstellen"
+            },
+            "applying-template-description": "Vorlage wird angewendet...",
+            "create-success-message": {
+                "body": "",
+                "title": "Projekt erfolgreich erstellt."
+            },
+            "edit-success-message": {
+                "body": "",
+                "title": "Projekt erfolgreich bearbeitet."
+            },
+            "generalSettings": {
+                "allowAnonymousVersionCreation": "Anonyme Versionserstellung gestatten",
+                "confirm-delete": {
+                    "btnOkText": "Projekt löschen",
+                    "description": "Wenn Sie dieses Projekt löschen, werden alle Informationen über es endgültig vernichtet.",
+                    "title": "Wollen Sie dieses Projekt wirklich löschen?"
+                },
+                "confirm-invitation-revoke": {
+                    "btnOkText": "Einladung zurückziehen",
+                    "description": "Sie können die Person jederzeit erneut einladen.",
+                    "title": "Wollen Sie diese Einladung wirklich zurückziehen?"
+                },
+                "confirmLeave": {
+                    "btnOkText": "Projekt verlassen",
+                    "description": "Wenn Sie dieses Projekt verlassen, haben Sie keinen Zugriff mehr darauf.",
+                    "title": "Wollen Sie dieses Projekt wirklich verlassen?"
+                },
+                "confirmRemove": {
+                    "btnOkText": "Mitglied entfernen",
+                    "description": "Diese Aktion wird keine Auswirkungen auf die in diesem Projekt gespeicherten Daten haben.",
+                    "title": "Wollen Sie dieses Mitglied wirklich aus dem Projekt ausschließen?"
+                },
+                "delete-success": {
+                    "title": "Das Projekt wurde erfolgreich gelöscht"
+                },
+                "description": "Projektbeschreibung",
+                "members": {
+                    "by": "von",
+                    "createdAt": "Eingeladen am",
+                    "invitations": "Einladungen",
+                    "invite": "Einladen",
+                    "manage": "Bearbeiten",
+                    "noMatchingPendingRoles": "Es gibt keine passenden Einladungen",
+                    "noMatchingRevokedRoles": "Es gibt keine passenden ehemaligen Mitglieder",
+                    "noMatchingRoles": "Es gibt keine passenden Mitglieder",
+                    "permissions": {
+                        "administrator": {
+                            "description": "Hat vollständige Kontrolle über das Projekt"
+                        },
+                        "givePermissions": {
+                            "description": "Kann Rechte vergeben"
+                        },
+                        "invite": {
+                            "description": "Kann neue Mitglieder einladen"
+                        }
+                    },
+                    "remove": "Entfernen",
+                    "revoke-invitation": "Zurückziehen",
+                    "revoked": "Ehemalige Mitglieder",
+                    "revokedAt": "Entfernt am:",
+                    "title": "Mitglieder"
+                },
+                "name": "Projektname",
+                "searchMemberPlaceholder": "Mitglied suchen"
+            },
+            "inviteModal": {
+                "cancel": "Abbrechen",
+                "email": "E-Mail",
+                "emailPlaceholder": "Geben Sie die E-Mail-Adresse des einzuladenden Benutzers ein",
+                "invite": "Benutzer einladen",
+                "title": "Benutzer einladen"
+            },
+            "leave-project": {
+                "last-admin": "Als einziger Admin können Sie das Projekt nicht verlassen. Löschen Sie das Projekt stattdessen oder setzen Sie einen weiteren Admin ein.",
+                "leave-btn": "Projekt verlassen"
+            },
+            "leave-success-message": {
+                "body": "Sie müssen erneut eingeladen werden, um wieder Zugriff zu erhalten.",
+                "title": "Sie haben das Projekt verlassen."
+            },
+            "list": {
+                "apply-template": "Vorlage anwenden",
+                "newProject": "Neues Projekt",
+                "no-projects-yet": {
+                    "apply-project-template": "Erstelle ein Demo-Projekt!",
+                    "text": "Sie sind noch kein Mitglied in einem Projekt. Lassen Sie sich von einem Projekt-Admin einladen oder erstellen Sie Ihr eigenes Projekt."
+                },
+                "noSearchResults": "Keine Projekte gefunden",
+                "searchPlaceholder": "Projekt suchen",
+                "title": "Ihre Projekte"
+            },
+            "no-tables-editor-on-xs": "Diese Funktion ist auf kleinen Endgeräten deaktiviert.",
+            "overview": {
+                "drag-favorite": "Ändern Sie die Reihenfolge Ihrer Favoriten durch Ziehen",
+                "favorites": {
+                    "add": "Zu Favoriten hinzufügen",
+                    "maximum-reached": "Maximale Anzahl an Favoriten erreicht",
+                    "remove": "Von Favoriten entfernen"
+                },
+                "new": "Neu",
+                "newTitle": "Neue Einträge erstellen",
+                "noTables": "Keine passenden Tabellen gefunden.",
+                "permission": {
+                    "3": "Sie können auch Einträge anderer Benutzer in dieser Tabelle verändern oder löschen"
+                },
+                "search": "Suchen",
+                "searchPlaceholder": "Nach Tabelle suchen",
+                "searchTitle": "Suchen"
+            },
+            "project-member": {
+                "form": {
+                    "admin": {
+                        "displayName": "Administrator"
+                    },
+                    "invite": {
+                        "displayName": "Neue Benutzer einladen"
+                    },
+                    "permissions": {
+                        "displayName": "Rechte vergeben"
+                    }
+                },
+                "no-permission": "Sie haben keine Berechtigung die Rechte dieses Projektmitglieds zu bearbeiten",
+                "permissions": "Rechte in Projekt"
+            },
+            "settings": {
+                "danger-zone": "Gefahrenzone",
+                "delete": "Projekt löschen",
+                "export": "Exportieren"
+            },
+            "tables": {
+                "create-entry": {
+                    "create-success-message": {
+                        "body": "",
+                        "title": "Eintrag erfolgreich erstellt."
+                    }
+                }
+            }
+        },
+        "relation-explorer": {
+            "expand-tool": {
+                "description": "Durch Klicken auf einen blauen Eintrag werden dessen Beziehungen angezeigt."
+            },
+            "inspect-tool": {
+                "description": "Durch Klicken auf einen Eintrag wird eine detaillierte Ansicht unter dem Graphen angezeigt."
+            },
+            "remove-tool": {
+                "description": "Durch Klicken auf einen blauen Eintrag wird dieser vom Graphen entfernt."
+            }
+        },
+        "relations-explorer": {
+            "not-all-versions-shown-message": {
+                "body": "Zum jetzigen Zeitpunkt werden nur 25 Beziehungen pro Attribut und Eintrag unterstützt.",
+                "title": "Es konnten nicht alle Beziehungen geladen werden"
+            }
+        },
+        "roles": {
+            "invitation-success-message": {
+                "body": "",
+                "title": "Einladung wurde versendet."
+            },
+            "remove-success-message": {
+                "body": "",
+                "title": "Mitarbeiter erfolgreich entfernt."
+            },
+            "revoke-invitation-success-message": {
+                "body": "",
+                "title": "Einladung erfolgreich zurückgezogen."
+            }
+        },
+        "search-results": {
+            "go-fullscreen": "Vollbildmodus"
+        },
+        "tables-editor": {
+            "create-success-message": {
+                "body": "",
+                "title": "Tabelle erfolgreich erstellt."
+            },
+            "delete-success-message": {
+                "body": "",
+                "title": "Tabelle erfolgreich gelöscht."
+            },
+            "edit-success-message": {
+                "body": "",
+                "title": "Tabelle erfolgreich bearbeitet."
+            },
+            "save-positions": {
+                "success-message": {
+                    "body": "",
+                    "title": "Tabellenpositionen erfolgreich gespeichert."
+                }
+            }
+        },
+        "tables": {
+            "attributes-inputs": {
+                "show-concealed-attributes": "Es sind {{ numberOfConcealedAttributes }} Attribute verborgen.",
+                "show-hidden-attributes": "Es sind {{ numberOfHiddenAttributes }} Attribute versteckt."
+            },
+            "column-orders": {
+                "create-column-order-preference-modal": {
+                    "min-ordered-attributes-error": "Es muss mindestens ein Attribut angegeben werden."
+                }
+            },
+            "columnOrder-preferences": {
+                "columnOrder-preferences-manager-modal": {
+                    "add-column-order": "Spalten-Ordnung  hinzufügen",
+                    "close": "Schließen",
+                    "drag-columnOrder-preference": "Reihenfolge via drag & drop ändern",
+                    "no-columnOrders": "Es wurden noch keine Reihenfolgen gespeichert",
+                    "remove-columnOrder": "Löschen",
+                    "title": "Spalten-Ordnung verwalten"
+                },
+                "columnOrder-preferences-selector": {
+                    "selector-empty-name": "Spalten-Ordnung verwalten"
+                },
+                "create-columnOrder-preference-modal": {
+                    "discard": "Abbrechen",
+                    "drag-attribute": "Reihenfolge via drag & drop ändern",
+                    "save": "Speichern",
+                    "title": "Neue Spalten-Ordnung erstellen"
+                }
+            },
+            "entry-form": {
+                "customize": {
+                    "title": "Individualisieren"
+                }
+            },
+            "filter-preferences": {
+                "filter-preferences-manager-modal": {
+                    "close": "Schließen",
+                    "drag-filter-preference": "Reihenfolge via drag & drop ändern",
+                    "no-filters": "Sie haben noch keine Filter gespeichert.",
+                    "remove-filter": "Filter löschen",
+                    "title": "Gespeicherte Filter bearbeiten"
+                }
+            },
+            "overview": {
+                "create": {
+                    "description": "Erstelle einen neuen Eintrag in dieser Tabelle",
+                    "title": "Neu"
+                },
+                "search": {
+                    "description": "Suche in dieser Tabelle nach Einträgen",
+                    "saved-filters": "Gespeicherte Filter",
+                    "title": "Suchen"
+                }
+            },
+            "table-views": {
+                "table-views-editor-modal": {
+                    "default-order-subtitle": "(Derzeit Standardreihenfolge)",
+                    "discard": "Verwerfen",
+                    "save": "Speichern",
+                    "title": "Individualisieren Sie Ihre Ansicht",
+                    "use-default-order": "Standardreihenfolge"
+                },
+                "table-views-editor": {
+                    "add-attribute": "Fügen Sie ein Attribute hinzu, dass sichtbar sein soll",
+                    "concealed-attributes-hint": "Sowie {{ numberOfConcealedAttributes }} verborgene Attribute",
+                    "drag-attribute": "Ziehen Sie Attribute, um ihre Reihenfolge anzupassen",
+                    "min-ordered-attributes-error": "Mindestens 1 Attribut muss sichtbar sein."
+                }
+            }
+        },
+        "tablesEditor": {
+            "add-foreign-attribute": "Beziehung hinzufügen",
+            "addAttribute": "Attribut hinzufügen",
+            "allowAnonymousCreation": "Anonyme Aktionen gestatten",
+            "confirm-foreign-save": {
+                "btnOkText": "Änderungen speichern",
+                "description": "Erst wenn Sie dieses neue Beziehungsattribut speichern, wird sein Gegenstück automatisch generiert. <br/><br/> Wenn Sie Änderungen gemacht haben, die Sie nicht speichern wollen: drücken Sie \"Abbrechen\", machen Sie die Änderungen rückgängig und speichern Sie die Tabelle erst dann. <br/><br/> Vergessen Sie nicht die korrekten Namen und Validatoren für die neuen Attribute zu setzen.",
+                "title": "Speichern Sie Ihre Änderungen, um die Erstellung abzuschließen"
+            },
+            "confirmAttributeDeletion": {
+                "btnOkText": "Änderungen speichern",
+                "description": "Ihre Änderungen löschen mindestens ein Attribut. Damit werden auch alle für dieses Attribut gespeicherten Werte permanent gelöscht. Sie können diese Aktion nicht rückgängig machen. Wollen Sie diese Änderungen wirklich speichern?",
+                "title": "Speichern würde ein Attribut irreversibel entfernen"
+            },
+            "confirmDeletion": {
+                "btnOkText": "Tabelle löschen",
+                "description": "Wollen Sie wirklich diese Tabelle löschen? Sie können diese Aktion danach nicht wieder rückgängig machen!",
+                "title": "Tabelle löschen"
+            },
+            "create-foreign-attribute-modal": {
+                "choose-foreign-tableId": "Bitte wählen Sie eine Tabelle aus dem nachfolgenden Graph aus. Die somit erstellte Beziehung verknüpft die aktuelle geöffnete Tabelle mit der so ausgewählten.",
+                "close": "Abbrechen",
+                "title": "Wählen Sie eine Tabelle aus..."
+            },
+            "deleteTable": "Tabelle löschen",
+            "display-properties": "Namen & Beschreibung",
+            "displayProperties": {
+                "description": "Beschreibung",
+                "minimum-languages": "Sie müssen den Namen in mindestens einer Sprache angeben",
+                "plural": "Pluralname",
+                "singular": "Singularname"
+            },
+            "drag-attribute": "Ändern Sie die Reihenfolge der Attribute durch Ziehen",
+            "edit": {
+                "description": "Wählen Sie die Tabelle zum Bearbeiten aus, indem Sie auf den entsprechenden Namen im Graphen klicken",
+                "title": "Tabelle bearbeiten"
+            },
+            "foreign-save-invalid": {
+                "description": "Erst wenn Sie dieses neue Beziehungsattribut speichern, wird sein Gegenstück automatisch generiert. <br/><br/> Das Formular ist aktuell fehlerhaft. Bitte drücken Sie \"Abbrechen\", berichtigen Sie Ihre Änderungen und speichern Sie die Tabelle dann. <br/><br/> Vergessen Sie nicht die korrekten Namen und Validatoren für die neuen Attribute zu setzen.",
+                "title": "Speichern Sie Ihre Änderungen, um die Erstellung abzuschließen"
+            },
+            "general-settings": {
+                "table-settings-for": "Tabelleneinstellungen für"
+            },
+            "kind-options": "Optionen & Validatoren",
+            "new": {
+                "description": "Klicken Sie hier oder auf eine leere Fläche des Graphen.",
+                "title": "Neue Tabelle erstellen"
+            },
+            "noAttributes": "Eine Tabelle benötigt mindestens ein Attribut",
+            "projectDefault": "Projektstandardeinstellung",
+            "removeAttribute": "Entfernen",
+            "table-graph": {
+                "empty": "In diesem Projekt wurden noch keine Tabellen angelegt. Füllen Sie das Formular unten aus und speichern Sie es, um eine neue Tabelle zu erstellen. Die neue Tabelle wird danach hier im Tabellen-Graph angezeigt.",
+                "fit": "Ansicht an Fenster anpassen",
+                "indicator-info": "Das ist der Graph zum Ändern der Tabellenstruktur",
+                "layout": "Graph automatisch anordnen (experimentell)",
+                "new": "Neue Tabelle erstellen",
+                "reset": "Tabellenpositionen zurücksetzen",
+                "save": "Klicken Sie hier, um die Tabellenpositionen speichern",
+                "zoom-in": "Ansicht vergrößern",
+                "zoom-out": "Ansicht verkleinern"
+            },
+            "table": {
+                "attributes": "Attribute"
+            },
+            "validators": "Validatoren"
+        },
+        "users": {
+            "edit-success-message": {
+                "body": "",
+                "title": "Persönliche Einstellungen erfolgreich geändert."
+            },
+            "remove-email-success-message": {
+                "body": "",
+                "title": "E-Mail-Adresse erfolgreich entfernt."
+            }
+        }
+    },
+    "roles": {
+        "anonymousUser": "Anonymer Benutzer",
+        "me": "Ich"
+    },
+    "routing": {
+        "about": "Über uns",
+        "changelog": "Änderungen",
+        "company-details": "Impressum",
+        "createEntry": "Neu",
+        "edit": "Bearbeiten",
+        "edit-description": "Bearbeite den Eintrag",
+        "entry-overview": "Überblick",
+        "entry-overview-description": "Ein kompletter Überblick über alle Daten und Metadaten des Eintrages",
+        "faq": "FAQ",
+        "features": "Funktionen",
+        "general-settings": "Einstellungen",
+        "general-settings-descriptions": "Bearbeiten Sie allgemeine Einstellungen des Projektes",
+        "help": "Hilfe",
+        "history": "Verlauf",
+        "history-description": "Der komplette Versionsverlauf des Eintrages",
+        "home": "Startseite",
+        "licenses": "Lizenzen von Drittanbietern",
+        "members": "Mitglieder",
+        "overview": "Überblick",
+        "overview-description": "Wählen Sie eine Tabelle und erstellen, suchen und bearbeiten Sie Einträge",
+        "privacy-policy": "Datenschutzerklärung",
+        "project-overview": "Überblick",
+        "projects": "Projekte",
+        "relation-explorer": "Beziehungsübersicht",
+        "relation-explorer-description": "",
+        "scanner": "Scanner",
+        "search": "Suchen",
+        "settings-members": "Mitglieder",
+        "settings-members-descriptions": "Laden Sie neue Benutzer ein und bearbeiten Sie die Rollen und Rechte von Mitgliedern",
+        "statistics": "Statistiken",
+        "support": "Support",
+        "tables-editor": "Editor",
+        "tables-editor-descriptions": "Erstellen und bearbeiten Sie Tabellen",
+        "user-profile": "Benutzerprofil"
+    },
+    "scanner": {
+        "clear-results": "Ergebnisse leeren",
+        "errors": {
+            "no-camera": "Dieses Gerät besitzt keine Kamera.",
+            "no-permission": "Der Video-Stream kann nicht gelesen werden. Bitte stellen Sie sicher, dass die Kamera aktiviert ist und diese Applikation die korrekten Berechtigungen besitzt."
+        },
+        "nothing-scanned-yet": "Scannen Sie das QR-Code-Label eines Eintrages..."
+    },
+    "shared": {
+        "feature": {
+            "display-features": {
+                "efficient-workflow": {
+                    "description": "Unsere Benutzeroberfläche ist so aufgebaut, dass sie schnell und zuverlässig Arbeiten können. Müssen Sie bspw. mehrere ähnliche Einträge erstellen, können Sie ganz einfach den ersten Eintrag per Knopfdruck duplizieren und müssen nur noch die entsprechenden Werte ändern.",
+                    "title": "Workflow orientiert"
+                },
+                "export": {
+                    "description": "Geplant ist ein Export von Tabellen als CSV- und JSON-Dateien. Damit wird insbesondere auch die Möglichkeit zur Migration von Daten aus dem KoppaDb-System hin zu anderen Datenverarbeitungslösungen geboten.",
+                    "title": "Datei-Export"
+                },
+                "files-search": {
+                    "description": "Es soll möglich sein nach dem Dateinamen sowie Text-Inhalt einer Datei zu filtern. Unterstützt werden dabei Textdateien, PDF-Dateien und Bilder, bei denen über optische Zeichenerkennung der Text ermittelt wird.",
+                    "title": "Suche nach Dateien"
+                },
+                "files": {
+                    "description": "Es ist auch möglich beliebige Dateien hochzuladen. Diese können dann nicht nur heruntergeladen werden, sondern (abhängig vom Browser) auch direkt in KoppaDb angezeigt werden. Für die Vorschau werden Bilder, Videos, Audio, Text, PDF und Markdown Dateien unterstützt. Eine Vorschau für Excel-Dateien befindet sich in der Entwicklung.",
+                    "title": "Datei-Attribute"
+                },
+                "foreign-search": {
+                    "description": "Es soll möglich sein auch Verknüpfungs-Attribute in die Suche mit einzubeziehen.",
+                    "title": "Suche mit Verknüpfungen"
+                },
+                "hidden-attributes": {
+                    "description": "Sie haben Attribute, die es nur aus historischen Gründen gibt und nicht mehr aktiv verwendet werden? Sie können sie standardmäßig einfach verstecken, ohne dass sie ihre Werte verlieren.",
+                    "title": "Versteckte Attribute"
+                },
+                "history": {
+                    "description": "Jede Änderung oder Löschung eines Eintrages wird in einer leicht verständlichen Historie gespeichert. Damit wird unbeabsichtigter Informationsverlust verhindert.",
+                    "title": "Vollständige Versionshistorie"
+                },
+                "labels": {
+                    "description": "Für jeden Eintrag generieren wir ein Label mit einem QR-Code, der auf den entsprechenden Eintrag verweist. Dieses Label kann ausgedruckt und bspw. auf das entsprechende Produkt geklebt werden. Durch Einscannen gelangt man blitzschnell zu all seinen wichtigen Informationen.",
+                    "title": "Labels"
+                },
+                "markdown": {
+                    "description": "Formatierte Texte können über einen integrierten Editor erstellt und gespeichert werden. Es ist dafür nicht nötig die zu Grunde liegende Formatierungssprache \"Markdown\" zu verstehen.",
+                    "title": "Markdown"
+                },
+                "permissions": {
+                    "description": "Über ein gruppenbasiertes Rechtesystem soll der Zugriff von Projekt-Mitgliedern auf Tabellen eingeschränkt werden können.",
+                    "title": "Rechte-Management"
+                },
+                "planned-features": {
+                    "description": "Die folgenden Funktionen sind angedacht und befinden sich auf unterschiedlichen Stufen der Planung und Umsetzung. Es ist jeweils noch keine ETA vorhanden.",
+                    "title": "Geplante Funktionen"
+                },
+                "relations": {
+                    "description": "Verknüpfungen verbinden Einträge aus Tabellen miteinander. Es werden einfache Verknüpfungen unterstützt, die nur aus einem Auswahlfeld bestehen, aber auch komplexe Verknüpfungen, bei denen durch intermediäre Attribute in der Verknüpfung selbst noch weitere Daten gespeichert werden können.",
+                    "title": "Verknüpfungen"
+                },
+                "table-views": {
+                    "description": "Eine Tabelle wird von mehreren Mitarbeitern benutzt, für die jeweils nur eine Handvoll Attribute relevant sind? - Jedes Mitglied kann seine eigene Attribut-Reihenfolge festlegen und sogar Attribute ausblenden.",
+                    "title": "Tabellen-Ansichten"
+                },
+                "tables-graph": {
+                    "description": "Tabellen und ihre Beziehungen zueinander werden in dem Tabellen-Graphen übersichtlich dargestellt. Über ihn erfolgt außerdem die Navigation. Projektmitglieder können häufig benutzte Tabellen als Favoriten markieren und somit für sich optisch hervorheben.",
+                    "title": "Tabellen-Graph"
+                },
+                "title": "Weitere Funktionen",
+                "validators": {
+                    "description": "Über Validatoren können Eingabefehler vermindert werden. Für jede Attributart gibt es verschiedene Validatoren, so kann man bspw. Minmal- und Maximalwerte für Zahlen festlegen oder Dateien auf bestimmte Dateitypen begrenzen. Die Fehlermeldungen werden beim Ausfüllen in Echtzeit generiert.",
+                    "title": "Validatoren"
+                }
+            },
+            "display-pitch": {
+                "case-0": "Sie ein Unternehmen, Verein oder sonstige Organisation mit Sitz in Deutschland sind",
+                "case-1": "Ihnen Ordner voller Excel-Tabellen nicht mehr ausreichen.",
+                "case-2": "einige oder alle in Ihrem Team wenig informatische Kenntnisse besitzen.",
+                "case-3": "Sie Ihre Daten (schrittweise) digital geordnet speichern wollen.",
+                "case-4": "Sie auf eine zukunftssichere Lösung für Ihre wertvollen Daten setzen wollen.",
+                "title": "KoppaDb ist genau richtig für Sie, wenn..."
+            },
+            "display-tutorial": {
+                "1": {
+                    "button": "hier",
+                    "post-button": ".",
+                    "pre-button": "Registrieren Sie sich ganz einfach und kostenlos",
+                    "title": "Registrieren"
+                },
+                "2": {
+                    "description": "Alle Projekte sind jeweils voneinander unabhängig und zeichnen sich durch ihre Mitglieder, Tabellenstruktur und gespeicherten Daten aus.",
+                    "title": "Projekt erstellen"
+                },
+                "3": {
+                    "description": "Tabellen geben die Struktur vor, in welcher die Daten eingepflegt werden sollen. Attribute sind dabei die Spalten der Tabelle. Über die Art des Attributes legt man fest, ob bspw. Zahlen, Wörter, Zeitangaben oder Dateien in einer Spalte stehen sollen.",
+                    "title": "Tabellen kreieren"
+                },
+                "4": {
+                    "description": "Laden Sie weitere Mitarbeiter zu Ihrem Projekt ein. Sie können ihnen verschiedene Zugangsberechtigungen erteilen.",
+                    "title": "Mitarbeiter einladen"
+                },
+                "5": {
+                    "description": "Anhand der zuvor festgelegten Tabellenstruktur wurde ein Formular generiert, über welches nun alle Mitarbeiter neue Einträge erstellen, bearbeiten oder löschen können.",
+                    "title": "Daten einpflegen"
+                },
+                "6": {
+                    "description": "Nach allen Einträgen kann auch gesucht werden. Auch Suchanfragen mit komplexen Filtern sind möglich.",
+                    "title": "Nach Einträgen suchen"
+                },
+                "7": {
+                    "description": "In der Realität kommt es ständig zu neuen Entwicklungen, die andere Attribute erfordern. Da man die Tabellenstruktur jederzeit selbst über die Benutzeroberfläche anpassen kann, verhindert man Verzögerungen oder Missverständnisse durch umständliche Kommunikation mit der IT-Abteilung oder Programmierern, die kein Domänenwissen besitzen.",
+                    "title": "Die Tabellen an neuen Anforderungen anpassen"
+                },
+                "title": "Wie funktioniert KoppaDb?"
+            },
+            "pricing": {
+                "all-functions": "Uneingeschränkte Nutzung aller Funktionen",
+                "basic-fee": "Grundgebühr",
+                "cloud": {
+                    "advantages": {
+                        "1": "Von überall aufrufbar",
+                        "2": "Flexibel skalierbar",
+                        "3": "Wir kümmern uns um Wartung und Sicherheit",
+                        "4": "Hohe Verfügbarkeit durch Nutzung der Amazon Webservices Infrastruktur",
+                        "5": "Regelmäßige Backups inklusive"
+                    },
+                    "description": "Nutzen Sie eine offizielle KoppaDb-Instanz.",
+                    "individual-instance": "Eigene isolierte KoppaDb-Instanz auf individueller Domain",
+                    "member-upgrade": {
+                        "more-members": "1 weiterer Benutzer",
+                        "more-space": "{{ maxInGB }} GB zusätzlicher Speicherplatz",
+                        "title": "Zusätzlicher Benutzer"
+                    },
+                    "premium": {
+                        "more-storage": "{{ maxInGB }} GB zusätzlicher Speicherplatz"
+                    },
+                    "storage-upgrade": {
+                        "more-option": "Mehr nach individueller Absprache",
+                        "option": "{{ storageInGB }} GB für {{ priceInEUR }}€",
+                        "per-month": "Preise jeweils pro Monat",
+                        "title": "Zusätzlicher Speicherplatz"
+                    },
+                    "title": "Cloud"
+                },
+                "excluding-vat": "zzgl. MwSt.",
+                "on-premise": {
+                    "advantages": {
+                        "1": "Regelmäßige Sicherheits- und Funktions-Updates",
+                        "2": "Priorisierter Kundensupport",
+                        "3": "Keine Software-Begrenzung an Speicherplatz, Projekt- oder Eintrags-Anzahl"
+                    },
+                    "contact": {
+                        "post": " in Verbindung",
+                        "pre": "Setzen Sie sich bei Interesse mit uns via"
+                    },
+                    "data-migration": "Beratung oder Entwicklung von Datenmigrationslösungen: individuelle Absprache",
+                    "description": "Sie wollen KoppaDb auf ihrem eigenen Unternehmensserver laufen lassen? Dann ist dies die richtige Option. Ihre Daten sind somit auch physisch nur für Sie selbst einsehbar.",
+                    "initial-setup": "Einmalige Einrichtung (Docker-Container): individuelle Absprache",
+                    "single-license": {
+                        "minimum-volume": "Es müssen mindestens {{ minVolume }} erworben werden"
+                    },
+                    "title": "On Premise"
+                },
+                "per-month": "pro Monat",
+                "title": "Preise",
+                "unlimited-devices": "Auf beliebig vielen Geräten",
+                "unlimited-projects": "Unbegrenzte Anzahl an Projekten"
+            }
+        },
+        "show-more": {
+            "show-less": "Weniger zeigen...",
+            "show-more": "Mehr zeigen..."
+        },
+        "utility": {
+            "global-loading-placeholder": {
+                "abort": "Abbrechen"
+            }
+        },
+        "versions": {
+            "foreign": {
+                "display-foreign-many": {
+                    "number-of-relations": "Verknüpfungen"
+                }
+            }
+        }
+    },
+    "table": {
+        "attribute": "Attribut",
+        "value": "Wert"
+    },
+    "user": {
+        "add-email": "E-Mail hinzufügen",
+        "add-email-placeholder": "Neue E-Mail",
+        "change-auth-mail-input": {
+            "name": "Neue Authentifizierungs-E-Mail-Adresse"
+        },
+        "change-auth-mail": {
+            "btn": "Authentifizierungs-E-Mail-Adresse ändern",
+            "errors": {
+                "only-one-email-verified": "Sie müssen mehr als eine verifizierte E-Mail-Adresse haben, um Ihre Authentifizierungs-E-Mail ändern zu können.",
+                "token": "Dieser Link ist inkorrekt. Bitte fordern Sie einen neuen an."
+            },
+            "heading": "Authentifizierungs-E-Mail-Adresse ändern"
+        },
+        "danger-zone": "Gefahrenzone",
+        "emails": "E-Mails",
+        "general": "Allgemeine Einstellungen",
+        "language": "Bevorzugte Sprache",
+        "name": "Name",
+        "not-removable-email": {
+            "authentication-email": "Sie können Ihre Authentifizierungs-E-Mail-Adresse nicht entfernen.",
+            "notification-email": "Sie können Ihre Benachrichtigungs-E-Mail-Adresse nicht entfernen.",
+            "public-email": "Sie können Ihre Öffentliche E-Mail-Adresse nicht entfernen."
+        },
+        "notification-email": "Benachrichtigungs-E-Mail",
+        "public-email": "Öffentliche E-Mail",
+        "request-auth-email-change": {
+            "btn": "Ändere Authentifizierungs-E-Mail-Adresse",
+            "description": "Die Authentifizierungs-E-Mail-Adresse ist die E-Mail-Adresse, die Sie bei der Anmeldung angeben müssen. Drücken Sie auf den folgenden Knopf und Ihnen wird eine E-Mail mit weiteren Instruktionen an die folgende E-Mail-Adresse gesendet:",
+            "min-emails-error": "Um Ihre Authentifizierungs-E-Mail-Adresse zu ändern benötigen Sie mindestens zwei verifizierte E-Mail-Adressen."
+        },
+        "reset-password": "E-Mail zur Passwortänderung senden",
+        "unset-publicEmail": "Unsichtbar"
+    },
+    "validators": {
+        "error": {
+            "all-hidden": "Es dürfen nicht alle Attribute \"Versteckt\" sein.",
+            "alreadyInList": "Dieses Element ist bereits in der Liste.",
+            "containsLetter": "Es muss mindestens ein Buchstabe in der Eingabe enthalten sein.",
+            "containsNumber": "Es muss mindestens eine Ziffer in der Eingabe enthalten sein.",
+            "date": "Die Eingabe ist kein valides Datum.",
+            "dateMax": "Die Eingabe darf höchstens {{ max }} sein.",
+            "dateMin": "Die Eingabe muss mindestens {{ min }} sein.",
+            "dateTime": "Die Eingabe ist kein valides Datum mit Zeit.",
+            "defaultIncrementRequired": "Wenn \"{{ incrementName }}\" gesetzt ist, dann muss dieses Attribut auch \"Benötigt\" sein",
+            "email": "Diese E-Mail-Adresse ist ungültig.",
+            "emailAlreadyInProject": "{{ value }} wurde bereits eingeladen.",
+            "emailAlreadyVerified": "{{ value }} ist bereits verifiziert.",
+            "hiddenNotRequired": "Ein \"verstecktes\" Attribut darf nicht gleichzeitig auch \"Benötigt\" sein.",
+            "isMultipleOf": "Die Eingabe ist kein ganzzahliges Vielfaches von {{ multipleOf }}. Meinten Sie vielleicht {{ previous }} oder {{ next }}?",
+            "isNumber": "Die Eingabe ist keine Zahl!",
+            "matchesPassword": "Die Passwörter sind nicht identisch.",
+            "max": "Die Eingabe darf höchstens {{ max }} sein.",
+            "maxItems": "Es dürfen nicht mehr als {{ maxItems }} Elemente in der Liste sein.",
+            "maxLength": "Die Eingabe ist {{ difference }} Zeichen zu lang.",
+            "min": "Die Eingabe muss mindestens {{ min }} sein.",
+            "min-after-max": "\"{{ minName }}\" darf nicht später als \"{{ maxName }}\" sein.",
+            "min-higher-max": "\"{{ minName }}\" darf nicht größer als \"{{ maxName }}\" sein.",
+            "minItems": "Es dürfen nicht weniger als {{ minItems }} Elemente in der Liste sein.",
+            "minLength": "Die Eingabe ist {{ difference }} Zeichen zu kurz.",
+            "pattern": "Die Eingabe entspricht nicht dem regulären Ausdruck: {{ pattern }}",
+            "regExp": "Die Eingabe ist kein regulärer Ausdruck.",
+            "required": "Die Eingabe darf nicht leer sein.",
+            "time": "Die Eingabe ist keine valide Zeit.",
+            "timeMax": "Die Eingabe darf höchstens {{ max }} sein.",
+            "timeMin": "Die Eingabe muss mindestens {{ min }} sein.",
+            "timeMultipleOf": "Die Eingabe ist kein ganzzahliges Vielfaches von {{ multipleOf }}s.",
+            "unique": "Die Eingabe existiert bereits.",
+            "url": "Die Eingabe ist keine valide Url."
+        },
+        "warning": {
+            "missing-primary-key": "Wir empfehlen für jede Tabelle ein Attribut zur eindeutigen Identifikation eines Eintrages zu erstellen. Sie können diesen erstellen, indem sie die Validatoren \"Benötigt\" und \"Eindeutig\" für ein Attribut setzen. Meistens ist dieses Attribut eine ID oder ein Name."
+        }
+    }
+}

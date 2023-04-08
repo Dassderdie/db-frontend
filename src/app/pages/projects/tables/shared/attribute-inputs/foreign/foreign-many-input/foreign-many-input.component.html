@@ -1,0 +1,137 @@
+<ng-template #descriptionTemplate>
+    <app-markdown-viewer
+        [markdownText]="attribute.descriptions | translateDescriptions"
+    ></app-markdown-viewer>
+</ng-template>
+
+<div
+    class="card"
+    [class.border-status-invalid]="foreignState.delayedInvalid$ | async"
+    [class.border-status-warning]="foreignState.delayedWarning$ | async"
+    [class.border-status-changed]="
+        version && (foreignState.delayedChanged$ | async)
+    "
+>
+    <div class="card-header pt-0 pb-0" style="background-color: #e9ecef">
+        <div class="row justify-content-between">
+            <div
+                [appInfoTooltip]="descriptionTemplate"
+                [isDisabled]="
+                    !attribute.descriptions ||
+                    !(attribute.descriptions | translateDescriptions)
+                "
+                tooltipStyle="light"
+                placement="top"
+                [adaptivePosition]="false"
+                class="col-auto pt-2 pb-2"
+            >
+                <app-attribute-name
+                    [attribute]="attribute"
+                    [displayKind]="true"
+                ></app-attribute-name>
+                <span *ngIf="attribute.required" class="text-status-invalid"
+                    >*</span
+                >
+            </div>
+            <app-create-new-foreign-entry-btn
+                [projectId]="projectId"
+                [foreignTableId]="attribute.kindOptions.foreign.tableId"
+                btnClasses="btn-link"
+                class="col-auto"
+            ></app-create-new-foreign-entry-btn>
+        </div>
+    </div>
+
+    <!-- New relations that should be created -->
+    <div *ngIf="intermediateTable$ | async as intermediateTable; withLoading">
+        <div
+            *ngIf="value.newRelations.length > 0; else empty"
+            class="ps-4"
+            style="max-height: 400px; overflow-y: auto"
+        >
+            <app-new-foreign-many-relation
+                *ngFor="
+                    let newRelation of value.newRelations;
+                    let index = index;
+                    trackBy: '$index' | trackByProperty
+                "
+                [id]="index | toString"
+                [projectId]="projectId"
+                [intermediateTable]="intermediateTable"
+                [attribute]="attribute"
+                [value]="newRelation"
+                [parentState]="foreignState"
+                [disabled]="disabled"
+                (removeNewForeignRelation)="removeNewRelation(index)"
+                (editNewForeignRelation)="editNewRelation(index, $event)"
+            >
+            </app-new-foreign-many-relation>
+        </div>
+        <ng-template #empty>
+            <div class="mt-3 ps-4 text-muted">
+                {{ 'custom-forms.foreign.add-placeholder' | translate }}
+            </div>
+        </ng-template>
+        <div class="d-grid gap-2">
+            <button
+                class="btn btn-link mt-3"
+                [class.disabled]="disabled"
+                (click)="addNewRelations(intermediateTable)"
+                style="
+                    background: #e9ecef;
+                    width: -webkit-fill-available;
+                    border-top-left-radius: 0px;
+                    border-top-right-radius: 0px;
+                "
+                [class.bottom-radius-0]="version !== undefined"
+            >
+                <app-icon icon="create"></app-icon>
+                {{ 'custom-forms.foreign.add-relations' | translate }}
+            </button>
+        </div>
+    </div>
+
+    <!-- Present relations -->
+    <!-- when creating a new entry there are no relations yet -->
+    <app-display-foreign-many
+        *ngIf="version"
+        [attribute]="attribute"
+        [version]="version"
+        [emptyTemplate]="empty"
+        [numberOfTranslationsKey]="
+            'custom-forms.foreign.number-of-present-relations' | translate
+        "
+    >
+        <ng-template
+            let-first="first"
+            let-last="last"
+            let-isVisible="isVisible"
+            let-intermediateVersion="intermediateVersion"
+            let-intermediateTable="intermediateTable"
+        >
+            <app-foreign-many-relation-input
+                *ngIf="isVisible; withLoading"
+                [intermediateVersion]="intermediateVersion"
+                [attribute]="attribute"
+                [foreignState]="foreignState"
+                [intermediateTable]="intermediateTable"
+                [tableId]="version.tableId"
+                [value]="value.changedRelations[intermediateVersion.entryId]"
+                [disabled]="disabled"
+                (removeRelation)="
+                    removePresentRelation($event, intermediateTable)
+                "
+                (restoreRelation)="restorePresentRelation($event)"
+                (updateValue)="editPresentRelation($event, intermediateTable)"
+            >
+            </app-foreign-many-relation-input>
+        </ng-template>
+    </app-display-foreign-many>
+
+    <ng-template #empty>
+        <div class="ps-4 mb-3 mt-3 text-muted">
+            {{ 'custom-forms.foreign.empty' | translate }}
+        </div>
+    </ng-template>
+</div>
+<app-validation [state]="foreignState"></app-validation>

@@ -1,0 +1,32 @@
+<span
+    *ngIf="options.relative; else absoluteDate"
+    [appInfoTooltip]="
+        $any(options).noPopover
+            ? ''
+            : (date | dateTimeFormatter: 'dateTime' | async) || ''
+    "
+>
+    {{ date | relativeTimeFormat: options.format | async }}
+</span>
+<ng-template #absoluteDate>
+    <!-- title is just to absolutely make sure the value is displayed correctly/the user can understand it -->
+    <!-- TODO: replace workarounds for angulars lack of narrowing through ngIf-else -->
+    <span [title]="date">
+        {{
+            date
+                | dateTimeFormatter
+                    : $any(
+                          options.format !== 'dateTime'
+                              ? options.format
+                              : !(
+                                    breakpoints.md
+                                    | responsiveBreakpointExceeded
+                                    | async
+                                )
+                              ? 'shortDateTime'
+                              : 'dateTime'
+                      )
+                | async
+        }}
+    </span>
+</ng-template>

@@ -1,0 +1,16 @@
+<button
+    type="button"
+    [class]="'btn btn-' + type"
+    [class.btn-sm]="small"
+    [ngStyle]="additionalStyles"
+    [title]="title"
+    [disabled]="disabled || (disabled === null && (displayLoadingE$ | async))"
+>
+    <app-icon
+        *ngFor="let icon of icons; trackBy: null | trackByProperty"
+        [icon]="icon"
+        class="ms-1"
+    ></app-icon>
+    <ng-content></ng-content>
+    <app-icon *ngIf="displayLoadingE$ | async" icon="loading"></app-icon>
+</button>

@@ -1,0 +1,78 @@
+<!-- all foreign-relations of a deleted version are or or will be deleted -->
+<ng-container *ngIf="!version.deleted || createFilterFunction">
+    <ng-container
+        *ngIf="intermediateTableE$ | async as intermediateTable; withLoading"
+    >
+        <div
+            *ngIf="
+                intermediateVersions$ | async as intermediateVersions;
+                withLoading
+            "
+            class="ps-4"
+            #container
+        >
+            <div
+                [ngStyle]="{
+                    'max-height': viewportHeight$ + 'px',
+                    'overflow-y': 'auto'
+                }"
+                (scroll)="onScroll($event)"
+            >
+                <ng-container
+                    *ngIf="numberOfRelations$ | async as numberOfRelations"
+                >
+                    <div *ngIf="numberOfRelations < 5" class="mb-3"></div>
+                    <div *ngIf="numberOfRelations >= 5" class="mb-2 mt-2">
+                        {{ numberOfRelations }}
+                        {{ numberOfTranslationsKey | translate }}
+                    </div>
+                </ng-container>
+                <div #displayForeignItems>
+                    <!-- TODO: use virtual-scroll (with autosize when available and stable see https://github.com/angular/components/issues/10113) -->
+                    <div
+                        *ngFor="
+                            let intermediateVersion of intermediateVersions;
+                            trackBy: 'id' | trackByProperty;
+                            let first = first;
+                            let last = last
+                        "
+                        [appIsVisible]="
+                            isVisible[intermediateVersion.id]
+                                ? undefined
+                                : container
+                        "
+                        (isVisibleChanges)="
+                            isVisible[intermediateVersion.id] = !!(
+                                $event || isVisible[intermediateVersion.id]
+                            )
+                        "
+                        class="mb-3"
+                    >
+                        <ng-container
+                            *ngTemplateOutlet="
+                                displayForeignItem;
+                                context: {
+                                    first: first,
+                                    last: last,
+                                    intermediateVersion: intermediateVersion,
+                                    intermediateTable: intermediateTable,
+                                    isVisible: isVisible[intermediateVersion.id]
+                                }
+                            "
+                        ></ng-container>
+                    </div>
+                </div>
+            </div>
+            <app-loading-placeholder
+                *ngIf="(allElementsLoaded$ | async) !== true"
+                [inline]="false"
+                class="mt-3 mb-3"
+            ></app-loading-placeholder>
+        </div>
+    </ng-container>
+</ng-container>
+
+<ng-template
+    *ngIf="emptyTemplate && (numberOfRelations$ | async) === 0"
+    [ngTemplateOutlet]="emptyTemplate"
+></ng-template>

@@ -1,0 +1,13 @@
+<div class="page-container">
+    <h1>
+        <app-icon icon="licenses"></app-icon>
+        {{ 'routing.licenses' | translate }}
+    </h1>
+    <p>{{ 'help.licenses.description' | translate }}</p>
+    <hr />
+    <pre
+        *ngIf="licenses; withLoading"
+        [innerHTML]="licenses"
+        style="white-space: pre-wrap; word-break: keep-all"
+    ></pre>
+</div>

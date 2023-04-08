@@ -1,0 +1,95 @@
+<div
+    *ngIf="rows.length > 0; else empty"
+    style="max-height: 400px; overflow-y: auto"
+>
+    <table class="table table-sm m-0" style="border-style: hidden">
+        <thead class="bg-light">
+            <tr>
+                <th colSpan="2">
+                    {{ 'files.name' | translate }}
+                </th>
+                <th class="fit">
+                    {{ 'files.size' | translate }}
+                </th>
+                <th class="fit">
+                    {{ 'files.creator' | translate }}
+                </th>
+                <th class="pe-0 ps-0 text-center">
+                    {{ 'files.actions' | translate }}
+                </th>
+            </tr>
+        </thead>
+        <tbody class="text-nowrap">
+            <tr *ngFor="let row of rows; trackBy: '$index' | trackByProperty">
+                <td
+                    *ngIf="row.status === 'renamed'"
+                    class="light text-muted font-italic"
+                >
+                    <app-icon
+                        *ngIf="row.status === 'renamed'"
+                        icon="edit"
+                        class="text-status-changed"
+                    ></app-icon>
+                    <app-file-name
+                        *ngIf="row.name.previousName"
+                        [fileName]="row.name.previousName"
+                    ></app-file-name>
+                </td>
+                <td
+                    class="light"
+                    [class.text-center]="row.status === 'unchanged'"
+                    [colSpan]="row.status !== 'renamed' ? 2 : 1"
+                >
+                    <app-icon
+                        *ngIf="row.status === 'deleted'"
+                        icon="delete"
+                        class="text-status-deleted"
+                    ></app-icon>
+                    <app-icon
+                        *ngIf="row.status === 'new'"
+                        icon="create"
+                        class="text-status-new"
+                    ></app-icon>
+                    <app-icon
+                        *ngIf="row.status === 'renamed'"
+                        icon="edit"
+                        class="text-status-changed"
+                    ></app-icon>
+                    <app-file-name
+                        [fileName]="
+                            (row.name.currentName || row.name.previousName)!
+                        "
+                    ></app-file-name>
+                </td>
+                <td>
+                    <span
+                        class="float-end"
+                        style="padding-right: calc(100% - 100px)"
+                    >
+                        {{
+                            row.blobInformation.rawSize | prettySizePipe | async
+                        }}
+                    </span>
+                </td>
+                <td>
+                    <app-member-name
+                        [projectId]="projectId"
+                        [userId]="row.blobInformation.creatorId"
+                    ></app-member-name>
+                </td>
+                <td class="fit p-0 bg-light" style="max-width: min-content">
+                    <app-file-buttons
+                        (preview)="previewFile(row)"
+                        (download)="downloadFile(row)"
+                    ></app-file-buttons>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #empty>
+    <div class="text-muted text-center p-1 w-100">
+        {{ 'files.empty' | translate }}
+    </div>
+</ng-template>

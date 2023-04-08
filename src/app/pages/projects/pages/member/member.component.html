@@ -1,0 +1,54 @@
+<div class="page-container">
+    <h1><app-member-name [role]="role"></app-member-name></h1>
+
+    <ng-container *ngIf="ownRole && permissionsForm && role; withLoading">
+        <div *ngIf="ownRole.administrator" class="card mb-3">
+            <div class="card-header">
+                {{ 'pages.projects.project-member.permissions' | translate }}
+            </div>
+            <div class="card-body">
+                <div
+                    *ngFor="
+                        let control of permissionsForm.controls;
+                        trackBy: 'id' | trackByProperty
+                    "
+                    class="mb-3"
+                >
+                    <app-input
+                        [control]="control"
+                        [showChanged]="true"
+                    ></app-input>
+                </div>
+                <br />
+                <button
+                    (click)="permissionsForm.reset()"
+                    [disabled]="!permissionsForm.changed"
+                    class="btn btn-status-changed"
+                >
+                    <app-icon icon="reset"></app-icon>
+                    {{ 'customForms.reset' | translate }}
+                </button>
+                <app-loading-button
+                    (click)="submitProjectRoles()"
+                    [disabled]="
+                        !permissionsForm.changed || permissionsForm.invalid
+                    "
+                    class="ms-2"
+                    [icons]="['save']"
+                    [newEvent]="changingRole"
+                >
+                    {{ 'customForms.save' | translate }}
+                </app-loading-button>
+            </div>
+        </div>
+        <div *ngIf="ownRole.givePermissions" class="card">
+            <div class="card-header">Table-Permissions</div>
+            <div class="card-body">Coming Soon!</div>
+        </div>
+        <ng-container
+            *ngIf="!ownRole.givePermissions && !ownRole.administrator"
+        >
+            {{ 'pages.projects.project-member.no-permission' | translate }}
+        </ng-container>
+    </ng-container>
+</div>

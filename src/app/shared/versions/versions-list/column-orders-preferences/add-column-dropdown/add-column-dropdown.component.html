@@ -1,0 +1,33 @@
+<div
+    *ngIf="attributeCols.length"
+    class="btn-group"
+    placement="bottom right"
+    dropdown
+>
+    <button
+        dropdownToggle
+        type="button"
+        class="btn btn-outline-success dropdown-toggle"
+        [class.border-0]="inline"
+        [appInfoTooltip]="'pages.entries.addColumn' | translate"
+    >
+        <app-icon icon="create"></app-icon>
+        <ng-container *ngIf="!inline">
+            {{ 'pages.entries.addColumn' | translate }}
+        </ng-container>
+    </button>
+    <ul *dropdownMenu class="dropdown-menu dropdown-menu-right">
+        <li
+            *ngFor="let attr of attributeCols; trackBy: null | trackByProperty"
+            (click)="addAttributeCol.emit(attr)"
+        >
+            <button class="dropdown-item">
+                <app-attribute-col-name
+                    [attributeCol]="attr"
+                    [attributes]="attributes"
+                    [displayAttributeKind]="true"
+                ></app-attribute-col-name>
+            </button>
+        </li>
+    </ul>
+</div>

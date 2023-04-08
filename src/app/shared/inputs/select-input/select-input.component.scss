@@ -1,0 +1,23 @@
+@import 'scss/variables';
+
+.is-invalid button.dropdown-toggle {
+    border-color: $danger;
+}
+
+.active {
+    background: $primary;
+}
+
+.no-border-radius-left {
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+}
+
+.no-border-radius-right {
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.dropdown {
+    flex: 1 1 auto;
+}

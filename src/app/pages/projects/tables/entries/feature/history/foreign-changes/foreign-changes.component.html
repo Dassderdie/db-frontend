@@ -1,0 +1,52 @@
+<app-display-foreign-many
+    [attribute]="attribute"
+    [version]="version"
+    [createFilterFunction]="
+        showUnchanged
+            ? getChangedAndUnchangedRelationsFilter
+            : getChangedRelationsFilter
+    "
+    [numberOfTranslationsKey]="
+        'pages.entries.history.foreign.number-of-changed-relations' | translate
+    "
+    (totalForeignVersionCountChanges)="
+        rowStatus.emit($event > 0 ? 'changed' : 'unchanged')
+    "
+>
+    <ng-template
+        let-first="first"
+        let-last="last"
+        let-isVisible="isVisible"
+        let-intermediateVersion="intermediateVersion"
+        let-intermediateTable="intermediateTable"
+    >
+        <ng-container *ngIf="isVisible; withLoading">
+            <app-foreign-many-item-changes
+                *ngIf="
+                    intermediateVersion.updateId === version.updateId;
+                    else displayUnchangedIntermediateVersion
+                "
+                [tableId]="version.tableId"
+                [attribute]="attribute"
+                [intermediateVersion]="intermediateVersion"
+                [intermediateTable]="intermediateTable"
+            ></app-foreign-many-item-changes>
+            <ng-template #displayUnchangedIntermediateVersion>
+                <app-foreign-many-item
+                    *ngIf="showUnchanged; else unexpectedVersion"
+                    [tableId]="version.tableId"
+                    [attribute]="attribute"
+                    [intermediateVersion]="intermediateVersion"
+                    [intermediateTable]="intermediateTable"
+                    [showHidden]="showHidden"
+                ></app-foreign-many-item>
+                <ng-template #unexpectedVersion>
+                    <div class="text-status-invalid">
+                        This relation wasn't changed and should therefore not be
+                        displayed here. Please inform the support about this.
+                    </div>
+                </ng-template>
+            </ng-template>
+        </ng-container>
+    </ng-template>
+</app-display-foreign-many>

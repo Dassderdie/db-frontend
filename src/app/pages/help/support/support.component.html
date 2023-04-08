@@ -1,0 +1,71 @@
+<div class="page-container">
+    <h1>
+        <app-icon icon="support"></app-icon> {{ 'routing.support' | translate }}
+    </h1>
+    <p>
+        {{ 'help.support.intro' | translate }}
+    </p>
+    <p>
+        {{ 'help.support.general-contact.1' | translate }}
+        <a routerLink="/help/faq">{{ 'routing.faq' | translate }}</a>
+        {{ 'help.support.general-contact.2' | translate }}
+        <a [href]="'mailto: ' + supportEmail">{{ supportEmail }}</a
+        >{{ 'help.support.general-contact.3' | translate }}
+    </p>
+
+    <h2 id="reportBug">
+        {{ 'help.support.report-bug.title' | translate }}
+    </h2>
+    <p>
+        {{ 'help.support.report-bug.description.1' | translate }}
+        <a [href]="'mailto: ' + supportEmail">{{ supportEmail }}</a
+        >.
+    </p>
+    {{ 'help.support.report-bug.description.2' | translate }}
+    <ul>
+        <li>
+            {{ 'help.support.report-bug.report-url.1' | translate }}
+            <code>{{ baseUrl + '/projects' }}</code
+            >{{ 'help.support.report-bug.report-url.2' | translate }}
+        </li>
+        <li>
+            {{ 'help.support.report-bug.report-error' | translate }}
+        </li>
+        <li
+            [innerHTML]="
+                'help.support.report-bug.report-media'
+                    | translate
+                        : {
+                              windows:
+                                  '<kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>',
+                              mac: '<kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd>'
+                          }
+            "
+        ></li>
+        <li>
+            {{ 'help.support.report-bug.report-reproduction' | translate }}
+        </li>
+        <li>
+            {{
+                'help.support.report-bug.report-expected-behaviour' | translate
+            }}
+        </li>
+    </ul>
+    <p>
+        {{ 'help.support.report-bug.description.3' | translate }}
+    </p>
+
+    <h2 id="featureRequest">
+        {{ 'help.support.feature-request.title' | translate }}
+    </h2>
+    <p>
+        {{ 'help.support.feature-request.description.1' | translate }}
+        <a [href]="'mailto: ' + supportEmail">{{ supportEmail }}</a
+        >.
+    </p>
+    <p>
+        {{ 'help.support.feature-request.description.2' | translate }}
+    </p>
+
+    <!-- TODO: have a look here to see what we are currently working on. -->
+</div>

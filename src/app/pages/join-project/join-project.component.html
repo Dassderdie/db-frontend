@@ -1,0 +1,85 @@
+<div class="page-container">
+    <div class="p-5 bg-light rounded-3 text-center">
+        <div *ngIf="!invitation; else invited">
+            <div class="display-4 text-status-invalid">
+                {{ 'pages.join-project.invalid.title' | translate }}
+            </div>
+            <p class="lead">
+                {{ 'pages.join-project.invalid.description' | translate }}
+            </p>
+        </div>
+
+        <ng-template #invited>
+            <div *ngIf="invitationExpired; else invitationValid">
+                <h1 class="display-4">
+                    {{ 'pages.join-project.expired.title' | translate }}
+                </h1>
+                <p class="lead">
+                    {{
+                        'pages.join-project.expired.description'
+                            | translate: { name: invitation?.projectName }
+                    }}
+                </p>
+            </div>
+
+            <ng-template #invitationValid>
+                <div
+                    *ngIf="
+                        (authenticatedService.isAuthenticated$ | async) ===
+                        false
+                    "
+                >
+                    <div class="display-4">
+                        {{ 'pages.join-project.login.title' | translate }}
+                    </div>
+                    <p class="lead">
+                        {{ 'pages.join-project.login.description' | translate }}
+                    </p>
+                </div>
+
+                <div
+                    *ngIf="
+                        (authenticatedService.isAuthenticated$ | async) &&
+                        user &&
+                        invitation?.sub !== user.id
+                    "
+                >
+                    <h1 class="display-4">
+                        {{ 'pages.join-project.user.title' | translate }}
+                    </h1>
+                    <p class="lead">
+                        {{
+                            'pages.join-project.user.description'
+                                | translate: { name: invitation?.projectName }
+                        }}
+                    </p>
+                </div>
+
+                <div
+                    *ngIf="
+                        (authenticatedService.isAuthenticated$ | async) &&
+                        user &&
+                        invitation?.sub === user.id
+                    "
+                >
+                    <h1 class="display-4">
+                        {{ 'pages.join-project.accept.title' | translate }}
+                    </h1>
+                    <p class="lead">
+                        {{
+                            'pages.join-project.accept.description'
+                                | translate: { name: invitation?.projectName }
+                        }}
+                    </p>
+                    <button
+                        (click)="acceptInvitation()"
+                        class="btn btn-primary btn-lg"
+                        type="button"
+                    >
+                        {{ 'pages.join-project.accept.btn' | translate }}
+                    </button>
+                </div>
+            </ng-template>
+        </ng-template>
+    </div>
+</div>

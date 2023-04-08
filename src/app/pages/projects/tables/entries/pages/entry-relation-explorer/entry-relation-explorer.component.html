@@ -1,0 +1,20 @@
+<div class="page-container">
+    <div class="row">
+        <h2 class="col">
+            <app-entry-name
+                *ngIf="params$ | async as params"
+                [projectId]="params.projectId"
+                [tableId]="params.tableId"
+                [entryId]="params.entryId"
+            ></app-entry-name>
+        </h2>
+    </div>
+</div>
+<div class="container-fluid">
+    <app-relation-explorer
+        *ngIf="params$ | async as params"
+        [projectId]="params.projectId"
+        [tableId]="params.tableId"
+        [entryId]="params.entryId"
+    ></app-relation-explorer>
+</div>

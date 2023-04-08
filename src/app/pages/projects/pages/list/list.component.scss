@@ -1,0 +1,9 @@
+@import 'scss/variables';
+
+.pointer {
+    cursor: pointer;
+}
+
+.pointer:hover {
+    border-color: $primary;
+}

@@ -1,0 +1,33 @@
+<ng-template #descriptionTemplate>
+    <app-description
+        [description]="addon.description || addon.attribute?.descriptions"
+    ></app-description>
+</ng-template>
+
+<!-- user generated descriptions should be light themed -->
+<span
+    [appDescriptionTooltip]="descriptionTemplate"
+    [description]="addon.description || addon.attribute?.descriptions"
+    placement="top"
+>
+    <app-icon *ngIf="addon.icon" [icon]="addon.icon"></app-icon>
+    <span *ngIf="addon.string">
+        {{ addon.string }}
+    </span>
+    <span *ngIf="addon.translateKey">
+        {{ addon.translateKey | translate }}
+    </span>
+    <app-attribute-name
+        *ngIf="addon.attribute"
+        [attribute]="addon.attribute"
+    ></app-attribute-name>
+    <app-meta-attribute-name
+        *ngIf="addon.metaAttribute"
+        [metaAttribute]="addon.metaAttribute"
+    ></app-meta-attribute-name>
+    <span
+        *ngIf="addon.required || addon.attribute?.required"
+        class="text-status-invalid"
+        >*</span
+    >
+</span>

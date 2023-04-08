@@ -1,0 +1,38 @@
+<table class="table table-sm table-bordered m-0">
+    <thead *ngIf="displayHead">
+        <tr>
+            <th class="dark fit">
+                {{ 'table.attribute' | translate }}
+            </th>
+            <th class="dark">{{ 'table.value' | translate }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr
+            *ngFor="
+                let attribute of showHidden
+                    ? attributes
+                    : (attributes | filter: ['hidden']:true);
+                trackBy: 'id' | trackByProperty
+            "
+        >
+            <th class="dark fit">
+                <app-attribute-name
+                    [attribute]="attribute"
+                    [displayKind]="false"
+                ></app-attribute-name>
+            </th>
+            <td
+                [ngClass]="{
+                    'pe-0 pt-0 pb-0': attribute.kind === 'foreign'
+                }"
+            >
+                <app-attribute-value
+                    [attribute]="attribute"
+                    [version]="version"
+                    [showHidden]="showHidden"
+                ></app-attribute-value>
+            </td>
+        </tr>
+    </tbody>
+</table>

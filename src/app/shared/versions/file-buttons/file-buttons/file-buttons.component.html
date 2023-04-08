@@ -1,0 +1,18 @@
+<button
+    class="btn btn-link ps-2 pe-2"
+    [title]="'files-buttons.preview' | translate"
+    [appInfoTooltip]="'files-buttons.preview' | translate"
+    (click)="preview.next(undefined)"
+>
+    <app-icon icon="file-preview"></app-icon>
+</button>
+<!-- TODO: remove warning (also in popover) if the files get checked on the server -->
+<button
+    [title]="'files-buttons.download.title' | translate"
+    [appInfoTooltip]="'files-buttons.download.body' | translate"
+    placement="left"
+    (click)="download.next(undefined)"
+    class="btn link-warning ps-2 pe-2"
+>
+    <app-icon icon="download"></app-icon>
+</button>

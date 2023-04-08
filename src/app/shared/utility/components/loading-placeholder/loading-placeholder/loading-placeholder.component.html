@@ -1,0 +1,18 @@
+<ng-container *ngIf="timeout === undefined || (timeoutIsOver$ | async)">
+    <div
+        *ngIf="!inline; else inlinePlaceholder"
+        class="text-center mb-5 mt-5"
+        @fade
+    >
+        <span class="spinner-border text-secondary" role="status" @fade> </span>
+    </div>
+    <ng-template #inlinePlaceholder>
+        <span class="placeholder-item user-select-none" role="status" @fade>
+            <!--
+                This is a hack to set a fitting width and height on an inline element, that respects the font size.
+                It is important, that the word has at least one letter with a descender and one with an ascender.
+            -->
+            <span style="opacity: 0">Koppa</span>
+        </span>
+    </ng-template>
+</ng-container>

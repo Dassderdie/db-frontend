@@ -1,0 +1,21 @@
+<div style="display: flex; flex-direction: column; min-height: 100vh">
+    <app-progress-bar></app-progress-bar>
+
+    <app-navbar></app-navbar>
+
+    <div style="flex: 1">
+        <br />
+        <br />
+        <br />
+        <div class="page-container">
+            <app-toasts></app-toasts>
+            <app-breadcrumb></app-breadcrumb>
+        </div>
+        <router-outlet></router-outlet>
+        <br />
+    </div>
+
+    <app-alerts></app-alerts>
+
+    <app-footer (scrollToTop)="scrollToTop()"></app-footer>
+</div>

@@ -1,0 +1,40 @@
+<ng-template #descriptionTemplate>
+    <app-description [description]="control.description"></app-description>
+</ng-template>
+
+<div
+    [appDescriptionTooltip]="descriptionTemplate"
+    [description]="control.description"
+    (focus)="control.setTouched(true)"
+    class="input-group"
+>
+    <ng-container *ngTemplateOutlet="prependTemplate"></ng-container>
+    <!-- TODO: use ngModel instead of [bsValue] because it doesn't convert the date to the specified format at init -->
+    <!-- TODO: remove any assertion because bsDatepicker's typings don't specify a nullish value -->
+    <input
+        type="text"
+        class="form-control"
+        [title]="control.value$ | async"
+        [attr.disabled]="(control.disabled$ | async) ? '' : null"
+        [class.is-invalid]="showValidation && (control.invalid$ | async)"
+        [class.has-warning]="showValidation && (control.hasWarning$ | async)"
+        [class.is-changed]="showChanged && (control.changed$ | async)"
+        placeholder="yyyy-mm-dd"
+        [id]="control.name"
+        bsDatepicker
+        [minDate]="$any(control.min | dateObj)"
+        [maxDate]="$any(control.max | dateObj)"
+        [bsConfig]="{
+            dateInputFormat: 'YYYY-MM-DD',
+            containerClass: 'theme-blue',
+            isAnimated: true,
+            adaptivePosition: true,
+            showTodayButton: false
+        }"
+        [appAutoFocus]="autofocus"
+        [ngModel]="bsValue"
+        (ngModelChange)="changeValue($event)"
+    />
+    <ng-container *ngTemplateOutlet="appendTemplate"></ng-container>
+</div>
+<app-validation *ngIf="showValidation" [state]="control"></app-validation>

@@ -1,0 +1,117 @@
+<div class="page-container">
+    <!-- Choose camera -->
+    <div *ngIf="cameras.length > 1" class="btn-group" dropdown>
+        <button
+            dropdownToggle
+            type="button"
+            class="btn btn-outline-secondary dropdown-toggle"
+            title="Change camera"
+        >
+            {{ chosenCamera?.label }}
+            <span class="caret"></span>
+        </button>
+        <ul *dropdownMenu class="dropdown-menu" role="menu">
+            <li
+                *ngFor="
+                    let camera of cameras;
+                    trackBy: 'deviceId' | trackByProperty;
+                    let i = index
+                "
+                (click)="startScanning(camera)"
+                role="menuitem"
+            >
+                {{ camera.label || 'camera ' + i }}
+            </li>
+        </ul>
+    </div>
+    <!-- Error messages -->
+    <div *ngIf="status === 'noPermission'" class="text-danger">
+        {{ 'scanner.errors.no-permission' | translate }}
+    </div>
+    <div *ngIf="status === 'noCamera'" class="text-danger">
+        {{ 'scanner.errors.no-camera' | translate }}
+    </div>
+    <!-- Camera canvas -->
+    <div class="text-center">
+        <figure class="figure w-auto mb-0">
+            <app-loading-placeholder
+                *ngIf="status === 'loading'"
+                [inline]="false"
+            ></app-loading-placeholder>
+            <canvas
+                #cameraCanvas
+                class="figure-img img-fluid rounded w-auto"
+                style="max-height: 50vh"
+            ></canvas>
+        </figure>
+    </div>
+    <ng-container
+        *ngIf="(scannedValues$ | async)?.length; else nothingScannedYet"
+    >
+        <button (click)="clear()" class="btn btn-outline-status-changed">
+            <app-icon icon="reset"></app-icon>
+            {{ 'scanner.clear-results' | translate }}
+        </button>
+        <div
+            *ngFor="
+                let project of scannedValues$ | async;
+                trackBy: 'projectId' | trackByProperty;
+                let last = last
+            "
+        >
+            <h2>
+                <app-icon icon="project"></app-icon
+                >{{ project.projectName$ | async }}
+            </h2>
+            <div
+                *ngFor="
+                    let table of project.tables;
+                    trackBy: 'tableId' | trackByProperty
+                "
+            >
+                <h3>
+                    <app-table-name
+                        *ngIf="
+                            table.table$ | async as tableValue;
+                            withInlineLoading
+                        "
+                        [table]="tableValue"
+                        [showIcon]="true"
+                    ></app-table-name>
+                </h3>
+                <div
+                    *ngIf="table.table$ | async as tableValue; withLoading"
+                    style="max-height: 50vh; overflow-y: auto"
+                >
+                    <app-versions-list
+                        [attributes]="tableValue.attributes"
+                        [queryId]="table.tableId"
+                        [lastCol]="lastCol"
+                        [versions]="table.versions$ | async"
+                        [disableSorting]="true"
+                    ></app-versions-list>
+                    <ng-template #lastCol let-version="version">
+                        <td
+                            class="p-0 fit bg-light last-col"
+                            style="
+                                position: sticky;
+                                vertical-align: middle;
+                                right: 0;
+                            "
+                        >
+                            <app-navigation-col
+                                [version]="version"
+                            ></app-navigation-col>
+                        </td>
+                    </ng-template>
+                </div>
+            </div>
+            <hr *ngIf="!last" />
+        </div>
+    </ng-container>
+    <ng-template #nothingScannedYet>
+        <p class="text-muted text-center">
+            {{ 'scanner.nothing-scanned-yet' | translate }}
+        </p>
+    </ng-template>
+</div>

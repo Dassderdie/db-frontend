@@ -1,0 +1,68 @@
+<div
+    class="input-group"
+    [appDescriptionTooltip]="descriptionTemplate"
+    [description]="control.description"
+>
+    <ng-container *ngTemplateOutlet="prependTemplate"></ng-container>
+    <input
+        type="time"
+        [formControl]="timeInput"
+        class="form-control"
+        [class.is-invalid]="showValidation && (control.invalid$ | async)"
+        [class.has-warning]="showValidation && (control.hasWarning$ | async)"
+        [class.is-changed]="showChanged && (control.changed$ | async)"
+        [id]="control.name + 'Time'"
+        [attr.disabled]="(control.disabled$ | async) ? '' : null"
+        [step]="control.multipleOf"
+        [placeholder]="control.placeholder | translate"
+        [appAutoFocus]="autofocus"
+    />
+    <div dropdown [insideClick]="true" class="d-grid gap-2">
+        <button
+            dropdownToggle
+            type="button"
+            [attr.disabled]="(control.disabled$ | async) ? '' : null"
+            class="input-group-text btn btn-outline-secondary"
+            [id]="control.name + 'TimeZone'"
+        >
+            <ng-container
+                *ngIf="timeZoneInput.value === '00:00' || !timeZoneInput.value"
+            >
+                Z
+            </ng-container>
+            <ng-container
+                *ngIf="timeZoneInput.value !== '00:00' && timeZoneInput.value"
+            >
+                {{ timeZoneSignInput.value + timeZoneInput.value }}
+            </ng-container>
+        </button>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+            <div class="input-group mb-3">
+                <select
+                    [formControl]="timeZoneSignInput"
+                    [attr.disabled]="(control.disabled$ | async) ? '' : null"
+                    class="form-control timeZoneSign"
+                    [id]="control.name + 'TimeZoneSign'"
+                >
+                    <option>+</option>
+                    <option>-</option>
+                </select>
+                <input
+                    [formControl]="timeZoneInput"
+                    type="time"
+                    [attr.disabled]="(control.disabled$ | async) ? '' : null"
+                    class="form-control timeZone"
+                    [id]="control.name + 'TimeZone'"
+                    style="background-image: none; padding-right: 0.75rem"
+                />
+            </div>
+        </div>
+    </div>
+    <ng-container *ngTemplateOutlet="appendTemplate"></ng-container>
+</div>
+
+<app-validation *ngIf="showValidation" [state]="control"></app-validation>
+
+<ng-template #descriptionTemplate>
+    <app-description [description]="control.description"></app-description>
+</ng-template>

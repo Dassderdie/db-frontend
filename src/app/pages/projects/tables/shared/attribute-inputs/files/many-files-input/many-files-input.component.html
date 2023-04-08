@@ -1,0 +1,375 @@
+<ng-template #descriptionTemplate>
+    <app-markdown-viewer
+        [markdownText]="attribute.descriptions | translateDescriptions"
+    ></app-markdown-viewer>
+</ng-template>
+
+<ng-template
+    #actionButtons
+    let-fileName="fileName"
+    let-fileValue="fileValue"
+    let-isNewFile="isNewFile"
+>
+    <td class="fit p-0 bg-light" style="max-width: min-content">
+        <app-file-buttons
+            (preview)="
+                previewFile(
+                    isNewFile ? fileValue.blob : fileValue.blobId,
+                    fileName
+                )
+            "
+            (download)="
+                downloadFile(
+                    isNewFile ? fileValue.blob : fileValue.blobId,
+                    fileName
+                )
+            "
+        >
+        </app-file-buttons>
+        <button
+            *ngIf="isNewFile || !fileValue.deleted; else restoreFileBtn"
+            class="btn pe-2 ps-2 link-danger"
+            [appInfoTooltip]="'custom-forms.files.delete' | translate"
+            [class.disabled]="disabled"
+            (click)="
+                isNewFile
+                    ? deleteNewFile(fileName)
+                    : deletePresentFile(fileName)
+            "
+        >
+            <app-icon icon="delete"></app-icon>
+        </button>
+        <ng-template #restoreFileBtn>
+            <button
+                class="btn pe-2 ps-2 link-status-changed"
+                [appInfoTooltip]="'custom-forms.files.restore' | translate"
+                [class.disabled]="disabled"
+                (click)="restorePresentFile(fileName)"
+            >
+                <app-icon icon="restore"></app-icon>
+            </button>
+        </ng-template>
+    </td>
+</ng-template>
+
+<!-- TODO: remove fileTypeCastPipe assertion -->
+<ng-template
+    #fileNameInput
+    let-fileName="fileName"
+    let-fileValue="fileValue"
+    let-kind="kind"
+>
+    <div
+        [class.text-changed]="fileValue.changedFileName !== undefined"
+        [class.text-invalid]="fileValue.errors"
+    >
+        <app-icon
+            [icon]="fileName | getFileTypeIcon"
+            [inline]="false"
+        ></app-icon>
+        <div
+            *ngIf="kind | fileKindCast as kind"
+            class="d-inline-block input-group-sm"
+            style="max-width: 400px; width: 90%"
+        >
+            <input
+                type="text"
+                [class.is-invalid]="
+                    pendingRenames[kind][fileName] === undefined &&
+                    fileValue.errors
+                "
+                [class.is-changed]="
+                    pendingRenames[kind][fileName] !== undefined
+                "
+                [attr.disabled]="
+                    disabled ||
+                    fileValue.deleted ||
+                    pendingRenames[kind][fileName]?.confirmationPending
+                        ? ''
+                        : null
+                "
+                class="form-control"
+                [placeholder]="'custom-forms.files.rename' | translate"
+                [value]="
+                    pendingRenames[kind][fileName] === undefined
+                        ? fileValue.changedFileName || fileName
+                        : pendingRenames[kind][fileName]!.newName
+                "
+                (input)="
+                    updateRenameValue(kind, fileName, $any($event.target).value)
+                "
+                (blur)="performRenames(kind)"
+                (keydown.enter)="performRenames(kind)"
+            />
+        </div>
+        <ng-container
+            *ngIf="
+                pendingRenames[kind | fileKindCast][fileName] === undefined &&
+                fileValue.errors
+            "
+        >
+            <ng-container
+                *ngFor="
+                    let error of fileValue.errors | keyvalue;
+                    trackBy: 'value.translationKey' | trackByProperty
+                "
+            >
+                {{ $any(error.value).translationKey | translate: error.value }}
+            </ng-container>
+        </ng-container>
+    </div>
+</ng-template>
+
+<!-- perform rename on mouseleave, because as an additional safety because the user could still be focused on the input-field when pressing the save-button -->
+<div
+    class="card"
+    [class.border-status-invalid]="inputState.delayedInvalid$ | async"
+    [class.border-status-warning]="inputState.delayedWarning$ | async"
+    [class.border-status-changed]="inputState.delayedChanged$ | async"
+    (mouseleave)="performRenames('files'); performRenames('newFiles')"
+>
+    <div class="card-header" style="background-color: #e9ecef">
+        <span
+            [appInfoTooltip]="descriptionTemplate"
+            [isDisabled]="
+                !attribute.descriptions ||
+                !(attribute.descriptions | translateDescriptions)
+            "
+            placement="top"
+            [adaptivePosition]="false"
+            tooltipStyle="light"
+        >
+            <app-attribute-name
+                [attribute]="attribute"
+                [displayKind]="true"
+            ></app-attribute-name>
+            <span *ngIf="attribute.required" class="text-danger">*</span>
+        </span>
+    </div>
+    <div
+        *ngIf="value"
+        (dragover)="disabled ? '' : isValidDrop($event)"
+        (drop)="filesDropped($event)"
+        (dragleave)="dragLeave()"
+        [class.drop]="drop && !disabled"
+    >
+        <div style="max-height: 400px; overflow-y: auto">
+            <table
+                *ngIf="displayKeys.newFiles.length > 0; else noNewFiles"
+                class="table table-sm m-0"
+            >
+                <thead class="bg-light">
+                    <tr>
+                        <th>
+                            {{ 'files.name' | translate }}
+                            <app-file-sort-btn
+                                key="name"
+                                [sortKey]="sortObject.newFiles.key"
+                                [sortOrder]="sortObject.newFiles.order"
+                                (click)="toggleSortBy('newFiles', 'name')"
+                            ></app-file-sort-btn>
+                        </th>
+                        <th>
+                            {{ 'files.size' | translate }}
+                            <app-file-sort-btn
+                                key="size"
+                                [sortKey]="sortObject.newFiles.key"
+                                [sortOrder]="sortObject.newFiles.order"
+                                (click)="toggleSortBy('newFiles', 'size')"
+                            ></app-file-sort-btn>
+                        </th>
+                        <th
+                            class="text-center ps-0 pe-0"
+                            style="max-width: min-content"
+                        >
+                            {{ 'files.actions' | translate }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="
+                            let fileName of displayKeys.newFiles;
+                            trackBy: null | trackByProperty
+                        "
+                    >
+                        <td class="text-new">
+                            <ng-container
+                                *ngTemplateOutlet="
+                                    fileNameInput;
+                                    context: {
+                                        fileName: fileName,
+                                        fileValue: value.newFiles[fileName],
+                                        kind: 'newFiles'
+                                    }
+                                "
+                            >
+                            </ng-container>
+                        </td>
+                        <td>
+                            <span
+                                class="float-end"
+                                style="padding-right: calc(100% - 100px)"
+                            >
+                                {{
+                                    value.newFiles[fileName]!.blobInformation
+                                        .rawSize
+                                        | prettySizePipe
+                                        | async
+                                }}
+                            </span>
+                        </td>
+                        <ng-container
+                            *ngTemplateOutlet="
+                                actionButtons;
+                                context: {
+                                    fileName: fileName,
+                                    fileValue: value.newFiles[fileName],
+                                    isNewFile: true
+                                }
+                            "
+                        >
+                        </ng-container>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #noNewFiles>
+            <div class="mb-2 mt-2 ms-4 text-muted">
+                {{ 'custom-forms.files.add-placeholder' | translate }}
+            </div>
+        </ng-template>
+        <div class="d-grid gap-2">
+            <label
+                class="btn btn-link m-0"
+                style="
+                    background: #e9ecef;
+                    width: -webkit-fill-available;
+                    border-top-left-radius: 0px;
+                    border-top-right-radius: 0px;
+                "
+                [class.bottom-radius-0]="initialValue !== undefined"
+            >
+                <!-- TODO: HTMLInputElement type "file" change event.target has no files. https://github.com/microsoft/TypeScript/issues/31816 -->
+                <!-- set fileINput.value to null for fixing file not added after selecting it again (https://stackoverflow.com/a/12102992) -->
+                <input
+                    #fileInput
+                    type="file"
+                    class="d-none"
+                    [attr.multiple]="
+                        !attribute.kindOptions.maximumFileAmount ||
+                        attribute.kindOptions.maximumFileAmount > 1
+                            ? ''
+                            : null
+                    "
+                    [class.disabled]="disabled"
+                    [attr.accept]="acceptedExtensions"
+                    (change)="
+                        addFiles($any($event.target).files);
+                        fileInput.value = $any(null)
+                    "
+                />
+                <app-icon icon="create"></app-icon>
+                {{ 'custom-forms.files.add-files' | translate }}
+            </label>
+        </div>
+        <!-- all the already present files (not shown on entry creation) -->
+        <div
+            *ngIf="initialValue !== undefined"
+            style="max-height: 400px; overflow-y: auto"
+        >
+            <table
+                *ngIf="displayKeys.files.length > 0; else empty"
+                class="table table-sm m-0"
+            >
+                <thead class="bg-light">
+                    <tr>
+                        <th>
+                            {{ 'files.name' | translate }}
+                            <app-file-sort-btn
+                                key="name"
+                                [sortKey]="sortObject.files.key"
+                                [sortOrder]="sortObject.files.order"
+                                (click)="toggleSortBy('files', 'name')"
+                            ></app-file-sort-btn>
+                        </th>
+                        <th class="fit">
+                            {{ 'files.size' | translate }}
+                            <app-file-sort-btn
+                                key="size"
+                                [sortKey]="sortObject.files.key"
+                                [sortOrder]="sortObject.files.order"
+                                (click)="toggleSortBy('files', 'size')"
+                            ></app-file-sort-btn>
+                        </th>
+                        <th class="text-center pe-0 ps-0">
+                            {{ 'files.actions' | translate }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="
+                            let fileName of displayKeys.files;
+                            trackBy: null | trackByProperty
+                        "
+                    >
+                        <td
+                            [class.text-deleted]="
+                                value.files[fileName]!.deleted
+                            "
+                        >
+                            <ng-container
+                                *ngTemplateOutlet="
+                                    fileNameInput;
+                                    context: {
+                                        fileName: fileName,
+                                        fileValue: value.files[fileName],
+                                        kind: 'files'
+                                    }
+                                "
+                            ></ng-container>
+                        </td>
+                        <td>
+                            <span
+                                class="float-end"
+                                style="padding-right: calc(100% - 100px)"
+                                [ngStyle]="{
+                                    'text-decoration-line': value.files[
+                                        fileName
+                                    ]!.deleted
+                                        ? 'line-through'
+                                        : ''
+                                }"
+                            >
+                                {{
+                                    value.files[fileName]!.blobInformation
+                                        .rawSize
+                                        | prettySizePipe
+                                        | async
+                                }}
+                            </span>
+                        </td>
+                        <ng-container
+                            *ngTemplateOutlet="
+                                actionButtons;
+                                context: {
+                                    fileName: fileName,
+                                    fileValue: value.files[fileName],
+                                    isNewFile: false
+                                }
+                            "
+                        >
+                        </ng-container>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #empty>
+            <div class="mb-2 mt-2 ms-4 text-muted">
+                {{ 'custom-forms.files.empty' | translate }}
+            </div>
+        </ng-template>
+    </div>
+</div>
+<app-validation [state]="inputState"></app-validation>

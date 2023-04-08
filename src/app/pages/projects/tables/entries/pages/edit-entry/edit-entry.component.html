@@ -1,0 +1,121 @@
+<div class="page-container">
+    <ng-container
+        *ngIf="project && table && initialVersion && tableViews; withLoading"
+    >
+        <div class="row align-items-center">
+            <h2 class="col">
+                <app-entry-name
+                    *ngIf="
+                        (initialVersion.values[table.attributes[0]!.id]!
+                            | getCurrentValue
+                                : changedEntryValues[
+                                      table.attributes[0]!.id
+                                  ]!) !== null;
+                        else emptyName
+                    "
+                    [newValue]="
+                        initialVersion.values[table.attributes[0]!.id]!
+                            | getCurrentValue
+                                : changedEntryValues[table.attributes[0]!.id]!
+                    "
+                    [entryId]="initialVersion.entryId"
+                    [table]="table"
+                    [deleted]="
+                        changedEntryValues[table.attributes[0]!.id] ===
+                            undefined && !!initialVersion.deleted
+                    "
+                ></app-entry-name>
+                <ng-template #emptyName> ??? </ng-template>
+                <s
+                    *ngIf="
+                        changedEntryValues[table.attributes[0]!.id] !==
+                        undefined
+                    "
+                    class="small text-muted"
+                >
+                    <app-entry-name
+                        [newestVersion]="initialVersion"
+                        [table]="table"
+                    ></app-entry-name>
+                </s>
+            </h2>
+            <div class="col-auto">
+                <button
+                    (click)="editTableView()"
+                    [appInfoTooltip]="
+                        'pages.tables.entry-form.customize.title' | translate
+                    "
+                    type="button"
+                    class="btn btn-sm"
+                    [class.btn-outline-secondary]="!tableViews[table.id]"
+                    [class.btn-secondary]="!!tableViews[table.id]"
+                >
+                    <app-icon icon="tables-editor"></app-icon>
+                    {{ 'pages.tables.entry-form.customize.title' | translate }}
+                </button>
+            </div>
+        </div>
+        <app-attribute-inputs
+            [initialVersion]="initialVersion"
+            [attributes]="table.attributes"
+            [changedValues]="changedEntryValues"
+            [parentState]="entryState"
+            [autofocus]="true"
+            [tableView]="tableViews[table.id]"
+            (valuesChange)="changedEntryValues = $event"
+        ></app-attribute-inputs>
+        <div class="row mt-3">
+            <div class="col-auto mb-2">
+                <button
+                    (click)="reset()"
+                    [disabled]="(entryState.delayedChanged$ | async) === false"
+                    class="btn btn-status-changed"
+                >
+                    <app-icon icon="reset"></app-icon>
+                    <ng-container
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                    >
+                        {{ 'customForms.reset' | translate }}
+                    </ng-container>
+                </button>
+            </div>
+            <app-anonymous-button
+                [allowAnonymous]="
+                    table.allowAnonymousVersionCreation === null
+                        ? project.allowAnonymousVersionCreation
+                        : table.allowAnonymousVersionCreation
+                "
+                [icons]="['save']"
+                [disabled]="
+                    ((entryState.delayedChanged$ | async) === false &&
+                        !initialVersion.deleted) ||
+                    (entryState.delayedInvalid$ | async)
+                "
+                [newEvent$]="entryEditing"
+                (anonymousClick)="submit($event)"
+                class="col-auto mb-2"
+            >
+                {{ 'customForms.save' | translate }}
+            </app-anonymous-button>
+            <app-anonymous-button
+                [allowAnonymous]="
+                    table.allowAnonymousVersionCreation === null
+                        ? project.allowAnonymousVersionCreation
+                        : table.allowAnonymousVersionCreation
+                "
+                type="danger"
+                [icons]="['delete']"
+                [disabled]="!!initialVersion.deleted"
+                [newEvent$]="entryDeleting"
+                (anonymousClick)="deleteEntry($event)"
+                class="col-auto mb-2"
+            >
+                {{ 'customForms.delete' | translate }}
+            </app-anonymous-button>
+        </div>
+    </ng-container>
+</div>

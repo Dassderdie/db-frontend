@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        {{ 'pages.projects.inviteModal.title' | translate }}
+    </h4>
+    <button
+        type="button"
+        class="btn-close"
+        (click)="bsModalRef.hide()"
+    ></button>
+</div>
+<div class="modal-body" (keyup.enter)="inviteUser()">
+    <label [for]="invitationForm.controls[0]!.name">{{
+        'pages.projects.inviteModal.email' | translate
+    }}</label>
+    <app-input
+        [control]="invitationForm.controls[0]!"
+        [autofocus]="true"
+    ></app-input>
+</div>
+<div class="modal-footer">
+    <app-loading-button
+        (click)="inviteUser()"
+        [disabled]="invitationForm.invalid$ | async"
+        [newEvent]="invitingUser"
+        [title]="'pages.projects.inviteModal.invite' | translate"
+        [icons]="['create']"
+    >
+        {{ 'pages.projects.inviteModal.invite' | translate }}
+    </app-loading-button>
+    <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="bsModalRef.hide()"
+    >
+        {{ 'pages.projects.inviteModal.cancel' | translate }}
+    </button>
+</div>

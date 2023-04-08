@@ -1,0 +1,80 @@
+<!-- E.g. to display that no language is set -->
+<app-validation
+    [state]="displayPropertiesState"
+    classes="mb-3"
+></app-validation>
+
+<div
+    *ngFor="
+        let language of languages;
+        trackBy: 'id' | trackByProperty;
+        let last = last
+    "
+    class="card"
+    [class.border-status-invalid]="
+        displayPropertiesState.children[language.id]?.delayedInvalid$ | async
+    "
+    [class.border-status-warning]="
+        displayPropertiesState.children[language.id]?.delayedWarning$ | async
+    "
+    [class.border-status-changed]="
+        !parentState.newCreated &&
+        (displayPropertiesState.children[language.id]?.delayedChanged$ | async)
+    "
+    [class.mb-3]="!last"
+>
+    <div
+        (click)="toggleDisplayLanguage(language.id)"
+        (keydown.enter)="toggleDisplayLanguage(language.id)"
+        role="button"
+        tabindex="0"
+        class="card-header pointer collapse-toggler"
+        style="border-bottom-right-radius: 0; border-top-right-radius: 0"
+    >
+        <h6 class="mb-0">
+            <app-collapse-indicator
+                [isExpanded]="!!display[language.id]"
+                class="me-3"
+            ></app-collapse-indicator>
+            {{ language.translateKey | translate }}
+            <app-icon [icon]="language.id" [inline]="true"></app-icon>
+            <span class="ms-2 fw-normal">
+                {{
+                    $any(displayProperties.displayNames)[language.id]?.singular
+                }}
+                <app-validation
+                    [state]="displayPropertiesState.children[language.id]!"
+                    classes="d-inline"
+                ></app-validation>
+            </span>
+        </h6>
+    </div>
+    <app-animated-if [show]="!!display[language.id]">
+        <div * class="card-body">
+            <div
+                *ngFor="
+                    let control of forms[language.id]!.controls;
+                    let index = index;
+                    trackBy: 'id' | trackByProperty
+                "
+                class="mb-3"
+            >
+                <app-input
+                    [control]="control"
+                    [showChanged]="!parentState?.newCreated"
+                    [autofocus]="index === 0"
+                ></app-input>
+            </div>
+            <button
+                (click)="forms[language.id]!.reset()"
+                [disabled]="
+                    (forms[language.id]!.delayedChanged$ | async) === false
+                "
+                class="btn btn-status-changed"
+            >
+                <app-icon icon="reset"></app-icon>
+                {{ 'customForms.reset' | translate }}
+            </button>
+        </div>
+    </app-animated-if>
+</div>

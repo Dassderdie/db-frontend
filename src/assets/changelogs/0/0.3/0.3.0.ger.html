@@ -1,0 +1,111 @@
+<h2>Neue Funktionen</h2>
+<h4>Datei-Attribut</h4>
+<ul>
+    <li>
+        In diesem Attribut können pro Version eines Eintrages bis zu 100 Dateien
+        gespeichert werden
+    </li>
+    <li>Erstellen, Löschen, Umbenennen, Sortieren nach Name und Größe</li>
+    <li>
+        Beim Herunterladen wird noch eine Warnung angezeigt, da Dateien noch
+        nicht auf Viren gescannt werden
+    </li>
+    <li>
+        Viele Dateitypen können auch direkt angezeigt werden. Dazu zählen
+        <ul>
+            <li>Audio</li>
+            <li>
+                Excel (Kann nicht auf möglichen Schadcode beim Anzeigen im
+                Browser überprüft werden (XSS-Attacke))
+            </li>
+            <li>Bilder</li>
+            <li>Video</li>
+            <li>PDF</li>
+            <li>Text</li>
+            <li>Markdown</li>
+        </ul>
+    </li>
+</ul>
+<h4>Gemeinsames Caching zwischen Tabs</h4>
+<ul>
+    <li>
+        Daten zwischen mehreren offenen KoppaDb-Tabs eines Browser-Fensters
+        werden nun geteilt, damit werden insbesondere unnötige Anfragen
+        reduziert
+    </li>
+    <li>
+        Daten werden teilweise in Echtzeit und teilweise alle 10-12 Minuten
+        automatisch aktualisiert. Alternativ können die Daten über den
+        Synchronisieren-Knopf jederzeit aktualisiert werden. Ein komplettes
+        Neuladen der Webseite ist theoretisch nur noch nötig, falls etwas nicht
+        funktioniert.
+    </li>
+</ul>
+<h4>Lokalisierungen</h4>
+<ul>
+    <li>
+        Zahlen werden nun entsprechend der ausgewählten Sprache formatiert.
+        <ul>
+            <li>Deutsch: 10.000,03</li>
+            <li>Englisch: 10,000.03</li>
+        </ul>
+    </li>
+    <li>
+        Daten werden nun entsprechend der ausgewählten Sprache formatiert.
+        <ul>
+            <li>Deutsch: So., 2. August 2020</li>
+            <li>Englisch: Sun, August 2, 2020</li>
+        </ul>
+    </li>
+    <li>Die Datumsauswahl ist nun auch in Deutsch und Englisch verfügbar</li>
+</ul>
+<h4>Hilfeseiten</h4>
+<ul>
+    <li><a href="/help/support">Support</a></li>
+    <li>
+        <a href="/help/faq">FAQ</a>
+        <ul>
+            <li>
+                Mehr Fragen + Antworten werden in den nächsten Updates folgen
+            </li>
+        </ul>
+    </li>
+    <li><a href="/help/licenses">Lizenzen von Drittanbietern</a></li>
+</ul>
+<h2>Außerdem...</h2>
+<ul>
+    <li>Verbesserte Erstellung von Beziehungsattributen</li>
+    <li>Das Löschen eines Attributes muss nun noch einmal bestätigt werden</li>
+    <li>
+        Warnung im Tabelleneditor, wenn eine Tabelle keinen Primärschlüssel
+        besitzt
+    </li>
+    <li>Viele neue Hinweise für Funktionen via schwarzen Tooltips</li>
+    <li>Überarbeitete "Mitglieder"-Oberfläche</li>
+    <li>Viele UX- und Design-Verbesserungen</li>
+    <li>
+        Beziehungen werden erst geladen, wenn sie auch wirklich dargestellt
+        werden müssen
+    </li>
+    <li>
+        Änderungen in einem Beziehungsattribut werden im Verlauf nun auch sofort
+        ohne weitere Benutzerinteraktion geladen
+    </li>
+</ul>
+<h2>Sicherheit</h2>
+<ul>
+    <li>
+        Man wird nun automatisch ausgeloggt, wenn man alle KoppaDb-Tabs
+        schließt.
+    </li>
+    <li>
+        Mögliche XSS-Angriffsvektoren über den Markdown-Editor und -Viewer
+        reduziert
+    </li>
+    <li>
+        Das Token wird nun nicht mehr im localStorage, sondern in der Laufzeit
+        des SharedWorkers gespeichert. Somit wird es erschwert, XSS-Attacken
+        ohne notwendige Benutzerinteraktion auszuführen.
+    </li>
+    <li>Strengere CSP</li>
+</ul>

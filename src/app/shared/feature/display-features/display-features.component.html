@@ -1,0 +1,443 @@
+<h1>
+    {{ 'shared.feature.display-features.title' | translate }}
+</h1>
+
+<h4>
+    {{ 'shared.feature.display-features.history.title' | translate }}
+</h4>
+<p>
+    {{ 'shared.feature.display-features.history.description' | translate }}
+</p>
+<img
+    [src]="'/assets/images/history-preview' | i18nPath: 'png' | async"
+    loading="lazy"
+    width="1130"
+    height="190"
+    class="preview-img d-none d-md-block mb-3"
+/>
+<br />
+
+<h4>
+    {{ 'shared.feature.display-features.relations.title' | translate }}
+</h4>
+<p>
+    {{ 'shared.feature.display-features.relations.description' | translate }}
+</p>
+<img
+    [src]="'/assets/images/relations-preview' | i18nPath: 'png' | async"
+    loading="lazy"
+    width="1120"
+    height="620"
+    class="preview-img d-none d-md-block mb-3"
+/>
+<br />
+<br />
+
+<div class="row row-cols-1 row-cols-md-2 mb-3">
+    <div class="col mb-5">
+        <div class="card h-100">
+            <app-icon
+                icon="files"
+                class="text-center"
+                style="font-size: 500%"
+            ></app-icon>
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{
+                        'shared.feature.display-features.files.title'
+                            | translate
+                    }}
+                </h4>
+                <p class="card-text">
+                    {{
+                        'shared.feature.display-features.files.description'
+                            | translate
+                    }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5">
+        <div class="card h-100">
+            <app-icon
+                icon="qrcode"
+                class="text-center"
+                style="font-size: 500%"
+            ></app-icon>
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{
+                        'shared.feature.display-features.labels.title'
+                            | translate
+                    }}
+                </h4>
+                <p class="card-text">
+                    {{
+                        'shared.feature.display-features.labels.description'
+                            | translate
+                    }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5">
+        <!-- Mostly because users don't know what markdown is -->
+        <div class="card h-100">
+            <app-icon
+                icon="markdown"
+                class="text-center"
+                style="font-size: 500%"
+            ></app-icon>
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{
+                        'shared.feature.display-features.markdown.title'
+                            | translate
+                    }}
+                </h4>
+                <p class="card-text">
+                    {{
+                        'shared.feature.display-features.markdown.description'
+                            | translate
+                    }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5">
+        <div class="card h-100">
+            <div class="p-4 d-grid gap-2">
+                <button
+                    *ngFor="
+                        let language of languages;
+                        trackBy: 'id' | trackByProperty
+                    "
+                    (click)="translateService.use(language.id)"
+                    [class.disabled]="
+                        translateService.currentLang === language.id
+                    "
+                    class="btn btn-outline-dark btn-lg"
+                >
+                    <app-icon [icon]="language.id"></app-icon>
+                    {{ language.translateKey | translate }}
+                </button>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{ 'landing.i18n.title' | translate }}
+                </h4>
+                <p class="card-text">
+                    {{ 'landing.i18n.description' | translate }}
+                </p>
+                <p class="card-text text-muted small">
+                    {{ 'landing.i18n.cto' | translate }}
+                    <!-- TODO: -->
+                    <button class="btn btn-link btn-sm p-0 align-baseline">
+                        <p>{{ 'landing.i18n.cto-link' | translate }}</p></button
+                    >.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5">
+        <div class="card h-100">
+            <app-icon
+                icon="landing-page-secure"
+                class="text-center"
+                style="font-size: 500%"
+            ></app-icon>
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{
+                        'shared.feature.display-features.validators.title'
+                            | translate
+                    }}
+                </h4>
+                <p class="card-text">
+                    {{
+                        'shared.feature.display-features.validators.description'
+                            | translate
+                    }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5">
+        <div class="card h-100">
+            <div class="text-center text-primary">
+                <app-icon
+                    icon="copy"
+                    style="font-size: 500%"
+                    class="me-2"
+                ></app-icon>
+                <app-icon icon="create" style="font-size: 500%"></app-icon>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{
+                        'shared.feature.display-features.efficient-workflow.title'
+                            | translate
+                    }}
+                </h4>
+                <p class="card-text">
+                    {{
+                        'shared.feature.display-features.efficient-workflow.description'
+                            | translate
+                    }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5">
+        <div class="card h-100">
+            <div class="m-3">
+                <img
+                    [src]="
+                        '/assets/images/tables-graph-preview'
+                            | i18nPath: 'png'
+                            | async
+                    "
+                    loading="lazy"
+                    width="595"
+                    height="390"
+                    class="preview-img card-img-top"
+                />
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{
+                        'shared.feature.display-features.tables-graph.title'
+                            | translate
+                    }}
+                </h4>
+                <p class="card-text">
+                    {{
+                        'shared.feature.display-features.tables-graph.description'
+                            | translate
+                    }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5">
+        <div class="card h-100">
+            <div class="m-3">
+                <img
+                    [src]="
+                        '/assets/images/table-view-preview'
+                            | i18nPath: 'png'
+                            | async
+                    "
+                    loading="lazy"
+                    width="470"
+                    height="405"
+                    class="preview-img card-img-top"
+                />
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{
+                        'shared.feature.display-features.table-views.title'
+                            | translate
+                    }}
+                </h4>
+                <p class="card-text">
+                    {{
+                        'shared.feature.display-features.table-views.description'
+                            | translate
+                    }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5">
+        <div class="card h-100">
+            <div class="text-center">
+                <app-icon
+                    icon="landing-page-cellphone"
+                    style="font-size: 500%"
+                    class="me-3"
+                ></app-icon>
+                <app-icon
+                    icon="landing-page-tablet-ipad"
+                    style="font-size: 500%"
+                    class="me-3"
+                ></app-icon>
+                <app-icon
+                    icon="landing-page-monitor"
+                    style="font-size: 500%"
+                ></app-icon>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{ 'landing.compatible.title' | translate }}
+                </h4>
+                <p class="card-text">
+                    {{ 'landing.compatible.description' | translate }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5">
+        <div class="card h-100">
+            <app-icon
+                icon="synchronize"
+                class="text-center"
+                style="font-size: 500%"
+            ></app-icon>
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{ 'landing.updates.title' | translate }}
+                </h4>
+                <p class="card-text">
+                    {{ 'landing.updates.description' | translate }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4">
+        <h4 class="card-title">
+            {{
+                'shared.feature.display-features.hidden-attributes.title'
+                    | translate
+            }}
+        </h4>
+        <p class="card-text">
+            {{
+                'shared.feature.display-features.hidden-attributes.description'
+                    | translate
+            }}
+        </p>
+    </div>
+    <div class="col-lg-8">
+        <img
+            [src]="
+                '/assets/images/hidden-attribute-preview'
+                    | i18nPath: 'png'
+                    | async
+            "
+            width="1060"
+            height="155"
+            loading="lazy"
+            class="preview-img d-none d-md-block align-items-center"
+        />
+    </div>
+</div>
+<br />
+<br />
+
+<h1>
+    {{ 'shared.feature.display-features.planned-features.title' | translate }}
+</h1>
+<p class="text-muted">
+    {{
+        'shared.feature.display-features.planned-features.description'
+            | translate
+    }}
+</p>
+
+<div class="row row-cols-1 row-cols-md-2 mb-3 text-muted">
+    <div class="col mb-5">
+        <div class="card h-100">
+            <app-icon
+                icon="download"
+                style="font-size: 500%"
+                class="text-center"
+            ></app-icon>
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{
+                        'shared.feature.display-features.export.title'
+                            | translate
+                    }}
+                </h4>
+                <p class="card-text">
+                    {{
+                        'shared.feature.display-features.export.description'
+                            | translate
+                    }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5">
+        <div class="card h-100">
+            <app-icon
+                icon="permissions"
+                style="font-size: 500%"
+                class="text-center"
+            ></app-icon>
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{
+                        'shared.feature.display-features.permissions.title'
+                            | translate
+                    }}
+                </h4>
+                <p class="card-text">
+                    {{
+                        'shared.feature.display-features.permissions.description'
+                            | translate
+                    }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5">
+        <div class="card h-100">
+            <div class="text-center">
+                <app-icon icon="foreign" style="font-size: 500%"></app-icon>
+                <app-icon
+                    icon="search"
+                    class="text-muted"
+                    style="font-size: 350%"
+                ></app-icon>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{
+                        'shared.feature.display-features.foreign-search.title'
+                            | translate
+                    }}
+                </h4>
+                <p class="card-text">
+                    {{
+                        'shared.feature.display-features.foreign-search.description'
+                            | translate
+                    }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5">
+        <div class="card h-100">
+            <div class="text-center">
+                <app-icon icon="files" style="font-size: 500%"></app-icon>
+                <app-icon
+                    icon="search"
+                    class="text-muted"
+                    style="font-size: 350%"
+                ></app-icon>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{
+                        'shared.feature.display-features.files-search.title'
+                            | translate
+                    }}
+                </h4>
+                <p class="card-text">
+                    {{
+                        'shared.feature.display-features.files-search.description'
+                            | translate
+                    }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />

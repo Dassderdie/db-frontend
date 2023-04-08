@@ -1,0 +1,49 @@
+<div class="btn-group btn-group-sm" placement="bottom right" dropdown>
+    <div
+        *ngIf="columnOrdersPreference && columnOrdersPreference.length"
+        class="btn-group btn-group-sm"
+        placement="bottom right"
+        dropdown
+        [isDisabled]="columnOrdersPreference.length < 2"
+    >
+        <button
+            dropdownToggle
+            type="button"
+            class="btn btn-outline-secondary dropdown-toggle"
+        >
+            <app-icon icon="column-order"></app-icon>
+            {{ selectedColumnOrderPreference?.name || '???' }}
+        </button>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+            <button
+                *ngFor="
+                    let columnOrderPreference of columnOrdersPreference;
+                    trackBy: 'name' | trackByProperty
+                "
+                [attr.disabled]="
+                    columnOrderPreference.name ===
+                    selectedColumnOrderPreference?.name
+                        ? ''
+                        : null
+                "
+                (click)="selectColumnOrder(columnOrderPreference)"
+                class="dropdown-item btn-sm"
+            >
+                {{ columnOrderPreference.name || '???' }}
+            </button>
+        </div>
+    </div>
+    <button
+        *ngIf="editingEnabled"
+        (click)="openColumnOrdersPreferenceManagerModal()"
+        class="btn btn-outline-secondary"
+    >
+        <app-icon icon="tables-editor"></app-icon>
+        <ng-container *ngIf="!columnOrdersPreference?.length">
+            {{
+                'pages.tables.columnOrder-preferences.columnOrder-preferences-selector.selector-empty-name'
+                    | translate
+            }}
+        </ng-container>
+    </button>
+</div>

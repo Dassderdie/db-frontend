@@ -1,0 +1,36 @@
+<ng-container
+    *ngIf="(totalVersionsCountE$ | async) !== null; withInlineLoading"
+>
+    {{ totalVersionsCountE$ | async }}
+</ng-container>
+{{ 'pages.entries.results' | translate }}
+
+<!-- TODO: preferenceName -->
+<app-column-order-preference-selector
+    [projectId]="table.projectId"
+    [tableId]="table.id"
+    [editingEnabled]="true"
+    [preferenceName]="''"
+    (columnOrderChanges)="columnOrder = $event"
+    class="float-end mb-2"
+></app-column-order-preference-selector>
+
+<app-versions-list
+    [attributes]="table.attributes"
+    [queryId]="queryId"
+    [firstCol]="firstCol"
+    [firstColHeader]="firstColHeader"
+    [lastCol]="lastCol"
+    [root]="root"
+    [versions]="versionsE$ | async"
+    [disableSorting]="false"
+    [attributeOrder]="columnOrder"
+    (sortingChanges)="sorting$.next($event)"
+    (versionsWrapperElement)="versionsWrapperElement = $event"
+></app-versions-list>
+
+<app-loading-placeholder
+    *ngIf="(allElementsLoaded$ | async) !== true"
+    [inline]="false"
+    class="mt-3 mb-3"
+></app-loading-placeholder>

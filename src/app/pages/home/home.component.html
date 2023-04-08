@@ -1,0 +1,121 @@
+<div class="page-container">
+    <app-landing-page
+        *ngIf="
+            (authenticatedService.isAuthenticated$ | async) === false;
+            else authenticatedLandingPage
+        "
+    ></app-landing-page>
+    <ng-template #authenticatedLandingPage>
+        <br />
+        <div class="row row-cols-1 row-cols-md-2">
+            <div class="col mb-4">
+                <a class="card h-100 card-link" routerLink="projects">
+                    <app-icon
+                        class="card-img-top"
+                        icon="projects"
+                        [inline]="false"
+                    ></app-icon>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            {{ 'routing.projects' | translate }}
+                        </h4>
+                        <p
+                            *ngIf="
+                                breakpoints.xs
+                                    | responsiveBreakpointExceeded
+                                    | async
+                            "
+                            class="card-text"
+                        >
+                            {{ 'home.projects.description' | translate }}
+                        </p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col mb-4">
+                <a class="card h-100 card-link" routerLink="scanner">
+                    <app-icon
+                        class="card-img-top"
+                        icon="scanner"
+                        [inline]="false"
+                    ></app-icon>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            {{ 'routing.scanner' | translate }}
+                        </h4>
+                        <p
+                            *ngIf="
+                                breakpoints.xs
+                                    | responsiveBreakpointExceeded
+                                    | async
+                            "
+                            class="card-text"
+                        >
+                            {{ 'home.scanner.description' | translate }}
+                        </p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col mb-4">
+                <a class="card h-100 card-link" routerLink="your-profile">
+                    <app-icon
+                        class="card-img-top"
+                        icon="user"
+                        [inline]="false"
+                    ></app-icon>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            {{ 'routing.user-profile' | translate }}
+                        </h4>
+                        <p
+                            *ngIf="
+                                breakpoints.xs
+                                    | responsiveBreakpointExceeded
+                                    | async
+                            "
+                            class="card-text"
+                        >
+                            {{ 'home.user-profile.description' | translate }}
+                        </p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col mb-4">
+                <a class="card h-100 card-link" routerLink="help">
+                    <app-icon
+                        class="card-img-top"
+                        icon="help"
+                        [inline]="false"
+                    ></app-icon>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            {{ 'routing.help' | translate }}
+                        </h4>
+                        <p
+                            *ngIf="
+                                breakpoints.xs
+                                    | responsiveBreakpointExceeded
+                                    | async
+                            "
+                            class="card-text"
+                        >
+                            {{ 'home.help.description' | translate }}
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <br />
+
+        <app-display-changelog
+            [startingFrom]="showReleasesStartingFrom"
+            [showChangelogLink]="true"
+        ></app-display-changelog>
+        <br />
+        <!-- TODO: Show important or interesting stuff -->
+    </ng-template>
+</div>

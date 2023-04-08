@@ -1,0 +1,72 @@
+<div *ngIf="initialTable && table; withLoading" class="page-container">
+    <h2>
+        <app-table-name [table]="table" [showIcon]="true"></app-table-name>
+        <s
+            *ngIf="
+                (table.displayNames | translateDisplayNames)?.singular !==
+                (initialTable.displayNames | translateDisplayNames)?.singular
+            "
+            class="small text-muted"
+        >
+            {{ (initialTable.displayNames | translateDisplayNames)?.singular }}
+        </s>
+    </h2>
+    <div class="mb-3">
+        <app-general-properties
+            [initialGeneralProperties]="{
+                displayNames: initialTable.displayNames,
+                descriptions: initialTable.descriptions,
+                allowAnonymousVersionCreation:
+                    initialTable.allowAnonymousVersionCreation
+            }"
+            [generalProperties]="{
+                displayNames: table.displayNames,
+                descriptions: table.descriptions,
+                allowAnonymousVersionCreation:
+                    table.allowAnonymousVersionCreation
+            }"
+            (generalPropertiesChange)="updateGeneralProperties($event)"
+            (deleteTable)="deleteTable()"
+            [parentState]="tableState"
+            [open]="generalPropertiesOpen"
+            (openChange)="generalPropertiesOpen = $event"
+        ></app-general-properties>
+    </div>
+    <h3>{{ 'pages.tablesEditor.table.attributes' | translate }}:</h3>
+    <app-edit-attributes
+        [tableId]="initialTable.id"
+        [initialAttributes]="initialTable.attributes"
+        [attributes]="table.attributes"
+        [parentState]="tableState"
+        (attributesChange)="table.attributes = $event"
+        (saveChanges)="saveChangesForForeignAttribute()"
+    ></app-edit-attributes>
+    <app-validation [state]="tableState"></app-validation>
+    <hr />
+    <div class="mt-3">
+        <button
+            (click)="resetChanges()"
+            [disabled]="(tableState.delayedChanged$ | async) === false"
+            class="btn btn-status-changed"
+            type="button"
+        >
+            <app-icon icon="reset"></app-icon>
+            {{ 'customForms.reset' | translate }}
+        </button>
+        <app-loading-button
+            (click)="submitTable()"
+            [newEvent]="tableCreation"
+            [icons]="['save']"
+            [disabled]="
+                (tableState.delayedChanged$ | async) === false ||
+                (tableState.delayedInvalid$ | async)
+            "
+            class="ms-2"
+        >
+            {{ 'customForms.save' | translate }}
+        </app-loading-button>
+    </div>
+</div>
+
+<br />
+<br />

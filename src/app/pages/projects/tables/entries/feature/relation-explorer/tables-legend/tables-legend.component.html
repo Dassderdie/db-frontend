@@ -1,0 +1,6 @@
+<div *ngFor="let table of tables">
+    <span [style]="'color: ' + tableColorService.getColor($any(table))"
+        >&#x25ae;</span
+    >
+    <app-table-name [table]="table" [showIcon]="false"></app-table-name>
+</div>

@@ -1,0 +1,29 @@
+<ng-container *ngIf="state.errors$ | async as errors">
+    <div
+        *ngIf="
+            (state.invalid$ | async) &&
+            !(errors | filterHiddenErrors | isEmptyObject)
+        "
+        [class]="'text-status-invalid ' + classes"
+    >
+        <app-display-errors
+            [errors]="errors"
+            [pending]="(state.invalidPending$ | async) === true"
+        ></app-display-errors>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="state.warnings$ | async as warnings">
+    <div
+        *ngIf="
+            (state.hasWarning$ | async) &&
+            !(warnings | filterHiddenErrors | isEmptyObject)
+        "
+        [class]="'text-status-warning ' + classes"
+    >
+        <app-display-errors
+            [errors]="warnings"
+            [pending]="(state.hasWarningPending$ | async) === true"
+        ></app-display-errors>
+    </div>
+</ng-container>

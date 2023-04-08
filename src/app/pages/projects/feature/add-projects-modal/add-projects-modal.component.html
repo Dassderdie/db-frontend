@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        {{ 'pages.projects.addProjectsModal.title' | translate }}
+    </h4>
+    <button
+        type="button"
+        class="btn-close"
+        (click)="bsModalRef.hide()"
+    ></button>
+</div>
+<div class="modal-body">
+    <label for="project-name-input">{{
+        'pages.projects.addProjectsModal.name' | translate
+    }}</label>
+    <app-input
+        [control]="newProjectForm.controls[0]"
+        [autofocus]="true"
+        (keydown.enter)="createProject()"
+    ></app-input>
+    <div class="mb-3"></div>
+    <app-input [control]="newProjectForm.controls[1]"></app-input>
+</div>
+<div class="modal-footer">
+    <button
+        type="submit"
+        (click)="createProject()"
+        [disabled]="newProjectForm.invalid$ | async"
+        class="btn btn-warning"
+    >
+        <app-icon icon="create"></app-icon>
+        {{ 'pages.projects.addProjectsModal.create' | translate }}
+    </button>
+    <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="bsModalRef.hide()"
+    >
+        {{ 'pages.projects.addProjectsModal.cancel' | translate }}
+    </button>
+</div>

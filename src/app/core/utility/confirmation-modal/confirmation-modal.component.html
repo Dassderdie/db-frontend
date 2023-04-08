@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ title | translate: titleParams }}</h4>
+    <button
+        type="button"
+        class="btn-close"
+        (click)="confirmation$.next(null); bsModalRef.hide()"
+    ></button>
+</div>
+<div class="modal-body">
+    <div [innerHTML]="description | translate: descriptionsParams"></div>
+    <div *ngIf="confirmationString" class="mt-2">
+        {{ 'confirmation-modal.confirmation-key-description' | translate }}
+        <div class="text-center font-monospace mb-2">
+            {{ confirmationString }}
+        </div>
+        <app-string-input
+            [control]="confirmationInput"
+            [autofocus]="true"
+            [showChanged]="false"
+        ></app-string-input>
+    </div>
+</div>
+<div class="modal-footer">
+    <button
+        *ngIf="btnOkText"
+        type="button"
+        [ngClass]="'btn btn-' + kind"
+        [disabled]="
+            confirmationString && confirmationInput.value !== confirmationString
+        "
+        (click)="confirmation$.next(true); bsModalRef.hide()"
+    >
+        {{ btnOkText | translate }}
+    </button>
+    <button
+        type="button"
+        class="btn btn-outline-secondary"
+        autofocus
+        (click)="confirmation$.next(false); bsModalRef.hide()"
+    >
+        {{ btnCancelText | translate }}
+    </button>
+</div>

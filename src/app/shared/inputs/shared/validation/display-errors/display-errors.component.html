@@ -1,0 +1,32 @@
+<ng-container
+    *ngFor="
+        let errorKeyValue of (errors | processStateErrors | async) || {}
+            | filterHiddenErrors
+            | keyvalue;
+        trackBy: null | trackByProperty
+    "
+>
+    <ng-container
+        *ngIf="
+            errorKeyValue.value.translationKey;
+            let translation;
+            else: noTranslationFound
+        "
+    >
+        {{ translation | translate: errorKeyValue.value }}
+    </ng-container>
+    <ng-template #noTranslationFound>
+        <i>No translation found for error: {{ errorKeyValue.key }}</i>
+        <div class="me-3 ms-3 small" style="overflow: auto; max-height: 20px">
+            <!-- arguments for debugging -->
+            {{ errorKeyValue.value | json }}
+        </div>
+    </ng-template>
+</ng-container>
+<!-- Indicate that not all async validators are loaded yet -->
+<span
+    *ngIf="pending"
+    class="spinner-border text-secondary spinner-border-sm"
+    role="status"
+>
+</span>

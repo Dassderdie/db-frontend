@@ -1,0 +1,160 @@
+<!-- overflow-y: hidden to fix bug where vertical scrollbar is sometimes visible -->
+<div
+    #tableBody
+    class="table-responsive w-100"
+    style="overflow-y: hidden; min-height: 200px"
+>
+    <table
+        cdk-table
+        [dataSource]="versions || []"
+        [trackBy]="'id' | trackByProperty"
+        multiTemplateDataRows
+        class="table table-bordered"
+    >
+        <ng-container cdkColumnDef="firstCol" sticky>
+            <!-- TODO: I guess this doesn't work? :/ -->
+            <ng-container
+                *cdkHeaderCellDef
+                [ngTemplateOutlet]="firstColHeader!"
+                cdk-header-cell
+            ></ng-container>
+
+            <ng-container
+                *cdkCellDef="let version"
+                cdk-cell
+                [ngTemplateOutlet]="firstCol!"
+                [ngTemplateOutletContext]="{ version: version }"
+            ></ng-container>
+        </ng-container>
+
+        <!-- z-index to make the dropdown appear over the sticky column -->
+        <ng-container cdkColumnDef="lastCol" stickyEnd>
+            <th
+                *cdkHeaderCellDef
+                cdk-header-cell
+                class="dark text-center p-0 align-middle last-col"
+                style="
+                    max-width: min-content;
+                    right: 0;
+                    z-index: 100;
+                    background-color: #f5f5f5;
+                "
+            ></th>
+
+            <ng-container
+                *cdkCellDef="let version"
+                cdk-cell
+                [ngTemplateOutlet]="lastCol!"
+                [ngTemplateOutletContext]="{ version: version }"
+            ></ng-container>
+        </ng-container>
+
+        <ng-container
+            *ngFor="
+                let attr of attributeOrder;
+                trackBy: null | trackByProperty;
+                let firstAttr = first
+            "
+            [cdkColumnDef]="attr"
+        >
+            <th
+                *cdkHeaderCellDef
+                cdk-header-cell
+                class="dark text-nowrap pt-0 pb-0 align-middle"
+            >
+                <app-attribute-col-name
+                    [attributeCol]="attr"
+                    [attributes]="attributes"
+                    [displayAttributeKind]="false"
+                ></app-attribute-col-name>
+                <ng-container *ngIf="!disableSorting">
+                    <button
+                        *ngIf="
+                            attr
+                                | getSortIcon
+                                    : sortingKey
+                                    : sortingOrder
+                                    : (attr | attributeById: attributes) as icon
+                        "
+                        (click)="toggleSortBy(attr)"
+                        class="btn"
+                    >
+                        <app-icon
+                            [icon]="icon.type"
+                            [style.color]="icon.grey ? 'grey' : undefined"
+                        ></app-icon>
+                    </button>
+                </ng-container>
+            </th>
+
+            <td *cdkCellDef="let version" cdk-cell class="light">
+                <div
+                    class="table-cell row flex-nowrap no-gutters"
+                    style="white-space: nowrap; max-width: min(500px, 50vw)"
+                >
+                    <app-collapse-indicator
+                        *ngIf="firstAttr"
+                        [isExpanded]="version.id === showVersionWithId"
+                        class="pointer col-auto"
+                        style="max-width: min-content"
+                    ></app-collapse-indicator>
+                    <app-meta-attribute-value
+                        *ngIf="
+                            attr | isMetaAttributeKey as metaAttributeKey;
+                            else attributeValue
+                        "
+                        [class.col]="firstAttr"
+                        [class.ps-0]="firstAttr"
+                        class="font-italic col"
+                        [entry]="version"
+                        [key]="metaAttributeKey"
+                    ></app-meta-attribute-value>
+                    <ng-template #attributeValue>
+                        <app-attribute-value
+                            *ngIf="
+                                attr | attributeById: attributes as attribute
+                            "
+                            [attribute]="attribute"
+                            [version]="version"
+                            [small]="true"
+                            [root]="root"
+                            [class.col]="firstAttr"
+                            [class.ps-0]="firstAttr"
+                        ></app-attribute-value>
+                    </ng-template>
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container cdkColumnDef="expandedDetail">
+            <td
+                *cdkCellDef="let version"
+                cdk-cell
+                [attr.colspan]="columnOrder.length"
+                class="p-0"
+            >
+                <app-animated-if [show]="version.id === showVersionWithId">
+                    <div * class="card-body p-0">
+                        <app-entry-table
+                            [attributes]="attributes"
+                            [version]="version"
+                        ></app-entry-table>
+                    </div>
+                </app-animated-if>
+            </td>
+        </ng-container>
+
+        <tr *cdkHeaderRowDef="columnOrder" cdk-header-row sticky></tr>
+        <tr
+            *cdkRowDef="let version; columns: columnOrder"
+            cdk-row
+            (click)="toggleShowVersion(version.id)"
+            [class.showVersion]="showVersionWithId === version.id"
+            class="hover"
+        ></tr>
+        <tr *cdkRowDef="let version; columns: ['expandedDetail']" cdk-row></tr>
+    </table>
+    <div *ngIf="versions?.length === 0" class="text-center h6 text-muted">
+        {{ 'pages.entries.noEntries' | translate }}
+    </div>
+</div>

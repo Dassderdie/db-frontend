@@ -1,0 +1,68 @@
+<footer class="navbar navbar-dark bg-dark">
+    <div class="page-container navbar-nav">
+        <div class="row w-100 text-center">
+            <div class="col-sm">
+                <a
+                    *ngIf="environment.companyDetails"
+                    routerLink="/company-details"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    class="col-auto text-decoration-none nav-link"
+                >
+                    <app-icon
+                        icon="info"
+                        class="fw-light text-light"
+                    ></app-icon>
+                    {{ 'routing.company-details' | translate }}
+                </a>
+            </div>
+            <div class="col-sm">
+                <a routerLink="/about" class="col-auto text-decoration-none">
+                    <app-icon
+                        icon="about"
+                        class="fw-light text-light"
+                        style="font-size: 25px"
+                    ></app-icon>
+                    <span class="text-muted" style="font-weight: 60%">
+                        {{ version }}
+                    </span>
+                </a>
+                <div
+                    *ngIf="customerConfigurationService.config"
+                    class="text-light"
+                >
+                    {{ 'koppaDb-customer-for' | translate }}
+                    <span class="font-monospace" style="font-size: 20px">
+                        {{
+                            (customerConfigurationService.config | async)?.name
+                        }}
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm">
+                <a
+                    *ngIf="environment.hasPrivacyPolicy"
+                    routerLink="/privacy-policy"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    class="col-auto text-decoration-none nav-link"
+                >
+                    <app-icon
+                        icon="info"
+                        class="fw-light text-light"
+                    ></app-icon>
+                    {{ 'routing.privacy-policy' | translate }}
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+<span
+    *ngIf="showScrollToTopButton$ | async"
+    (click)="scrollToTop.emit()"
+    [title]="'footer.scroll-top' | translate"
+    class="position-fixed pointer text-primary"
+    style="bottom: 0px; right: 10px; font-size: xx-large"
+>
+    <app-icon icon="scroll-to-top"></app-icon>
+</span>

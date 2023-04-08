@@ -1,0 +1,35 @@
+<!-- all foreign-relations of a deleted version are or or will be deleted  -->
+<ng-container *ngIf="!version.deleted">
+    <ng-container
+        *ngIf="intermediateVersions && intermediateTable; withInlineLoading"
+    >
+        <ng-container
+            *ngFor="
+                let intermediateVersion of intermediateVersions;
+                trackBy: 'id' | trackByProperty;
+                let last = last
+            "
+        >
+            <app-entry-name
+                [projectId]="version.projectId"
+                [tableId]="attribute.kindOptions.foreign.tableId"
+                [entryId]="
+                    intermediateVersion.values
+                        | getForeignEntryId
+                            : true
+                            : intermediateTable
+                            : version.tableId
+                            : attribute.id
+                "
+                [minimalistic]="small"
+                [showLink]="!small"
+            >
+            </app-entry-name>
+            <app-display-foreign-divider
+                [last]="last"
+                [numberOfTotalRelations]="numberOfTotalRelations!"
+                [displayLimit]="displayLimit"
+            ></app-display-foreign-divider>
+        </ng-container>
+    </ng-container>
+</ng-container>

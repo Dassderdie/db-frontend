@@ -1,0 +1,29 @@
+<div class="page-container">
+    <h1>{{ 'user.change-auth-mail.heading' | translate }}</h1>
+    <div *ngIf="chooseNewAuthEmailInput; else displayErrors">
+        <app-select-input
+            [control]="chooseNewAuthEmailInput"
+        ></app-select-input>
+        <br />
+        <app-loading-button
+            [title]="'user.change-auth-mail.btn' | translate"
+            [icons]="['edit', 'email']"
+            [newEvent]="authEmailChanging"
+            (click)="changeAuthEmail()"
+            type="outline-danger"
+        >
+            {{ 'user.change-auth-mail.btn' | translate }}
+        </app-loading-button>
+    </div>
+    <ng-template #displayErrors>
+        <div *ngIf="!token" class="text-status-invalid">
+            {{ 'user.change-auth-mail.errors.token' | translate }}
+        </div>
+        <div *ngIf="onlyOneEmailVerified" class="text-status-invalid">
+            {{
+                'user.change-auth-mail.errors.only-one-email-verified'
+                    | translate
+            }}
+        </div>
+    </ng-template>
+</div>

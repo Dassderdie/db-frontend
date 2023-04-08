@@ -1,0 +1,74 @@
+<ng-container
+    *ngIf="
+        tableValue &&
+            (newestVersionValue || (entryId && newValue !== undefined));
+        else errorOrLoading
+    "
+>
+    <a
+        *ngIf="showLink; else displayEntryName"
+        class="btn-link"
+        role="button"
+        target="_blank"
+        [routerLink]="
+            '/projects/' +
+            tableValue.projectId +
+            '/tables/' +
+            tableValue.id +
+            '/entries/' +
+            (newestVersionValue?.entryId || entryId)
+        "
+    >
+        <ng-container [ngTemplateOutlet]="displayEntryName"></ng-container>
+    </a>
+    <ng-template #displayEntryName>
+        <span
+            [class.text-status-deleted]="newestVersionValue?.deleted || deleted"
+            [appInfoTooltip]="
+                ((newestVersionValue?.deleted || deleted) && !minimalistic
+                    ? 'entry-name.deleted'
+                    : 'empty-translation'
+                ) | translate
+            "
+        >
+            <app-icon *ngIf="!minimalistic" icon="entry"></app-icon>
+            <app-attribute-value
+                *ngIf="newestVersionValue; else inputsAttributeValue"
+                [attribute]="tableValue.attributes[0]!"
+                [version]="newestVersionValue"
+                [small]="true"
+            ></app-attribute-value>
+            <ng-template #inputsAttributeValue>
+                <!-- TODO: types: remove type assertions because of missing type narrowing of union types -->
+                <app-attribute-simple-value
+                    *ngIf="
+                        tableValue.attributes[0]!.kind !== 'foreign' &&
+                            tableValue.attributes[0]!.kind !== 'files';
+                        else newFilesOrForeignValue
+                    "
+                    [attribute]="$any(tableValue.attributes[0])"
+                    [value]="$any(newValue)"
+                ></app-attribute-simple-value>
+                <ng-template #newFilesOrForeignValue>
+                    <!-- TODO: display the value of a not yet submitted foreign- or files-value -->
+                    <span class="text-muted">Not supported yet</span>
+                </ng-template>
+            </ng-template>
+            <app-icon
+                *ngIf="newestVersionValue?.deleted || deleted"
+                icon="delete"
+                style="font-size: 60%; opacity: 0.8"
+            ></app-icon>
+        </span>
+    </ng-template>
+</ng-container>
+
+<ng-template #errorOrLoading>
+    <!-- either there was an error or it is still loading -->
+    <span
+        *ngIf="newestVersionValue === null; withInlineLoading"
+        class="text-danger"
+    >
+        <app-icon icon="danger"></app-icon> Error
+    </span>
+</ng-template>

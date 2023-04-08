@@ -1,0 +1,249 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "db-frontend": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss",
+                    "changeDetection": "OnPush"
+                },
+                "@schematics/angular:application": {
+                    "strict": true
+                }
+            },
+            "root": "",
+            "sourceRoot": "src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist",
+                        "aot": true,
+                        "main": "src/main.ts",
+                        "vendorChunk": false,
+                        "tsConfig": "tsconfig.app.json",
+                        "polyfills": "src/polyfills.ts",
+                        "assets": [
+                            "src/assets",
+                            "src/favicon.ico",
+                            "src/manifest.webmanifest",
+                            {
+                                "glob": "robots.txt",
+                                "input": "src/environments/assets/robots/disallow",
+                                "output": "/"
+                            }
+                        ],
+                        "styles": ["src/styles.scss"],
+                        "scripts": [],
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["src"]
+                        },
+                        "allowedCommonJsDependencies": [
+                            "cytoscape",
+                            "qrcode",
+                            "cytoscape-grid-guide",
+                            "cytoscape-fcose",
+                            "@toast-ui/editor",
+                            "@toast-ui/editor/dist/i18n/de-de",
+                            "xlsx",
+                            "heap",
+                            "cose-base",
+                            "mime",
+                            "core-js-pure",
+                            "raf"
+                        ],
+                        "budgets": [
+                            {
+                                "type": "anyComponentStyle",
+                                "maximumWarning": "170kb"
+                            }
+                        ],
+                        "optimization": {
+                            "scripts": true,
+                            "styles": {
+                                "minify": true,
+                                "inlineCritical": false
+                            },
+                            "fonts": true
+                        },
+                        "outputHashing": "all",
+                        "sourceMap": false,
+                        "namedChunks": false,
+                        "extractLicenses": true,
+                        "buildOptimizer": true,
+                        "serviceWorker": true,
+                        "index": {
+                            "input": "src/environments/assets/index.prod.html",
+                            "output": "index.html"
+                        },
+                        "webWorkerTsConfig": "tsconfig.worker.json"
+                    },
+                    "configurations": {
+                        "development": {
+                            "index": "src/index.html",
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environments/development.env.ts"
+                                }
+                            ],
+                            "optimization": false,
+                            "outputHashing": "none",
+                            "sourceMap": true,
+                            "namedChunks": true,
+                            "buildOptimizer": false,
+                            "serviceWorker": false
+                        },
+                        "cli": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environments/cli.env.prod.ts"
+                                }
+                            ],
+                            "assets": [
+                                "src/assets",
+                                "src/favicon.ico",
+                                "src/manifest.webmanifest",
+                                {
+                                    "glob": "robots.txt",
+                                    "input": "src/environments/assets/robots/disallow",
+                                    "output": "/"
+                                },
+                                {
+                                    "glob": "**/*",
+                                    "input": "src/environments/assets/privacy-policy",
+                                    "output": "assets/privacy-policy"
+                                }
+                            ]
+                        },
+                        "official": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environments/official.env.prod.ts"
+                                }
+                            ],
+                            "assets": [
+                                "src/assets",
+                                "src/favicon.ico",
+                                "src/manifest.webmanifest",
+                                {
+                                    "glob": "robots.txt",
+                                    "input": "src/environments/assets/robots/",
+                                    "output": "/"
+                                },
+                                {
+                                    "glob": "**/*",
+                                    "input": "src/environments/assets/privacy-policy",
+                                    "output": "assets/privacy-policy"
+                                }
+                            ]
+                        },
+                        "customerOnPremise": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environments/customer-on-premise.env.prod.ts"
+                                }
+                            ],
+                            "assets": [
+                                "src/assets",
+                                "src/favicon.ico",
+                                "src/manifest.webmanifest",
+                                {
+                                    "glob": "robots.txt",
+                                    "input": "src/environments/assets/robots/disallow",
+                                    "output": "/"
+                                },
+                                {
+                                    "glob": "customer-config.json",
+                                    "input": "src/environments/assets/customer/",
+                                    "output": "assets/"
+                                }
+                            ]
+                        },
+                        "customerOnline": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environments/customer-online.env.prod.ts"
+                                }
+                            ],
+                            "assets": [
+                                "src/assets",
+                                "src/favicon.ico",
+                                "src/manifest.webmanifest",
+                                {
+                                    "glob": "robots.txt",
+                                    "input": "src/environments/assets/robots/disallow",
+                                    "output": "/"
+                                },
+                                {
+                                    "glob": "customer-config.json",
+                                    "input": "src/environments/assets/customer/",
+                                    "output": "assets/"
+                                },
+                                {
+                                    "glob": "**/*",
+                                    "input": "src/environments/assets/privacy-policy",
+                                    "output": "assets/privacy-policy"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "proxyConfig": "src/proxy.conf.json",
+                        "browserTarget": "db-frontend:build:development"
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "db-frontend:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "src/test.ts",
+                        "karmaConfig": "./karma.conf.js",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "tsconfig.spec.json",
+                        "scripts": [],
+                        "styles": ["src/styles.scss"],
+                        "assets": [
+                            "src/assets",
+                            "src/favicon.ico",
+                            "src/manifest.webmanifest"
+                        ],
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["src"]
+                        },
+                        "webWorkerTsConfig": "tsconfig.worker.json"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-eslint/builder:lint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "src/**/*.ts",
+                            "src/**/*.component.html"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "defaultProject": "db-frontend",
+    "cli": {
+        "defaultCollection": "@angular-eslint/schematics"
+    }
+}

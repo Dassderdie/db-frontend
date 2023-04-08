@@ -1,0 +1,21 @@
+<span [class.text-muted]="attribute.hidden">
+    <app-icon
+        *ngIf="displayKind"
+        [icon]="
+            attribute.kind === 'foreign'
+                ? (attribute | isForeignSingleAttribute)
+                    ? 'foreignSingle'
+                    : 'foreignMultiple'
+                : attribute.kind
+        "
+    ></app-icon>
+    <ng-container
+        *ngIf="
+            attribute.displayNames | translateDisplayNames as displayNames;
+            else noName
+        "
+    >
+        {{ plural ? displayNames.singular : (displayNames | getPluralName) }}
+    </ng-container>
+    <ng-template #noName> ??? </ng-template>
+</span>

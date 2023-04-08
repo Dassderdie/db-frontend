@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        {{ 'auth.email-verification-modal.title' | translate }}
+    </h4>
+    <button
+        type="button"
+        class="btn-close"
+        (click)="bsModalRef.hide()"
+    ></button>
+</div>
+<div class="modal-body">
+    {{ 'auth.email-verification-modal.description' | translate }}
+    <p class="text-muted small">
+        {{ 'auth.email-verification-modal.small-description' | translate }}
+    </p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="bsModalRef.hide()">
+        {{ 'auth.email-verification-modal.continue' | translate }}
+    </button>
+</div>

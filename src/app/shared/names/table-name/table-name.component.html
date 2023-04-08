@@ -1,0 +1,10 @@
+<app-icon *ngIf="showIcon" icon="table"></app-icon>
+<ng-container
+    *ngIf="
+        (table.displayNames | translateDisplayNames)?.singular as singName;
+        else unknownName
+    "
+>
+    {{ singName }}
+</ng-container>
+<ng-template #unknownName> ??? </ng-template>

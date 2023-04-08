@@ -1,0 +1,29 @@
+@import '~bootstrap/scss/_functions.scss';
+@import '~bootstrap/scss/_variables.scss';
+
+/**
+ * the colour for displaying that an input or similar has changes
+ */
+$changed: $info;
+/**
+ * the colour for displaying that an input or similar is invalid
+ */
+$invalid: $danger;
+/**
+ * the colour for displaying that an item was newly added
+ */
+$new: $success;
+$deleted: $danger;
+$status-colors: (
+    'status-changed': $changed,
+    'status-new': $new,
+    /**
+     * the colour for displaying that an item should or has been deleted
+     */
+        'status-warning': $warning,
+    'status-deleted': $deleted,
+    'status-invalid': $invalid,
+);
+
+$utilities-text-colors: map-merge($theme-colors, $status-colors);
+$theme-colors: map-merge($theme-colors, $status-colors);

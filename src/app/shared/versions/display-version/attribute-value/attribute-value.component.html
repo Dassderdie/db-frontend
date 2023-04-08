@@ -1,0 +1,61 @@
+<ng-container [ngSwitch]="attribute.kind">
+    <span
+        *ngSwitchCase="'foreign'"
+        [appIsVisible]="loaded ? undefined : root"
+        (isVisibleChanges)="loaded = loaded || !!$event"
+    >
+        <ng-container *ngIf="loaded; withInlineLoading">
+            <app-display-foreign
+                *ngIf="
+                    small ||
+                        ($any(attribute.kindOptions).intermediateAttributes
+                            .length === 0 &&
+                            $any(attribute.kindOptions).relationshipMax &&
+                            $any(attribute.kindOptions).relationshipMax <= 1);
+                    else foreignMany
+                "
+                [attribute]="$any(attribute)"
+                [version]="version"
+                [small]="small"
+            ></app-display-foreign>
+            <ng-template #foreignMany>
+                <app-display-foreign-many
+                    [attribute]="$any(attribute)"
+                    [version]="version"
+                >
+                    <ng-template
+                        let-first="first"
+                        let-last="last"
+                        let-isVisible="isVisible"
+                        let-intermediateVersion="intermediateVersion"
+                        let-intermediateTable="intermediateTable"
+                    >
+                        <app-foreign-many-item
+                            *ngIf="isVisible; withLoading"
+                            [attribute]="$any(attribute)"
+                            [intermediateVersion]="intermediateVersion"
+                            [intermediateTable]="intermediateTable"
+                            [tableId]="version.tableId"
+                            [showHidden]="showHidden"
+                        >
+                        </app-foreign-many-item>
+                    </ng-template>
+                </app-display-foreign-many>
+            </ng-template>
+        </ng-container>
+    </span>
+    <app-display-files
+        *ngSwitchCase="'files'"
+        [attribute]="$any(attribute)"
+        [value]="$any(version.values[attribute.id])"
+        [projectId]="version.projectId"
+        [small]="small"
+    >
+    </app-display-files>
+    <app-attribute-simple-value
+        *ngSwitchDefault
+        [attribute]="$any(attribute)"
+        [value]="$any(version.values[attribute.id])"
+        [small]="small"
+    ></app-attribute-simple-value>
+</ng-container>

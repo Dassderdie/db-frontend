@@ -1,0 +1,93 @@
+<div class="page-container">
+    <ng-container *ngIf="table">
+        <h1>
+            <app-table-name [table]="table" [showIcon]="true"></app-table-name>
+        </h1>
+        <app-markdown-viewer
+            *ngIf="table.descriptions | translateDescriptions as description"
+            [markdownText]="description"
+            maxHeight="100px"
+            overflow="showMore"
+        ></app-markdown-viewer>
+    </ng-container>
+    <br />
+    <!-- TODO: disable/enable depending on permissions -->
+    <div class="row row-cols-1 row-cols-md-2">
+        <div class="col mb-4">
+            <a class="card h-100 card-link" routerLink="new">
+                <app-icon
+                    icon="create"
+                    [inline]="false"
+                    class="card-img-top"
+                ></app-icon>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ 'pages.tables.overview.create.title' | translate }}
+                    </h4>
+                    <p
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                        class="card-text"
+                    >
+                        {{
+                            'pages.tables.overview.create.description'
+                                | translate
+                        }}
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col mb-4">
+            <a class="card h-100 card-link" routerLink="search">
+                <app-icon
+                    icon="search"
+                    [inline]="false"
+                    class="card-img-top"
+                ></app-icon>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ 'pages.tables.overview.search.title' | translate }}
+                    </h4>
+                    <p
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                        class="card-text"
+                    >
+                        {{
+                            'pages.tables.overview.search.description'
+                                | translate
+                        }}
+                    </p>
+                </div>
+            </a>
+        </div>
+        <!-- TODO: Add statistics -->
+    </div>
+
+    <ng-container
+        *ngIf="
+            table && role && role.preferences
+                ? role.preferences.filters[table.id]
+                : null as filtersPreference
+        "
+    >
+        <h3>{{ 'pages.tables.overview.search.saved-filters' | translate }}</h3>
+        <ul>
+            <li *ngFor="let filterPreference of filtersPreference | slice: 0:3">
+                <a
+                    (click)="navigateToSearch(filterPreference)"
+                    class="btn-link pointer"
+                >
+                    {{ filterPreference.name }}
+                </a>
+            </li>
+        </ul>
+    </ng-container>
+</div>

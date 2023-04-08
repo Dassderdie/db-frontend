@@ -1,0 +1,167 @@
+<div class="page-container">
+    <h1>
+        <app-icon icon="project"></app-icon>
+        <ng-container *ngIf="project; withInlineLoading">
+            {{ project.name }}
+        </ng-container>
+    </h1>
+    <div class="row row-cols-1 row-cols-md-2">
+        <div class="col mb-4">
+            <a routerLink="tables" class="card h-100 card-link">
+                <app-icon
+                    icon="project-overview"
+                    [inline]="false"
+                    class="card-img-top"
+                ></app-icon>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ 'routing.overview' | translate }}
+                    </h4>
+                    <p
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                        class="card-text"
+                    >
+                        {{ 'routing.overview-description' | translate }}
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col mb-4">
+            <a routerLink="settings/members" class="card h-100 card-link">
+                <app-icon
+                    icon="users"
+                    [inline]="false"
+                    class="card-img-top"
+                ></app-icon>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ 'routing.settings-members' | translate }}
+                    </h4>
+                    <p
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                        class="card-text"
+                    >
+                        {{
+                            'routing.settings-members-descriptions' | translate
+                        }}
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col mb-4">
+            <a
+                routerLink="settings/general"
+                class="card h-100 card-link"
+                [class.disabled]="
+                    project && !project.authenticatedUserRole.administrator
+                "
+            >
+                <app-icon
+                    icon="settings"
+                    [inline]="false"
+                    class="card-img-top"
+                ></app-icon>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ 'routing.general-settings' | translate }}
+                    </h4>
+                    <p
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                        class="card-text"
+                    >
+                        {{
+                            'routing.general-settings-descriptions' | translate
+                        }}
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col mb-4">
+            <a
+                routerLink="settings/tables"
+                class="card h-100 card-link"
+                [class.disabled]="
+                    (project && !project.authenticatedUserRole.administrator) ||
+                    (breakpoints.xs | responsiveBreakpointExceeded | async) ===
+                        false
+                "
+            >
+                <app-icon
+                    icon="tables-editor"
+                    [inline]="false"
+                    class="card-img-top"
+                ></app-icon>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ 'routing.tables-editor' | translate }}
+                    </h4>
+                    <p
+                        *ngIf="
+                            breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async
+                        "
+                        class="card-text"
+                    >
+                        {{ 'routing.tables-editor-descriptions' | translate }}
+                    </p>
+                    <p
+                        *ngIf="
+                            (breakpoints.xs
+                                | responsiveBreakpointExceeded
+                                | async) === false
+                        "
+                        class="card-text text-danger"
+                    >
+                        {{
+                            'pages.projects.no-tables-editor-on-xs' | translate
+                        }}
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-between mt-4">
+            <div class="col-auto mb-2"></div>
+            <button
+                *ngIf="!isLastAdmin; else lastAdminBtn"
+                (click)="leaveProject()"
+                [attr.disabled]="!project ? '' : null"
+                class="btn btn-danger col-md-3"
+            >
+                <app-icon icon="logout"></app-icon>
+                {{ 'pages.projects.leave-project.leave-btn' | translate }}
+            </button>
+            <ng-template #lastAdminBtn>
+                <!-- TODO: use just 1 button with conditional popover (not able to disable popover + attr.disabled on chrome stops all events) -->
+                <button
+                    [appInfoTooltip]="
+                        'pages.projects.leave-project.last-admin' | translate
+                    "
+                    placement="top"
+                    class="btn btn-danger col-md-3 disabled"
+                >
+                    <app-icon icon="logout"></app-icon>
+                    {{ 'pages.projects.leave-project.leave-btn' | translate }}
+                </button>
+            </ng-template>
+        </div>
+    </div>
+</div>
