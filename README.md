@@ -1,5 +1,25 @@
 # DbFrontend
 
+This is the web frontend of KoppaDb, an easy-to-use database management system that I (@Dassderdie) co-founded in 2020. The code was written between February 2018 and September 2021, and it is now publicly archived for portfolio purposes. The company was liquidated just a bit more than one year after its founding because we never managed to scale above our initial customer. However, it was a valuable experience, and I learned more about software development in this project than in the first two years of my bachelor's degree.
+
+## Overview
+
+If you're looking for a high-level understanding of this codebase, you're in the right place. This section will provide you with the highlights.
+
+
+
+
+WIP
+
+
+## Documentation
+
+<details>
+
+<summary>
+Click me to see parts of the original README.
+</summary>
+
 ## Project structure
 
 For most this is a typical angular-app:
@@ -22,9 +42,7 @@ in `/app` and every descending folder/module
 -   _lazy-loaded-pages_
     -   if there is a lazy loaded module via the router the corresponding folder with this module and all it's declarations is often at the same level as `/pages`, `shared`, `core`, etc. (e.g. `app/pages/projects/tables`). With this design the module is still at the same level as the routing says without nesting everything to much.
 
-Between the server and the client is the cache-server (`src/cache-server`). He sends and receives requests and caches them to reduce the server load. In the best case (fallback) he is shared between all tabs through the service-worker.
-
-The service-worker (`src/service-worker`) is used for centralized communicating between tabs.
+Between the server and the client is the [CacheServer](./src/cache-server/cache-server.ts). It sends and receives requests and caches them to reduce the server load. In the best case it is shared between all tabs through a [SharedWorker](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker). In case the browser doesn't support it, each tab creates a fallback on its main thread.
 
 ## Build
 
@@ -225,3 +243,5 @@ class AService {
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+</details>
