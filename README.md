@@ -6,11 +6,91 @@ This is the web frontend of KoppaDb, an easy-to-use database management system t
 
 If you're looking for a high-level understanding of this codebase, you're in the right place. This section will provide you with the highlights.
 
+[![](readme-assets/codebase-visualization.svg)](https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=Dassderdie%2Fdb-frontend)
 
+### Authentication System
 
+-   [AuthenticationModal](src/app/core/auth-modal) which is enforced via a [RouteGuard](src/app/core/guards/auth/auth.guard.ts)
+-   Also includes pages for [email verification](src/app/pages/verify-email/verify-email.component.ts), [password reset](src/app/pages/reset-password/reset-password.component.ts) and [email change](src/app/pages/change-authentication-email/change-authentication-email.component.ts)
 
-WIP
+![](./readme-assets/login-modal.png)
 
+### Profile Settings
+
+-   [ProfileComponent](src/app/pages/users/profile/profile.component.ts)
+
+![](./readme-assets/profile-settings.png)
+
+### Breadcrumb
+
+-   Responsive breadcrumb navigation ([BreadcrumbService](src/app/feature/breadcrumb/breadcrumbs.service.ts), [BreadcrumbComponent](src/app/feature/breadcrumb/breadcrumb/breadcrumb.component.ts))
+-   Configuration is saved in the [RoutingModules](src/app/pages/projects/projects-routing.module.ts)
+
+![](./readme-assets/breadcrumb-big.png)
+![](./readme-assets/breadcrumb-small.png)
+
+### Projects
+
+[List all projects](src/app/pages/projects/pages/list/list.component.ts)
+![](./readme-assets/projects.png)
+
+### Tables Editor
+
+-   A visual editor to create, edit and delete tables of the underlying relational database
+-   [Click here for the code](src/app/pages/projects/tables-editor)
+
+![](./readme-assets/tables-editor-full.png)
+Click on a table to edit its attributes
+
+![](./readme-assets/tables-editor-attribute-options.png)
+There are a lot of (attribute specific) options and validators
+
+![](./readme-assets/tables-editor-choose-foreign-table.png)
+Foreign attributes can be used to model relations between tables
+
+![](./readme-assets/tables-editor-intermediate-foreign.png)
+A foreign attribute can also have additional attributes (including further foreign attributes -> recursion!)
+
+### DeactivationGuard
+
+Most of the formulars are not only aware of their current validation status, but also of wether their value has been changed. If the user closes the tab or navigates away from the current page and has unsaved changes a prompt plops up.
+[Click here for the code](src/app/core/guards/deactivation/deactivation.ts)
+
+![](./readme-assets/deactivation-guard.png)
+
+### Entries
+
+Table entries can be created, edited and deleted
+
+![](./readme-assets/entry-creation-preview.png)
+![](./readme-assets/relations-preview.png)
+
+### History
+
+![](./readme-assets/history-preview.png)
+All versions of an entry are preserved and changes between them are highlighted in its history [EntryHistoryComponent](src/app/pages/projects/tables/entries/pages/entry-history/entry-history.component.ts) (also recursive for intermediate-foreign-relations)
+
+### Search
+
+-   No-Code Filter creation
+-   Filters and displayed attributes are synchronized with the URL-Query-Parameters. This enables easy sharing via a link and using bookmarks for saving them. [EntrySearchComponent](src/app/pages/projects/tables/pages/entry-search/entry-search.component.ts)
+
+![](./readme-assets/filter-preview.png)
+
+![](./readme-assets/search.png)
+
+### Scanner
+
+-   Integrated [QR-Code scanner](src/app/pages/scanner/scanner/scanner.component.ts) to link physical entities with database entries
+-   The scan algorithm itself runs in [a WebWorker](src/app/pages/scanner/jsqr.worker.ts) to guarantee a smooth camera live thread
+
+![](./readme-assets/scanner.png)
+
+### Miscellanous
+
+-   I18n via `ngx-translate` for the complete UI
+-   TODO: Visualization of complex relations between entries
+-   A custom [SharedWorker](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker)-based cache enables state consistency between tabs as well as automatic invalidation and refrehsing of all data ([CacheServer code](./src/cache-server/cache-server.ts)).
 
 ## Documentation
 
